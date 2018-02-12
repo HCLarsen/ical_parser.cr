@@ -1,0 +1,9 @@
+name: iCalCr
+version: 0.1.0
+
+authors:
+  - Chris Larsen <clarsenipod@gmail.com>
+
+crystal: 0.24.1
+
+license: MIT
