@@ -1,6 +1,6 @@
 # iCalCr
 
-TODO: Write a description here
+A Crystal library for parsing and generating calendar data with the iCalendar Specification.
 
 ## Installation
 
@@ -18,15 +18,9 @@ dependencies:
 require "iCalCr"
 ```
 
-TODO: Write usage instructions here
-
-## Development
-
-TODO: Write development instructions here
-
 ## Contributing
 
-1. Fork it ( https://github.com/[your-github-name]/iCalCr/fork )
+1. Fork it ( https://github.com/HCLarsen/iCalCr/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
@@ -34,4 +28,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [[your-github-name]](https://github.com/[your-github-name]) Chris Larsen - creator, maintainer
+- [HCLarsen](https://github.com/HCLarsen) Chris Larsen - creator, maintainer

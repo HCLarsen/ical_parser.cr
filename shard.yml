@@ -2,7 +2,12 @@ name: iCalCr
 version: 0.1.0
 
 authors:
-  - Chris Larsen <clarsenipod@gmail.com>
+  - Chris Larsen
+
+development_dependencies:
+  minitest:
+    github: ysbaddaden/minitest.cr
+    version: "0.3.6"
 
 crystal: 0.24.1
 
