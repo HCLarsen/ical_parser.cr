@@ -2,6 +2,8 @@
 
 A Crystal library for parsing and generating calendar data with the iCalendar Specification.
 
+DO NOT USE. Still a work in progress, many changes to come.
+
 ## Installation
 
 Add this to your application's `shard.yml`:
@@ -9,7 +11,7 @@ Add this to your application's `shard.yml`:
 ```yaml
 dependencies:
   iCalCr:
-    github: [your-github-name]/iCalCr
+    github: HCLarsen/iCalCr
 ```
 
 ## Usage
