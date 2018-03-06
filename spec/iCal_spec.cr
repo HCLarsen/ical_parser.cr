@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe ICalCr do
+describe ICal do
   # TODO: Write tests
 
   it "works" do

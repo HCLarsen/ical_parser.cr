@@ -1,2 +1,2 @@
 require "spec"
-require "../src/iCalCr"
+require "../src/ICal"

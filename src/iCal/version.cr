@@ -1,3 +1,3 @@
-module ICalCr
+module ICal
   VERSION = "0.1.0"
 end

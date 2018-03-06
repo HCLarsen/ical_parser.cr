@@ -1,6 +1,6 @@
 require "minitest/autorun"
 
-require "/../src/iCalCr/parser"
+require "/../src/ICal/parser"
 
 class ParserTest < Minitest::Test
 end

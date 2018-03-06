@@ -1,4 +1,4 @@
-class ICalCr::Event
+class ICal::Event
   getter summary : String
   getter uid : String
   getter start : Time
@@ -7,8 +7,12 @@ class ICalCr::Event
 
   def initialize(vevent : String)
     summaryRegex = /(?<=SUMMARY:)(.*)(?=\n)/
-    startRegex = /(?<=DTSTART).*:(.*)(?=\n)/
     uidRegex = /(?<=UID:)(.*)(?=\n)/
+    descriptionRegex = /(?<=DESCRIPTION:)(.*)(?=\n)/
+
+    stampRegex = /(?<=DTSTAMP).*:(.*)(?=\n)/
+    startRegex = /(?<=DTSTART).*:(.*)(?=\n)/
+    endRegex = /(?<=DTEND).*:(.*)(?=\n)/
 
     @summary = summaryRegex.match(vevent).try &.[1] || ""
     @uid = uidRegex.match(vevent).try &.[1] || ""
