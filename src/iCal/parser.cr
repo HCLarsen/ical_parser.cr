@@ -14,7 +14,17 @@ class ICal::Parser
     string.gsub(/(\\(?!\\))/){ |match| "" }
   end
 
-  def self.from_iCalDT(string)
+  def self.duration(string)
+    days = (/(\d+)(?=W)/.match(string).try &.[1].to_i || 0) * 7
+    days += /(\d+)(?=D)/.match(string).try &.[1].to_i || 0
+    hours = /(\d+)(?=H)/.match(string).try &.[1].to_i || 0
+    minutes = /(\d+)(?=M)/.match(string).try &.[1].to_i || 0
+    seconds = /(\d+)(?=S)/.match(string).try &.[1].to_i || 0
+
+    Time::Span.new(days, hours, minutes, seconds)
+  end
+
+  def self.from_iCalDT(string) : Time
     dTRegex = /^\d{8}T\d{6}(?!Z)/
     dTUTCRegex = /^\d{8}T\d{6}Z/
     dTTZRegex = /(?<=\w:)\d{8}T\d{6}/

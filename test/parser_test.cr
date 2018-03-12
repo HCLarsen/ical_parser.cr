@@ -15,6 +15,21 @@ class ParserTest < Minitest::Test
     assert_equal text, ICal::Parser.rfc5545_text_unescape(escaped)
   end
 
+  def test_should_parse_one_hour_duration
+    text = "PT1H"
+    assert_equal Time::Span.new(1, 0, 0), ICal::Parser.duration(text)
+  end
+
+  def test_should_parse_multi_parameter_duration
+    text = "P15DT5H0M20S"
+    assert_equal Time::Span.new(15, 5, 0, 20), ICal::Parser.duration(text)
+  end
+
+  def test_should_parse_one_week_duration
+    text = "P7W"
+    assert_equal Time::Span.new(49, 0, 0, 0), ICal::Parser.duration(text)
+  end
+
   def test_should_identify_floating_DateTime
     dateTime = ICal::Parser.from_iCalDT("19980119T070000")
     assert_equal Time.new(1998, 1, 19, 7, 0, 0, nanosecond: 0, kind: Time::Kind::Local), dateTime
