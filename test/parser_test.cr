@@ -15,15 +15,21 @@ class ParserTest < Minitest::Test
     assert_equal text, ICal::Parser.rfc5545_text_unescape(escaped)
   end
 
+  def test_should_identify_floating_DateTime
+    dateTime = ICal::Parser.from_iCalDT("19980119T070000")
+    assert_equal Time.new(1998, 1, 19, 7, 0, 0, nanosecond: 0, kind: Time::Kind::Local), dateTime
+    assert dateTime.local?
+  end
+
   def test_should_identify_UTC_DateTime
     dateTime = ICal::Parser.from_iCalDT("19980119T070000Z")
     assert_equal Time.utc(1998, 1, 19, 7, 0, 0), dateTime
     assert dateTime.utc?
   end
 
-  def test_should_identify_floating_DateTime
-    dateTime = ICal::Parser.from_iCalDT("19980119T070000")
-    assert_equal Time.new(1998, 1, 19, 7, 0, 0, nanosecond: 0, kind: Time::Kind::Local), dateTime
+  def test_should_identify_DateTime_with_TimeZone
+    dateTime = ICal::Parser.from_iCalDT("TZID=America/New_York:19980119T020000")
+    assert_equal Time.new(1998, 1, 19, 2, 0, 0, nanosecond: 0, kind: Time::Kind::Local), dateTime
     assert dateTime.local?
   end
 end
