@@ -34,8 +34,8 @@ class EventTest < Minitest::Test
     event = ICal::Event.new(event_string)
     assert_equal "Lunchtime meeting", event.summary
     assert_equal "ff808181-1fd7389e-011f-d7389ef9-00000003", event.uid
-    assert_equal Time.new(2016, 4, 20, 12, 0, 0, nanosecond: 0, kind: Time::Kind::Local), event.start
-    assert_equal Time.new(2016, 4, 20, 13, 0, 0, nanosecond: 0, kind: Time::Kind::Local), event.end
+    assert_equal Time.new(2016, 4, 20, 12, 0, 0, kind: Time::Kind::Local), event.start
+    assert_equal Time.new(2016, 4, 20, 13, 0, 0, kind: Time::Kind::Local), event.end
     assert_equal "Mo's bar - back room", event.location
     assert_equal descriptionString, event.description
   end

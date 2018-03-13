@@ -7,14 +7,16 @@ class ICal::Event
   getter end : Time
   getter description : String?
   getter location : String?
+  getter url : String?
 
   def initialize(vevent : String)
     summaryRegex = /(?<=SUMMARY:)(.*)(?=\n)/
     uidRegex = /(?<=UID:)(.*)(?=\n)/
+
     descriptionRegex = /(?s)(?<=DESCRIPTION:)(.*?)(?=\n\w)/
     locationRegex = /(?<=LOCATION:)(.*)(?=\n)/
+    urlRegex = /(?<=URL:)(.*)(?=\n)/
 
-    stampRegex = /(?<=DTSTAMP).*:(.*)(?=\n)/
     startRegex = /(?<=DTSTART).*:(.*)(?=\n)/
     endRegex = /(?<=DTEND).*:(.*)(?=\n)/
     durationRegex = /(?<=DURATION).*:(.*)(?=\n)/
@@ -43,5 +45,6 @@ class ICal::Event
     end
 
     @location = locationRegex.match(vevent).try &.[1] || nil
+    @url = urlRegex.match(vevent).try &.[1] || nil
   end
 end
