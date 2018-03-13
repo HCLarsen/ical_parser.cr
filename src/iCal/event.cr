@@ -1,4 +1,4 @@
-require "./parser"
+require "./common"
 
 class ICal::Event
   getter summary : String
@@ -24,13 +24,13 @@ class ICal::Event
     @summary = summaryRegex.match(vevent).try &.[1] || ""
     @uid = uidRegex.match(vevent).try &.[1] || ""
     startString = startRegex.match(vevent).try &.[1] || ""
-    @start = ICal::Parser.from_iCalDT(startString)
+    @start = ICal.from_iCalDT(startString)
     if endRegex.match(vevent)
       endString = endRegex.match(vevent).try &.[1] || ""
-      @end = ICal::Parser.from_iCalDT(endString)
+      @end = ICal.from_iCalDT(endString)
     elsif durationRegex.match(vevent)
       durationString = durationRegex.match(vevent).try &.[1] || ""
-      duration = ICal::Parser.duration(durationString)
+      duration = ICal.duration(durationString)
       @end = @start + duration
     else
       # For cases where a "VEVENT" calendar component specifies a "DTSTART" property with a DATE value type but no "DTEND" nor "DURATION" property, the event's duration is taken to be one day.  For cases where a "VEVENT" calendar component specifies a "DTSTART" property with a DATE-TIME value type but no "DTEND" property, the event ends on the same calendar date and time of day specified by the "DTSTART" property.
@@ -39,7 +39,7 @@ class ICal::Event
 
     descriptionString = descriptionRegex.match(vevent).try &.[1] || nil
     if descriptionString
-      @description = Parser.rfc5545_text_unescape(descriptionString)
+      @description = ICal.rfc5545_text_unescape(descriptionString)
     else
       @description = nil
     end

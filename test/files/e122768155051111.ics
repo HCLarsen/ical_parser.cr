@@ -1,0 +1,712 @@
+BEGIN:VCALENDAR
+PRODID:-//Facebook//NONSGML Facebook Events V1.0//EN
+X-PUBLISHED-TTL:PT12H
+X-ORIGINAL-URL:https://www.facebook.com/events/122768155051111/
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+DTSTAMP:20180208T200311Z
+LAST-MODIFIED:20180208T200311Z
+CREATED:20170922T143815Z
+SEQUENCE:12029096
+ORGANIZER;CN=Ticketmaster Events:MAILTO:noreply@facebookmail.com
+ATTENDEE;CN=AL Maund-Boucher;PARTSTAT=ACCEPTED:https://www.facebook.com/al.maundboucher.9
+ATTENDEE;CN=Lesley Roylance;PARTSTAT=ACCEPTED:https://www.facebook.com/lesley.roylance
+ATTENDEE;CN=Pamela Beemer;PARTSTAT=ACCEPTED:https://www.facebook.com/profile.php?id=100012667680993
+ATTENDEE;CN=Shel Grant;PARTSTAT=ACCEPTED:https://www.facebook.com/profile.php?id=100010515301194
+ATTENDEE;CN=Duncan Andrew Foot;PARTSTAT=ACCEPTED:https://www.facebook.com/dunkfoot
+ATTENDEE;CN=Alicia Hanko;PARTSTAT=ACCEPTED:https://www.facebook.com/profile.php?id=100009423982653
+ATTENDEE;CN=William Engel;PARTSTAT=ACCEPTED:https://www.facebook.com/william.engel.52
+ATTENDEE;CN=Kayla Somers;PARTSTAT=ACCEPTED:https://www.facebook.com/profile.php?id=100005520915142
+ATTENDEE;CN=Ernesto Orge Domingo Jr.;PARTSTAT=ACCEPTED:https://www.facebook.com/ernesto.domingo.908
+ATTENDEE;CN=Tia Art;PARTSTAT=ACCEPTED:https://www.facebook.com/tiaart2
+ATTENDEE;CN=Brad Puddephatt;PARTSTAT=ACCEPTED:https://www.facebook.com/brad.puddephatt
+ATTENDEE;CN=Michael O'Brien;PARTSTAT=ACCEPTED:https://www.facebook.com/michaelraymondpatrickobrien
+ATTENDEE;CN=Brendan Ross;PARTSTAT=ACCEPTED:https://www.facebook.com/brendanjayross
+ATTENDEE;CN=Dave Camposarcone;PARTSTAT=ACCEPTED:https://www.facebook.com/profile.php?id=100002673093634
+ATTENDEE;CN=Jackie Andernacht;PARTSTAT=ACCEPTED:https://www.facebook.com/jackie.andernacht
+ATTENDEE;CN=Don Mitchell-Colton;PARTSTAT=ACCEPTED:https://www.facebook.com/don.mitchell.77770
+ATTENDEE;CN=Fredster Liu;PARTSTAT=ACCEPTED:https://www.facebook.com/fredster.liu
+ATTENDEE;CN=Courtney Devin Kutzleb;PARTSTAT=ACCEPTED:https://www.facebook.com/kutzleb
+ATTENDEE;CN=Jane Ancaster;PARTSTAT=ACCEPTED:https://www.facebook.com/profile.php?id=100001409445374
+ATTENDEE;CN=Vanecessary Neshevich;PARTSTAT=ACCEPTED:https://www.facebook.com/ghoulius.b
+ATTENDEE;CN=Dale Barker;PARTSTAT=ACCEPTED:https://www.facebook.com/dale.barker.127
+ATTENDEE;CN=Francisco Alvarez;PARTSTAT=ACCEPTED:https://www.facebook.com/francisco.alvarez.9469
+ATTENDEE;CN=Joseph Voltaire De Pano;PARTSTAT=ACCEPTED:https://www.facebook.com/josephvoltaire.depano
+ATTENDEE;CN=Jenni Piette;PARTSTAT=ACCEPTED:https://www.facebook.com/jenni.piette
+ATTENDEE;CN=Jeff Caldwell;PARTSTAT=ACCEPTED:https://www.facebook.com/jeff.caldwell.393
+ATTENDEE;CN=Von Claire;PARTSTAT=ACCEPTED:https://www.facebook.com/von.claire.1
+ATTENDEE;CN=Louie De Leon;PARTSTAT=ACCEPTED:https://www.facebook.com/louie.deleon.5
+ATTENDEE;CN=Nata Dzk;PARTSTAT=ACCEPTED:https://www.facebook.com/natalia.dziekonski
+ATTENDEE;CN=Jasmin Liu;PARTSTAT=ACCEPTED:https://www.facebook.com/akjsrvo2iqs
+ATTENDEE;CN=Eden Ashley;PARTSTAT=ACCEPTED:https://www.facebook.com/edenashley2
+ATTENDEE;CN=Anna Catley;PARTSTAT=ACCEPTED:https://www.facebook.com/AnnaJCatley
+ATTENDEE;CN=Peter Godziszewski;PARTSTAT=ACCEPTED:https://www.facebook.com/peter.godziszewski
+ATTENDEE;CN=Steven Schilling;PARTSTAT=ACCEPTED:https://www.facebook.com/steven.schilling.904
+ATTENDEE;CN=Gary Williams;PARTSTAT=ACCEPTED:https://www.facebook.com/gary.williams.927758
+ATTENDEE;CN=Jammie Iker;PARTSTAT=ACCEPTED:https://www.facebook.com/jammie.iker
+ATTENDEE;CN=Nicholas Wansha;PARTSTAT=ACCEPTED:https://www.facebook.com/nicholas.wansha
+ATTENDEE;CN=Caleb Dearsley;PARTSTAT=ACCEPTED:https://www.facebook.com/caleb.dearsley
+ATTENDEE;CN=Kay Bee;PARTSTAT=ACCEPTED:https://www.facebook.com/karla.bobadilla1
+ATTENDEE;CN=Hannah Biel;PARTSTAT=ACCEPTED:https://www.facebook.com/hannah.biel.9
+ATTENDEE;CN=Stephen Shaw;PARTSTAT=ACCEPTED:https://www.facebook.com/shawstephen
+ATTENDEE;CN=Laurie Anne Mercier;PARTSTAT=ACCEPTED:https://www.facebook.com/laurie.a.mercier
+ATTENDEE;CN=Merv House;PARTSTAT=ACCEPTED:https://www.facebook.com/merv.house
+ATTENDEE;CN=Chris Corker;PARTSTAT=ACCEPTED:https://www.facebook.com/CCorks
+ATTENDEE;CN=Chino Mansilla;PARTSTAT=ACCEPTED:https://www.facebook.com/ChinoMansilla
+ATTENDEE;CN=Penelope Ironstone;PARTSTAT=ACCEPTED:https://www.facebook.com/penelope.ironstone
+ATTENDEE;CN=Bere Ortiz;PARTSTAT=ACCEPTED:https://www.facebook.com/berenice.patinoortiz
+ATTENDEE;CN=Monica Hummer-Jensen;PARTSTAT=ACCEPTED:https://www.facebook.com/monica.hummerjensen
+ATTENDEE;CN=Kevin Purvis;PARTSTAT=ACCEPTED:https://www.facebook.com/kevin.purvis.710
+ATTENDEE;CN=Greg Clow;PARTSTAT=ACCEPTED:https://www.facebook.com/gregclow
+ATTENDEE;CN=Stephan Anders;PARTSTAT=ACCEPTED:https://www.facebook.com/stephan.anders
+ATTENDEE;CN=Jennifer Ditaranto;PARTSTAT=ACCEPTED:https://www.facebook.com/jennifer.ditaranto.3
+ATTENDEE;CN=Sioux Lister-Timmerman;PARTSTAT=ACCEPTED:https://www.facebook.com/siouxlister
+ATTENDEE;CN=Colin Jenkins;PARTSTAT=ACCEPTED:https://www.facebook.com/colinhjenkins
+ATTENDEE;CN=Davy Love;PARTSTAT=ACCEPTED:https://www.facebook.com/davylove
+ATTENDEE;CN=Christine Buchanan;PARTSTAT=ACCEPTED:https://www.facebook.com/christine.buchanan.92
+ATTENDEE;CN=Chris Coltas;PARTSTAT=ACCEPTED:https://www.facebook.com/chris.coltas
+ATTENDEE;CN=Stacey Polonicoff;PARTSTAT=ACCEPTED:https://www.facebook.com/stacey.polonicoff.1
+ATTENDEE;CN=Kim Purpura;PARTSTAT=ACCEPTED:https://www.facebook.com/kim.purpura.7
+ATTENDEE;CN=Sue McLean Long;PARTSTAT=ACCEPTED:https://www.facebook.com/sue.m.long
+ATTENDEE;CN=Vlad Bobeika;PARTSTAT=ACCEPTED:https://www.facebook.com/vlad.bobeika
+ATTENDEE;CN=Kath Omatic;PARTSTAT=ACCEPTED:https://www.facebook.com/profile.php?id=835275211
+ATTENDEE;CN=Christopher Hanyk;PARTSTAT=ACCEPTED:https://www.facebook.com/christopher.hanyk
+ATTENDEE;CN=Allen Braude;PARTSTAT=ACCEPTED:https://www.facebook.com/allen.braude
+ATTENDEE;CN=Todd Snyders;PARTSTAT=ACCEPTED:https://www.facebook.com/todd.snyders.1
+ATTENDEE;CN=Miranda Christoff;PARTSTAT=ACCEPTED:https://www.facebook.com/miranda.christoff
+ATTENDEE;CN=Nancy Janders;PARTSTAT=ACCEPTED:https://www.facebook.com/nancy.teti.98
+ATTENDEE;CN=Ryan Rice;PARTSTAT=ACCEPTED:https://www.facebook.com/ryrice
+ATTENDEE;CN=Julie Potvin;PARTSTAT=ACCEPTED:https://www.facebook.com/julie.potvin.712
+ATTENDEE;CN=Kamla Wray;PARTSTAT=ACCEPTED:https://www.facebook.com/kamla.wray
+ATTENDEE;CN=Janet Wilson;PARTSTAT=ACCEPTED:https://www.facebook.com/profile.php?id=794310386
+ATTENDEE;CN=Tom Hall;PARTSTAT=ACCEPTED:https://www.facebook.com/DJThomasHall
+ATTENDEE;CN=Jeff Fish;PARTSTAT=ACCEPTED:https://www.facebook.com/Mrfishspeed
+ATTENDEE;CN=Lesley Jack Halcro;PARTSTAT=ACCEPTED:https://www.facebook.com/lesley.halcro
+ATTENDEE;CN=Bryan Dearsley;PARTSTAT=ACCEPTED:https://www.facebook.com/badearsley
+ATTENDEE;CN=Wayne Slater;PARTSTAT=ACCEPTED:https://www.facebook.com/wayne.slater.313
+ATTENDEE;CN=Meg Crockett;PARTSTAT=ACCEPTED:https://www.facebook.com/megc1000
+ATTENDEE;CN=Paula Araneta Cordero;PARTSTAT=ACCEPTED:https://www.facebook.com/paula.a.cordero.1
+ATTENDEE;CN=James Fowler;PARTSTAT=ACCEPTED:https://www.facebook.com/jamesfowlerart
+ATTENDEE;CN=Christy Washer;PARTSTAT=ACCEPTED:https://www.facebook.com/christy.washer
+ATTENDEE;CN=Jean Hammond;PARTSTAT=ACCEPTED:https://www.facebook.com/jean.hammond.14
+ATTENDEE;CN=Marcia Myers;PARTSTAT=ACCEPTED:https://www.facebook.com/marcia.myers.3517
+ATTENDEE;CN=Michael Peters;PARTSTAT=ACCEPTED:https://www.facebook.com/profile.php?id=748175598
+ATTENDEE;CN=Steven Biasutti;PARTSTAT=ACCEPTED:https://www.facebook.com/steven.biasutti
+ATTENDEE;CN=Greg Thomson;PARTSTAT=ACCEPTED:https://www.facebook.com/greg.thomson.1614
+ATTENDEE;CN=Robert Raum;PARTSTAT=ACCEPTED:https://www.facebook.com/robert.raum.52
+ATTENDEE;CN=Kathy Hanshaw;PARTSTAT=ACCEPTED:https://www.facebook.com/kathy.hanshaw
+ATTENDEE;CN=Brian Smith;PARTSTAT=ACCEPTED:https://www.facebook.com/profile.php?id=735120637
+ATTENDEE;CN=Robert Thomson;PARTSTAT=ACCEPTED:https://www.facebook.com/robert.thomson.315865
+ATTENDEE;CN=Robin Keith McCallum;PARTSTAT=ACCEPTED:https://www.facebook.com/robin.k.mccallum
+ATTENDEE;CN=Cathy Montgomerie;PARTSTAT=ACCEPTED:https://www.facebook.com/cathy.okopny
+ATTENDEE;CN=Javier Aguilera;PARTSTAT=ACCEPTED:https://www.facebook.com/javier.aguilera.9404
+ATTENDEE;CN=Deb Foran;PARTSTAT=ACCEPTED:https://www.facebook.com/deb.foran.9
+ATTENDEE;CN=Donna Bravo;PARTSTAT=ACCEPTED:https://www.facebook.com/donnabravo4ever
+ATTENDEE;CN=Ivan A Henriquez Miranda;PARTSTAT=ACCEPTED:https://www.facebook.com/ivan.henriquez.33
+ATTENDEE;CN=Pauline Lierman;PARTSTAT=ACCEPTED:https://www.facebook.com/pauline.lierman
+ATTENDEE;CN=Amanda Powell;PARTSTAT=ACCEPTED:https://www.facebook.com/amanda.powell3
+ATTENDEE;CN=Robert Menegoni;PARTSTAT=ACCEPTED:https://www.facebook.com/robert.menegoni
+ATTENDEE;CN=Jamie Good;PARTSTAT=ACCEPTED:https://www.facebook.com/jamie.good.391
+ATTENDEE;CN=Martine Ouellette;PARTSTAT=ACCEPTED:https://www.facebook.com/martine.ouellette.77
+ATTENDEE;CN=Joel Gale;PARTSTAT=ACCEPTED:https://www.facebook.com/JG101
+ATTENDEE;CN=Eric Koeck;PARTSTAT=ACCEPTED:https://www.facebook.com/eric.koeck
+ATTENDEE;CN=Charlotte Green van Berlo;PARTSTAT=ACCEPTED:https://www.facebook.com/cvan.berlo
+ATTENDEE;CN=Skip Viitala;PARTSTAT=ACCEPTED:https://www.facebook.com/skip.viitala
+ATTENDEE;CN=Elisa Carreira-Benard;PARTSTAT=ACCEPTED:https://www.facebook.com/elisa.carreirabenard
+ATTENDEE;CN=Diana Harris;PARTSTAT=ACCEPTED:https://www.facebook.com/diana.harris.1428
+ATTENDEE;CN=Josh Downing;PARTSTAT=ACCEPTED:https://www.facebook.com/darcliptor
+ATTENDEE;CN=Shemina Keshvani;PARTSTAT=ACCEPTED:https://www.facebook.com/shemina.keshvani
+ATTENDEE;CN=Warren Hudson;PARTSTAT=ACCEPTED:https://www.facebook.com/warren.hudson.50
+ATTENDEE;CN=Ez Raven;PARTSTAT=ACCEPTED:https://www.facebook.com/intheravenclaws
+ATTENDEE;CN=Lisa Christensen;PARTSTAT=ACCEPTED:https://www.facebook.com/lisa.christensen.9889
+ATTENDEE;CN=Peter Degrassi;PARTSTAT=ACCEPTED:https://www.facebook.com/peter.degrassi1
+ATTENDEE;CN=Anne Nelson;PARTSTAT=ACCEPTED:https://www.facebook.com/anne.m.nelson
+ATTENDEE;CN=Mark Watts;PARTSTAT=ACCEPTED:https://www.facebook.com/mark.watts.scarborough
+ATTENDEE;CN=Marissa Page;PARTSTAT=ACCEPTED:https://www.facebook.com/marissa.page1
+ATTENDEE;CN=Brenda Torrance;PARTSTAT=ACCEPTED:https://www.facebook.com/brenda.torrance.3
+ATTENDEE;CN=Mitchell Janiak;PARTSTAT=ACCEPTED:https://www.facebook.com/mitchell.janiak
+ATTENDEE;CN=Asaf Aviv;PARTSTAT=ACCEPTED:https://www.facebook.com/asaf.aviv.9
+ATTENDEE;CN=James Stoneburrowes;PARTSTAT=ACCEPTED:https://www.facebook.com/james.stoneburrowes
+ATTENDEE;CN=Aimée Beausoleil;PARTSTAT=ACCEPTED:https://www.facebook.com/aimee.beausoleil.3
+ATTENDEE;CN=Tom Haapanen;PARTSTAT=ACCEPTED:https://www.facebook.com/tom.haapanen
+ATTENDEE;CN=Jamie Lefkovics;PARTSTAT=ACCEPTED:https://www.facebook.com/jamie.lefkovics
+ATTENDEE;CN=Louie Melissis;PARTSTAT=ACCEPTED:https://www.facebook.com/lmelissis
+ATTENDEE;CN=Sandy Nakade;PARTSTAT=ACCEPTED:https://www.facebook.com/sandy.nakade
+ATTENDEE;CN=Pauline Harrison;PARTSTAT=ACCEPTED:https://www.facebook.com/pauline.harrison.161
+ATTENDEE;CN=Louise Jane;PARTSTAT=ACCEPTED:https://www.facebook.com/louise.dixon.3114
+ATTENDEE;CN=Robert Atkins;PARTSTAT=ACCEPTED:https://www.facebook.com/robert.atkins.528
+ATTENDEE;CN=Demaris Smith;PARTSTAT=ACCEPTED:https://www.facebook.com/demaris.smith.54
+ATTENDEE;CN=Frittos A;PARTSTAT=ACCEPTED:https://www.facebook.com/frittos.a
+ATTENDEE;CN=Keith Duncanson;PARTSTAT=ACCEPTED:https://www.facebook.com/keithduncanson75
+ATTENDEE;CN=Robyn Dalton;PARTSTAT=ACCEPTED:https://www.facebook.com/robyn.dalton.94
+ATTENDEE;CN=Flick Rowley-Pavlik;PARTSTAT=ACCEPTED:https://www.facebook.com/felicity.rowleyagnew
+ATTENDEE;CN=Darryl Hughes;PARTSTAT=ACCEPTED:https://www.facebook.com/darryl.hughes.1276
+ATTENDEE;CN=Suzan Kr;PARTSTAT=ACCEPTED:https://www.facebook.com/suzan.k.37
+ATTENDEE;CN=Adam Gill;PARTSTAT=ACCEPTED:https://www.facebook.com/adam.gill.9279
+ATTENDEE;CN=Marielle Toner;PARTSTAT=ACCEPTED:https://www.facebook.com/marielle.toner
+ATTENDEE;CN=Karen Caplinskis Miteff;PARTSTAT=ACCEPTED:https://www.facebook.com/karen.caplinskismiteff
+ATTENDEE;CN=Atzy Karanagnostis Kapassouris;PARTSTAT=ACCEPTED:https://www.facebook.com/angela.kapassouris
+ATTENDEE;CN=Bob Harrison Drue;PARTSTAT=ACCEPTED:https://www.facebook.com/bob.drue
+ATTENDEE;CN=Chris Scian;PARTSTAT=ACCEPTED:https://www.facebook.com/cscianchris
+ATTENDEE;CN=Jennifer Bazinet;PARTSTAT=ACCEPTED:https://www.facebook.com/jennifer.bazinet
+ATTENDEE;CN=David Cordero;PARTSTAT=ACCEPTED:https://www.facebook.com/david.cordero.900
+ATTENDEE;CN=PJ Koster;PARTSTAT=ACCEPTED:https://www.facebook.com/pj.koster.7
+ATTENDEE;CN=Brydon LaSalle;PARTSTAT=ACCEPTED:https://www.facebook.com/BrydonLaSalle
+ATTENDEE;CN=Melissa Burke;PARTSTAT=ACCEPTED:https://www.facebook.com/f1girl69
+ATTENDEE;CN=Steve Dumbrova;PARTSTAT=ACCEPTED:https://www.facebook.com/dumbrova
+ATTENDEE;CN=David Baker;PARTSTAT=ACCEPTED:https://www.facebook.com/profile.php?id=616420122
+ATTENDEE;CN=Linda McNally;PARTSTAT=ACCEPTED:https://www.facebook.com/linda.szymkiewicz.1
+ATTENDEE;CN=Nikki Gore;PARTSTAT=ACCEPTED:https://www.facebook.com/nikgore
+ATTENDEE;CN=Phil Gauthier;PARTSTAT=ACCEPTED:https://www.facebook.com/phil.gauthier.94
+ATTENDEE;CN=Gregory Snutch Knowles;PARTSTAT=ACCEPTED:https://www.facebook.com/gorydeath
+ATTENDEE;CN=Simon Hinchcliffe;PARTSTAT=ACCEPTED:https://www.facebook.com/simon.hinchcliffe.58
+ATTENDEE;CN=Kira Sergeievna;PARTSTAT=ACCEPTED:https://www.facebook.com/kira.sergeievna
+ATTENDEE;CN=Sheldon Jozef;PARTSTAT=ACCEPTED:https://www.facebook.com/sheldon.bizjak
+ATTENDEE;CN=Kolicko Strychnine;PARTSTAT=ACCEPTED:https://www.facebook.com/kolicko
+ATTENDEE;CN=Mar Leong;PARTSTAT=ACCEPTED:https://www.facebook.com/maryleong
+ATTENDEE;CN=Rob Phillips;PARTSTAT=ACCEPTED:https://www.facebook.com/RampBuilder
+ATTENDEE;CN=Stephanie Denis;PARTSTAT=ACCEPTED:https://www.facebook.com/stephanie.denis.798
+ATTENDEE;CN=Daz Scott;PARTSTAT=ACCEPTED:https://www.facebook.com/dazzerlk
+ATTENDEE;CN=Stuart Isherwood;PARTSTAT=ACCEPTED:https://www.facebook.com/stuart.isherwood.73
+ATTENDEE;CN=Diane Oliveira;PARTSTAT=ACCEPTED:https://www.facebook.com/diane.oliveira.545
+ATTENDEE;CN=Jennifer Hanlon;PARTSTAT=ACCEPTED:https://www.facebook.com/jennifer.hanlon.98
+ATTENDEE;CN=Matt Cecile;PARTSTAT=ACCEPTED:https://www.facebook.com/matt.cecile
+ATTENDEE;CN=Olivera Bay;PARTSTAT=ACCEPTED:https://www.facebook.com/olivera.bay
+ATTENDEE;CN=Suzanne L Stewart;PARTSTAT=ACCEPTED:https://www.facebook.com/suzanneleastewart
+ATTENDEE;CN=Kerry Prentice McRorie;PARTSTAT=ACCEPTED:https://www.facebook.com/kerry.mcrorie
+ATTENDEE;CN=Mark Bajor;PARTSTAT=ACCEPTED:https://www.facebook.com/mbajor
+ATTENDEE;CN=Tina DeSantis;PARTSTAT=ACCEPTED:https://www.facebook.com/demolitiondesani
+ATTENDEE;CN=Paul Galea;PARTSTAT=ACCEPTED:https://www.facebook.com/paul.galea.7549
+ATTENDEE;CN=Chris Hill;PARTSTAT=ACCEPTED:https://www.facebook.com/chris8
+ATTENDEE;CN=Doug Lea;PARTSTAT=ACCEPTED:https://www.facebook.com/SLUTdrummer
+ATTENDEE;CN=Gisèle RS;PARTSTAT=ACCEPTED:https://www.facebook.com/sylvie.riouxsavic
+ATTENDEE;CN=Susan Yang;PARTSTAT=ACCEPTED:https://www.facebook.com/susan.yang.942
+ATTENDEE;CN=Ryan Rumsey;PARTSTAT=ACCEPTED:https://www.facebook.com/RyanDavidRumseyWakaluk
+ATTENDEE;CN=Steven Foster;PARTSTAT=ACCEPTED:https://www.facebook.com/steven.w.foster
+ATTENDEE;CN=Vicki Corker;PARTSTAT=ACCEPTED:https://www.facebook.com/victoria.corker
+ATTENDEE;CN=Karin von Ompteda;PARTSTAT=ACCEPTED:https://www.facebook.com/karin.vonompteda
+ATTENDEE;CN=John Linington;PARTSTAT=ACCEPTED:https://www.facebook.com/john.linington
+ATTENDEE;CN=Stephen Lotimer;PARTSTAT=ACCEPTED:https://www.facebook.com/stephen.lotimer
+ATTENDEE;CN=Mateusz Factor;PARTSTAT=ACCEPTED:https://www.facebook.com/matthew.mateusz
+ATTENDEE;CN=Sandie DeCoste;PARTSTAT=ACCEPTED:https://www.facebook.com/sandie.decoste
+ATTENDEE;CN=Jennifer Miller-Mckenzie;PARTSTAT=ACCEPTED:https://www.facebook.com/jennifer.millermckenzie
+ATTENDEE;CN=Janice Schick;PARTSTAT=ACCEPTED:https://www.facebook.com/janice.schick
+ATTENDEE;CN=Karen Muhl;PARTSTAT=ACCEPTED:https://www.facebook.com/karen.muhl
+ATTENDEE;CN=Mari Jane;PARTSTAT=ACCEPTED:https://www.facebook.com/mari.jane.92
+ATTENDEE;CN=Ronald Khan;PARTSTAT=ACCEPTED:https://www.facebook.com/ronaldkhan
+ATTENDEE;CN=Alex Mc;PARTSTAT=ACCEPTED:https://www.facebook.com/Alex.mcf
+ATTENDEE;CN=Kiran Bhoday;PARTSTAT=ACCEPTED:https://www.facebook.com/kiran.bhoday
+ATTENDEE;CN=Mark Baker;PARTSTAT=ACCEPTED:https://www.facebook.com/U2BROTHR
+ATTENDEE;CN=Mike Connelly;PARTSTAT=ACCEPTED:https://www.facebook.com/spindrmike
+ATTENDEE;CN=Elaine Keys;PARTSTAT=ACCEPTED:https://www.facebook.com/elaine.keys.79
+ATTENDEE;CN=Chris Latendresse;PARTSTAT=ACCEPTED:https://www.facebook.com/roodlez
+ATTENDEE;CN=Mark Stewart;PARTSTAT=ACCEPTED:https://www.facebook.com/mark.stewart.52
+ATTENDEE;CN=Kayvon Zahedi;PARTSTAT=ACCEPTED:https://www.facebook.com/kayvon.zahedi
+ATTENDEE;CN=Jeff Walter;PARTSTAT=ACCEPTED:https://www.facebook.com/jeff.walter.169
+ATTENDEE;CN=Eric Perelshtein;PARTSTAT=ACCEPTED:https://www.facebook.com/ericptoronto
+ATTENDEE;CN=Sean Andernacht;PARTSTAT=ACCEPTED:https://www.facebook.com/seanandernacht
+ATTENDEE;CN=Sahver Goria;PARTSTAT=ACCEPTED:https://www.facebook.com/sahver.goria
+ATTENDEE;CN=Tim Votskos;PARTSTAT=ACCEPTED:https://www.facebook.com/tim.votskos
+ATTENDEE;CN=Priya Panda;PARTSTAT=ACCEPTED:https://www.facebook.com/partypriyapanda
+ATTENDEE;CN=Mike Berg;PARTSTAT=ACCEPTED:https://www.facebook.com/MikeBerg
+ATTENDEE;CN=Alex Perry;PARTSTAT=ACCEPTED:https://www.facebook.com/alex.perry.507
+ATTENDEE;CN=Rick Kopfensteiner;PARTSTAT=ACCEPTED:https://www.facebook.com/rick.kopfensteiner
+ATTENDEE;CN=Terry Johnston;PARTSTAT=ACCEPTED:https://www.facebook.com/terry.johnston.7547
+ATTENDEE;CN=Lesia Nahorny;PARTSTAT=TENTATIVE:https://www.facebook.com/lessyanahornylazor
+ATTENDEE;CN=Phoebe Lee;PARTSTAT=TENTATIVE:https://www.facebook.com/phoebe.lee.3152130
+ATTENDEE;CN=Petur Workman;PARTSTAT=TENTATIVE:https://www.facebook.com/petur.workman
+ATTENDEE;CN=Angela Comi;PARTSTAT=TENTATIVE:https://www.facebook.com/angela.comi.737
+ATTENDEE;CN=Luca Frangione;PARTSTAT=TENTATIVE:https://www.facebook.com/luca.frangione.5
+ATTENDEE;CN=Rhys Hughes;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=100014993702771
+ATTENDEE;CN=Ivett Sanchez;PARTSTAT=TENTATIVE:https://www.facebook.com/ivett.sanchez.54540
+ATTENDEE;CN=Richard Dotsun;PARTSTAT=TENTATIVE:https://www.facebook.com/dotsunmoon1
+ATTENDEE;CN=Shane Christopher;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=100013570441756
+ATTENDEE;CN=Nancy Kriparos;PARTSTAT=TENTATIVE:https://www.facebook.com/nancy.kriparos
+ATTENDEE;CN=Jonathan Westley;PARTSTAT=TENTATIVE:https://www.facebook.com/jonathan.westley.1
+ATTENDEE;CN=Piotr Tulej;PARTSTAT=TENTATIVE:https://www.facebook.com/piotr.tulej.90
+ATTENDEE;CN=James Henderson;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=100010225144005
+ATTENDEE;CN=Stephanie Farrugia-Thomas;PARTSTAT=TENTATIVE:https://www.facebook.com/stephanie.farrugiathomas.7
+ATTENDEE;CN=Laura Lynn McBride;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=100009500209358
+ATTENDEE;CN=Chris Kassfeldt;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=100009136439103
+ATTENDEE;CN=Andrew James Paterson;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=100009062471224
+ATTENDEE;CN=Cameron Dearsley;PARTSTAT=TENTATIVE:https://www.facebook.com/cadearsley
+ATTENDEE;CN=Tracy Timmins;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=100007818616772
+ATTENDEE;CN=Azeema Rotstein;PARTSTAT=TENTATIVE:https://www.facebook.com/azeemarotstein
+ATTENDEE;CN=Anthony Tony Aprile;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=100007178084689
+ATTENDEE;CN=Philip Rose;PARTSTAT=TENTATIVE:https://www.facebook.com/PhilipCharlesRose
+ATTENDEE;CN=Eri Nicks;PARTSTAT=TENTATIVE:https://www.facebook.com/lebrasseure
+ATTENDEE;CN=Christopher David;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=100006651586622
+ATTENDEE;CN=Dave Whitaker;PARTSTAT=TENTATIVE:https://www.facebook.com/dave.whitaker.988
+ATTENDEE;CN=Antonio Restaino;PARTSTAT=TENTATIVE:https://www.facebook.com/antonio.restaino.507
+ATTENDEE;CN=Aubrey Smith;PARTSTAT=TENTATIVE:https://www.facebook.com/Aubelisk
+ATTENDEE;CN=William Dobyung Lee;PARTSTAT=TENTATIVE:https://www.facebook.com/williamdobyung.lee
+ATTENDEE;CN=Kathleen Lobb;PARTSTAT=TENTATIVE:https://www.facebook.com/kathleen.lobb.52
+ATTENDEE;CN=Jim Cassimatis;PARTSTAT=TENTATIVE:https://www.facebook.com/c.j.cassimatis
+ATTENDEE;CN=Sam Noir;PARTSTAT=TENTATIVE:https://www.facebook.com/sam.noir.90
+ATTENDEE;CN=Warren Griffiths;PARTSTAT=TENTATIVE:https://www.facebook.com/warrenlgriffiths
+ATTENDEE;CN=Paul Harrington;PARTSTAT=TENTATIVE:https://www.facebook.com/paul.harrington.5494360
+ATTENDEE;CN=Paula Norton;PARTSTAT=TENTATIVE:https://www.facebook.com/pj.norton.374
+ATTENDEE;CN=Richard Flierl;PARTSTAT=TENTATIVE:https://www.facebook.com/richflierl
+ATTENDEE;CN=Mark Tittle;PARTSTAT=TENTATIVE:https://www.facebook.com/mark.t.333
+ATTENDEE;CN=Yunfei Wu;PARTSTAT=TENTATIVE:https://www.facebook.com/nancy.wu.52438
+ATTENDEE;CN=Joann Schelstraete;PARTSTAT=TENTATIVE:https://www.facebook.com/joann.schelstraete
+ATTENDEE;CN=Sarah Mawson;PARTSTAT=TENTATIVE:https://www.facebook.com/sarah.mawson.927
+ATTENDEE;CN=James H Huctwith;PARTSTAT=TENTATIVE:https://www.facebook.com/james.huctwith
+ATTENDEE;CN=Gerda Landry;PARTSTAT=TENTATIVE:https://www.facebook.com/gerda.landry
+ATTENDEE;CN=Chantelle Dandy Campbell;PARTSTAT=TENTATIVE:https://www.facebook.com/chantelle.dandycampbell
+ATTENDEE;CN=Marie Jaago;PARTSTAT=TENTATIVE:https://www.facebook.com/marie.jaago
+ATTENDEE;CN=Erin Vulpecula;PARTSTAT=TENTATIVE:https://www.facebook.com/ErinVixxen
+ATTENDEE;CN=Jonathan Frank;PARTSTAT=TENTATIVE:https://www.facebook.com/mirage.citanes
+ATTENDEE;CN=Carl Bathurst;PARTSTAT=TENTATIVE:https://www.facebook.com/carl.bathurst.9
+ATTENDEE;CN=Joe Pereira;PARTSTAT=TENTATIVE:https://www.facebook.com/joe.pereira.35912
+ATTENDEE;CN=Victor Axon;PARTSTAT=TENTATIVE:https://www.facebook.com/victor.axon
+ATTENDEE;CN=Jeremy Sykes;PARTSTAT=TENTATIVE:https://www.facebook.com/jeremy.sykes.756
+ATTENDEE;CN=Sherri Moore;PARTSTAT=TENTATIVE:https://www.facebook.com/sherri.moorearbour
+ATTENDEE;CN=Chris Dodgson;PARTSTAT=TENTATIVE:https://www.facebook.com/chrislikeshockey
+ATTENDEE;CN=Hula Bula;PARTSTAT=TENTATIVE:https://www.facebook.com/hula.bula.3
+ATTENDEE;CN=SuLee Cleveland;PARTSTAT=TENTATIVE:https://www.facebook.com/SuLee.cleveland
+ATTENDEE;CN=Jennifer Oh;PARTSTAT=TENTATIVE:https://www.facebook.com/jennifer.oreilly.31
+ATTENDEE;CN=Roj Fitch;PARTSTAT=TENTATIVE:https://www.facebook.com/roj.fitch
+ATTENDEE;CN=Redmond Green Glowing Joyce;PARTSTAT=TENTATIVE:https://www.facebook.com/green.glowing
+ATTENDEE;CN=Martino Daniells;PARTSTAT=TENTATIVE:https://www.facebook.com/martino.daniells
+ATTENDEE;CN=Don Espina Villamor;PARTSTAT=TENTATIVE:https://www.facebook.com/don.e.villamor
+ATTENDEE;CN=Heather Shaw;PARTSTAT=TENTATIVE:https://www.facebook.com/heather.shaw.5855
+ATTENDEE;CN=Bill Mcrae;PARTSTAT=TENTATIVE:https://www.facebook.com/bill.mcrae.54
+ATTENDEE;CN=Kay Chu;PARTSTAT=TENTATIVE:https://www.facebook.com/kay.chu.7
+ATTENDEE;CN=Nick Buegel;PARTSTAT=TENTATIVE:https://www.facebook.com/nicholas.sexcake
+ATTENDEE;CN=Theo Klaver;PARTSTAT=TENTATIVE:https://www.facebook.com/theo.goalkeeper
+ATTENDEE;CN=Bernadette Jager;PARTSTAT=TENTATIVE:https://www.facebook.com/bernadette.jager.3
+ATTENDEE;CN=Lex Henderson;PARTSTAT=TENTATIVE:https://www.facebook.com/lex.henderson.7
+ATTENDEE;CN=Scott Coles;PARTSTAT=TENTATIVE:https://www.facebook.com/scott.coles.735
+ATTENDEE;CN=Shane James;PARTSTAT=TENTATIVE:https://www.facebook.com/gshanejames
+ATTENDEE;CN=Anne Marie Lorusso;PARTSTAT=TENTATIVE:https://www.facebook.com/annemarie.lorusso
+ATTENDEE;CN=Liza Sardi;PARTSTAT=TENTATIVE:https://www.facebook.com/liza.sardi
+ATTENDEE;CN=Paul Procenko;PARTSTAT=TENTATIVE:https://www.facebook.com/riddler.vonstueban
+ATTENDEE;CN=Karen Jungjohann;PARTSTAT=TENTATIVE:https://www.facebook.com/KarenJungjohann
+ATTENDEE;CN=Judy Mendoza;PARTSTAT=TENTATIVE:https://www.facebook.com/judy.mendoza.71619
+ATTENDEE;CN=Louise Gaynor;PARTSTAT=TENTATIVE:https://www.facebook.com/louise.gaynor.5
+ATTENDEE;CN=Esther Szanto Murphy;PARTSTAT=TENTATIVE:https://www.facebook.com/esther.szantomurphy
+ATTENDEE;CN=Chris Miller;PARTSTAT=TENTATIVE:https://www.facebook.com/chris.miller.7549185
+ATTENDEE;CN=Stephanie Jackson;PARTSTAT=TENTATIVE:https://www.facebook.com/stephanie.jackson.56808
+ATTENDEE;CN=Pat Lighthelp;PARTSTAT=TENTATIVE:https://www.facebook.com/lighthelp
+ATTENDEE;CN=Cathy Murray;PARTSTAT=TENTATIVE:https://www.facebook.com/cathy.murray.54
+ATTENDEE;CN=David Bernards;PARTSTAT=TENTATIVE:https://www.facebook.com/david.bernards
+ATTENDEE;CN=Maddie Everson;PARTSTAT=TENTATIVE:https://www.facebook.com/maddie.everson
+ATTENDEE;CN=István Veress Kovács;PARTSTAT=TENTATIVE:https://www.facebook.com/istvan.veresskovacs
+ATTENDEE;CN=J-m Rivera;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=1733937457
+ATTENDEE;CN=Danielle de Carle;PARTSTAT=TENTATIVE:https://www.facebook.com/ddecarle
+ATTENDEE;CN=Melissa Curtis;PARTSTAT=TENTATIVE:https://www.facebook.com/melissa.curtis1
+ATTENDEE;CN=Christina Wolf-Goodyear;PARTSTAT=TENTATIVE:https://www.facebook.com/christina.wolfgoodyear
+ATTENDEE;CN=Shannon Adamczyk;PARTSTAT=TENTATIVE:https://www.facebook.com/shannon.adamczyk
+ATTENDEE;CN=Gared Haaland;PARTSTAT=TENTATIVE:https://www.facebook.com/gared.holland
+ATTENDEE;CN=Donna Dixon;PARTSTAT=TENTATIVE:https://www.facebook.com/donna.dixon.14224
+ATTENDEE;CN=Bradburn Williams;PARTSTAT=TENTATIVE:https://www.facebook.com/bradburn.williams
+ATTENDEE;CN=Harriet Vangalis;PARTSTAT=TENTATIVE:https://www.facebook.com/madamehair
+ATTENDEE;CN=Elaine Pipher;PARTSTAT=TENTATIVE:https://www.facebook.com/epipher1
+ATTENDEE;CN=Tom MacCammon;PARTSTAT=TENTATIVE:https://www.facebook.com/tom.maccammon
+ATTENDEE;CN=Rosario Reinoso Dizon;PARTSTAT=TENTATIVE:https://www.facebook.com/rosario.dizon
+ATTENDEE;CN=Sharon Delia;PARTSTAT=TENTATIVE:https://www.facebook.com/sharon.mclaffertykeseling
+ATTENDEE;CN=Cheryl Wright;PARTSTAT=TENTATIVE:https://www.facebook.com/cheryl.wright.52035
+ATTENDEE;CN=Mark Laudisio;PARTSTAT=TENTATIVE:https://www.facebook.com/mark.laudisio
+ATTENDEE;CN=Bill Wittur;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=1483126435
+ATTENDEE;CN=Colleen Guthrie;PARTSTAT=TENTATIVE:https://www.facebook.com/colleenDZ
+ATTENDEE;CN=Pat Morgan;PARTSTAT=TENTATIVE:https://www.facebook.com/pat.morgan.3152
+ATTENDEE;CN=Walter Froebrich;PARTSTAT=TENTATIVE:https://www.facebook.com/walter.froebrich
+ATTENDEE;CN=John Kurtz;PARTSTAT=TENTATIVE:https://www.facebook.com/Blitzblutz
+ATTENDEE;CN=Chris Hassett;PARTSTAT=TENTATIVE:https://www.facebook.com/christopher.hassett
+ATTENDEE;CN=Joe Marino;PARTSTAT=TENTATIVE:https://www.facebook.com/joeylemonfingers
+ATTENDEE;CN=Cyril Fernandes;PARTSTAT=TENTATIVE:https://www.facebook.com/cyril.fernandes.98
+ATTENDEE;CN=Lise Ah;PARTSTAT=TENTATIVE:https://www.facebook.com/lise.ah.9
+ATTENDEE;CN=Marija Gogic Petrovic;PARTSTAT=TENTATIVE:https://www.facebook.com/marija.g.petrovic
+ATTENDEE;CN=Brendan Martyn;PARTSTAT=TENTATIVE:https://www.facebook.com/brendanbmartyn
+ATTENDEE;CN=Heather Hospodar;PARTSTAT=TENTATIVE:https://www.facebook.com/heather.hospodar.7
+ATTENDEE;CN=Bill Ross;PARTSTAT=TENTATIVE:https://www.facebook.com/bill.ross.988373
+ATTENDEE;CN=Michael Ramey;PARTSTAT=TENTATIVE:https://www.facebook.com/michael.ramey
+ATTENDEE;CN=Hum Sandy;PARTSTAT=TENTATIVE:https://www.facebook.com/SandmanSandy1
+ATTENDEE;CN=Evangeline Marsh;PARTSTAT=TENTATIVE:https://www.facebook.com/evangeline.marsh
+ATTENDEE;CN=ReAnna Wade;PARTSTAT=TENTATIVE:https://www.facebook.com/caterpillargurl87
+ATTENDEE;CN=Robert DiStefano;PARTSTAT=TENTATIVE:https://www.facebook.com/robert.distefano.9
+ATTENDEE;CN=Peter Jaeggin;PARTSTAT=TENTATIVE:https://www.facebook.com/peter.jaeggin
+ATTENDEE;CN=Sandy Hurst;PARTSTAT=TENTATIVE:https://www.facebook.com/sandyschallenge
+ATTENDEE;CN=Ken Moffatt;PARTSTAT=TENTATIVE:https://www.facebook.com/ken.moffatt.5
+ATTENDEE;CN=Maria Campisi;PARTSTAT=TENTATIVE:https://www.facebook.com/maria.campisi.988
+ATTENDEE;CN=Ron Dalley;PARTSTAT=TENTATIVE:https://www.facebook.com/ron.dalley.5
+ATTENDEE;CN=Tara Shelli Coe;PARTSTAT=TENTATIVE:https://www.facebook.com/staracoe
+ATTENDEE;CN=Ave Busuego;PARTSTAT=TENTATIVE:https://www.facebook.com/ave.busuego
+ATTENDEE;CN=Joanne Belanger;PARTSTAT=TENTATIVE:https://www.facebook.com/belanger.joanne
+ATTENDEE;CN=Susy Da Silva;PARTSTAT=TENTATIVE:https://www.facebook.com/Sushi.Q.71
+ATTENDEE;CN=Pete Carmichael;PARTSTAT=TENTATIVE:https://www.facebook.com/pcarmichael77
+ATTENDEE;CN=Rob Cooke;PARTSTAT=TENTATIVE:https://www.facebook.com/rockstar71
+ATTENDEE;CN=Alison Elliot;PARTSTAT=TENTATIVE:https://www.facebook.com/alison.elliot.355
+ATTENDEE;CN=Farida Peters;PARTSTAT=TENTATIVE:https://www.facebook.com/farida.peters
+ATTENDEE;CN=Matthew Pounsett;PARTSTAT=TENTATIVE:https://www.facebook.com/mattpounsett
+ATTENDEE;CN=Monica Lewis;PARTSTAT=TENTATIVE:https://www.facebook.com/monica.lewis.7127
+ATTENDEE;CN=Tammy Hollard;PARTSTAT=TENTATIVE:https://www.facebook.com/tammy.hollard
+ATTENDEE;CN=Chad Low;PARTSTAT=TENTATIVE:https://www.facebook.com/chad.low.56
+ATTENDEE;CN=Billiam J. Weck;PARTSTAT=TENTATIVE:https://www.facebook.com/billiam.weck
+ATTENDEE;CN=Peter Troyer;PARTSTAT=TENTATIVE:https://www.facebook.com/peter.troyer.75
+ATTENDEE;CN=Ella Labella;PARTSTAT=TENTATIVE:https://www.facebook.com/ella.labella.5
+ATTENDEE;CN=Jennifer Zilio;PARTSTAT=TENTATIVE:https://www.facebook.com/jenniferzilio
+ATTENDEE;CN=Andrea Leung;PARTSTAT=TENTATIVE:https://www.facebook.com/andrea.leung.9
+ATTENDEE;CN=D Christopher Gillette;PARTSTAT=TENTATIVE:https://www.facebook.com/devynchristopher
+ATTENDEE;CN=Jesmond Dominic Galea;PARTSTAT=TENTATIVE:https://www.facebook.com/jesmond.d.galea
+ATTENDEE;CN=Cathy Daley;PARTSTAT=TENTATIVE:https://www.facebook.com/cathy.daley
+ATTENDEE;CN=Karen Schulman Dupuis;PARTSTAT=TENTATIVE:https://www.facebook.com/karensd
+ATTENDEE;CN=Georgina Bencsik;PARTSTAT=TENTATIVE:https://www.facebook.com/georginabencsik
+ATTENDEE;CN=Raymond Mitchell;PARTSTAT=TENTATIVE:https://www.facebook.com/raymond.mitchell.1804
+ATTENDEE;CN=Loralyn Sardella;PARTSTAT=TENTATIVE:https://www.facebook.com/loralyn.sardella
+ATTENDEE;CN=Keena C;PARTSTAT=TENTATIVE:https://www.facebook.com/keena.c.3
+ATTENDEE;CN=Banacek Burrows;PARTSTAT=TENTATIVE:https://www.facebook.com/banacekb
+ATTENDEE;CN=Katrine Maroukis;PARTSTAT=TENTATIVE:https://www.facebook.com/katrine.maroukis
+ATTENDEE;CN=Andrea Nemeth;PARTSTAT=TENTATIVE:https://www.facebook.com/andrea.nemeth.73997
+ATTENDEE;CN=Christie Hails;PARTSTAT=TENTATIVE:https://www.facebook.com/christie.hails
+ATTENDEE;CN=Allan Gies;PARTSTAT=TENTATIVE:https://www.facebook.com/allan.gies
+ATTENDEE;CN=Andrea Ovesny;PARTSTAT=TENTATIVE:https://www.facebook.com/andrea.ovesny
+ATTENDEE;CN=Melanie Turner;PARTSTAT=TENTATIVE:https://www.facebook.com/melanie.turner.965
+ATTENDEE;CN=Chris Snyder;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=841330150
+ATTENDEE;CN=Michael Alstad;PARTSTAT=TENTATIVE:https://www.facebook.com/michael.alstad
+ATTENDEE;CN=Jeff Hamilton;PARTSTAT=TENTATIVE:https://www.facebook.com/jeff.hamilton.944023
+ATTENDEE;CN=Alan Macdonald;PARTSTAT=TENTATIVE:https://www.facebook.com/Alanemacdonald
+ATTENDEE;CN=Lou Tallerico;PARTSTAT=TENTATIVE:https://www.facebook.com/lou.tallerico.3
+ATTENDEE;CN=Julie Lynn Ford;PARTSTAT=TENTATIVE:https://www.facebook.com/JulieLynnFord
+ATTENDEE;CN=Erin Greenwood;PARTSTAT=TENTATIVE:https://www.facebook.com/Melanie.Erin.Greenwood
+ATTENDEE;CN=Angie Mattei;PARTSTAT=TENTATIVE:https://www.facebook.com/angie.mattei
+ATTENDEE;CN=Martha Bajec;PARTSTAT=TENTATIVE:https://www.facebook.com/martha.bajec
+ATTENDEE;CN=Victoria Clarke;PARTSTAT=TENTATIVE:https://www.facebook.com/Candyperfumegrl
+ATTENDEE;CN=Michele Avison;PARTSTAT=TENTATIVE:https://www.facebook.com/michele22.avison
+ATTENDEE;CN=Lawrence Jinx Zada;PARTSTAT=TENTATIVE:https://www.facebook.com/lawrence.zada
+ATTENDEE;CN=Daniel Giosa;PARTSTAT=TENTATIVE:https://www.facebook.com/dgiosa
+ATTENDEE;CN=Michael Solomon;PARTSTAT=TENTATIVE:https://www.facebook.com/michael.t.b.solomon
+ATTENDEE;CN=Melissa Spencer;PARTSTAT=TENTATIVE:https://www.facebook.com/Melissa.Diana80
+ATTENDEE;CN=Jason Byford;PARTSTAT=TENTATIVE:https://www.facebook.com/jason.byford.39
+ATTENDEE;CN=Tavia Charlton;PARTSTAT=TENTATIVE:https://www.facebook.com/TaVia.TaVia.AiVaT
+ATTENDEE;CN=Brian Moran;PARTSTAT=TENTATIVE:https://www.facebook.com/brian.moran.378
+ATTENDEE;CN=Rick Sullivan;PARTSTAT=TENTATIVE:https://www.facebook.com/rick.sullivan.984786
+ATTENDEE;CN=Helen Katz;PARTSTAT=TENTATIVE:https://www.facebook.com/helen.katz1
+ATTENDEE;CN=Nicole A. Urbina Muñoz;PARTSTAT=TENTATIVE:https://www.facebook.com/unelocin
+ATTENDEE;CN=Edie Kim;PARTSTAT=TENTATIVE:https://www.facebook.com/edie.kim.14
+ATTENDEE;CN=Kristen Leone;PARTSTAT=TENTATIVE:https://www.facebook.com/kristen.leone.10
+ATTENDEE;CN=Matthew B Wehttam;PARTSTAT=TENTATIVE:https://www.facebook.com/mtthwb
+ATTENDEE;CN=Gillian Tee;PARTSTAT=TENTATIVE:https://www.facebook.com/gilliantooke
+ATTENDEE;CN=Kerry Kimble;PARTSTAT=TENTATIVE:https://www.facebook.com/kerry.kimble.9
+ATTENDEE;CN=Olga Tirsalis Brilant;PARTSTAT=TENTATIVE:https://www.facebook.com/olga.brilant
+ATTENDEE;CN=Farah Cue;PARTSTAT=TENTATIVE:https://www.facebook.com/farah.quadri.562
+ATTENDEE;CN=Dawn Goodwin;PARTSTAT=TENTATIVE:https://www.facebook.com/dawn.goodwin.718
+ATTENDEE;CN=Andrea Go;PARTSTAT=TENTATIVE:https://www.facebook.com/Sn0Wyt
+ATTENDEE;CN=Lianne Klinck;PARTSTAT=TENTATIVE:https://www.facebook.com/lianne.klinck
+ATTENDEE;CN=Michael Lacorte;PARTSTAT=TENTATIVE:https://www.facebook.com/michael.lacorte.376
+ATTENDEE;CN=Donna Allman;PARTSTAT=TENTATIVE:https://www.facebook.com/donna.allman.10
+ATTENDEE;CN=Del Taylor;PARTSTAT=TENTATIVE:https://www.facebook.com/del.taylor1
+ATTENDEE;CN=Sam Slade;PARTSTAT=TENTATIVE:https://www.facebook.com/SAMMYSLADE27
+ATTENDEE;CN=Tania Lewis;PARTSTAT=TENTATIVE:https://www.facebook.com/Tee.bird3
+ATTENDEE;CN=Lynnie Lynne;PARTSTAT=TENTATIVE:https://www.facebook.com/lynne.morganchellew
+ATTENDEE;CN=Glenn Teneycke;PARTSTAT=TENTATIVE:https://www.facebook.com/glenn.teneycke
+ATTENDEE;CN=Jay Faulk;PARTSTAT=TENTATIVE:https://www.facebook.com/jay.faulkner.7
+ATTENDEE;CN=Denise Butcher;PARTSTAT=TENTATIVE:https://www.facebook.com/dbutcher74
+ATTENDEE;CN=Paula Haxton;PARTSTAT=TENTATIVE:https://www.facebook.com/paula.haxton
+ATTENDEE;CN=Michael MacLeod;PARTSTAT=TENTATIVE:https://www.facebook.com/LaughingChef
+ATTENDEE;CN=Jim Zwygers;PARTSTAT=TENTATIVE:https://www.facebook.com/zwyguy
+ATTENDEE;CN=Eugenia Catroppa;PARTSTAT=TENTATIVE:https://www.facebook.com/eugenia.catroppa.5
+ATTENDEE;CN=Lore Gallo;PARTSTAT=TENTATIVE:https://www.facebook.com/lore.gallo1
+ATTENDEE;CN=Karlyn Tunbridge;PARTSTAT=TENTATIVE:https://www.facebook.com/karlyn.tunbridge
+ATTENDEE;CN=Jill Johnson;PARTSTAT=TENTATIVE:https://www.facebook.com/shotgunjilly
+ATTENDEE;CN=Anthony Farrauto;PARTSTAT=TENTATIVE:https://www.facebook.com/anthony.farrauto
+ATTENDEE;CN=Chris Wickens;PARTSTAT=TENTATIVE:https://www.facebook.com/chris.wickens.52
+ATTENDEE;CN=Douglas Middlemiss;PARTSTAT=TENTATIVE:https://www.facebook.com/djdougmanstar
+ATTENDEE;CN=Christopher Park;PARTSTAT=TENTATIVE:https://www.facebook.com/chrispcrunch
+ATTENDEE;CN=M-j Elberdi;PARTSTAT=TENTATIVE:https://www.facebook.com/mj.elberdi
+ATTENDEE;CN=Riley MacKinnon;PARTSTAT=TENTATIVE:https://www.facebook.com/rilesmack
+ATTENDEE;CN=Allan Kennedy;PARTSTAT=TENTATIVE:https://www.facebook.com/allan.kennedy.5855
+ATTENDEE;CN=Barbra Davidek-MacDonald;PARTSTAT=TENTATIVE:https://www.facebook.com/barbra.davidekmacdonald
+ATTENDEE;CN=Christine Teenie Thomas;PARTSTAT=TENTATIVE:https://www.facebook.com/christine.c.thomas.7
+ATTENDEE;CN=Heather Brooks;PARTSTAT=TENTATIVE:https://www.facebook.com/heather.brooks.5621
+ATTENDEE;CN=Julie Watts;PARTSTAT=TENTATIVE:https://www.facebook.com/julie.watts.5667
+ATTENDEE;CN=Roger Psutka;PARTSTAT=TENTATIVE:https://www.facebook.com/rpsutka
+ATTENDEE;CN=Ton M. King;PARTSTAT=TENTATIVE:https://www.facebook.com/tonmkingIII
+ATTENDEE;CN=Karen Maunder;PARTSTAT=TENTATIVE:https://www.facebook.com/karen.m.austin.7
+ATTENDEE;CN=Susan McKone;PARTSTAT=TENTATIVE:https://www.facebook.com/susan.mckone.5
+ATTENDEE;CN=Nik Glista;PARTSTAT=TENTATIVE:https://www.facebook.com/Muskrattt
+ATTENDEE;CN=John Kyriakoulias;PARTSTAT=TENTATIVE:https://www.facebook.com/DJ.Johnny.Love
+ATTENDEE;CN=Conor O'Brien;PARTSTAT=TENTATIVE:https://www.facebook.com/ConorOBrienJuly1969
+ATTENDEE;CN=Christian Vail;PARTSTAT=TENTATIVE:https://www.facebook.com/christian.vail.56
+ATTENDEE;CN=Nancy Yee;PARTSTAT=TENTATIVE:https://www.facebook.com/nancy.yee.754
+ATTENDEE;CN=Kimberlee Goodman Harrison;PARTSTAT=TENTATIVE:https://www.facebook.com/kimberlee.g.harrison
+ATTENDEE;CN=David Meneley;PARTSTAT=TENTATIVE:https://www.facebook.com/david.meneley
+ATTENDEE;CN=David G Christen;PARTSTAT=TENTATIVE:https://www.facebook.com/david.g.christen
+ATTENDEE;CN=Sarah Jordan;PARTSTAT=TENTATIVE:https://www.facebook.com/sarahmjordan.toronto
+ATTENDEE;CN=Richard R Hum;PARTSTAT=TENTATIVE:https://www.facebook.com/richard.r.hum
+ATTENDEE;CN=Richard Adair;PARTSTAT=TENTATIVE:https://www.facebook.com/richard.adair1
+ATTENDEE;CN=Lesley-Ann Senior;PARTSTAT=TENTATIVE:https://www.facebook.com/lesleysr
+ATTENDEE;CN=Scott King;PARTSTAT=TENTATIVE:https://www.facebook.com/scott.king.718689
+ATTENDEE;CN=Jen Maveal;PARTSTAT=TENTATIVE:https://www.facebook.com/jen.maveal
+ATTENDEE;CN=Paola Oliva;PARTSTAT=TENTATIVE:https://www.facebook.com/paola.oliva.319
+ATTENDEE;CN=Rob Cooper;PARTSTAT=TENTATIVE:https://www.facebook.com/SvenGolly
+ATTENDEE;CN=Lee Scarlett;PARTSTAT=TENTATIVE:https://www.facebook.com/ScarlettELee1
+ATTENDEE;CN=Ania Isabel;PARTSTAT=TENTATIVE:https://www.facebook.com/ania.isabel1
+ATTENDEE;CN=Mateo Castaño-Suárez;PARTSTAT=TENTATIVE:https://www.facebook.com/MateoToronto
+ATTENDEE;CN=Alexandra Robinson Fawcett;PARTSTAT=TENTATIVE:https://www.facebook.com/alexandra.robinsonfawcett
+ATTENDEE;CN=Beth Parton;PARTSTAT=TENTATIVE:https://www.facebook.com/beth.parton.75
+ATTENDEE;CN=Jenny Fountain;PARTSTAT=TENTATIVE:https://www.facebook.com/LilMumma
+ATTENDEE;CN=Tina Preussner;PARTSTAT=TENTATIVE:https://www.facebook.com/tpreussner
+ATTENDEE;CN=Sandra Kerr;PARTSTAT=TENTATIVE:https://www.facebook.com/sandra.kerr.5070
+ATTENDEE;CN=George Balkov;PARTSTAT=TENTATIVE:https://www.facebook.com/george.balkos
+ATTENDEE;CN=Brigette Kocijancic;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=704185109
+ATTENDEE;CN=William Leighton;PARTSTAT=TENTATIVE:https://www.facebook.com/william.leighton2
+ATTENDEE;CN=Raven H. Sun;PARTSTAT=TENTATIVE:https://www.facebook.com/rhsun
+ATTENDEE;CN=Ed Sousa;PARTSTAT=TENTATIVE:https://www.facebook.com/ed.sousa.79
+ATTENDEE;CN=Diane Webster;PARTSTAT=TENTATIVE:https://www.facebook.com/diane.webster.908
+ATTENDEE;CN=Craig Anderson;PARTSTAT=TENTATIVE:https://www.facebook.com/craig.anderson.5011516
+ATTENDEE;CN=Daniel Belasco;PARTSTAT=TENTATIVE:https://www.facebook.com/Doktor.Daniel.X
+ATTENDEE;CN=Tara Salt;PARTSTAT=TENTATIVE:https://www.facebook.com/tara.salt
+ATTENDEE;CN=Deborah Pletsch-Smith;PARTSTAT=TENTATIVE:https://www.facebook.com/deborah.pletschsmith
+ATTENDEE;CN=Sue Clarke;PARTSTAT=TENTATIVE:https://www.facebook.com/sue.clarke.9693
+ATTENDEE;CN=Jeff Preyra;PARTSTAT=TENTATIVE:https://www.facebook.com/preyra
+ATTENDEE;CN=William Pace;PARTSTAT=TENTATIVE:https://www.facebook.com/william.pace.313
+ATTENDEE;CN=Michelle Fletcher;PARTSTAT=TENTATIVE:https://www.facebook.com/michelle.fletcher.7777019
+ATTENDEE;CN=Charles C. Tramer;PARTSTAT=TENTATIVE:https://www.facebook.com/cctramer
+ATTENDEE;CN=Melanie Calandra;PARTSTAT=TENTATIVE:https://www.facebook.com/melanie.calandra
+ATTENDEE;CN=Lyndsey McFarland;PARTSTAT=TENTATIVE:https://www.facebook.com/lyndsey.mcfarland
+ATTENDEE;CN=Nabeel Sherif;PARTSTAT=TENTATIVE:https://www.facebook.com/nabeel.sherif
+ATTENDEE;CN=Andrew Lochhead;PARTSTAT=TENTATIVE:https://www.facebook.com/andrewlochhead
+ATTENDEE;CN=Bartosz Deptuch;PARTSTAT=TENTATIVE:https://www.facebook.com/bartosz.deeptouch
+ATTENDEE;CN=Edward Pond;PARTSTAT=TENTATIVE:https://www.facebook.com/edward.pond
+ATTENDEE;CN=Yan Lau;PARTSTAT=TENTATIVE:https://www.facebook.com/yan.lau.332345
+ATTENDEE;CN=Dean Eric Frost-Spokes;PARTSTAT=TENTATIVE:https://www.facebook.com/dean.spokes
+ATTENDEE;CN=Monica Musselle Ferguson;PARTSTAT=TENTATIVE:https://www.facebook.com/jonicaferguson
+ATTENDEE;CN=Pamela Rogers;PARTSTAT=TENTATIVE:https://www.facebook.com/pamela.rogers.94695
+ATTENDEE;CN=Jan Marie;PARTSTAT=TENTATIVE:https://www.facebook.com/jan.m.daigler
+ATTENDEE;CN=Paul Farnan;PARTSTAT=TENTATIVE:https://www.facebook.com/pfarnan
+ATTENDEE;CN=Zoltan Lasak;PARTSTAT=TENTATIVE:https://www.facebook.com/ZoltanLasak
+ATTENDEE;CN=Melissa Hutchinson;PARTSTAT=TENTATIVE:https://www.facebook.com/reptilianthighs
+ATTENDEE;CN=Daryl Gomes;PARTSTAT=TENTATIVE:https://www.facebook.com/daryl.gomes.7
+ATTENDEE;CN=Samantha Stonehouse;PARTSTAT=TENTATIVE:https://www.facebook.com/sam.hilts.75
+ATTENDEE;CN=Bernhard Wagner;PARTSTAT=TENTATIVE:https://www.facebook.com/loopology
+ATTENDEE;CN=JoAnn Leavey;PARTSTAT=TENTATIVE:https://www.facebook.com/joann.leavey
+ATTENDEE;CN=Kelly Robotham;PARTSTAT=TENTATIVE:https://www.facebook.com/kelly.robotham1
+ATTENDEE;CN=Lindsay E Andrews;PARTSTAT=TENTATIVE:https://www.facebook.com/lindsay.e.andrews.7
+ATTENDEE;CN=Donna Lypchuk;PARTSTAT=TENTATIVE:https://www.facebook.com/lypchuk
+ATTENDEE;CN=Jamie Elliot-Galt;PARTSTAT=TENTATIVE:https://www.facebook.com/elliotgalt
+ATTENDEE;CN=Graham Steele;PARTSTAT=TENTATIVE:https://www.facebook.com/graham.steele.7965
+ATTENDEE;CN=Michelle Mac Donald;PARTSTAT=TENTATIVE:https://www.facebook.com/beerqueen
+ATTENDEE;CN=Annie Nigro;PARTSTAT=TENTATIVE:https://www.facebook.com/annie.nigro.5
+ATTENDEE;CN=Richard Johnston;PARTSTAT=TENTATIVE:https://www.facebook.com/richard.r.johnston67
+ATTENDEE;CN=Laura McCutchan;PARTSTAT=TENTATIVE:https://www.facebook.com/laura.mccutchan
+ATTENDEE;CN=John D'Attolico;PARTSTAT=TENTATIVE:https://www.facebook.com/JohnnyD452
+ATTENDEE;CN=Bram Aaron;PARTSTAT=TENTATIVE:https://www.facebook.com/bram.aaron
+ATTENDEE;CN=Erica Howe;PARTSTAT=TENTATIVE:https://www.facebook.com/erica.louise.howe
+ATTENDEE;CN=Mike Weller;PARTSTAT=TENTATIVE:https://www.facebook.com/mikewellerpersonal
+ATTENDEE;CN=Lisa Maurice;PARTSTAT=TENTATIVE:https://www.facebook.com/lisa.maurice.50
+ATTENDEE;CN=David Wong;PARTSTAT=TENTATIVE:https://www.facebook.com/david.wong.0888
+ATTENDEE;CN=Arvin Parrenas;PARTSTAT=TENTATIVE:https://www.facebook.com/arvin.parrenas
+ATTENDEE;CN=Gary Webb;PARTSTAT=TENTATIVE:https://www.facebook.com/Gary17
+ATTENDEE;CN=Andy Andy;PARTSTAT=TENTATIVE:https://www.facebook.com/a.d.stammers
+ATTENDEE;CN=Ernest Reyes;PARTSTAT=TENTATIVE:https://www.facebook.com/ernestjreyes
+ATTENDEE;CN=Eddie Smith;PARTSTAT=TENTATIVE:https://www.facebook.com/eddie.smith.144181
+ATTENDEE;CN=Brian Kennedy;PARTSTAT=TENTATIVE:https://www.facebook.com/briankennedy72
+ATTENDEE;CN=Sandi Mileta-Clancy;PARTSTAT=TENTATIVE:https://www.facebook.com/sandi.miletaclancy
+ATTENDEE;CN=Anne Elly;PARTSTAT=TENTATIVE:https://www.facebook.com/anne.elly.5
+ATTENDEE;CN=Jenn Barrigar;PARTSTAT=TENTATIVE:https://www.facebook.com/feisty.jenn
+ATTENDEE;CN=Annette Tatchell Windebank;PARTSTAT=TENTATIVE:https://www.facebook.com/annette.windebank
+ATTENDEE;CN=Wendy Hicks;PARTSTAT=TENTATIVE:https://www.facebook.com/wendy.hicks.5891
+ATTENDEE;CN=Vandana Juneja;PARTSTAT=TENTATIVE:https://www.facebook.com/vandana.juneja.77
+ATTENDEE;CN=Paul Robinson;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=640190536
+ATTENDEE;CN=Michael Leary;PARTSTAT=TENTATIVE:https://www.facebook.com/contactmichaelleary
+ATTENDEE;CN=Wilbert Madarang;PARTSTAT=TENTATIVE:https://www.facebook.com/wmadarang
+ATTENDEE;CN=Jeannette Rayn Hagan Beresford;PARTSTAT=TENTATIVE:https://www.facebook.com/jeannette
+ATTENDEE;CN=Paul Bazinet;PARTSTAT=TENTATIVE:https://www.facebook.com/blankboy
+ATTENDEE;CN=Cindi Sanelli;PARTSTAT=TENTATIVE:https://www.facebook.com/cindi.sanelli
+ATTENDEE;CN=Kelly Erin Meehan;PARTSTAT=TENTATIVE:https://www.facebook.com/kelly.e.meehan
+ATTENDEE;CN=Christopher Kennedy;PARTSTAT=TENTATIVE:https://www.facebook.com/cjakennedy
+ATTENDEE;CN=Julia Valente;PARTSTAT=TENTATIVE:https://www.facebook.com/julia.valente.140
+ATTENDEE;CN=Hey Abbott;PARTSTAT=TENTATIVE:https://www.facebook.com/thaibeau
+ATTENDEE;CN=Mark Hopewell;PARTSTAT=TENTATIVE:https://www.facebook.com/M.Welby.MD
+ATTENDEE;CN=Armando Rivero;PARTSTAT=TENTATIVE:https://www.facebook.com/armando.rivero
+ATTENDEE;CN=Dan Hurley;PARTSTAT=TENTATIVE:https://www.facebook.com/dan.hurley.714
+ATTENDEE;CN=Anna Lise;PARTSTAT=TENTATIVE:https://www.facebook.com/whole.shebang
+ATTENDEE;CN=Rebecca Uribe Tilk;PARTSTAT=TENTATIVE:https://www.facebook.com/rebecca.tilk
+ATTENDEE;CN=Stephanie Wood;PARTSTAT=TENTATIVE:https://www.facebook.com/stephaniewoodtorontorealtor
+ATTENDEE;CN=Sanda Dobosi;PARTSTAT=TENTATIVE:https://www.facebook.com/sanda.dobosi
+ATTENDEE;CN=Lynn Mercille-Cresswell;PARTSTAT=TENTATIVE:https://www.facebook.com/lmercillecresswell
+ATTENDEE;CN=Terra Bedore;PARTSTAT=TENTATIVE:https://www.facebook.com/MagentaBedore
+ATTENDEE;CN=Luanne Vendittelli;PARTSTAT=TENTATIVE:https://www.facebook.com/luannev
+ATTENDEE;CN=Peter F Rood;PARTSTAT=TENTATIVE:https://www.facebook.com/peter.f.rood.50
+ATTENDEE;CN=Matthew Garrow;PARTSTAT=TENTATIVE:https://www.facebook.com/matthew.garrow.58
+ATTENDEE;CN=Heidi Maija Rudzītis;PARTSTAT=TENTATIVE:https://www.facebook.com/heidilerudy
+ATTENDEE;CN=Lynn A Wilson;PARTSTAT=TENTATIVE:https://www.facebook.com/lynn.a.wilson.7
+ATTENDEE;CN=Kazia Warnick;PARTSTAT=TENTATIVE:https://www.facebook.com/kazia.warnick
+ATTENDEE;CN=Peter Katchay;PARTSTAT=TENTATIVE:https://www.facebook.com/peter.katchay
+ATTENDEE;CN=Bryony Suvanto;PARTSTAT=TENTATIVE:https://www.facebook.com/bryony.suvanto
+ATTENDEE;CN=Zak Miljanic;PARTSTAT=TENTATIVE:https://www.facebook.com/zak.miljanic
+ATTENDEE;CN=Shannon Muir;PARTSTAT=TENTATIVE:https://www.facebook.com/Demuredamedesign
+ATTENDEE;CN=Thomas Brasch;PARTSTAT=TENTATIVE:https://www.facebook.com/tom.brasch.756
+ATTENDEE;CN=Lisa Marie Di Pietro;PARTSTAT=TENTATIVE:https://www.facebook.com/Dipietli
+ATTENDEE;CN=Andrea Ayotte;PARTSTAT=TENTATIVE:https://www.facebook.com/andrea.ayotte
+ATTENDEE;CN=Sonya Fink;PARTSTAT=TENTATIVE:https://www.facebook.com/scfink
+ATTENDEE;CN=TsPete Jones;PARTSTAT=TENTATIVE:https://www.facebook.com/tspete.jones
+ATTENDEE;CN=Courtney Alexander;PARTSTAT=TENTATIVE:https://www.facebook.com/courtney.alexander.106
+ATTENDEE;CN=Kim Racine-Phillips;PARTSTAT=TENTATIVE:https://www.facebook.com/kim.racinephillips
+ATTENDEE;CN=Nella Menoudakis;PARTSTAT=TENTATIVE:https://www.facebook.com/nella.menoudakis
+ATTENDEE;CN=Anji Barton;PARTSTAT=TENTATIVE:https://www.facebook.com/poshmoggy
+ATTENDEE;CN=Wendy Potomski;PARTSTAT=TENTATIVE:https://www.facebook.com/wendy.potomski
+ATTENDEE;CN=Emily Heung;PARTSTAT=TENTATIVE:https://www.facebook.com/emilyheung8
+ATTENDEE;CN=Diana Weber;PARTSTAT=TENTATIVE:https://www.facebook.com/diana.weberdoan
+ATTENDEE;CN=Robyn Bright;PARTSTAT=TENTATIVE:https://www.facebook.com/robynbright
+ATTENDEE;CN=Lorrie MacKinnon;PARTSTAT=TENTATIVE:https://www.facebook.com/lorrie.w.mackinnon
+ATTENDEE;CN=Michela Foschia;PARTSTAT=TENTATIVE:https://www.facebook.com/cjiase
+ATTENDEE;CN=Sonia Gulia;PARTSTAT=TENTATIVE:https://www.facebook.com/sonia.gulia.5
+ATTENDEE;CN=Valerie Kang;PARTSTAT=TENTATIVE:https://www.facebook.com/valeriegoldstar
+ATTENDEE;CN=Ryan Clark;PARTSTAT=TENTATIVE:https://www.facebook.com/BattyVonBats
+ATTENDEE;CN=Serena Graham;PARTSTAT=TENTATIVE:https://www.facebook.com/serena.graham.31
+ATTENDEE;CN=Darin Campbell;PARTSTAT=TENTATIVE:https://www.facebook.com/darin.campbell.9
+ATTENDEE;CN=Rebecca Holzman;PARTSTAT=TENTATIVE:https://www.facebook.com/rebecca.holzman.9
+ATTENDEE;CN=Jamie Skillen;PARTSTAT=TENTATIVE:https://www.facebook.com/jamieskillen81
+ATTENDEE;CN=Tim Corbett;PARTSTAT=TENTATIVE:https://www.facebook.com/tim.corbett.188
+ATTENDEE;CN=David Cruickshank;PARTSTAT=TENTATIVE:https://www.facebook.com/djcruickshank
+ATTENDEE;CN=Lisa Pacitto Russo;PARTSTAT=TENTATIVE:https://www.facebook.com/lisa.pacitto.5
+ATTENDEE;CN=Irene Katharine Motz;PARTSTAT=TENTATIVE:https://www.facebook.com/irene.k.motz
+ATTENDEE;CN=Marija Ribic;PARTSTAT=TENTATIVE:https://www.facebook.com/marija.ribic.58
+ATTENDEE;CN=Jen Pokerface Marchand;PARTSTAT=TENTATIVE:https://www.facebook.com/jenpokerface.marchand
+ATTENDEE;CN=Gillian Underhill;PARTSTAT=TENTATIVE:https://www.facebook.com/gillian.underhill
+ATTENDEE;CN=Michael Pennell;PARTSTAT=TENTATIVE:https://www.facebook.com/michael.pennell1
+ATTENDEE;CN=Netannis Arnett;PARTSTAT=TENTATIVE:https://www.facebook.com/netannis.arnett
+ATTENDEE;CN=Julie Marini;PARTSTAT=TENTATIVE:https://www.facebook.com/julie.marini.503
+ATTENDEE;CN=Oriane Laromiguière;PARTSTAT=TENTATIVE:https://www.facebook.com/oriane.laromiguiere
+ATTENDEE;CN=Tim Shore;PARTSTAT=TENTATIVE:https://www.facebook.com/timshore
+ATTENDEE;CN=Liz Kartsonas-Chouzouris;PARTSTAT=TENTATIVE:https://www.facebook.com/liz.kartsonaschouzouris
+ATTENDEE;CN=Nick Nobile;PARTSTAT=TENTATIVE:https://www.facebook.com/nick.nobile.1
+ATTENDEE;CN=Alex Sharkey;PARTSTAT=TENTATIVE:https://www.facebook.com/stephanie.a.sharkey
+ATTENDEE;CN=Rosa Rawson;PARTSTAT=TENTATIVE:https://www.facebook.com/rosa.rawson
+ATTENDEE;CN=Jeannette Michelle Orr;PARTSTAT=TENTATIVE:https://www.facebook.com/jeannette.orr
+ATTENDEE;CN=Michelle Siewert Strauss;PARTSTAT=TENTATIVE:https://www.facebook.com/michstrauss
+ATTENDEE;CN=Lori Maziarz;PARTSTAT=TENTATIVE:https://www.facebook.com/lori.maziarz
+ATTENDEE;CN=Michelle McMann;PARTSTAT=TENTATIVE:https://www.facebook.com/michelle.mcmann.54
+ATTENDEE;CN=Krista Zingel;PARTSTAT=TENTATIVE:https://www.facebook.com/kristazingel
+ATTENDEE;CN=John Wilson;PARTSTAT=TENTATIVE:https://www.facebook.com/secablade
+ATTENDEE;CN=Kia LaFey;PARTSTAT=TENTATIVE:https://www.facebook.com/kia.kotsanis
+ATTENDEE;CN=Wayne Hodgson;PARTSTAT=TENTATIVE:https://www.facebook.com/wayne.hodgson.11.11
+ATTENDEE;CN=Kelly Evans;PARTSTAT=TENTATIVE:https://www.facebook.com/evanskelly
+ATTENDEE;CN=Hazel Aperocho;PARTSTAT=TENTATIVE:https://www.facebook.com/hazel.aperocho
+ATTENDEE;CN=Kim Perry Blacklock;PARTSTAT=TENTATIVE:https://www.facebook.com/kim.perryblacklock
+ATTENDEE;CN=Glenn Eve;PARTSTAT=TENTATIVE:https://www.facebook.com/metroretro
+ATTENDEE;CN=Timothy Brown;PARTSTAT=TENTATIVE:https://www.facebook.com/timothy.brown.2012
+ATTENDEE;CN=Jen Snooters;PARTSTAT=TENTATIVE:https://www.facebook.com/JeniferAGoodman
+ATTENDEE;CN=Franca Sohl;PARTSTAT=TENTATIVE:https://www.facebook.com/franca.sohl
+ATTENDEE;CN=Melissa Duguay;PARTSTAT=TENTATIVE:https://www.facebook.com/melissa.duguay.58
+ATTENDEE;CN=David Strutt;PARTSTAT=TENTATIVE:https://www.facebook.com/david.strutt1
+ATTENDEE;CN=Zanne Michelle Fernwood;PARTSTAT=TENTATIVE:https://www.facebook.com/zanne.michelle
+ATTENDEE;CN=Garry Webster;PARTSTAT=TENTATIVE:https://www.facebook.com/garry.webster.1
+ATTENDEE;CN=Roger Cullman;PARTSTAT=TENTATIVE:https://www.facebook.com/rogercullman
+ATTENDEE;CN=Filomena Jolic;PARTSTAT=TENTATIVE:https://www.facebook.com/filomenaj
+ATTENDEE;CN=CQ Cheong;PARTSTAT=TENTATIVE:https://www.facebook.com/Cathy.Q.Cheong
+ATTENDEE;CN=John Ikeno;PARTSTAT=TENTATIVE:https://www.facebook.com/john.ikeno
+ATTENDEE;CN=Helena Maaranen;PARTSTAT=TENTATIVE:https://www.facebook.com/helena.maaranen
+ATTENDEE;CN=Tera Johnson;PARTSTAT=TENTATIVE:https://www.facebook.com/tera.johnson.549
+ATTENDEE;CN=Morris Rothman;PARTSTAT=TENTATIVE:https://www.facebook.com/serendipityboy
+ATTENDEE;CN=Penny Grant-McCarthy;PARTSTAT=TENTATIVE:https://www.facebook.com/penny.grantmccarthy
+ATTENDEE;CN=Bryen Dunn;PARTSTAT=TENTATIVE:https://www.facebook.com/bryen.dunn
+ATTENDEE;CN=Charles Moore;PARTSTAT=TENTATIVE:https://www.facebook.com/charles.moore.39501
+ATTENDEE;CN=Lynne Seston;PARTSTAT=TENTATIVE:https://www.facebook.com/lynne.seston
+ATTENDEE;CN=T Domingo Wilson;PARTSTAT=TENTATIVE:https://www.facebook.com/t.d.wilson.9
+ATTENDEE;CN=Wayne Atkinson-Loft;PARTSTAT=TENTATIVE:https://www.facebook.com/wayne.atkinsonloft
+ATTENDEE;CN=Bonnie Petley Arbour;PARTSTAT=TENTATIVE:https://www.facebook.com/bonnie.arbour
+ATTENDEE;CN=Nikki Van Der Kooi;PARTSTAT=TENTATIVE:https://www.facebook.com/nikki.kooi
+ATTENDEE;CN=Hannor Barbera;PARTSTAT=TENTATIVE:https://www.facebook.com/hannor.barbera
+ATTENDEE;CN=Zahra Nurmohamed;PARTSTAT=TENTATIVE:https://www.facebook.com/zahra.nurmohamed
+ATTENDEE;CN=Andreas Schneider;PARTSTAT=TENTATIVE:https://www.facebook.com/andreas.schneider.522
+ATTENDEE;CN=Dana Kay;PARTSTAT=TENTATIVE:https://www.facebook.com/d.kearns.brou
+ATTENDEE;CN=Adrienne Reynolds;PARTSTAT=TENTATIVE:https://www.facebook.com/adrienne.reynolds.10
+ATTENDEE;CN=Gavin Merritt;PARTSTAT=TENTATIVE:https://www.facebook.com/gavin.merritt.10
+ATTENDEE;CN=Pawl K. Giel;PARTSTAT=TENTATIVE:https://www.facebook.com/tootawlpawl
+ATTENDEE;CN=Christina Nunes;PARTSTAT=TENTATIVE:https://www.facebook.com/christina.nunes.35
+ATTENDEE;CN=Sherry Allen;PARTSTAT=TENTATIVE:https://www.facebook.com/sherrysfunstuff
+ATTENDEE;CN=Veronika Jean Cook;PARTSTAT=TENTATIVE:https://www.facebook.com/veronika.cook
+ATTENDEE;CN=Lisa Pereira;PARTSTAT=TENTATIVE:https://www.facebook.com/lisa.pereira.73
+ATTENDEE;CN=Lotus Zenlove;PARTSTAT=TENTATIVE:https://www.facebook.com/monalisa.manalang
+ATTENDEE;CN=Cezary Buczel;PARTSTAT=TENTATIVE:https://www.facebook.com/cezarybuczel
+ATTENDEE;CN=MIke Score;PARTSTAT=TENTATIVE:https://www.facebook.com/mike.score.1
+ATTENDEE;CN=Mitch Cowitz;PARTSTAT=TENTATIVE:https://www.facebook.com/mcowitz
+ATTENDEE;CN=Fabiana Zanchetta;PARTSTAT=TENTATIVE:https://www.facebook.com/fabiana.zanchetta.1
+ATTENDEE;CN=Geoffrey W Fulton;PARTSTAT=TENTATIVE:https://www.facebook.com/geoffrey.w.fulton
+ATTENDEE;CN=Stacey Dyson;PARTSTAT=TENTATIVE:https://www.facebook.com/stacey.dyson.12
+ATTENDEE;CN=Andrew Gurudata;PARTSTAT=TENTATIVE:https://www.facebook.com/gurudata
+ATTENDEE;CN=Jack Armatys;PARTSTAT=TENTATIVE:https://www.facebook.com/jack.armatys
+ATTENDEE;CN=Pedro Santos;PARTSTAT=TENTATIVE:https://www.facebook.com/peterjrsantos
+ATTENDEE;CN=Tea Be;PARTSTAT=TENTATIVE:https://www.facebook.com/TeaBe1
+ATTENDEE;CN=Christian Larsen;PARTSTAT=TENTATIVE:https://www.facebook.com/christian.larsen.77
+ATTENDEE;CN=Sharon Robinson;PARTSTAT=TENTATIVE:https://www.facebook.com/sharon.robinson.3956
+ATTENDEE;CN=Wendy Margaret;PARTSTAT=TENTATIVE:https://www.facebook.com/wendy.margaret27
+ATTENDEE;CN=Paula Sciuk;PARTSTAT=TENTATIVE:https://www.facebook.com/paula.sciuk
+ATTENDEE;CN=Anna Kerti;PARTSTAT=TENTATIVE:https://www.facebook.com/anna.kerti
+ATTENDEE;CN=Brent Chisholm;PARTSTAT=TENTATIVE:https://www.facebook.com/brent.chisholm.568
+ATTENDEE;CN=Shanaz Gilchrist;PARTSTAT=TENTATIVE:https://www.facebook.com/shanaz.gilchrist
+ATTENDEE;CN=Krista Zee;PARTSTAT=TENTATIVE:https://www.facebook.com/Krista.Zeee
+ATTENDEE;CN=Jennifer Creagh;PARTSTAT=TENTATIVE:https://www.facebook.com/Pooktown.Critters
+ATTENDEE;CN=Edwin Wong;PARTSTAT=TENTATIVE:https://www.facebook.com/unrecognized
+ATTENDEE;CN=Deborah Owens;PARTSTAT=TENTATIVE:https://www.facebook.com/zing9111
+ATTENDEE;CN=Mary Fuser Jagger;PARTSTAT=TENTATIVE:https://www.facebook.com/mary.f.jagger
+ATTENDEE;CN=Tasneem 'Doctor' Gopeesingh;PARTSTAT=TENTATIVE:https://www.facebook.com/tasneem.gopeesingh
+ATTENDEE;CN=Mike Neu;PARTSTAT=TENTATIVE:https://www.facebook.com/mike.neu.965
+ATTENDEE;CN=Wendy Bairos;PARTSTAT=TENTATIVE:https://www.facebook.com/wendy.bairos
+ATTENDEE;CN=Bill Kay;PARTSTAT=TENTATIVE:https://www.facebook.com/bill.k.5
+ATTENDEE;CN=Brendan Jerome;PARTSTAT=TENTATIVE:https://www.facebook.com/brendan.jerome.1
+ATTENDEE;CN=Aliisa Revill;PARTSTAT=TENTATIVE:https://www.facebook.com/profile.php?id=513588087
+ATTENDEE;CN=Derek St. John;PARTSTAT=TENTATIVE:https://www.facebook.com/derek.s.john
+ATTENDEE;CN=Cyndi VanBrussel;PARTSTAT=TENTATIVE:https://www.facebook.com/cyncearly
+ATTENDEE;CN=Laura Muirhead Hansen;PARTSTAT=TENTATIVE:https://www.facebook.com/lmuirhead1
+ATTENDEE;CN=Kara Lisa;PARTSTAT=TENTATIVE:https://www.facebook.com/karalisax
+ATTENDEE;CN=Niikholeezz Marsilia;PARTSTAT=TENTATIVE:https://www.facebook.com/niikkhorlerzzm
+ATTENDEE;CN=Rebecca Travis;PARTSTAT=TENTATIVE:https://www.facebook.com/r.j.travis
+ATTENDEE;CN=Lara Zapata;PARTSTAT=TENTATIVE:https://www.facebook.com/lara.zapata
+ATTENDEE;CN=Frances Hunter;PARTSTAT=TENTATIVE:https://www.facebook.com/fifi1025
+ATTENDEE;CN=Diane Hines;PARTSTAT=TENTATIVE:https://www.facebook.com/diane.h.hines
+ATTENDEE;CN=Craig Slay;PARTSTAT=TENTATIVE:https://www.facebook.com/craig.slay
+ATTENDEE;CN=Kellie N;PARTSTAT=TENTATIVE:https://www.facebook.com/kellie.n.7
+ATTENDEE;CN=Chris G. Irving;PARTSTAT=TENTATIVE:https://www.facebook.com/chris.g.irving
+ATTENDEE;CN=Beth Solomon;PARTSTAT=TENTATIVE:https://www.facebook.com/beth4991
+ATTENDEE;CN=Leah Salt;PARTSTAT=TENTATIVE:https://www.facebook.com/serenityreine
+ATTENDEE;CN=Diana Kurtzer;PARTSTAT=TENTATIVE:https://www.facebook.com/diana.kurtzer
+ATTENDEE;CN=Marlon Wurmitzer;PARTSTAT=TENTATIVE:https://www.facebook.com/marlonwurmitzer
+ATTENDEE;CN=Marni Windebank Macken;PARTSTAT=TENTATIVE:https://www.facebook.com/marni.macken
+ATTENDEE;CN=Stelios Agaliotis;PARTSTAT=TENTATIVE:https://www.facebook.com/stelios.agaliotis.3
+ATTENDEE;CN=David Black;PARTSTAT=TENTATIVE:https://www.facebook.com/rdavidblack
+ATTENDEE;CN=Elle Eerie;PARTSTAT=TENTATIVE:https://www.facebook.com/eerieelle
+ATTENDEE;CN=Sheila Mattang;PARTSTAT=TENTATIVE:https://www.facebook.com/sheila.mattar.5
+ATTENDEE;CN=Tanya Crepulja;PARTSTAT=TENTATIVE:https://www.facebook.com/tanya.crepulja
+ATTENDEE;CN=Jennifer McCready;PARTSTAT=TENTATIVE:https://www.facebook.com/JenMcCreadyPhotographerChick
+ATTENDEE;CN=Carole Farhall;PARTSTAT=TENTATIVE:https://www.facebook.com/cfarhall
+ATTENDEE;CN=Matthew Alexander Parent;PARTSTAT=TENTATIVE:https://www.facebook.com/matthew.a.parent
+ATTENDEE;CN=Marlo Forget;PARTSTAT=TENTATIVE:https://www.facebook.com/marlodjur
+ATTENDEE;CN=Morgan LeFaye Narkiewicz;PARTSTAT=TENTATIVE:https://www.facebook.com/narkiewicz
+ATTENDEE;CN=Kaley Mae Bill;PARTSTAT=TENTATIVE:https://www.facebook.com/kalezz
+ATTENDEE;CN=Elizabeth De Marco;PARTSTAT=TENTATIVE:https://www.facebook.com/ElizabethDeMarco
+ATTENDEE;CN=Ivy Berlin;PARTSTAT=TENTATIVE:https://www.facebook.com/ivy.berlin
+ATTENDEE;CN=Felix Tenne;PARTSTAT=TENTATIVE:https://www.facebook.com/felix.tenne.1
+ATTENDEE;CN=Allan Chops Meace;PARTSTAT=TENTATIVE:https://www.facebook.com/chopsincanada
+ATTENDEE;CN=Devi Ekanand;PARTSTAT=TENTATIVE:https://www.facebook.com/devi.ekanand
+ATTENDEE;CN=Himadri Ghosh;PARTSTAT=TENTATIVE:https://www.facebook.com/himadri.ghosh
+ATTENDEE;CN=Dan Gothe;PARTSTAT=TENTATIVE:https://www.facebook.com/dangothe
+ATTENDEE;CN=Chris Lawless;PARTSTAT=TENTATIVE:https://www.facebook.com/chris.lawless.334
+ATTENDEE;CN=Michael Christopher Duguay;PARTSTAT=TENTATIVE:https://www.facebook.com/michaelcduguay
+ATTENDEE;CN=Kari Cwynar;PARTSTAT=TENTATIVE:https://www.facebook.com/kari.cwynar
+ATTENDEE;CN=Frederick Peters;PARTSTAT=TENTATIVE:https://www.facebook.com/frederickp
+ATTENDEE;CN=Scott Schaffer;PARTSTAT=TENTATIVE:https://www.facebook.com/professorevil
+ATTENDEE;CN=Kevin Cherry;PARTSTAT=TENTATIVE:https://www.facebook.com/kevincherry
+DTSTART:20180313T230000Z
+DTEND:20180314T020000Z
+UID:e122768155051111@facebook.com
+SUMMARY:OMD
+LOCATION:The Danforth Music Hall
+URL:https://www.facebook.com/events/122768155051111/
+DESCRIPTION:19+ Event/Valid Photo ID Required 
+ \nDoors - 7:00pm\n\nSupport: GGOOLLDD
+ \n\nSale Dates and Times:\nPublic Ons
+ ale : Fri\, 22 Sep 2017 at 11:00 AM
+ \n\nhttps://www.facebook.com/events/
+ 122768155051111/
+CLASS:PUBLIC
+STATUS:CONFIRMED
+PARTSTAT:TENTATIVE
+END:VEVENT
+END:VCALENDAR

@@ -2,5 +2,5 @@ require "./ICal/*"
 
 # TODO: Write documentation for `ICal`
 module ICal
-  # TODO: Put your code here
+  # TODO: Write code for `ICal`
 end
