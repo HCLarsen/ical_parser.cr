@@ -4,8 +4,9 @@ class ICal::Event
   getter summary : String
   getter uid : String
   getter start : Time
-  getter description : String | Nil
-  getter location : String | Nil
+  getter end : Time
+  getter description : String?
+  getter location : String?
 
   def initialize(vevent : String)
     summaryRegex = /(?<=SUMMARY:)(.*)(?=\n)/
@@ -26,7 +27,10 @@ class ICal::Event
       @end = ICal::Parser.from_iCalDT(endString)
     elsif durationRegex.match(vevent)
       durationString = durationRegex.match(vevent).try &.[1] || ""
-      
+      duration = ICal::Parser.duration(durationString)
+      @end = @start + duration
+    else
+      raise "No End Time or Duration Found"
     end
   end
 end
