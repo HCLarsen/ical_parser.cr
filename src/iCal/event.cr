@@ -11,7 +11,8 @@ class ICal::Event
   def initialize(vevent : String)
     summaryRegex = /(?<=SUMMARY:)(.*)(?=\n)/
     uidRegex = /(?<=UID:)(.*)(?=\n)/
-    descriptionRegex = /(?<=DESCRIPTION:)(.*)(?=\n)/
+    descriptionRegex = /(?s)(?<=DESCRIPTION:)(.*?)(?=\n\w)/
+    locationRegex = /(?<=LOCATION:)(.*)(?=\n)/
 
     stampRegex = /(?<=DTSTAMP).*:(.*)(?=\n)/
     startRegex = /(?<=DTSTART).*:(.*)(?=\n)/
@@ -30,7 +31,17 @@ class ICal::Event
       duration = ICal::Parser.duration(durationString)
       @end = @start + duration
     else
+      # For cases where a "VEVENT" calendar component specifies a "DTSTART" property with a DATE value type but no "DTEND" nor "DURATION" property, the event's duration is taken to be one day.  For cases where a "VEVENT" calendar component specifies a "DTSTART" property with a DATE-TIME value type but no "DTEND" property, the event ends on the same calendar date and time of day specified by the "DTSTART" property.
       raise "No End Time or Duration Found"
     end
+
+    descriptionString = descriptionRegex.match(vevent).try &.[1] || nil
+    if descriptionString
+      @description = Parser.rfc5545_text_unescape(descriptionString)
+    else
+      @description = nil
+    end
+
+    @location = locationRegex.match(vevent).try &.[1] || nil
   end
 end
