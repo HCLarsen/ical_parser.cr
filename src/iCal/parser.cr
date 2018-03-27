@@ -1,7 +1,7 @@
 require "./event"
 
 class ICal::Parser
-  EVENT_REGEX = /(?s)(?<=BEGIN:VEVENT\n)(.*?)(?=END:VEVENT)/
+  EVENT_REGEX = /(?s)BEGIN:VEVENT(.*?)END:VEVENT/
 
   def self.parse_events(filename : String) : Array(Event)
     string = File.read(filename)
