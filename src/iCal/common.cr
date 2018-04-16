@@ -7,15 +7,15 @@ module ICal
   DT_UTC_REGEX = /^\d{8}T\d{6}Z/
   DT_TZ_REGEX = /(?<=\w:)\d{8}T\d{6}/
 
-  def self.rfc5545_text_escape(string) : String
+  def self.rfc5545_text_escape(string : String) : String
     string.gsub(/(\,|\;|\\[^n])/){ |match| "\\" + match }
   end
 
-  def self.rfc5545_text_unescape(string) : String
+  def self.rfc5545_text_unescape(string : String) : String
     string.gsub(/(\\(?!\\))/){ |match| "" }
   end
 
-  def self.duration(string) : Time::Span
+  def self.duration(string : String) : Time::Span
     days = (/(\d+)(?=W)/.match(string).try &.[1].to_i || 0) * 7
     days += /(\d+)(?=D)/.match(string).try &.[1].to_i || 0
     hours = /(\d+)(?=H)/.match(string).try &.[1].to_i || 0
@@ -25,7 +25,7 @@ module ICal
     Time::Span.new(days, hours, minutes, seconds)
   end
 
-  def self.from_iCalDT(string) : Time
+  def self.from_iCalDT(string : String) : Time
     if DT_REGEX.match(string)
       Time.parse(string, FLOATING_TIME.pattern, Time::Kind::Local)
     elsif DT_UTC_REGEX.match(string)
