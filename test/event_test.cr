@@ -70,6 +70,23 @@ class EventTest < Minitest::Test
     assert_equal "The Danforth Music Hall", event.location
   end
 
+  def test_raises_if_dtstart_absent
+    event_string = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:19970901T130000Z-123401@example.com
+    DTSTAMP:19970901T130000Z
+    DTEND:19970903T190000Z
+    SUMMARY:Annual Employee Review
+    CLASS:PRIVATE
+    CATEGORIES:BUSINESS,HUMAN RESOURCES
+    END:VEVENT
+    HEREDOC
+    response = assert_raises do
+      event = ICal::Event.new(event_string)
+    end
+    assert_equal "Invalid Event: No DTSTART present", response.message
+  end
+
 #  def test_parses_attendees
 #    event = ICal::Event.new(Fixture.facebook_event)
 #    puts event.size
