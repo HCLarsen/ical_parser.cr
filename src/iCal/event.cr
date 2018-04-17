@@ -76,29 +76,34 @@ class ICal::Event
     end
   end
 
-  private def extract_text(propName, eventProp) : String
-    regex = /(?s)#{propName}:(.*?)\R\w/
+  private def extract_text(propName : String, eventProp : String) : String
+    regex = /(?s)#{propName}:(.*?)\R(?=\w)/
+    matches = eventProp.scan(regex)
 
-    if string = regex.match(eventProp)
-      ICal.rfc5545_text_unescape(string[1].strip)
+    if matches.size == 1
+      ICal.rfc5545_text_unescape(matches[0][1].strip)
+    elsif matches.size > 1
+      raise "Invalid Event: #{propName.upcase} MUST NOT occur more than once"
     else
       raise "Invalid Event: No #{propName} present"
     end
   end
 
-  private def extract_optional_text(propName, eventProp) : String?
+  private def extract_optional_text(propName : String, eventProp : String) : String?
     regex = /(?s)#{propName}:(.*?)\R\w/
+    matches = eventProp.scan(regex)
 
-    if string = regex.match(eventProp)
-      ICal.rfc5545_text_unescape(string[1].strip)
+    if matches.size == 1
+      ICal.rfc5545_text_unescape(matches[0][1].strip)
     end
   end
 
   private def extract_uri(eventProp) : String?
     regex = /URL:(.*)\R/
+    matches = eventProp.scan(regex)
 
-    if string = regex.match(eventProp)
-      ICal.rfc5545_text_unescape(string[1].strip)
+    if matches.size == 1
+      ICal.rfc5545_text_unescape(matches[0][1].strip)
     end
   end
 end

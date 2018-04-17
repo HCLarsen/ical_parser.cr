@@ -71,23 +71,6 @@ class EventTest < Minitest::Test
     assert_equal "The Danforth Music Hall", event.location
   end
 
-  def test_raises_if_dtstart_absent
-    event_string = <<-HEREDOC
-    BEGIN:VEVENT
-    UID:19970901T130000Z-123401@example.com
-    DTSTAMP:19970901T130000Z
-    DTEND:19970903T190000Z
-    SUMMARY:Annual Employee Review
-    CLASS:PRIVATE
-    CATEGORIES:BUSINESS,HUMAN RESOURCES
-    END:VEVENT
-    HEREDOC
-    response = assert_raises do
-      event = ICal::Event.new(event_string)
-    end
-    assert_equal "Invalid Event: No DTSTART present", response.message
-  end
-
   def test_parses_all_day_event
     event_string = <<-HEREDOC
     BEGIN:VEVENT
@@ -121,5 +104,41 @@ class EventTest < Minitest::Test
     assert event.allDay
     assert_equal Time.new(2007, 6, 28), event.dtstart
     assert_equal Time.new(2007, 7, 9), event.dtend
+  end
+
+  def test_raises_if_dtstart_absent
+    event_string = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:19970901T130000Z-123401@example.com
+    DTSTAMP:19970901T130000Z
+    DTEND:19970903T190000Z
+    SUMMARY:Annual Employee Review
+    CLASS:PRIVATE
+    CATEGORIES:BUSINESS,HUMAN RESOURCES
+    END:VEVENT
+    HEREDOC
+    response = assert_raises do
+      event = ICal::Event.new(event_string)
+    end
+    assert_equal "Invalid Event: No DTSTART present", response.message
+  end
+
+  def test_raises_if_multiple_summaries
+    event_string = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:19970901T130000Z-123401@example.com
+    DTSTAMP:19970901T130000Z
+    DTSTART:19970903T163000Z
+    DTEND:19970903T190000Z
+    SUMMARY:Annual Employee Review
+    SUMMARY:Annual Employee Review
+    CLASS:PRIVATE
+    CATEGORIES:BUSINESS,HUMAN RESOURCES
+    END:VEVENT
+    HEREDOC
+    response = assert_raises do
+      event = ICal::Event.new(event_string)
+    end
+    assert_equal "Invalid Event: SUMMARY MUST NOT occur more than once", response.message
   end
 end
