@@ -4,10 +4,12 @@ class ICal::Event
   getter summary : String
   getter uid : String
   getter dtstart : Time
-  getter dtend : Time
+  getter dtend : Time?
   getter description : String?
   getter location : String?
   getter url : String?
+
+  getter allDay = false
 
   def initialize(eventProp : String)
     @summary = extract_text("SUMMARY", eventProp)
@@ -16,28 +18,45 @@ class ICal::Event
     @description = extract_optional_text("DESCRIPTION", eventProp)
     @location = extract_optional_text("LOCATION", eventProp)
 
-    @dtstart = extract_date_time("DTSTART", eventProp)
+    @dtstart = extract_date_or_date_time("DTSTART", eventProp)
     @dtend = find_end_time(eventProp)
 
     @url = extract_uri(eventProp)
   end
 
-  private def find_end_time(eventProp) : Time
+  private def find_end_time(eventProp : String) : Time
     endRegex = /DTEND.*:(.*)\R/
     durationRegex = /DURATION.*:(.*)\R/
 
     if endString = endRegex.match(eventProp)
-      @dtend = extract_date_time("DTEND", eventProp)
+      @dtend = extract_date_or_date_time("DTEND", eventProp)
     elsif durationString = durationRegex.match(eventProp)
       duration = extract_duration(eventProp)
       @dtend = @dtstart + duration
     else
-      # For cases where a "eventProp" calendar component specifies a "DTSTART" property with a DATE value type but no "DTEND" nor "DURATION" property, the event's duration is taken to be one day.  For cases where a "eventProp" calendar component specifies a "DTSTART" property with a DATE-TIME value type but no "DTEND" property, the event ends on the same calendar date and time of day specified by the "DTSTART" property.
-      raise "No End Time or Duration Found"
+      @dtend = @dtstart
     end
   end
 
-  private def extract_date_time(propName, eventProp) : Time
+  private def extract_date_or_date_time(propName : String, eventProp : String) : Time
+    regex = /#{propName}.*:(.*)\R/
+
+    dtRegex = /\d{8}T\d{6}/
+    dateRegex = /\d{8}/
+
+    if string = regex.match(eventProp)
+      if string[1].match(dtRegex)
+        ICal.from_iCalDT(string[1].strip)
+      else
+        @allDay = true
+        ICal.from_iCalDate(string[1].strip)
+      end
+    else
+      raise "Invalid Event: No #{propName} present"
+    end
+  end
+
+  private def extract_date_time(propName : String, eventProp : String) : Time
     regex = /#{propName}.*:(.*)\R/
 
     if string = regex.match(eventProp)

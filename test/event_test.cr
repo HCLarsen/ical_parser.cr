@@ -40,6 +40,7 @@ class EventTest < Minitest::Test
     assert_equal Time.new(2016, 4, 20, 13, 0, 0, kind: Time::Kind::Local), event.dtend
     assert_equal "Mo's bar - back room", event.location
     assert_equal descriptionString, event.description
+    assert_equal false, event.allDay
   end
 
   def test_parses_end_time
@@ -87,9 +88,38 @@ class EventTest < Minitest::Test
     assert_equal "Invalid Event: No DTSTART present", response.message
   end
 
-#  def test_parses_attendees
-#    event = ICal::Event.new(Fixture.facebook_event)
-#    puts event.size
-#    puts event[0]
-#  end
+  def test_parses_all_day_event
+    event_string = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:19970901T130000Z-123403@example.com
+    DTSTAMP:19970901T130000Z
+    DTSTART;VALUE=DATE:19971102
+    SUMMARY:Our Blissful Anniversary
+    TRANSP:TRANSPARENT
+    CLASS:CONFIDENTIAL
+    CATEGORIES:ANNIVERSARY,PERSONAL,SPECIAL OCCASION
+    RRULE:FREQ=YEARLY
+    END:VEVENT
+    HEREDOC
+    event = ICal::Event.new(event_string)
+    assert event.allDay
+    assert_equal event.dtstart, event.dtend
+  end
+
+  def test_parses_multi_day_event
+    event_string = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:20070423T123432Z-541111@example.com
+    DTSTAMP:20070423T123432Z
+    DTSTART;VALUE=DATE:20070628
+    DTEND;VALUE=DATE:20070709
+    SUMMARY:Festival International de Jazz de Montreal
+    TRANSP:TRANSPARENT
+    END:VEVENT
+    HEREDOC
+    event = ICal::Event.new(event_string)
+    assert event.allDay
+    assert_equal Time.new(2007, 6, 28), event.dtstart
+    assert_equal Time.new(2007, 7, 9), event.dtend
+  end
 end

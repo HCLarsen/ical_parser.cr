@@ -3,7 +3,8 @@ module ICal
   UTC_TIME = Time::Format.new("%Y%m%dT%H%M%SZ")
   ZONED_TIME = Time::Format.new("%Y%m%dT%H%M%S")
 
-  DT_REGEX = /^\d{8}T\d{6}(?!Z)/
+  DATE_REGEX = /^;VALUE=DATE:\d{8}/
+  DT_FLOATING_REGEX = /^\d{8}T\d{6}(?!Z)/
   DT_UTC_REGEX = /^\d{8}T\d{6}Z/
   DT_TZ_REGEX = /(?<=\w:)\d{8}T\d{6}/
 
@@ -26,7 +27,7 @@ module ICal
   end
 
   def self.from_iCalDT(string : String) : Time
-    if DT_REGEX.match(string)
+    if DT_FLOATING_REGEX.match(string)
       Time.parse(string, FLOATING_TIME.pattern, Time::Kind::Local)
     elsif DT_UTC_REGEX.match(string)
       Time.parse(string, UTC_TIME.pattern, Time::Kind::Utc)
@@ -39,5 +40,12 @@ module ICal
     else
       raise "Invalid Time Format"
     end
+  end
+
+  def self.from_iCalDate(string : String) : Time
+    year = /(\d{4})/.match(string).try &.[1].to_i || 0
+    month = /\d{4}(\d{2})/.match(string).try &.[1].to_i || 0
+    day = /\d{6}(\d{2})/.match(string).try &.[1].to_i || 0
+    Time.new(year, month, day)
   end
 end
