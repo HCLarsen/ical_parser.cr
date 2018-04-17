@@ -10,10 +10,6 @@ class ICal::Event
   getter url : String?
 
   def initialize(eventProp : String)
-    urlRegex = /URL:(.*)\R/
-    endRegex = /DTEND.*:(.*)\R/
-    durationRegex = /DURATION.*:(.*)\R/
-
     @summary = extract_text("SUMMARY", eventProp)
     @uid = extract_text("UID", eventProp)
 
@@ -21,6 +17,14 @@ class ICal::Event
     @location = extract_optional_text("LOCATION", eventProp)
 
     @dtstart = extract_date_time("DTSTART", eventProp)
+    @dtend = find_end_time(eventProp)
+
+    @url = extract_uri(eventProp)
+  end
+
+  private def find_end_time(eventProp) : Time
+    endRegex = /DTEND.*:(.*)\R/
+    durationRegex = /DURATION.*:(.*)\R/
 
     if endString = endRegex.match(eventProp)
       @dtend = extract_date_time("DTEND", eventProp)
@@ -31,8 +35,6 @@ class ICal::Event
       # For cases where a "eventProp" calendar component specifies a "DTSTART" property with a DATE value type but no "DTEND" nor "DURATION" property, the event's duration is taken to be one day.  For cases where a "eventProp" calendar component specifies a "DTSTART" property with a DATE-TIME value type but no "DTEND" property, the event ends on the same calendar date and time of day specified by the "DTSTART" property.
       raise "No End Time or Duration Found"
     end
-
-    @url = urlRegex.match(eventProp).try &.[1].strip || nil
   end
 
   private def extract_date_time(propName, eventProp) : Time
@@ -67,6 +69,14 @@ class ICal::Event
 
   private def extract_optional_text(propName, eventProp) : String?
     regex = /(?s)#{propName}:(.*?)\R\w/
+
+    if string = regex.match(eventProp)
+      ICal.rfc5545_text_unescape(string[1].strip)
+    end
+  end
+
+  private def extract_uri(eventProp) : String?
+    regex = /URL:(.*)\R/
 
     if string = regex.match(eventProp)
       ICal.rfc5545_text_unescape(string[1].strip)
