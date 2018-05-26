@@ -1,6 +1,6 @@
 require "./common"
 
-class ICal::Event
+class IcalParser::Event
   getter summary : String
   getter uid : String
   getter dtstart : Time
@@ -46,10 +46,10 @@ class ICal::Event
 
     if string = regex.match(eventProp)
       if string[1].match(dtRegex)
-        ICal.from_iCalDT(string[1].strip)
+        IcalParser.from_iCalDT(string[1].strip)
       else
         @allDay = true
-        ICal.from_iCalDate(string[1].strip)
+        IcalParser.from_iCalDate(string[1].strip)
       end
     else
       raise "Invalid Event: No #{propName} present"
@@ -60,7 +60,7 @@ class ICal::Event
     regex = /#{propName}.*:(.*)\R/
 
     if string = regex.match(eventProp)
-      ICal.from_iCalDT(string[1].strip)
+      IcalParser.from_iCalDT(string[1].strip)
     else
       raise "Invalid Event: No #{propName} present"
     end
@@ -70,7 +70,7 @@ class ICal::Event
     regex = /DURATION.*:(.*)\R/
 
     if string = regex.match(eventProp)
-      ICal.duration(string[1].strip)
+      IcalParser.duration(string[1].strip)
     else
       raise "No duration found"
     end
@@ -81,7 +81,7 @@ class ICal::Event
     matches = eventProp.scan(regex)
 
     if matches.size == 1
-      ICal.rfc5545_text_unescape(matches[0][1].strip)
+      IcalParser.rfc5545_text_unescape(matches[0][1].strip)
     elsif matches.size > 1
       raise "Invalid Event: #{propName.upcase} MUST NOT occur more than once"
     else
@@ -94,7 +94,7 @@ class ICal::Event
     matches = eventProp.scan(regex)
 
     if matches.size == 1
-      ICal.rfc5545_text_unescape(matches[0][1].strip)
+      IcalParser.rfc5545_text_unescape(matches[0][1].strip)
     end
   end
 
@@ -103,7 +103,7 @@ class ICal::Event
     matches = eventProp.scan(regex)
 
     if matches.size == 1
-      ICal.rfc5545_text_unescape(matches[0][1].strip)
+      IcalParser.rfc5545_text_unescape(matches[0][1].strip)
     end
   end
 end

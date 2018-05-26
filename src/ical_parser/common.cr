@@ -1,4 +1,4 @@
-module ICal
+module IcalParser
   FLOATING_TIME = Time::Format.new("%Y%m%dT%H%M%S")
   UTC_TIME = Time::Format.new("%Y%m%dT%H%M%SZ")
   ZONED_TIME = Time::Format.new("%Y%m%dT%H%M%S")

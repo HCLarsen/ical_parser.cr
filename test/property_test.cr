@@ -3,7 +3,7 @@ require "minitest/autorun"
 require "/../src/iCal"
 
 class PropertyTest < Minitest::Test
-  include ICal
+  include IcalParser
 
   def test_property_has_name
     property = Property.new("UID")

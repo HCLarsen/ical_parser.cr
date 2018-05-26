@@ -1,4 +1,4 @@
-module ICal
+module IcalParser
   class Property
     getter name : String
 

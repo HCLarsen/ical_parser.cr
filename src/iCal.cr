@@ -1,6 +1,6 @@
-require "./iCal/*"
-require "./iCal/property_parsers/*"
+require "./ical_parser/*"
+require "./ical_parser/property_parsers/*"
 
-# TODO: Write documentation for `ICal`
-module ICal
+# TODO: Write documentation for `IcalParser`
+module IcalParser
 end

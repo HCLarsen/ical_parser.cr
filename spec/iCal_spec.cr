@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe ICal do
+describe IcalParser do
   # TODO: Write tests
 
   it "works" do

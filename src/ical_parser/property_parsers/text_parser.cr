@@ -1,4 +1,4 @@
-module ICal
+module IcalParser
   module TextParser
     def self.parse(string)
       string.gsub(/(\\(?!\\))/){ |match| "" }

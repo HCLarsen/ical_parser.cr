@@ -1,6 +1,6 @@
 require "uri"
 
-module ICal
+module IcalParser
   module URIParser
     def self.parse(string)
       URI.parse(string)

@@ -1,4 +1,4 @@
-module ICal
+module IcalParser
   module DurationParser
     def self.parse(string)
       polarity = /^-/.match(string) ? -1 : 1

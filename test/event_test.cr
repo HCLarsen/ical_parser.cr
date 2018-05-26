@@ -1,6 +1,6 @@
 require "minitest/autorun"
 
-require "/../src/ICal/parser"
+require "/../src/IcalParser/parser"
 require "./ics_stream"
 
 class EventTest < Minitest::Test
@@ -33,7 +33,7 @@ class EventTest < Minitest::Test
      closure!!!
     DESCRIPTION_STRING
 
-    event = ICal::Event.new(event_string)
+    event = IcalParser::Event.new(event_string)
     assert_equal "Lunchtime meeting", event.summary
     assert_equal "ff808181-1fd7389e-011f-d7389ef9-00000003", event.uid
     assert_equal Time.new(2016, 4, 20, 12, 0, 0, kind: Time::Kind::Local), event.dtstart
@@ -55,7 +55,7 @@ class EventTest < Minitest::Test
     CATEGORIES:BUSINESS,HUMAN RESOURCES
     END:VEVENT
     HEREDOC
-    event = ICal::Event.new(event_string)
+    event = IcalParser::Event.new(event_string)
     assert_equal "Annual Employee Review", event.summary
     assert_equal Time.new(1997, 9, 3, 16, 30, 0, kind: Time::Kind::Utc), event.dtstart
     assert_equal Time.new(1997, 9, 3, 19, 0, 0, kind: Time::Kind::Utc), event.dtend
@@ -64,7 +64,7 @@ class EventTest < Minitest::Test
   end
 
   def test_parses_facebook_event
-    event = ICal::Event.new(Fixture.facebook_event)
+    event = IcalParser::Event.new(Fixture.facebook_event)
     assert_equal "OMD", event.summary
     assert_equal "https://www.facebook.com/events/122768155051111/", event.url
     assert_equal Time.new(2018, 3, 13, 23, 0, 0, kind: Time::Kind::Utc), event.dtstart
@@ -84,7 +84,7 @@ class EventTest < Minitest::Test
     RRULE:FREQ=YEARLY
     END:VEVENT
     HEREDOC
-    event = ICal::Event.new(event_string)
+    event = IcalParser::Event.new(event_string)
     assert event.allDay
     assert_equal event.dtstart, event.dtend
   end
@@ -100,7 +100,7 @@ class EventTest < Minitest::Test
     TRANSP:TRANSPARENT
     END:VEVENT
     HEREDOC
-    event = ICal::Event.new(event_string)
+    event = IcalParser::Event.new(event_string)
     assert event.allDay
     assert_equal Time.new(2007, 6, 28), event.dtstart
     assert_equal Time.new(2007, 7, 9), event.dtend
@@ -118,7 +118,7 @@ class EventTest < Minitest::Test
     END:VEVENT
     HEREDOC
     response = assert_raises do
-      event = ICal::Event.new(event_string)
+      event = IcalParser::Event.new(event_string)
     end
     assert_equal "Invalid Event: No DTSTART present", response.message
   end
@@ -137,7 +137,7 @@ class EventTest < Minitest::Test
     END:VEVENT
     HEREDOC
     response = assert_raises do
-      event = ICal::Event.new(event_string)
+      event = IcalParser::Event.new(event_string)
     end
     assert_equal "Invalid Event: SUMMARY MUST NOT occur more than once", response.message
   end

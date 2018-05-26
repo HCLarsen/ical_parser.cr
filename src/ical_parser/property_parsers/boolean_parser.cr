@@ -1,4 +1,4 @@
-module ICal
+module IcalParser
   module BooleanParser
     def self.parse(string)
       if string == "TRUE"

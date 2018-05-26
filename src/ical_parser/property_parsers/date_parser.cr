@@ -1,4 +1,4 @@
-module ICal
+module IcalParser
   module DateParser
     def self.parse(string)
       year = /(\d{4})/.match(string).try &.[1].to_i || 0
