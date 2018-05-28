@@ -1,6 +1,6 @@
 require "minitest/autorun"
 
-require "/../src/IcalParser/parser"
+require "/../src/iCal"
 
 class ParserTest < Minitest::Test
   def test_should_parse_event_from_iCal_with_one_event

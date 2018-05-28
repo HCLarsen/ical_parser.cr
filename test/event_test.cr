@@ -1,6 +1,6 @@
 require "minitest/autorun"
 
-require "/../src/IcalParser/parser"
+require "/../src/iCal"
 require "./ics_stream"
 
 class EventTest < Minitest::Test

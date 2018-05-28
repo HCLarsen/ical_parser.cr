@@ -1,6 +1,6 @@
 require "minitest/autorun"
 
-require "/../src/IcalParser/common"
+require "/../src/iCal"
 
 class CommonTest < Minitest::Test
   def test_should_escape_text
