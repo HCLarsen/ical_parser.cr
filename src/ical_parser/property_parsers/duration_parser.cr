@@ -1,6 +1,8 @@
+require "./value_parser"
+
 module IcalParser
-  module DurationParser
-    def self.parse(string)
+  class DurationParser < ValueParser
+    def parse(string) : Time::Span
       polarity = /^-/.match(string) ? -1 : 1
 
       days = (/(\d+)(?=W)/.match(string).try &.[1].to_i || 0) * 7

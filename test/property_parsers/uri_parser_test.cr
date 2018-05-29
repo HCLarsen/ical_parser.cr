@@ -5,6 +5,11 @@ require "/../src/iCal"
 class URIParserTest < Minitest::Test
   include IcalParser
 
+  def initialize(arg)
+    super(arg)
+    @parser = URIParser.parser
+  end
+
   def test_parses_url_uris
     examples = [
       "http://example.com/pub/calendars/jsmith/mytime.ics",
@@ -21,7 +26,7 @@ class URIParserTest < Minitest::Test
       {"scheme" => "telnet", "host" => "192.0.2.16", "hier-part" => "192.0.2.16:80/"},
     ]
     examples.each_with_index do |example, i|
-      uri = URIParser.parse(example)
+      uri = @parser.parse(example)
       assert_equal parsed_examples[i]["scheme"], uri.scheme
       assert_equal parsed_examples[i]["host"], uri.host
     end
@@ -29,7 +34,7 @@ class URIParserTest < Minitest::Test
 
   def test_parses_mailto_uri
     example = "mailto:John.Doe@example.com"
-    uri = URIParser.parse(example)
+    uri = @parser.parse(example)
     assert_equal "mailto", uri.scheme
     assert_equal "John.Doe@example.com", uri.opaque
   end

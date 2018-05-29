@@ -1,8 +1,10 @@
 require "uri"
 
+require "./value_parser"
+
 module IcalParser
-  module URIParser
-    def self.parse(string)
+  class URIParser < ValueParser
+    def parse(string : String) : URI
       URI.parse(string)
     end
   end

@@ -1,10 +1,12 @@
+require "./value_parser"
+
 module IcalParser
-  module TextParser
-    def self.parse(string)
+  class TextParser < ValueParser
+    def parse(string : String) : String
       string.gsub(/(\\(?!\\))/){ |match| "" }
     end
 
-    def self.generate(string)
+    def generate(string : String) : String
       string.gsub(/(\,|\;|\\[^n])/){ |match| "\\" + match }
     end
   end
