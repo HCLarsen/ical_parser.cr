@@ -1,22 +1,10 @@
+require "./value_parser"
+
 module IcalParser
-  class BooleanParser
-    @@instance : BooleanParser?
-
-    private def initialize; end
-
-    def self.parser : BooleanParser
-      if @@instance.nil?
-      	@@instance = new
-      else
-        @@instance.not_nil!
-  	  end
-    end
-
-    def dup
-      raise Exception.new("Can't duplicate instance of singleton #{self.class}")
-    end
-
-    def parse(string) : Bool
+  class BooleanParser < ValueParser
+    @return_type = Bool
+    
+    def parse(string : String) : Bool
       if string == "TRUE"
         true
       elsif string == "FALSE"
