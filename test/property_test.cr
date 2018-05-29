@@ -23,7 +23,7 @@ class PropertyTest < Minitest::Test
   end
 
   def test_property_has_name
-    property = Property.new("UID", BooleanParser.parser)
+    property = Property.new("UID", TextParser.parser)
     assert_equal "UID", property.name
   end
 
@@ -75,5 +75,25 @@ class PropertyTest < Minitest::Test
       uid = property.get(eventc)
     end
     assert_equal "Invalid Event: UID MUST NOT occur more than once", error.message
+  end
+
+  def test_match_is_case_insensitive
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    DTSTAMP:19960704T120000Z
+    UiD:uid1@example.com
+    ORGANIZER:mailto:jsmith@example.com
+    DTSTART:19960918T143000Z
+    DTEND:19960920T220000Z
+    STATUS:CONFIRMED
+    CATEGORIES:CONFERENCE
+    SUMMARY:Networld+Interop Conference
+    DESCRIPTION:Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta\, Georgia
+    END:VEVENT
+    HEREDOC
+
+    property = Property.new("UID", TextParser.parser)
+    uid = property.get(eventc)
+    assert_equal "uid1@example.com", uid
   end
 end

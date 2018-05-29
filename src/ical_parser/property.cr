@@ -6,7 +6,7 @@ module IcalParser
     end
 
     def get(eventc : String)
-      regex = /#{@name}(?<params>;.+?)?:(?<value>.+?)\R/
+      regex = /#{@name}(?<params>;.+?)?:(?<value>.+?)\R/i
       matches = eventc.scan(regex)
       if matches.size == 1
         @parser.parse(matches.first["value"])
