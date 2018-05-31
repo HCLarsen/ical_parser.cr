@@ -16,5 +16,18 @@ module IcalParser
         raise "Invalid Event: #{@name} is REQUIRED"
       end
     end
+
+    def parse_params(params : String)
+      array = params.split(";").map do |item|
+        pair = item.split("=")
+        if pair.size == 2
+          pair
+        else
+    	    raise "Invaild parameters format"
+        end
+      end
+      array = array.transpose
+      Hash.zip(array.first, array.last)
+    end
   end
 end
