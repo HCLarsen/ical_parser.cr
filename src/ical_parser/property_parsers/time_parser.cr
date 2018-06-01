@@ -6,7 +6,7 @@ module IcalParser
     DT_FLOATING_REGEX = /^\d{6}$/
     DT_UTC_REGEX = /^\d{6}Z$/
 
-    def parse(string : String)
+    def parse(string : String, params = {} of String => String)
       if DT_FLOATING_REGEX.match(string)
         Time.parse(string, TIME.pattern, Time::Kind::Unspecified)
       elsif DT_UTC_REGEX.match(string)
