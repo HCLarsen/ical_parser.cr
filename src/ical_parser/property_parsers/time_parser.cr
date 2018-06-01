@@ -8,7 +8,7 @@ module IcalParser
 
     def parse(string : String)
       if DT_FLOATING_REGEX.match(string)
-        Time.parse(string, TIME.pattern, Time::Kind::Local)
+        Time.parse(string, TIME.pattern, Time::Kind::Unspecified)
       elsif DT_UTC_REGEX.match(string)
         Time.parse(string, UTC_TIME.pattern, Time::Kind::Utc)
       else
