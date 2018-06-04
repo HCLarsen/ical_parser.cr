@@ -11,7 +11,7 @@ class DurationParserTest < Minitest::Test
   end
 
   def test_parses_simple_duration
-    durationString = "P1H"
+    durationString = "PT1H"
     assert_equal Time::Span.new(0, 1, 0, 0), @parser.parse(durationString)
   end
 
