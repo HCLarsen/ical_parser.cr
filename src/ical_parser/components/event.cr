@@ -11,6 +11,11 @@ module IcalParser
       check_end_greater_than_start(@dtstart, dtend)
     end
 
+    def initialize(@uid : String, @dtstamp : Time, @dtstart : Time, duration : Time::Span)
+      raise "Invalid Event: Duration must be positive" if duration < Time::Span.zero
+      @dtend = @dtstart + duration
+    end
+
     def dtstart=(dtstart : Time)
       dtend = @dtend
       if dtend.nil?
