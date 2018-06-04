@@ -29,4 +29,14 @@ class DurationParserTest < Minitest::Test
     durationString = "-PT15M"
     assert_equal Time::Span.new(0, 0, -15, 0), @parser.parse(durationString)
   end
+
+  def test_raises_on_invalid_durations
+    durations = ["P15D5H0M20S", "P1H", "15D", "P1Y", "P1M", "P1WT1H"]
+    durations.each do |duration|
+      error = assert_raises do
+        @parser.parse(duration)
+      end
+      assert_equal "Invalid Duration format", error.message
+    end
+  end
 end
