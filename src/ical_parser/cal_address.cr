@@ -15,7 +15,7 @@ module IcalParser
     property dir : URI?
     property uri : URI
 
-    def initialize(params : Hash(String, String), @uri : URI)
+    def initialize(@uri : URI, params : Hash(String, String))
       params = convert_params(params)
       @calendar_user_type = params["cutype"]?
       @member = params["member"]?
