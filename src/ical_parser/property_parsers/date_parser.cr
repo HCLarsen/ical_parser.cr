@@ -1,11 +1,11 @@
 require "./value_parser"
 
 module IcalParser
-  class DateParser < ValueParser
+  class DateParser < ValueParser(Time)
     DATE = Time::Format.new("%Y%m%d")
     DATE_REGEX = /^\d{8}$/
 
-    def parse(string : String, params = {} of String => String) : Time
+    def parse(string : String, params = {} of String => String) : T
       if DATE_REGEX.match(string)
         if params["kind"]? == "Local"
           kind = Time::Kind::Local

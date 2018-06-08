@@ -1,8 +1,8 @@
 require "./value_parser"
 
 module IcalParser
-  class BooleanParser < ValueParser
-    def parse(string : String) : Bool
+  class BooleanParser < ValueParser(Bool)
+    def parse(string : String, params = {} of String => String) : T
       if string == "TRUE"
         true
       elsif string == "FALSE"

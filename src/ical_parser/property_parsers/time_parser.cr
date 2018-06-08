@@ -7,7 +7,7 @@ module IcalParser
   # impossible to determine the offset of a time zone without knowing the date.
   # Time zone information is instead parsed and set by the Date-Time parser.
   #
-  class TimeParser < ValueParser
+  class TimeParser < ValueParser(Time)
     TIME = Time::Format.new("%H%M%S")
     UTC_TIME = Time::Format.new("%H%M%SZ")
 
@@ -16,7 +16,7 @@ module IcalParser
 
     # Parses the Time value and returns it as a Crystal Time object.
     #
-    def parse(string : String, params = {} of String => String)
+    def parse(string : String, params = {} of String => String) : T
       if DT_FLOATING_REGEX.match(string)
         Time.parse(string, TIME.pattern, Time::Kind::Unspecified)
       elsif DT_UTC_REGEX.match(string)

@@ -1,5 +1,5 @@
 module IcalParser
-  abstract class ValueParser
+  abstract class ValueParser(T)
     private def initialize; end
 
     macro inherited
@@ -16,6 +16,6 @@ module IcalParser
       raise Exception.new("Can't duplicate instance of singleton #{self.class}")
     end
 
-    abstract def parse(string : String)
+    abstract def parse(string : String) forall T
   end
 end

@@ -3,8 +3,8 @@ require "uri"
 require "./value_parser"
 
 module IcalParser
-  class URIParser < ValueParser
-    def parse(string : String) : URI
+  class URIParser < ValueParser(URI)
+    def parse(string : String, params = {} of String => String) : T
       URI.parse(string)
     end
   end

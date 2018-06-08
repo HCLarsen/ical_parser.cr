@@ -1,8 +1,8 @@
 require "./value_parser"
 
 module IcalParser
-  class DurationParser < ValueParser
-    def parse(string) : Time::Span
+  class DurationParser < ValueParser(Time::Span)
+    def parse(string : String, params = {} of String => String) : T
       days_regex = /^(?<polarity>[+-])?P((?<days>\d+)D)?(T((?<hours>\d+)H)?((?<minutes>\d+)M)?((?<seconds>\d+)S)?)?$/
       weeks_regex = /^(?<polarity>[+-])?P(?<weeks>\d+)W$/
 

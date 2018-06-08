@@ -1,11 +1,11 @@
 module IcalParser
-  class Property
+  class Property(T)
     getter name : String
 
-    def initialize(@name : String, @parser : ValueParser)
+    def initialize(@name : String, @parser : ValueParser(T))
     end
 
-    def get(eventc : String)
+    def get(eventc : String) : T
       regex = /#{@name}(?<params>;.+?)?:(?<value>.+?)\R/i
       matches = eventc.scan(regex)
       if matches.size == 1
@@ -17,7 +17,7 @@ module IcalParser
       end
     end
 
-    def parse_params(params : String)
+    def parse_params(params : String) : Hash(String, String)
       array = params.split(";").map do |item|
         pair = item.split("=")
         if pair.size == 2

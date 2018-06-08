@@ -1,8 +1,8 @@
 require "./value_parser"
 
 module IcalParser
-  class TextParser < ValueParser
-    def parse(string : String) : String
+  class TextParser < ValueParser(String)
+    def parse(string : String, params = {} of String => String) : T
       string.gsub(/(\\(?!\\))/){ |match| "" }
     end
 
