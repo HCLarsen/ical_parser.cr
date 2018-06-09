@@ -27,6 +27,24 @@ class PropertyTest < Minitest::Test
     assert_equal "UID", property.name
   end
 
+  def test_property_parses_value
+    property = Property.new("DESCRIPTION", TextParser.parser)
+    params = ""
+    value = "Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta\, Georgia"
+    text = property.parse(params, value)
+    assert_equal String, typeof(text)
+    assert_equal "Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta, Georgia", text
+  end
+
+  def test_property_parses_value_with_params
+    property = Property.new("ATTENDEE", CalAddressParser.parser)
+    params = "RSVP=TRUE;ROLE=REQ-PARTICIPANT;CUTYPE=GROUP"
+    value = "mailto:employee-A@example.com"
+    address = property.parse(params, value)
+    assert_equal "employee-A@example.com", address.uri.opaque
+    assert address.rsvp
+  end
+
   def test_property_gets_value
     property = Property.new("UID", TextParser.parser)
     uid = property.get(@eventc)
@@ -97,19 +115,19 @@ class PropertyTest < Minitest::Test
     assert_equal "uid1@example.com", uid
   end
 
-  def test_parses_tz_params
-    property = Property.new("UID", TextParser.parser)
+#  def test_parses_tz_params
+#    property = Property.new("UID", TextParser.parser)
+#
+#    params = "TZID=America/New_York"
+#    hash = {"TZID" => "America/New_York"}
+#    assert_equal hash, property.parse_params(params)
+#  end
 
-    params = "TZID=America/New_York"
-    hash = {"TZID" => "America/New_York"}
-    assert_equal hash, property.parse_params(params)
-  end
-
-  def test_parses_multiple_params
-    property = Property.new("UID", TextParser.parser)
-
-    params = "ROLE=REQ-PARTICIPANT;PARTSTAT=TENTATIVE;CN=Henry Cabot"
-    hash = {"ROLE" => "REQ-PARTICIPANT", "PARTSTAT" => "TENTATIVE", "CN" => "Henry Cabot"}
-    assert_equal hash, property.parse_params(params)
-  end
+#  def test_parses_multiple_params
+#    property = Property.new("UID", TextParser.parser)
+#
+#    params = "ROLE=REQ-PARTICIPANT;PARTSTAT=TENTATIVE;CN=Henry Cabot"
+#    hash = {"ROLE" => "REQ-PARTICIPANT", "PARTSTAT" => "TENTATIVE", "CN" => "Henry Cabot"}
+#    assert_equal hash, property.parse_params(params)
+#  end
 end

@@ -5,6 +5,11 @@ module IcalParser
     def initialize(@name : String, @parser : ValueParser(T))
     end
 
+    def parse(params : String, value : String) : T
+      params_hash = parse_params(params)
+      @parser.parse(value, params_hash)
+    end
+
     def get(eventc : String) : T
       regex = /#{@name}(?<params>;.+?)?:(?<value>.+?)\R/i
       matches = eventc.scan(regex)
@@ -18,6 +23,8 @@ module IcalParser
     end
 
     def parse_params(params : String) : Hash(String, String)
+      return Hash(String, String).new if params.empty?
+
       array = params.split(";").map do |item|
         pair = item.split("=")
         if pair.size == 2
