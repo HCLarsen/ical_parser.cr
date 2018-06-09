@@ -115,19 +115,19 @@ class PropertyTest < Minitest::Test
     assert_equal "uid1@example.com", uid
   end
 
-#  def test_parses_tz_params
-#    property = Property.new("UID", TextParser.parser)
-#
-#    params = "TZID=America/New_York"
-#    hash = {"TZID" => "America/New_York"}
-#    assert_equal hash, property.parse_params(params)
-#  end
+  def test_parses_tz_params
+    property = Property.new("UID", TextParser.parser)
 
-#  def test_parses_multiple_params
-#    property = Property.new("UID", TextParser.parser)
-#
-#    params = "ROLE=REQ-PARTICIPANT;PARTSTAT=TENTATIVE;CN=Henry Cabot"
-#    hash = {"ROLE" => "REQ-PARTICIPANT", "PARTSTAT" => "TENTATIVE", "CN" => "Henry Cabot"}
-#    assert_equal hash, property.parse_params(params)
-#  end
+    params = "TZID=America/New_York"
+    hash = {"TZID" => "America/New_York"}
+    assert_equal hash, property.parse_params(params)
+  end
+
+  def test_parses_multiple_params
+    property = Property.new("UID", TextParser.parser)
+
+    params = "ROLE=REQ-PARTICIPANT;PARTSTAT=TENTATIVE;CN=Henry Cabot"
+    hash = {"ROLE" => "REQ-PARTICIPANT", "PARTSTAT" => "TENTATIVE", "CN" => "Henry Cabot"}
+    assert_equal hash, property.parse_params(params)
+  end
 end

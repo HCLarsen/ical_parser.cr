@@ -29,7 +29,6 @@ class PropertyTest < Minitest::Test
   end
 
   def test_sets_rsvp
-    #ATTENDEE;RSVP=TRUE:mailto:jsmith@example.com
     uri = URI.parse("mailto:jsmith@example.com")
     params = { "RSVP" => "TRUE" }
     user = CalAddress.new(uri, params)
