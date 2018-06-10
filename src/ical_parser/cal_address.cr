@@ -1,6 +1,14 @@
 #IANA, non-standard, language, calendar user type, group or list membership, participation role, participation status, RSVP expectation, delegatee, delegator, sent by, common name, or directory entry
 
 module IcalParser
+  # Representation of the [Cal-Address](https://tools.ietf.org/html/rfc5545#section-3.3.3) value type
+  #
+  # uri = URI.parse("mailto:iamboss@example.com")
+  # params = { "ROLE" => "NON-PARTICIPANT", "PARTSTAT" => "DELEGATED", "CN" => "The Big Cheese" }
+  # user = CalAddress.new(uri, params)
+  # user.uri.opaque #=> iamboss@example.com
+  # user.common_name  #=> "The Big Cheese"
+  # user.role #=> non-participant
   class CalAddress
     property calendar_user_type : String?
     property member : String?
@@ -15,6 +23,12 @@ module IcalParser
     property dir : URI?
     property uri : URI
 
+    # Creates a new CalAddress object with the specified URI and parameters.
+    #
+    # uri = URI.parse("mailto:jsmith@example.com")
+    # params = { "RSVP" => "TRUE" }
+    # user = CalAddress.new(uri, params)
+    # user.uri.opaque  #=> "jsmith@example.com"
     def initialize(@uri : URI, params : Hash(String, String))
       params = convert_params(params)
       @calendar_user_type = params["cutype"]?
