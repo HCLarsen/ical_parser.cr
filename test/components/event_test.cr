@@ -81,4 +81,9 @@ class PropertyTest < Minitest::Test
     end
     assert_equal "Invalid Event: End time cannot precede start time", error.message
   end
+
+  def test_has_properties_list
+    properties = Event.properties
+    assert_equal Array(String), properties.keys.class
+  end
 end

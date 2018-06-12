@@ -1,5 +1,19 @@
+require "./../property_parsers/*"
+
 module IcalParser
   class Event
+    @@properties = {
+      "UID" => Property(String).new("UID", TextParser.parser),
+      "DTSTAMP" => Property(Time).new("DTSTAMP", TimeParser.parser),
+      "DTSTART" => Property(Time).new("DTSTART", TimeParser.parser),
+      "DTEND" => Property(Time).new("DTEND", TimeParser.parser),
+      "DURATION" => Property(Time::Span).new("DURATION", DurationParser.parser),
+    }
+
+    def self.properties
+      @@properties
+    end
+
     getter uid : String
     property dtstamp, dtstart : Time
     property dtend : Time?
