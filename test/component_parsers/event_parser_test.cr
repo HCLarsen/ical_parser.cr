@@ -9,15 +9,13 @@ class PropertyTest < Minitest::Test
     super(argument)
     @eventc = <<-HEREDOC
     BEGIN:VEVENT
-    DTSTAMP:19960704T120000Z
-    UID:uid1@example.com
-    ORGANIZER:mailto:jsmith@example.com
-    DTSTART:19960918T143000Z
-    DTEND:19960920T220000Z
-    STATUS:CONFIRMED
-    CATEGORIES:CONFERENCE
-    SUMMARY:Networld+Interop Conference
-    DESCRIPTION:Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta\, Georgia
+    UID:19970901T130000Z-123401@example.com
+    DTSTAMP:19970901T130000Z
+    DTSTART:19970903T163000Z
+    DTEND:19970903T190000Z
+    SUMMARY:Annual Employee Review
+    CLASS:PRIVATE
+    CATEGORIES:BUSINESS,HUMAN RESOURCES
     END:VEVENT
     HEREDOC
   end
@@ -35,5 +33,24 @@ class PropertyTest < Minitest::Test
       parser1.dup
     end
     assert_equal "Can't duplicate instance of singleton IcalParser::EventParser", error.message
+  end
+
+  def test_raises_for_invalid_line
+    parser = EventParser.parser
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:19970901T130000Z-123401@example.com
+    DTSTAMP:19970901T130000Z
+    DTSTART:19970903T163000Z
+    DTEND:19970903T190000Z
+    SUMMARY:Annual Employee Review
+    CLASS
+    CATEGORIES:BUSINESS,HUMAN RESOURCES
+    END:VEVENT
+    HEREDOC
+    error = assert_raises do
+      event = parser.parse(eventc)
+    end
+    assert_equal "No match made for invalid line CLASS", error.message
   end
 end

@@ -10,7 +10,18 @@ module IcalParser
       end
     end
 
-    def parse(string : String) forall T
+    def parse(eventc : String)
+      regex = /(?<name>.*?)(?<params>;.*?)?:(?<value>.*)/
+      lines = eventc.lines
+      lines.each do |line|
+        if match = line.match(regex)
+          if (name = match["name"]?) && (value = match["value"]?)
+            puts "Match made for #{name}"
+          end
+        else
+          raise "No match made for invalid line #{line}"
+        end
+      end
     end
 
     def dup
