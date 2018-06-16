@@ -7,6 +7,7 @@ class PropertyTest < Minitest::Test
 
   def initialize(argument)
     super(argument)
+    @parser = EventParser.parser
     @eventc = <<-HEREDOC
     BEGIN:VEVENT
     UID:19970901T130000Z-123401@example.com
@@ -21,8 +22,7 @@ class PropertyTest < Minitest::Test
   end
 
   def test_returns_parser
-    parser = EventParser.parser
-    assert_equal EventParser, parser.class
+    assert_equal EventParser, @parser.class
   end
 
   def test_parser_is_singleton
@@ -35,8 +35,15 @@ class PropertyTest < Minitest::Test
     assert_equal "Can't duplicate instance of singleton IcalParser::EventParser", error.message
   end
 
+  def test_parses_minimal_event
+    event = @parser.parse(@eventc)
+    assert_equal "19970901T130000Z-123401@example.com", event.uid
+    assert_equal Time.utc(1997, 9, 1, 13, 0, 0), event.dtstamp
+    assert_equal Time.utc(1997, 9, 3, 16, 30, 0), event.dtstart
+    assert_equal Time.utc(1997, 9, 3, 19, 0, 0), event.dtend
+  end
+
   def test_raises_for_invalid_line
-    parser = EventParser.parser
     eventc = <<-HEREDOC
     BEGIN:VEVENT
     UID:19970901T130000Z-123401@example.com
@@ -49,7 +56,7 @@ class PropertyTest < Minitest::Test
     END:VEVENT
     HEREDOC
     error = assert_raises do
-      event = parser.parse(eventc)
+      event = @parser.parse(eventc)
     end
     assert_equal "No match made for invalid line CLASS", error.message
   end
