@@ -33,9 +33,9 @@ module IcalParser
     # ```
     def parse(string : String, params = {} of String => String) : T
       if DT_FLOATING_REGEX.match(string)
-        Time.parse(string, TIME.pattern, Time::Kind::Unspecified)
+        Time.parse(string, TIME.pattern, Time::Location.local)
       elsif DT_UTC_REGEX.match(string)
-        Time.parse(string, UTC_TIME.pattern, Time::Kind::Utc)
+        Time.parse(string, UTC_TIME.pattern, Time::Location::UTC)
       else
         raise "Invalid Time format"
       end

@@ -11,8 +11,9 @@ class DateParserTest < Minitest::Test
   end
 
   def test_parses_date
-    date = "19970714"
-    assert_equal Time.new(1997,7,14), @parser.parse(date)
+    date = @parser.parse("19970714")
+    assert_equal Time.new(1997,7,14), date
+    assert_equal Time::Location.local, date.location
   end
 
   def test_raises_for_invalid_date_format

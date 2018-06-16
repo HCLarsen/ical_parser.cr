@@ -17,7 +17,7 @@ module IcalParser
       end
       raise "Invalid Date-Time format" if date_string == nil || time_string == nil
       time = TimeParser.parser.parse(time_string)
-      date = DateParser.parser.parse(date_string, { "kind" => time.kind.to_s })
+      date = DateParser.parser.parse(date_string, { "location" => time.location.to_s })
       date + time.time_of_day
     end
   end

@@ -7,8 +7,8 @@ authors:
 development_dependencies:
   minitest:
     github: ysbaddaden/minitest.cr
-    version: "0.3.6"
+    version: "0.4.0"
 
-crystal: 0.24.1
+crystal: 0.24.2
 
 license: MIT

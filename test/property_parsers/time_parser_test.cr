@@ -12,8 +12,8 @@ class TimeParserTest < Minitest::Test
 
   def test_parses_time
     time = "230000"
-    assert_equal Time.new(1,1,1,23,0,0, nanosecond: 0, kind: Time::Kind::Unspecified), @parser.parse(time)
-    assert_equal Time::Kind::Unspecified, @parser.parse(time).kind
+    assert_equal Time.new(1,1,1,23,0,0, nanosecond: 0, location: Time::Location.local), @parser.parse(time)
+    assert_equal Time::Location.local, @parser.parse(time).location
   end
 
   def test_parses_utc_time

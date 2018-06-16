@@ -7,16 +7,16 @@ module IcalParser
 
     def parse(string : String, params = {} of String => String) : T
       if DATE_REGEX.match(string)
-        if params["kind"]? == "Local"
-          kind = Time::Kind::Local
-        elsif params["kind"]? == "Utc"
-          kind = Time::Kind::Utc
+        if params["location"]? == "Local"
+          location = Time::Location.local
+        elsif params["location"]? == "UTC"
+          location = Time::Location::UTC
         else
-          kind = Time::Kind::Unspecified
+          location = Time::Location.local
         end
 
         begin
-          Time.parse(string, DATE.pattern, kind)
+          Time.parse(string, DATE.pattern, location)
         rescue
           raise "Invalid Date"
         end

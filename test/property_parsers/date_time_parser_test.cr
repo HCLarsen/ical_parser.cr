@@ -13,13 +13,13 @@ class DateTimeParserTest < Minitest::Test
   def test_parses_floating_date_time
     dateTime = @parser.parse("19980118T230000")
     assert_equal Time.new(1998, 1, 18, 23, 0, 0), dateTime
-    assert_equal Time::Kind::Unspecified, dateTime.kind
+    assert_equal Time::Location.local, dateTime.location
   end
 
   def test_parses_utc_date_time
     dateTime = @parser.parse("19980119T070000Z")
     assert_equal Time.utc(1998, 1, 19, 7, 0, 0), dateTime
-    assert_equal Time::Kind::Utc, dateTime.kind
+    assert_equal Time::Location::UTC, dateTime.location
   end
 
   def test_raises_for_invalid_time_format
