@@ -29,7 +29,6 @@ class PropertyTest < Minitest::Test
     value = "mailto:employee-A@example.com"
     address = property.parse(params, value)
     assert_equal "employee-A@example.com", address.uri.opaque
-    assert address.rsvp
   end
 
   def test_property_gets_value

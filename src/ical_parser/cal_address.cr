@@ -10,46 +10,49 @@ module IcalParser
   # user.common_name  #=> "The Big Cheese"
   # user.role #=> non-participant
   class CalAddress
-    property calendar_user_type : String?
-    property member : String?
-    property role : String?
-    property participation : String?
-    property rsvp : Bool?
-    property delegated_to : String?
-    property delegated_from : String?
-    property language : String?
-    property sent_by : String?
-    property common_name : String?
-    property dir : URI?
+    enum Role
+      Chair
+      ReqParticipant
+      OptParticipant
+      NonParticipant
+    end
+
+    enum CUType
+      Individual
+      Group
+      Resource
+      Room
+      Unknown
+    end
+
+    enum PartStat
+      NeedsAction
+      Accepted
+      Declined
+      Tentative
+      Delegated
+    end
+
     property uri : URI
 
-    # Creates a new CalAddress object with the specified URI and parameters.
+    property cutype = CUType::Individual
+    property member : CalAddress?
+    property role = Role::ReqParticipant
+    property part_stat = PartStat::NeedsAction
+    property rsvp = false
+    property delegated_to = [] of CalAddress
+    property delegated_from = [] of CalAddress
+    property language : String?
+    property sent_by : CalAddress?
+    property common_name : String?
+    property dir : URI?
+
+    # Creates a new CalAddress object with the specified URI.
     #
     # uri = URI.parse("mailto:jsmith@example.com")
-    # params = { "RSVP" => "TRUE" }
-    # user = CalAddress.new(uri, params)
+    # user = CalAddress.new(uri)
     # user.uri.opaque  #=> "jsmith@example.com"
-    def initialize(@uri : URI, params : Hash(String, String))
-      params = convert_params(params)
-      @calendar_user_type = params["cutype"]?
-      @member = params["member"]?
-      @role = params["role"]?
-      @participation = params["partstat"]?
-      @delegated_to = params["delegated_to"]?
-      @delegated_from = params["delegated_from"]?
-      @language = params["language"]?
-      @sent_by = params["sent_by"]?
-
-      if rsvp = params["rsvp"]?
-        if rsvp = "TRUE"
-          @rsvp = true
-        else
-          @rsvp = false
-        end
-      end
-
-      @common_name = params["cn"].split.map{ |w| w.capitalize}.join(" ") if params["cn"]?
-      @dir = URI.parse(params["dir"]) if params["dir"]?
+    def initialize(@uri : URI)
     end
 
     private def convert_params(hash : Hash(String, String))
