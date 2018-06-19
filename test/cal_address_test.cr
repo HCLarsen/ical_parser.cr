@@ -23,9 +23,9 @@ class CalAddressTest < Minitest::Test
 
   def test_accepts_member_cal_address
     member = CalAddress.new(URI.parse("mailto:ietf-calsch@example.org"))
-    @user.member = member
-    assert_equal "ietf-calsch@example.org", @user.member.not_nil!.uri.opaque
-    assert_equal CalAddress, @user.member.class
+    @user.member << member
+    assert_equal "ietf-calsch@example.org", @user.member.first.uri.opaque
+    assert_equal Array(CalAddress), @user.member.class
   end
 
   def test_accepts_sent_by_cal_address

@@ -15,6 +15,19 @@ module IcalParser
       ReqParticipant
       OptParticipant
       NonParticipant
+
+      def self.from_string(string : String)
+        case string
+        when "CHAIR"
+          Chair
+        when "OPT-PARTICIPANT"
+          OptParticipant
+        when "NON-PARTICIPANT"
+          NonParticipant
+        else
+          ReqParticipant
+        end
+      end
     end
 
     enum CUType
@@ -23,6 +36,21 @@ module IcalParser
       Resource
       Room
       Unknown
+
+      def self.from_string(string : String)
+        case string
+        when "GROUP"
+          Group
+        when "RESOURCE"
+          Resource
+        when "ROOM"
+          Room
+        when "UNKNOWN"
+          Unknown
+        else
+          Individual
+        end
+      end
     end
 
     enum PartStat
@@ -31,19 +59,34 @@ module IcalParser
       Declined
       Tentative
       Delegated
+
+      def self.from_string(string : String)
+        case string
+        when "ACCEPTED"
+          Accepted
+        when "DECLINED"
+          Declined
+        when "TENTATIVE"
+          Tentative
+        when "DELEGATED"
+          Delegated
+        else
+          NeedsAction
+        end
+      end
     end
 
     property uri : URI
 
     property cutype = CUType::Individual
-    property member : CalAddress?
     property role = Role::ReqParticipant
     property part_stat = PartStat::NeedsAction
     property rsvp = false
+    property sent_by : CalAddress?
+    property member = [] of CalAddress
     property delegated_to = [] of CalAddress
     property delegated_from = [] of CalAddress
     property language : String?
-    property sent_by : CalAddress?
     property common_name : String?
     property dir : URI?
 
