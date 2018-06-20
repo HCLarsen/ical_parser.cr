@@ -31,14 +31,6 @@ class PropertyTest < Minitest::Test
     assert_equal "employee-A@example.com", address.uri.opaque
   end
 
-  def test_property_parses_params_with_array_value
-    #ATTENDEE;DELEGATED-TO="mailto:jdoe@example.com","mailto:jqpublic@example.com":mailto:jsmith@example.com
-    property = Property.new("ATTENDEE", CalAddressParser.parser)
-    params = %(DELEGATED-TO="mailto:jdoe@example.com","mailto:jqpublic@example.com")
-    parsed_params = property.parse_params(params)
-    assert_equal %("mailto:jdoe@example.com","mailto:jqpublic@example.com"), parsed_params["DELEGATED-TO"]
-  end
-
   def test_property_gets_value
     eventc = <<-HEREDOC
     BEGIN:VEVENT
@@ -136,5 +128,12 @@ class PropertyTest < Minitest::Test
     params = "ROLE=REQ-PARTICIPANT;PARTSTAT=TENTATIVE;CN=Henry Cabot"
     hash = {"ROLE" => "REQ-PARTICIPANT", "PARTSTAT" => "TENTATIVE", "CN" => "Henry Cabot"}
     assert_equal hash, property.parse_params(params)
+  end
+
+  def test_property_parses_params_with_array_value
+    property = Property.new("ATTENDEE", CalAddressParser.parser)
+    params = %(DELEGATED-TO="mailto:jdoe@example.com","mailto:jqpublic@example.com")
+    parsed_params = property.parse_params(params)
+    assert_equal %("mailto:jdoe@example.com","mailto:jqpublic@example.com"), parsed_params["DELEGATED-TO"]
   end
 end
