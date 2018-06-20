@@ -1,5 +1,5 @@
 module IcalParser
-  class PeriodOfTime
+  struct PeriodOfTime
     property start_time : Time
     getter end_time : Time
 
