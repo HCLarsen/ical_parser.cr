@@ -2,12 +2,20 @@ require "./../property_parsers/*"
 
 module IcalParser
   class Event
+    PROPERTIES = {
+      "uid" => String,
+      "dtstamp" => Time,
+      "dtstart" => Time,
+      "dtend" => Time?,
+      "duration" => Time::Span?
+    }
+
     @@properties = {
-      "UID" => Property(String).new("UID", TextParser.parser),
-      "DTSTAMP" => Property(Time).new("DTSTAMP", TimeParser.parser),
-      "DTSTART" => Property(Time).new("DTSTART", TimeParser.parser),
-      "DTEND" => Property(Time).new("DTEND", TimeParser.parser),
-      "DURATION" => Property(Time::Span).new("DURATION", DurationParser.parser),
+      "uid" => Property(String).new("UID", TextParser.parser),
+      "dtstamp" => Property(Time).new("DTSTAMP", DateTimeParser.parser),
+      "dtstart" => Property(Time).new("DTSTART", DateTimeParser.parser),
+      "dtend" => Property(Time).new("DTEND", DateTimeParser.parser),
+      "duration" => Property(Time::Span).new("DURATION", DurationParser.parser),
     }
 
     def self.properties
@@ -17,6 +25,7 @@ module IcalParser
     getter uid : String
     property dtstamp, dtstart : Time
     property dtend : Time?
+    @duration : Time::Span?
 
     def initialize(@uid : String, @dtstamp : Time, @dtstart : Time)
     end
@@ -28,6 +37,21 @@ module IcalParser
     def initialize(@uid : String, @dtstamp : Time, @dtstart : Time, duration : Time::Span)
       raise "Invalid Event: Duration must be positive" if duration < Time::Span.zero
       @dtend = @dtstart + duration
+    end
+
+    def initialize(properties : Hash(String, String | Time | Time::Span))
+      @uid = properties["uid"].as String
+      @dtstamp = properties["dtstamp"].as Time
+      @dtstart = properties["dtstart"].as Time
+
+      assign_vars
+    end
+
+    macro assign_vars
+      {% for key, value in PROPERTIES %}
+        @{{key.id}} = properties[{{key}}].as {{value.id}} if properties[{{key}}]?
+      {% end %}
+      {% debug %}
     end
 
     def dtstart=(dtstart : Time)

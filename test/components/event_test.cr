@@ -36,6 +36,19 @@ class PropertyTest < Minitest::Test
     assert_equal dtend, event.dtend
   end
 
+  def test_initializes_event_from_hash
+    props = {
+      "uid" => "19970901T130000Z-123401@example.com",
+      "dtstamp" => Time.utc(1997, 9, 1, 13, 0, 0),
+      "dtstart" => Time.utc(1997, 9, 3, 16, 30, 0),
+      "dtend" => Time.utc(1997, 9, 3, 19, 0, 0)
+    } of String => String | Time | Time::Span
+    event = IcalParser::Event.new(props)
+    assert_equal props["uid"], event.uid
+    assert_equal props["dtstart"], event.dtstart
+    assert_equal props["dtend"], event.dtend
+  end
+
   def test_raises_error_if_end_time_earlier_than_start_time
     uid = "19970901T130000Z-123401@example.com"
     dtstamp = Time.utc(1997, 9, 1, 13, 0, 0)
