@@ -12,13 +12,13 @@ module IcalParser
 
     def parse(eventc : String)
       component_properties = {
-        "UID" => TextParser,
-        "DTSTAMP" => DateTimeParser,
-        "DTSTART" => DateTimeParser,
-        "DTEND" => DateTimeParser,
-        "SUMMARY" => TextParser,
-        "CLASS" => TextParser,
-        "CATEGORIES" => TextParser
+        "uid" => TextParser,
+        "dtstamp" => DateTimeParser,
+        "dtstart" => DateTimeParser,
+        "dtend" => DateTimeParser,
+        "summary" => TextParser,
+        "class" => TextParser,
+        "categories" => TextParser
       }
       found = Hash(String, String | Time).new
       regex = /(?<name>.*?)(?<params>;.*?)?:(?<value>.*)/
@@ -37,10 +37,10 @@ module IcalParser
         end
       end
 
-      uid = found["UID"].as(String)
-      dtstamp = found["DTSTAMP"].as(Time)
-      dtstart = found["DTSTART"].as(Time)
-      dtend = found["DTEND"].as(Time)
+      uid = found["uid"].as(String)
+      dtstamp = found["dtstamp"].as(Time)
+      dtstart = found["dtstart"].as(Time)
+      dtend = found["dtend"].as(Time)
 
       event = Event.new(uid, dtstamp, dtstart, dtend)
     end
