@@ -41,6 +41,8 @@ class PropertyTest < Minitest::Test
     assert_equal Time.utc(1997, 9, 1, 13, 0, 0), event.dtstamp
     assert_equal Time.utc(1997, 9, 3, 16, 30, 0), event.dtstart
     assert_equal Time.utc(1997, 9, 3, 19, 0, 0), event.dtend
+    assert_equal "Annual Employee Review", event.summary
+    assert_equal "PRIVATE", event.classification
   end
 
   def test_raises_for_invalid_line

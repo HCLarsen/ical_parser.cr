@@ -20,16 +20,18 @@ module IcalParser
         "class" => TextParser,
         "categories" => TextParser
       }
-      found = Hash(String, String | Time).new
+      found = Hash(String, String | Time | Time::Span).new
       regex = /(?<name>.*?)(?<params>;.*?)?:(?<value>.*)/
 
       lines = eventc.lines
       lines.each do |line|
         if match = line.match(regex)
-          name = match["name"]
+          name = match["name"].downcase
           if component_properties.keys.includes? name
             parser = component_properties[name].parser
-            #puts "#{match["name"]}:#{parser.class}:#{parser.parse(match["value"])}"
+
+            name = "classification" if name == "class"
+            
             found[name] = parser.parse(match["value"])
           end
         else
@@ -37,12 +39,7 @@ module IcalParser
         end
       end
 
-      uid = found["uid"].as(String)
-      dtstamp = found["dtstamp"].as(Time)
-      dtstart = found["dtstart"].as(Time)
-      dtend = found["dtend"].as(Time)
-
-      event = Event.new(uid, dtstamp, dtstart, dtend)
+      event = Event.new(found)
     end
 
     def dup

@@ -7,7 +7,9 @@ module IcalParser
       "dtstamp" => Time,
       "dtstart" => Time,
       "dtend" => Time?,
-      "duration" => Time::Span?
+      "duration" => Time::Span?,
+      "summary" => String?,
+      "classification" => String?
     }
 
     @@properties = {
@@ -26,6 +28,8 @@ module IcalParser
     property dtstamp, dtstart : Time
     property dtend : Time?
     @duration : Time::Span?
+    property summary : String?
+    property classification : String?
 
     def initialize(@uid : String, @dtstamp : Time, @dtstart : Time)
     end
@@ -47,11 +51,10 @@ module IcalParser
       assign_vars
     end
 
-    macro assign_vars
+    private macro assign_vars
       {% for key, value in PROPERTIES %}
         @{{key.id}} = properties[{{key}}].as {{value.id}} if properties[{{key}}]?
       {% end %}
-      {% debug %}
     end
 
     def dtstart=(dtstart : Time)
