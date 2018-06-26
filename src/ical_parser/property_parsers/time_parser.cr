@@ -33,7 +33,12 @@ module IcalParser
     # ```
     def parse(string : String, params = {} of String => String) : T
       if DT_FLOATING_REGEX.match(string)
-        Time.parse(string, TIME.pattern, Time::Location.local)
+        if tz = params["TZID"]?
+          location = Time::Location.load(tz)
+        else
+          location = Time::Location.local
+        end
+        Time.parse(string, TIME.pattern, location)
       elsif DT_UTC_REGEX.match(string)
         Time.parse(string, UTC_TIME.pattern, Time::Location::UTC)
       else
