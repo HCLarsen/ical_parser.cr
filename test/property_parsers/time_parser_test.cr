@@ -11,14 +11,16 @@ class TimeParserTest < Minitest::Test
   end
 
   def test_parses_time
-    time = "230000"
-    assert_equal Time.new(1,1,1,23,0,0, nanosecond: 0, location: Time::Location.local), @parser.parse(time)
-    assert_equal Time::Location.local, @parser.parse(time).location
+    string = "230000"
+    time = @parser.parse(string)
+    assert_equal Time.new(1,1,1,23,0,0, nanosecond: 0, location: Time::Location.local), time
+    assert_equal Time::Location.local, time.location
   end
 
   def test_parses_utc_time
-    time = "070000Z"
-    assert_equal Time.utc(1,1,1,7,0,0), @parser.parse(time)
+    string = "070000Z"
+    time = @parser.parse(string)
+    assert_equal Time.utc(1,1,1,7,0,0), time
   end
 
   def test_parses_time_zone_time
