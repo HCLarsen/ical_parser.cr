@@ -7,7 +7,7 @@ module IcalParser
 
     def parse(string : String, params = {} of String => String) : T
       if DATE_REGEX.match(string)
-        if tz = params["location"]?
+        if tz = params["TZID"]?
           location = Time::Location.load(tz)
         else
           location = Time::Location.local

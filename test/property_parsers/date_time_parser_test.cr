@@ -30,6 +30,14 @@ class DateTimeParserTest < Minitest::Test
     assert_equal Time::Location.load("America/New_York"), dateTime.location
   end
 
+  def test_parses_date_time_as_date
+    string = "19971102"
+    params = { "VALUE" => "DATE"}
+    dateTime = @parser.parse(string, params)
+    assert_equal Time.new(1997, 11, 2), dateTime
+    assert_equal Time::Location.local, dateTime.location    
+  end
+
   def test_raises_for_invalid_time_format
     error = assert_raises do
       @parser.parse("19980119T230000-0800")
