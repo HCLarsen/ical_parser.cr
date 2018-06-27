@@ -30,7 +30,7 @@ module IcalParser
         if pair.size == 2
           pair
         else
-    	    raise "Invaild parameters format"
+          raise "Invaild parameters format"
         end
       end
       array = array.transpose

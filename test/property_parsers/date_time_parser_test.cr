@@ -24,7 +24,7 @@ class DateTimeParserTest < Minitest::Test
 
   def test_parses_date_time_with_time_zone
     string = "19970714T133000"
-    params = { "TZID" => "America/New_York" }
+    params = {"TZID" => "America/New_York"}
     dateTime = @parser.parse(string, params)
     assert_equal Time.utc(1997, 7, 14, 17, 30, 0), dateTime
     assert_equal Time::Location.load("America/New_York"), dateTime.location
@@ -32,10 +32,10 @@ class DateTimeParserTest < Minitest::Test
 
   def test_parses_date_time_as_date
     string = "19971102"
-    params = { "VALUE" => "DATE"}
+    params = {"VALUE" => "DATE"}
     dateTime = @parser.parse(string, params)
     assert_equal Time.new(1997, 11, 2), dateTime
-    assert_equal Time::Location.local, dateTime.location    
+    assert_equal Time::Location.local, dateTime.location
   end
 
   def test_raises_for_invalid_time_format

@@ -2,9 +2,9 @@ require "./value_parser"
 
 module IcalParser
   class DurationParser < ValueParser(Time::Span)
-    DAYS_REGEX = /^(?<polarity>[+-])?P((?<days>\d+)D)?(T((?<hours>\d+)H)?((?<minutes>\d+)M)?((?<seconds>\d+)S)?)?$/
+    DAYS_REGEX  = /^(?<polarity>[+-])?P((?<days>\d+)D)?(T((?<hours>\d+)H)?((?<minutes>\d+)M)?((?<seconds>\d+)S)?)?$/
     WEEKS_REGEX = /^(?<polarity>[+-])?P(?<weeks>\d+)W$/
-    
+
     def parse(string : String, params = {} of String => String) : T
       if match = string.match(DAYS_REGEX)
         captures = get_captures(match)

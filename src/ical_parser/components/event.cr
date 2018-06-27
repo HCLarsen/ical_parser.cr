@@ -3,20 +3,20 @@ require "./../property_parsers/*"
 module IcalParser
   class Event
     PROPERTIES = {
-      "uid" => String,
-      "dtstamp" => Time,
-      "dtstart" => Time,
-      "dtend" => Time?,
-      "duration" => Time::Span?,
-      "summary" => String?,
-      "classification" => String?
+      "uid"            => String,
+      "dtstamp"        => Time,
+      "dtstart"        => Time,
+      "dtend"          => Time?,
+      "duration"       => Time::Span?,
+      "summary"        => String?,
+      "classification" => String?,
     }
 
     @@properties = {
-      "uid" => Property(String).new("UID", TextParser.parser),
-      "dtstamp" => Property(Time).new("DTSTAMP", DateTimeParser.parser),
-      "dtstart" => Property(Time).new("DTSTART", DateTimeParser.parser),
-      "dtend" => Property(Time).new("DTEND", DateTimeParser.parser),
+      "uid"      => Property(String).new("UID", TextParser.parser),
+      "dtstamp"  => Property(Time).new("DTSTAMP", DateTimeParser.parser),
+      "dtstart"  => Property(Time).new("DTSTART", DateTimeParser.parser),
+      "dtend"    => Property(Time).new("DTEND", DateTimeParser.parser),
       "duration" => Property(Time::Span).new("DURATION", DurationParser.parser),
     }
 

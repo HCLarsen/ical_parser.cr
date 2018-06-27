@@ -7,22 +7,22 @@ module IcalParser
   # time error.
   #
   # ```
-  # TextParser.new  #=> private method 'new' called for IcalParser::TextParser:Class
+  # TextParser.new # => private method 'new' called for IcalParser::TextParser:Class
   # ```
   #
   # Instead, access the singleton instance by calling #parser on the class.
   #
   # ```
-  # parser = TextParser.parser  #=> #<IcalParser::TextParser:0x1062d0f60>
+  # parser = TextParser.parser # => #<IcalParser::TextParser:0x1062d0f60>
   # ```
   #
   class TextParser < ValueParser(String)
     def parse(string : String, params = {} of String => String) : T
-      string.gsub(/(\\(?!\\))/){ |match| "" }
+      string.gsub(/(\\(?!\\))/) { |match| "" }
     end
 
     def generate(string : String) : String
-      string.gsub(/(\,|\;|\\[^n])/){ |match| "\\" + match }
+      string.gsub(/(\,|\;|\\[^n])/) { |match| "\\" + match }
     end
   end
 end

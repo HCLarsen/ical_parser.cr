@@ -78,5 +78,4 @@ class CalAddressTest < Minitest::Test
   def test_partstat_defaults_to_needs_action
     assert_equal CalAddress::PartStat::NeedsAction, @user.part_stat
   end
-
 end

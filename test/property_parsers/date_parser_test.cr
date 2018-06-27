@@ -12,7 +12,7 @@ class DateParserTest < Minitest::Test
 
   def test_parses_date
     date = @parser.parse("19970714")
-    assert_equal Time.new(1997,7,14), date
+    assert_equal Time.new(1997, 7, 14), date
     assert_equal Time::Location.local, date.location
   end
 

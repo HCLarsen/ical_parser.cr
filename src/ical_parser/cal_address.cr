@@ -1,4 +1,4 @@
-#IANA, non-standard, language, calendar user type, group or list membership, participation role, participation status, RSVP expectation, delegatee, delegator, sent by, common name, or directory entry
+# IANA, non-standard, language, calendar user type, group or list membership, participation role, participation status, RSVP expectation, delegatee, delegator, sent by, common name, or directory entry
 
 module IcalParser
   # Representation of the [Cal-Address](https://tools.ietf.org/html/rfc5545#section-3.3.3) value type
@@ -100,7 +100,7 @@ module IcalParser
 
     private def convert_params(hash : Hash(String, String))
       output = {} of String => String
-      hash.each do |k,v|
+      hash.each do |k, v|
         output[convert_string(k)] = v.downcase
       end
       output

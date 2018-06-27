@@ -2,7 +2,7 @@ require "./value_parser"
 
 module IcalParser
   class DateParser < ValueParser(Time)
-    DATE = Time::Format.new("%Y%m%d")
+    DATE       = Time::Format.new("%Y%m%d")
     DATE_REGEX = /^\d{8}$/
 
     def parse(string : String, params = {} of String => String) : T

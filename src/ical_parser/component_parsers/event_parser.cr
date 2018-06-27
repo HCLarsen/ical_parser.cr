@@ -12,13 +12,13 @@ module IcalParser
 
     def parse(eventc : String)
       component_properties = {
-        "uid" => TextParser,
-        "dtstamp" => DateTimeParser,
-        "dtstart" => DateTimeParser,
-        "dtend" => DateTimeParser,
-        "summary" => TextParser,
-        "class" => TextParser,
-        "categories" => TextParser
+        "uid"        => TextParser,
+        "dtstamp"    => DateTimeParser,
+        "dtstart"    => DateTimeParser,
+        "dtend"      => DateTimeParser,
+        "summary"    => TextParser,
+        "class"      => TextParser,
+        "categories" => TextParser,
       }
       found = Hash(String, String | Time | Time::Span).new
       regex = /(?<name>.*?)(?<params>;.*?)?:(?<value>.*)/
@@ -31,7 +31,7 @@ module IcalParser
             parser = component_properties[name].parser
 
             name = "classification" if name == "class"
-            
+
             found[name] = parser.parse(match["value"])
           end
         else

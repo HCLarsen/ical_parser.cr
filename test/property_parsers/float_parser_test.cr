@@ -33,6 +33,6 @@ class FloatParserTest < Minitest::Test
     error = assert_raises do
       @parser.parse(string)
     end
-    assert_equal "Invalid Float64: SOMETHING ELSE", error.message    
+    assert_equal "Invalid Float64: SOMETHING ELSE", error.message
   end
 end
