@@ -17,7 +17,7 @@ module IcalParser
   # ```
   #
   class TextParser < ValueParser(String)
-    def parse(string : String, params = {} of String => String) : T
+    def parse(string : String, params = {} of String => String, options = {} of String => Bool) : T
       string.gsub(/(\\(?!\\))/) { |match| "" }
     end
 

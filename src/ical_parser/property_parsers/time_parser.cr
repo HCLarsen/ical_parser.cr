@@ -31,7 +31,7 @@ module IcalParser
     # ```
     # TimeParser.parser.parse("230000") # => 0001-01-01 23:00:00
     # ```
-    def parse(string : String, params = {} of String => String) : T
+    def parse(string : String, params = {} of String => String, options = {} of String => Bool) : T
       if DT_FLOATING_REGEX.match(string)
         if tz = params["TZID"]?
           location = Time::Location.load(tz)
