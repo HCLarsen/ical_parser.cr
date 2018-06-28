@@ -10,18 +10,6 @@ module IcalParser
       @parser.parse(value, params_hash)
     end
 
-    def get(eventc : String) : T
-      regex = /#{@name}(?<params>;.+?)?:(?<value>.+?)\R/i
-      matches = eventc.scan(regex)
-      if matches.size == 1
-        @parser.parse(matches.first["value"])
-      elsif matches.size > 1
-        raise "Invalid Event: #{@name} MUST NOT occur more than once"
-      else
-        raise "Invalid Event: #{@name} is REQUIRED"
-      end
-    end
-
     def parse_params(params : String) : Hash(String, String)
       return Hash(String, String).new if params.empty?
 
