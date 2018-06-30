@@ -13,18 +13,6 @@ module IcalParser
       "categories"     => Array(String)
     }
 
-    @@properties = {
-      "uid"      => Property(String).new("UID", TextParser.parser),
-      "dtstamp"  => Property(Time).new("DTSTAMP", DateTimeParser.parser),
-      "dtstart"  => Property(Time).new("DTSTART", DateTimeParser.parser),
-      "dtend"    => Property(Time).new("DTEND", DateTimeParser.parser),
-      "duration" => Property(Time::Span).new("DURATION", DurationParser.parser),
-    }
-
-    def self.properties
-      @@properties
-    end
-
     getter uid : String
     property dtstamp, dtstart : Time
     property dtend : Time?
