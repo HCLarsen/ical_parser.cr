@@ -9,7 +9,7 @@ module IcalParser
     DT_FLOATING_REGEX = /^\d{8}T\d{6}$/
     DT_UTC_REGEX      = /^\d{8}T\d{6}Z$/
 
-    def parse(string : String, params = {} of String => String, options = {} of String => Bool) : T
+    def parse(string : String, params = {} of String => String, options = [] of EventParser::Option) : T
       if params["VALUE"]? != "DATE"
         begin
           date_string, time_string = string.split('T')

@@ -16,6 +16,6 @@ module IcalParser
       raise Exception.new("Can't duplicate instance of singleton #{self.class}")
     end
 
-    abstract def parse(string : String, params = {} of String => String, options = {} of String => Bool) forall T
+    abstract def parse(string : String, params = {} of String => String, options = [] of EventParser::Option) forall T
   end
 end

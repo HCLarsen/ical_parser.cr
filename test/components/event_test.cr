@@ -2,7 +2,7 @@ require "minitest/autorun"
 
 require "/../src/iCal"
 
-class PropertyTest < Minitest::Test
+class EventTest < Minitest::Test
   include IcalParser
 
   def test_initializes_event_without_end_time
@@ -42,7 +42,7 @@ class PropertyTest < Minitest::Test
       "dtstamp" => Time.utc(1997, 9, 1, 13, 0, 0),
       "dtstart" => Time.utc(1997, 9, 3, 16, 30, 0),
       "dtend"   => Time.utc(1997, 9, 3, 19, 0, 0),
-    } of String => String | Time | Time::Span
+    } of String => String | Time | Time::Span | Array(String)
     event = IcalParser::Event.new(props)
     assert_equal props["uid"], event.uid
     assert_equal props["dtstart"], event.dtstart

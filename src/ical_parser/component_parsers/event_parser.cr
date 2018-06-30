@@ -1,5 +1,14 @@
 module IcalParser
   class EventParser
+    enum Option
+      Dual
+      List
+      DateAllowed
+      DateOrPeriodAllowed
+      DateRequired
+      UTC
+    end
+
     private def initialize; end
 
     def self.parser : EventParser
@@ -20,7 +29,7 @@ module IcalParser
         "class"      => TextParser,
         "categories" => TextParser,
       }
-      found = Hash(String, String | Time | Time::Span).new
+      found = Hash(String, String | Time | Time::Span | Array(String)).new
       regex = /(?<name>.*?)(?<params>;.*?)?:(?<value>.*)/
 
       lines = eventc.lines
@@ -32,7 +41,12 @@ module IcalParser
 
             name = "classification" if name == "class"
 
-            found[name] = parser.parse(match["value"])
+            if name == "categories"
+              list = match["value"].split(/(?<!\\),/)
+              found[name] = list.map { |e| parser.parse(e).as String }
+            else
+              found[name] = parser.parse(match["value"])
+            end
           end
         else
           raise "No match made for invalid line #{line}"

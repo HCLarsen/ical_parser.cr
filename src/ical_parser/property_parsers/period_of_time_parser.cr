@@ -1,6 +1,6 @@
 module IcalParser
   class PeriodOfTimeParser < ValueParser(PeriodOfTime)
-    def parse(string : String, params = {} of String => String, options = {} of String => Bool) : T
+    def parse(string : String, params = {} of String => String, options = [] of EventParser::Option) : T
       parts = string.split("/")
       if parts.size == 2
         if parts[1].match(DateTimeParser::DT_UTC_REGEX) || parts[1].match(DateTimeParser::DT_FLOATING_REGEX)

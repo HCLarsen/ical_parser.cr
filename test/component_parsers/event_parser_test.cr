@@ -2,7 +2,7 @@ require "minitest/autorun"
 
 require "/../src/iCal"
 
-class PropertyTest < Minitest::Test
+class EventParserTest < Minitest::Test
   include IcalParser
 
   def initialize(argument)
@@ -43,6 +43,7 @@ class PropertyTest < Minitest::Test
     assert_equal Time.utc(1997, 9, 3, 19, 0, 0), event.dtend
     assert_equal "Annual Employee Review", event.summary
     assert_equal "PRIVATE", event.classification
+    assert_equal ["BUSINESS", "HUMAN RESOURCES"], event.categories
   end
 
   def test_raises_for_invalid_line

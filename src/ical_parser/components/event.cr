@@ -10,6 +10,7 @@ module IcalParser
       "duration"       => Time::Span?,
       "summary"        => String?,
       "classification" => String?,
+      "categories"     => Array(String)
     }
 
     @@properties = {
@@ -30,6 +31,7 @@ module IcalParser
     @duration : Time::Span?
     property summary : String?
     property classification : String?
+    property categories = [] of String
 
     def initialize(@uid : String, @dtstamp : Time, @dtstart : Time)
     end
@@ -43,7 +45,7 @@ module IcalParser
       @dtend = @dtstart + duration
     end
 
-    def initialize(properties : Hash(String, String | Time | Time::Span))
+    def initialize(properties : Hash(String, String | Time | Time::Span | Array(String)))
       @uid = properties["uid"].as String
       @dtstamp = properties["dtstamp"].as Time
       @dtstart = properties["dtstart"].as Time
