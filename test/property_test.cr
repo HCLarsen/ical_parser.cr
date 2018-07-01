@@ -9,13 +9,8 @@ class PropertyTest < Minitest::Test
     super(argument)
   end
 
-  def test_property_has_name
-    property = Property.new("UID", TextParser.parser)
-    assert_equal "UID", property.name
-  end
-
   def test_property_parses_value
-    property = Property.new("DESCRIPTION", TextParser.parser)
+    property = Property.new(TextParser.parser)
     params = ""
     value = "Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta\, Georgia"
     text = property.parse(params, value)
@@ -24,7 +19,7 @@ class PropertyTest < Minitest::Test
   end
 
   def test_property_parses_value_with_params
-    property = Property.new("ATTENDEE", CalAddressParser.parser)
+    property = Property.new(CalAddressParser.parser)
     params = "RSVP=TRUE;ROLE=REQ-PARTICIPANT;CUTYPE=GROUP"
     value = "mailto:employee-A@example.com"
     address = property.parse(params, value)
@@ -32,7 +27,7 @@ class PropertyTest < Minitest::Test
   end
 
   def test_parses_tz_params
-    property = Property.new("UID", TextParser.parser)
+    property = Property.new(TextParser.parser)
 
     params = "TZID=America/New_York"
     hash = {"TZID" => "America/New_York"}
@@ -40,7 +35,7 @@ class PropertyTest < Minitest::Test
   end
 
   def test_parses_multiple_params
-    property = Property.new("UID", TextParser.parser)
+    property = Property.new(TextParser.parser)
 
     params = "ROLE=REQ-PARTICIPANT;PARTSTAT=TENTATIVE;CN=Henry Cabot"
     hash = {"ROLE" => "REQ-PARTICIPANT", "PARTSTAT" => "TENTATIVE", "CN" => "Henry Cabot"}
@@ -48,7 +43,7 @@ class PropertyTest < Minitest::Test
   end
 
   def test_property_parses_params_with_array_value
-    property = Property.new("ATTENDEE", CalAddressParser.parser)
+    property = Property.new(CalAddressParser.parser)
     params = %(DELEGATED-TO="mailto:jdoe@example.com","mailto:jqpublic@example.com")
     parsed_params = property.parse_params(params)
     assert_equal %("mailto:jdoe@example.com","mailto:jqpublic@example.com"), parsed_params["DELEGATED-TO"]

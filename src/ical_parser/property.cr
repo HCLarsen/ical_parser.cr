@@ -1,8 +1,6 @@
 module IcalParser
   class Property(T)
-    getter name : String
-
-    def initialize(@name : String, @parser : ValueParser(T))
+    def initialize(@parser : ValueParser(T))
     end
 
     def parse(params : String, value : String) : T
