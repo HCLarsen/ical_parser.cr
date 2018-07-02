@@ -5,7 +5,7 @@ module IcalParser
     DATE       = Time::Format.new("%Y%m%d")
     DATE_REGEX = /^\d{8}$/
 
-    def parse(string : String, params = {} of String => String, options = [] of EventParser::Option) : T
+    def parse(string : String, params = {} of String => String) : T
       if DATE_REGEX.match(string)
         if tz = params["TZID"]?
           location = Time::Location.load(tz)

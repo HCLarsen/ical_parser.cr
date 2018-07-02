@@ -1,14 +1,5 @@
 module IcalParser
   class EventParser
-    enum Option
-      Dual
-      List
-      DateAllowed
-      DateOrPeriodAllowed
-      DateRequired
-      UTC
-    end
-
     private def initialize; end
 
     def self.parser : EventParser

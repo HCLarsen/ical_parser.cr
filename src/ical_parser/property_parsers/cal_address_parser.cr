@@ -2,7 +2,7 @@ require "uri"
 
 module IcalParser
   class CalAddressParser < ValueParser(CalAddress)
-    def parse(string : String, params = {} of String => String, options = [] of EventParser::Option) : T
+    def parse(string : String, params = {} of String => String) : T
       uri = URI.parse(string)
       address = CalAddress.new(uri)
       address.rsvp = true if params["RSVP"]? == "TRUE"
