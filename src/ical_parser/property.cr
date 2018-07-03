@@ -21,6 +21,7 @@ module IcalParser
     def parse_params(params : String) : Hash(String, String)
       return Hash(String, String).new if params.empty?
 
+      params = params.lstrip(';')
       array = params.split(";").map do |item|
         pair = item.split("=")
         if pair.size == 2

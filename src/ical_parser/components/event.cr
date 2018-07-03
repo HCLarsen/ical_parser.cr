@@ -3,15 +3,18 @@ require "./../property_parsers/*"
 module IcalParser
   class Event
     PROPERTIES = {
-      "uid"            => String,
-      "dtstamp"        => Time,
-      "dtstart"        => Time,
-      "dtend"          => Time?,
-      "duration"       => Time::Span?,
-      "summary"        => String?,
-      "classification" => String?,
-      "categories"     => Array(String)
+      "uid"             => String,
+      "dtstamp"         => Time,
+      "dtstart"         => Time,
+      "dtend"           => Time?,
+      "duration"        => Time::Span?,
+      "summary"         => String?,
+      "classification"  => String?,
+      "categories"      => Array(String),
+      "transp"           => String
     }
+
+    @all_day = false
 
     getter uid : String
     property dtstamp, dtstart : Time
@@ -20,6 +23,7 @@ module IcalParser
     property summary : String?
     property classification : String?
     property categories = [] of String
+    @transp = "OPAQUE"
 
     def initialize(@uid : String, @dtstamp : Time, @dtstart : Time)
     end
@@ -41,10 +45,8 @@ module IcalParser
       assign_vars
     end
 
-    private macro assign_vars
-      {% for key, value in PROPERTIES %}
-        @{{key.id}} = properties[{{key}}].as {{value.id}} if properties[{{key}}]?
-      {% end %}
+    def opaque?
+      @transp == "OPAQUE"
     end
 
     def dtstart=(dtstart : Time)
@@ -58,6 +60,20 @@ module IcalParser
 
     def dtend=(dtend : Time)
       check_end_greater_than_start(@dtstart, dtend)
+    end
+
+    def all_day?
+      @all_day
+    end
+
+    def all_day=(value : Bool)
+      @all_day = value
+    end
+
+    private macro assign_vars
+      {% for key, value in PROPERTIES %}
+        @{{key.id}} = properties[{{key}}].as {{value.id}} if properties[{{key}}]?
+      {% end %}
     end
 
     private def check_end_greater_than_start(dtstart : Time, dtend : Time)

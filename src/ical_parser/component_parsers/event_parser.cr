@@ -19,7 +19,9 @@ module IcalParser
         "summary"         => Property.new(TextParser.parser),
         "classification"  => Property.new(TextParser.parser),
         "categories"      => Property.new(TextParser.parser, Property::Quantity::List),
+        "transp"          => Property.new(TextParser.parser),
       }
+      all_day = false
       found = Hash(String, String | Time | Time::Span | Array(String)).new
       regex = /(?<name>.*?)(?<params>;.*?)?:(?<value>.*)/
 
@@ -28,6 +30,7 @@ module IcalParser
         if match = line.match(regex)
           name = match["name"].downcase
           name = "classification" if name == "class"
+          all_day = true if name == "dtstart" && match["params"]? && match["params"].includes?("VALUE=DATE")
 
           if component_properties.keys.includes? name
             property = component_properties[name]
@@ -40,11 +43,13 @@ module IcalParser
             end
           end
         else
-          raise "No match made for invalid line #{line}"
+          raise "Invalid Event: No value on line #{line}"
         end
       end
 
       event = Event.new(found)
+      event.all_day = all_day
+      return event
     end
 
     def dup

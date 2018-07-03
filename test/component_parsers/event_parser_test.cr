@@ -44,6 +44,26 @@ class EventParserTest < Minitest::Test
     assert_equal "Annual Employee Review", event.summary
     assert_equal "PRIVATE", event.classification
     assert_equal ["BUSINESS", "HUMAN RESOURCES"], event.categories
+    assert event.opaque?
+  end
+
+  def test_parses_anniversary_event
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:19970901T130000Z-123403@example.com
+    DTSTAMP:19970901T130000Z
+    DTSTART;VALUE=DATE:19971102
+    SUMMARY:Our Blissful Anniversary
+    TRANSP:TRANSPARENT
+    CLASS:CONFIDENTIAL
+    CATEGORIES:ANNIVERSARY,PERSONAL,SPECIAL OCCASION
+    RRULE:FREQ=YEARLY
+    END:VEVENT
+    HEREDOC
+    event = @parser.parse(eventc)
+    assert_equal Time.new(1997, 11, 2), event.dtstart
+    assert event.all_day?
+    refute event.opaque?
   end
 
   def test_raises_for_invalid_line
@@ -59,6 +79,6 @@ class EventParserTest < Minitest::Test
     error = assert_raises do
       event = @parser.parse(eventc)
     end
-    assert_equal "No match made for invalid line CLASS", error.message
+    assert_equal "Invalid Event: No value on line CLASS", error.message
   end
 end
