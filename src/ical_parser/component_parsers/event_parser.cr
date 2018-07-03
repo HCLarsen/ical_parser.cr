@@ -16,6 +16,7 @@ module IcalParser
         "dtstamp"         => Property.new(DateTimeParser.parser),
         "dtstart"         => Property.new(DateTimeParser.parser),
         "dtend"           => Property.new(DateTimeParser.parser),
+        "duration"        => Property.new(DurationParser.parser),
         "summary"         => Property.new(TextParser.parser),
         "classification"  => Property.new(TextParser.parser),
         "categories"      => Property.new(TextParser.parser, Property::Quantity::List),
@@ -69,6 +70,10 @@ module IcalParser
 
         if dtend <= dtstart
           raise "Invalid Event: DTEND MUST BE later than DTSTART"
+        end
+
+        if data["duration"]?
+          raise "Invalid Event: DTEND and DURATION MUST NOT appear in the same event"
         end
       end
 

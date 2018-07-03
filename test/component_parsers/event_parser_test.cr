@@ -136,6 +136,26 @@ class EventParserTest < Minitest::Test
     assert_equal "Invalid Event: DTEND MUST BE later than DTSTART", error.message
   end
 
+  def test_raises_if_end_and_duration_are_present
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:19970901T130000Z-123401@example.com
+    DTSTAMP:19970901T130000Z
+    DTSTART:19970903T163000Z
+    DTEND:19970903T190000Z
+    DURATION:PT1H
+    SUMMARY:Annual Employee Review
+    CLASS:PRIVATE
+    CATEGORIES:BUSINESS,HUMAN RESOURCES
+    END:VEVENT
+    HEREDOC
+
+    error = assert_raises do
+      event = @parser.parse(eventc)
+    end
+    assert_equal "Invalid Event: DTEND and DURATION MUST NOT appear in the same event", error.message
+  end
+
   def test_raises_for_invalid_transp_value
     eventc = <<-HEREDOC
     BEGIN:VEVENT
