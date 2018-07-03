@@ -12,13 +12,13 @@ module IcalParser
 
     def parse(eventc : String)
       component_properties = {
-        "uid"        => TextParser,
-        "dtstamp"    => DateTimeParser,
-        "dtstart"    => DateTimeParser,
-        "dtend"      => DateTimeParser,
-        "summary"    => TextParser,
-        "class"      => TextParser,
-        "categories" => TextParser,
+        "uid"             => Property.new(TextParser.parser),
+        "dtstamp"         => Property.new(DateTimeParser.parser),
+        "dtstart"         => Property.new(DateTimeParser.parser),
+        "dtend"           => Property.new(DateTimeParser.parser),
+        "summary"         => Property.new(TextParser.parser),
+        "classification"  => Property.new(TextParser.parser),
+        "categories"      => Property.new(TextParser.parser, Property::Quantity::List),
       }
       found = Hash(String, String | Time | Time::Span | Array(String)).new
       regex = /(?<name>.*?)(?<params>;.*?)?:(?<value>.*)/
@@ -27,16 +27,16 @@ module IcalParser
       lines.each do |line|
         if match = line.match(regex)
           name = match["name"].downcase
+          name = "classification" if name == "class"
+
           if component_properties.keys.includes? name
-            parser = component_properties[name].parser
+            property = component_properties[name]
 
-            name = "classification" if name == "class"
-
-            if name == "categories"
-              list = match["value"].split(/(?<!\\),/)
-              found[name] = list.map { |e| parser.parse(e).as String }
+            if property.quantity == Property::Quantity::One
+              found[name] = property.parse(match["value"], match["params"]?)
             else
-              found[name] = parser.parse(match["value"])
+              list = match["value"].split(/(?<!\\),/)
+              found[name] = list.map { |e| property.parse(e, match["params"]?).as String }
             end
           end
         else

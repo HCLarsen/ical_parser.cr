@@ -13,7 +13,7 @@ class PropertyTest < Minitest::Test
     property = Property.new(TextParser.parser)
     params = ""
     value = "Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta\, Georgia"
-    text = property.parse(params, value)
+    text = property.parse(value, params)
     assert_equal String, typeof(text)
     assert_equal "Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta, Georgia", text
   end
@@ -22,7 +22,7 @@ class PropertyTest < Minitest::Test
     property = Property.new(CalAddressParser.parser)
     params = "RSVP=TRUE;ROLE=REQ-PARTICIPANT;CUTYPE=GROUP"
     value = "mailto:employee-A@example.com"
-    address = property.parse(params, value)
+    address = property.parse(value, params)
     assert_equal "employee-A@example.com", address.uri.opaque
   end
 

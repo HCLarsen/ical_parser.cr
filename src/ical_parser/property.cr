@@ -1,11 +1,21 @@
 module IcalParser
   class Property(T)
-    def initialize(@parser : ValueParser(T))
+    property parser : ValueParser(T)
+    getter quantity : Quantity
+
+    enum Quantity
+      One
+      Two
+      List
     end
 
-    def parse(params : String, value : String) : T
+    def initialize(@parser : ValueParser(T), @quantity = Quantity::One)
+    end
+
+    def parse(value : String, params : String?) : T
+      params ||= ""
       params_hash = parse_params(params)
-      @parser.parse(value, params_hash)
+      parsed = @parser.parse(value, params_hash)
     end
 
     def parse_params(params : String) : Hash(String, String)

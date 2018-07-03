@@ -53,9 +53,7 @@ class EventParserTest < Minitest::Test
     DTSTAMP:19970901T130000Z
     DTSTART:19970903T163000Z
     DTEND:19970903T190000Z
-    SUMMARY:Annual Employee Review
     CLASS
-    CATEGORIES:BUSINESS,HUMAN RESOURCES
     END:VEVENT
     HEREDOC
     error = assert_raises do
