@@ -17,7 +17,17 @@ module IcalParser
     end
 
     def initialize(properties : Hash(String, String), @events = [] of Event)
-      @prodid = properties["prodid"].as String
+      if properties["prodid"]?
+        @prodid = properties["prodid"].as String
+      else
+        raise "Invalid Calendar: PRODID is REQUIRED"
+      end
+
+      if properties["version"]?
+        @prodid = properties["prodid"].as String
+      else
+        raise "Invalid Calendar: VERSION is REQUIRED"
+      end
 
       assign_vars
     end
