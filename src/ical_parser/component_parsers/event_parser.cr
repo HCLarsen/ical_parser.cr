@@ -23,7 +23,7 @@ module IcalParser
         "transp"          => Property.new(TextParser.parser),
       }
       all_day = false
-      found = Hash(String, String | Time | Time::Span | Array(String)).new
+      found = Hash(String, ICalValue).new
       regex = /(?<name>.*?)(?<params>;.*?)?:(?<value>.*)/
 
       lines = eventc.lines

@@ -37,7 +37,7 @@ module IcalParser
       @dtend = @dtstart + duration
     end
 
-    def initialize(properties : Hash(String, String | Time | Time::Span | Array(String)))
+    def initialize(properties : Hash(String, ICalValue))
       @uid = properties["uid"].as String
       @dtstamp = properties["dtstamp"].as Time
       @dtstart = properties["dtstart"].as Time

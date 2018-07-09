@@ -5,4 +5,5 @@ require "./ical_parser/property_parsers/*"
 
 # TODO: Write documentation for `IcalParser`
 module IcalParser
+  alias ICalValue = String | Time | Time::Span | Array(String)
 end
