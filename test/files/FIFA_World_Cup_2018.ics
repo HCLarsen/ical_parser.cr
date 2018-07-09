@@ -1,0 +1,584 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Calendar Labs//Calendar 1.0//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:FIFA World Cup 2018
+X-WR-TIMEZONE:America/New_York
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180614T150000Z
+DTEND:20180614T170000Z
+SUMMARY:Russia Vs Saudi Arabia - Group A
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb578a3
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180615T120000Z
+DTEND:20180615T140000Z
+SUMMARY:Egypt Vs Uruguay - Group A
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb579a0
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180615T150000Z
+DTEND:20180615T170000Z
+SUMMARY:Morocco Vs Iran - Group B
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb57a83
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180615T180000Z
+DTEND:20180615T200000Z
+SUMMARY:Portugal Vs Spain - Group B
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb57b78
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180616T100000Z
+DTEND:20180616T120000Z
+SUMMARY:France Vs Australia - Group C
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb57c5b
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180616T130000Z
+DTEND:20180616T150000Z
+SUMMARY:Argentina Vs Iceland - Group D
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb57d4f
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180616T160000Z
+DTEND:20180616T180000Z
+SUMMARY:Peru Vs Denmark - Group C
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb57e33
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180616T190000Z
+DTEND:20180616T200000Z
+SUMMARY:Croata Vs Nigeria - Group D
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb57f2a
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180617T120000Z
+DTEND:20180617T140000Z
+SUMMARY:Costarica Vs Serbia - Group E
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb58020
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180617T150000Z
+DTEND:20180617T170000Z
+SUMMARY:Germany Vs Mexico - Group F
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb58107
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180617T180000Z
+DTEND:20180617T200000Z
+SUMMARY:Brazil Vs Switzerland - Group E
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb581fd
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180618T120000Z
+DTEND:20180618T140000Z
+SUMMARY:Sweden Vs Korea Republic - Group F
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb582e5
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180618T150000Z
+DTEND:20180618T170000Z
+SUMMARY:Belgium Vs Panama - Group G
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb583de
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180618T180000Z
+DTEND:20180618T200000Z
+SUMMARY:Tunisia Vs England - Group G
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb584d8
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180619T120000Z
+DTEND:20180619T140000Z
+SUMMARY:Colombia Vs Japan - Group H
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb585d5
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180619T150000Z
+DTEND:20180619T170000Z
+SUMMARY:Poland Vs Senegal - Group H
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb586c0
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180619T180000Z
+DTEND:20180619T200000Z
+SUMMARY:Russia Vs Egypt - Group A
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb587aa
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180620T120000Z
+DTEND:20180620T140000Z
+SUMMARY:Portugal Vs Morocco - Group B
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb588a8
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180620T150000Z
+DTEND:20180620T170000Z
+SUMMARY:Uruguay Vs Saudi Arabia - Group A
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb589b2
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180620T180000Z
+DTEND:20180620T200000Z
+SUMMARY:Iran Vs Spain - Group B
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb58a9f
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180621T120000Z
+DTEND:20180621T140000Z
+SUMMARY:Denmark Vs Australia - Group C
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb58b8c
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180621T150000Z
+DTEND:20180621T170000Z
+SUMMARY:France Vs Peru - Group C
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb58c8c
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180621T180000Z
+DTEND:20180621T200000Z
+SUMMARY:Argentina Vs Croatia - Group D
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb58d8c
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180622T120000Z
+DTEND:20180622T140000Z
+SUMMARY:Brazil Vs Costa Rica - Group E
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb58e7c
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180622T150000Z
+DTEND:20180622T170000Z
+SUMMARY:Nigeria Vs Iceland - Group D
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb58f6c
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180622T180000Z
+DTEND:20180622T200000Z
+SUMMARY:Serbia Vs Switzerland - Group E
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5906f
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180623T120000Z
+DTEND:20180623T140000Z
+SUMMARY:Belgium Vs Tunisia - Group G
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb59160
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180623T150000Z
+DTEND:20180623T170000Z
+SUMMARY:Korea Republic Vs Mexico - Group F
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb59253
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180623T180000Z
+DTEND:20180623T200000Z
+SUMMARY:Germany Vs Sweden - Group F
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5936a
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180624T120000Z
+DTEND:20180624T140000Z
+SUMMARY:England Vs Panama - Group G
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5947c
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180624T150000Z
+DTEND:20180624T170000Z
+SUMMARY:Japan Vs Senegal - Group H
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb59571
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180624T180000Z
+DTEND:20180624T200000Z
+SUMMARY:Poland Vs Colombia - Group H
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb59666
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180625T140000Z
+DTEND:20180625T160000Z
+SUMMARY:Saudi Arabia Vs Egypt - Group A
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5976d
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180625T140000Z
+DTEND:20180625T160000Z
+SUMMARY:Uruguay Vs Russia - Group A
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb59882
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180625T180000Z
+DTEND:20180625T200000Z
+SUMMARY:Spain Vs Morocco - Group B
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5997b
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180625T180000Z
+DTEND:20180625T200000Z
+SUMMARY:Iran Vs Portugal - Group B
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb59a73
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180626T140000Z
+DTEND:20180626T160000Z
+SUMMARY:Denmark Vs France - Group C
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb59b7b
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180626T140000Z
+DTEND:20180626T160000Z
+SUMMARY:Australia Vs Peru - Group C
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb59c74
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180626T180000Z
+DTEND:20180626T200000Z
+SUMMARY:Nigeria Vs Argentina - Group D
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb59d6e
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180626T180000Z
+DTEND:20180626T200000Z
+SUMMARY:Iceland Vs Croatia - Group D
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb59e77
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180627T120000Z
+DTEND:20180627T140000Z
+SUMMARY:Mexico Vs Sweden - Group F
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb59f8e
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180627T140000Z
+DTEND:20180627T160000Z
+SUMMARY:Korean Republic Vs Germany - Group F
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5a08b
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180627T180000Z
+DTEND:20180627T200000Z
+SUMMARY:Switzerland Vs Costa Rica - Group E
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5a18a
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180627T180000Z
+DTEND:20180627T200000Z
+SUMMARY:Serbia Vs Brazil - Group E
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5a293
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180628T140000Z
+DTEND:20180628T160000Z
+SUMMARY:Japan Vs Poland - Group H
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5a391
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180628T140000Z
+DTEND:20180628T160000Z
+SUMMARY:Senegal Vs Colombia - Group H
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5a491
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180628T170000Z
+DTEND:20180628T190000Z
+SUMMARY:Panama Vs Tunisia - Group G
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5a59c
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180628T180000Z
+DTEND:20180628T200000Z
+SUMMARY:England Vs Belgium - Group G
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5a69b
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180630T140000Z
+DTEND:20180630T160000Z
+SUMMARY:R16 Match 2: Group C Winner Vs Group D runner up
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5a79d
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180630T180000Z
+DTEND:20180630T200000Z
+SUMMARY:R16 Match 1: Group A Winner Vs Group B runner up
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5a8ac
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180701T140000Z
+DTEND:20180701T160000Z
+SUMMARY:R16 Match 3: Group B Winner Vs Group A runner up
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5a9cd
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180701T180000Z
+DTEND:20180701T200000Z
+SUMMARY:R16 Match 4: Group D winner Vs Group C runner up
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5aad4
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180702T140000Z
+DTEND:20180702T160000Z
+SUMMARY:R16 Match 5: Group E Winner Vs Group F runner up
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5abda
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180702T180000Z
+DTEND:20180702T200000Z
+SUMMARY:R16 Match 6: Group G winner Vs Group H runner up
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5ad0b
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180703T140000Z
+DTEND:20180703T160000Z
+SUMMARY:R16 Match 7: Group F winner Vs Group E runner up
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5ae12
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180703T180000Z
+DTEND:20180703T200000Z
+SUMMARY:R16 Match 8: Group H winner Vs Group G runner up
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5af1b
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180706T140000Z
+DTEND:20180706T160000Z
+SUMMARY:QF 1 - Winners R16 Match 1 Vs Match 2
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5b024
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180706T180000Z
+DTEND:20180706T200000Z
+SUMMARY:QF 2 : Winners R16 Match 5 Vs Match 6
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5b1ad
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180707T140000Z
+DTEND:20180707T160000Z
+SUMMARY:QF 3: Winners R16 Match 7 Vs Match 8
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5b2df
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180707T180000Z
+DTEND:20180707T200000Z
+SUMMARY:QF 4: Winners R16 Match 3 Vs Match 4
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5b421
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180710T180000Z
+DTEND:20180710T200000Z
+SUMMARY:SF 1: Winners QF1 Vs QF2
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5b591
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180711T180000Z
+DTEND:20180711T200000Z
+SUMMARY:SF2 : Winners QF3 Vs QF4
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5b6e1
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180714T140000Z
+DTEND:20180714T160000Z
+SUMMARY:Third place play-off : Looser SF1 Vs SF2
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5b817
+END:VEVENT
+BEGIN:VEVENT
+LOCATION:
+DESCRIPTION:Visit https://calendarlabs.com/ for any kind of calendar needs. Like us on Facebook: http://fb.com/calendarlabs to get updates.
+DTSTART:20180715T150000Z
+DTEND:20180715T170000Z
+SUMMARY:Final : Winners SF1 Vs SF2
+DTSTAMP:20180311T075539Z
+UID:5aa4d2eb5b92f
+END:VEVENT
+END:VCALENDAR
