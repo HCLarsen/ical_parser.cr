@@ -31,7 +31,7 @@ module IcalParser
         if match = line.match(regex)
           name = match["name"].downcase
           name = "classification" if name == "class"
-          all_day = true if name == "dtstart" && match["params"]? && match["params"].includes?("VALUE=DATE")
+          all_day = true if name == "dtstart" && match["params"]? && match["params"].match(/VALUE=DATE(?:$|[^-])/)
 
           if component_properties.keys.includes? name
             property = component_properties[name]
