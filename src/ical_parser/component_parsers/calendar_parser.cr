@@ -24,6 +24,7 @@ module IcalParser
       found = {} of String => String
       events = [] of Event
 
+      calendar_object = unfold(calendar_object)
       calendar_object = remove_first_and_last_lines(calendar_object)
 
       components = calendar_object.scan(component_regex)
@@ -56,6 +57,10 @@ module IcalParser
       lines.shift?
       lines.pop?
       lines.join("\r\n")
+    end
+
+    private def unfold(string : String)
+      string.gsub("\r\n ", "")
     end
   end
 end
