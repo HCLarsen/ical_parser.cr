@@ -13,12 +13,15 @@ class ICSStreamTest < Minitest::Test
     calendar = calendars.first
     assert_equal "-//Calendar Labs//Calendar 1.0//EN", calendar.prodid
     assert_equal 64, calendar.events.size
+    assert_equal Event, calendar.events.first.class
   end
 
   def test_parses_remote_stream
-    address = "https://people.trentu.ca/rloney/files/Canada_Holidays.ics"
+    #address = "https://people.trentu.ca/~rloney/files/Canada_Holidays.ics"
+    address = "https://www.calendarlabs.com/ical-calendar/ics/196/FIFA_World_Cup_2018.ics"
     uri = URI.parse(address)
     calendars = ICSStream.read(uri)
     assert_equal Array(Calendar), calendars.class
+    assert_equal 1, calendars.size
   end
 end
