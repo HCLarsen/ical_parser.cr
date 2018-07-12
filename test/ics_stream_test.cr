@@ -8,10 +8,8 @@ class ICSStreamTest < Minitest::Test
 
   def test_parses_local_file
     filename = File.join(File.dirname(__FILE__), "files", "FIFA_World_Cup_2018.ics")
-    calendars = ICSStream.read(filename)
-    assert_equal Array(Calendar), calendars.class
-    assert_equal 1, calendars.size
-    calendar = calendars.first
+    calendar = ICSStream.read(filename)
+    assert_equal Calendar, calendar.class
     assert_equal "-//Calendar Labs//Calendar 1.0//EN", calendar.prodid
     assert_equal 64, calendar.events.size
     assert_equal Event, calendar.events.first.class
@@ -20,8 +18,29 @@ class ICSStreamTest < Minitest::Test
   def test_parses_remote_stream
     address = "webcal://www.calendarlabs.com/ical-calendar/ics/196/FIFA_World_Cup_2018.ics"
     uri = URI.parse(address)
-    calendars = ICSStream.read(uri)
+    calendar = ICSStream.read(uri)
+    assert_equal Calendar, calendar.class
+  end
+
+  def test_parses_local_file_as_array
+    filename = File.join(File.dirname(__FILE__), "files", "multical.ics")
+    calendars = ICSStream.read_calendars(filename)
+    assert_equal Array(Calendar), calendars.class
+    assert_equal 2, calendars.size
+  end
+
+  def test_parses_remote_stream_as_array
+    address = "webcal://www.calendarlabs.com/ical-calendar/ics/196/FIFA_World_Cup_2018.ics"
+    uri = URI.parse(address)
+    calendars = ICSStream.read_calendars(uri)
     assert_equal Array(Calendar), calendars.class
     assert_equal 1, calendars.size
+  end
+
+  def test_raises_for_non_calendar_stream
+    filename = File.join(File.dirname(__FILE__), "files", "invalid.ics")
+    assert_raises do
+      calendar = ICSStream.read(filename)      
+    end
   end
 end
