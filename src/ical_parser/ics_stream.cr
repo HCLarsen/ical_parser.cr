@@ -8,6 +8,9 @@ module IcalParser
     end
 
     def self.read(address : URI)
+      if address.scheme == "webcal"
+        address.scheme = "https"
+      end
       response = HTTP::Client.get address
       stream = response.body
       parse(stream)

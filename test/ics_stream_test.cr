@@ -1,4 +1,5 @@
 require "minitest/autorun"
+require "uri"
 
 require "/../src/iCal"
 
@@ -17,8 +18,7 @@ class ICSStreamTest < Minitest::Test
   end
 
   def test_parses_remote_stream
-    #address = "https://people.trentu.ca/~rloney/files/Canada_Holidays.ics"
-    address = "https://www.calendarlabs.com/ical-calendar/ics/196/FIFA_World_Cup_2018.ics"
+    address = "webcal://www.calendarlabs.com/ical-calendar/ics/196/FIFA_World_Cup_2018.ics"
     uri = URI.parse(address)
     calendars = ICSStream.read(uri)
     assert_equal Array(Calendar), calendars.class
