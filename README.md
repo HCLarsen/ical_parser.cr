@@ -38,7 +38,7 @@ uri = URI.parse(address)
 calendar = ICSStream.read(uri)  #=> #<IcalParser::Calendar:0x10868a5c0>
 calendar.class  #=> Calendar
 ```
-In most cases, an iCalendar stream will only contain one calendar object. However, the specification does allow for multiple calendar objects to be sequentially grouped in a single stream. If you are reading such a stream, the ICSStream.read method will only return the first calendar object. If you are working with a stream that may have multiple calendar objects, it's best to use the ICSStream.read_calendars method instead to get an array of Calendar objects.
+In most cases, an iCalendar stream will only contain one calendar object. However, the specification does allow for multiple calendar objects to be sequentially grouped in a single stream. If you are reading such a stream, the ICSStream.read method will only return the first calendar object. If you are working with a stream that may have multiple calendar objects, it's best to use the ICSStream#read_calendars method instead to get an array of Calendar objects.
 
 ```crystal
 filename = File.join(File.dirname(__FILE__), "files", "FIFA_World_Cup_2018.ics")
