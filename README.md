@@ -55,7 +55,7 @@ calendar.events       #=> [#<IcalParser::Event:0x102776f20...]
 calendar.events.first #=> #<IcalParser::Event:0x102776f20>
 ```
 
-For both the calendar object and calendar components, standard properties are accessed directly by the name of the property. These methods have names that correspond directly to the name of the property in the RFC5545 specification, with the exception of the CLASS property, which is referred to as classification, to avoid conflicting with the Object#class method.
+For both the calendar object and calendar components, standard properties are accessed directly by the name of the property. These methods have names that correspond directly to the name of the property in the RFC5545 specification, with two exceptions. The first being the CLASS property, which is referred to as classification, to avoid conflicting with the Object#class method. The second is any property that may occur more than once in the component, in which case the accessor is the pluralized version of the property name.
 
 ```crystal
 # After parsing this event:
@@ -72,6 +72,7 @@ For both the calendar object and calendar components, standard properties are ac
 event.summary         #=> "Annual Employee Review"
 event.classification  #=> "PRIVATE"
 event.class           #=> IcalParser::Event
+event.categories      #=> ["BUSINESS", "HUMAN RESOURCES"]
 ```
 
 Non-standard and IANA properties are accessed by hash notation.
