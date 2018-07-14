@@ -11,18 +11,27 @@ module IcalParser
       "summary"         => String?,
       "classification"  => String?,
       "categories"      => Array(String),
-      "transp"           => String
+      "transp"          => String?,
+      "description"     => String?,
+      "status"          => String?,
+      "location"        => String?,
+      "sequence"        => Int32?,
+      "organizer"       => CalAddress?,
+      "attendees"       => Array(CalAddress),
     }
 
     @all_day = false
+    {% for key, value in PROPERTIES %}
+      {% if key.id == "uid" %}
+        getter {{key.id}} : {{value.id}}
+      {% elsif key.id != "duration" %}
+        property {{key.id}} : {{value.id}}
+      {% end %}
+    {% end %}
+    {% debug %}
 
-    getter uid : String
-    property dtstamp, dtstart : Time
-    property dtend : Time?
-    @duration : Time::Span?
-    property summary : String?
-    property classification : String?
-    property categories = [] of String
+    @categories = [] of String
+    @attendees = [] of CalAddress
     @transp = "OPAQUE"
 
     def initialize(@uid : String, @dtstamp : Time, @dtstart : Time)
@@ -41,6 +50,10 @@ module IcalParser
       @uid = properties["uid"].as String
       @dtstamp = properties["dtstamp"].as Time
       @dtstart = properties["dtstart"].as Time
+
+      if duration = properties["duration"]?
+        @dtend = @dtstart + duration.as Time::Span
+      end
 
       assign_vars
     end
@@ -62,6 +75,22 @@ module IcalParser
       check_end_greater_than_start(@dtstart, dtend)
     end
 
+    def duration : Time::Span
+      if dtend = @dtend
+        dtend - @dtstart
+      else
+        Time::Span.zero
+      end
+    end
+
+    def duration=(duration : Time::Span)
+      if duration > Time::Span.zero
+        @dtend = @dtstart + duration
+      else
+        raise "Error: Duration value must be greater than zero"
+      end
+    end
+
     def all_day?
       @all_day
     end
@@ -72,7 +101,9 @@ module IcalParser
 
     private macro assign_vars
       {% for key, value in PROPERTIES %}
-        @{{key.id}} = properties[{{key}}].as {{value.id}} if properties[{{key}}]?
+        {% if key.id != "duration" %}
+          @{{key.id}} = properties[{{key}}].as {{value.id}} if properties[{{key}}]?
+        {% end %}
       {% end %}
     end
 

@@ -27,6 +27,11 @@ class ICSStreamTest < Minitest::Test
     calendars = ICSStream.read_calendars(filename)
     assert_equal Array(Calendar), calendars.class
     assert_equal 2, calendars.size
+    calendar = calendars.first
+    event = calendar.events.first
+    assert_equal "Networld+Interop Conference and Exhibit\\nAtlanta World Congress Center\\nAtlanta, Georgia", event.description
+    assert_equal "CONFIRMED", event.status
+    assert_equal ["CONFERENCE"], event.categories
   end
 
   def test_parses_remote_stream_as_array
@@ -40,7 +45,7 @@ class ICSStreamTest < Minitest::Test
   def test_raises_for_non_calendar_stream
     filename = File.join(File.dirname(__FILE__), "files", "invalid.ics")
     assert_raises do
-      calendar = ICSStream.read(filename)      
+      calendar = ICSStream.read(filename)
     end
   end
 end

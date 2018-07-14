@@ -2,6 +2,7 @@ module IcalParser
   class Property(T)
     property parser : ValueParser(T)
     getter quantity : Quantity
+    getter more_than_once : Bool
 
     enum Quantity
       One
@@ -9,7 +10,7 @@ module IcalParser
       List
     end
 
-    def initialize(@parser : ValueParser(T), @quantity = Quantity::One)
+    def initialize(@parser : ValueParser(T), @quantity = Quantity::One, @more_than_once = false)
     end
 
     def parse(value : String, params : String?) : T

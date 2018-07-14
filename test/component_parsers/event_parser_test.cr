@@ -8,17 +8,7 @@ class EventParserTest < Minitest::Test
   def initialize(argument)
     super(argument)
     @parser = EventParser.parser
-    @eventc = <<-HEREDOC
-    BEGIN:VEVENT
-    UID:19970901T130000Z-123401@example.com
-    DTSTAMP:19970901T130000Z
-    DTSTART:19970903T163000Z
-    DTEND:19970903T190000Z
-    SUMMARY:Annual Employee Review
-    CLASS:PRIVATE
-    CATEGORIES:BUSINESS,HUMAN RESOURCES
-    END:VEVENT
-    HEREDOC
+
   end
 
   def test_returns_parser
@@ -36,7 +26,18 @@ class EventParserTest < Minitest::Test
   end
 
   def test_parses_minimal_event
-    event = @parser.parse(@eventc)
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:19970901T130000Z-123401@example.com
+    DTSTAMP:19970901T130000Z
+    DTSTART:19970903T163000Z
+    DTEND:19970903T190000Z
+    SUMMARY:Annual Employee Review
+    CLASS:PRIVATE
+    CATEGORIES:BUSINESS,HUMAN RESOURCES
+    END:VEVENT
+    HEREDOC
+    event = @parser.parse(eventc)
     assert_equal "19970901T130000Z-123401@example.com", event.uid
     assert_equal Time.utc(1997, 9, 1, 13, 0, 0), event.dtstamp
     assert_equal Time.utc(1997, 9, 3, 16, 30, 0), event.dtstart
@@ -63,7 +64,23 @@ class EventParserTest < Minitest::Test
     event = @parser.parse(eventc)
     assert_equal Time.new(1997, 11, 2), event.dtstart
     assert event.all_day?
+    assert_equal "TRANSPARENT", event.transp
     refute event.opaque?
+  end
+
+  def test_parses_with_duration
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    SUMMARY:Lunchtime meeting
+    DTSTAMP:20160418T135200
+    UID:ff808181-1fd7389e-011f-d7389ef9-00000003
+    DTSTART;TZID=America/New_York:20160420T120000
+    DURATION:PT1H
+    END:VEVENT
+    HEREDOC
+    event = @parser.parse(eventc)
+    assert_equal Time::Span.new(0, 1, 0, 0), event.duration
+    assert_equal Time.new(2016, 4, 20, 13, 0, 0, location: Time::Location.load("America/New_York")), event.dtend
   end
 
   def test_raises_for_invalid_line

@@ -18,9 +18,15 @@ module IcalParser
         "dtend"           => Property.new(DateTimeParser.parser),
         "duration"        => Property.new(DurationParser.parser),
         "summary"         => Property.new(TextParser.parser),
+        "description"     => Property.new(TextParser.parser),
         "classification"  => Property.new(TextParser.parser),
         "categories"      => Property.new(TextParser.parser, Property::Quantity::List),
         "transp"          => Property.new(TextParser.parser),
+        "status"          => Property.new(TextParser.parser),
+        "location"        => Property.new(TextParser.parser),
+        "sequence"        => Property.new(IntegerParser.parser),
+        "organizer"       => Property.new(CalAddressParser.parser),
+        "attendees"        => Property.new(CalAddressParser.parser, more_than_once: true),
       }
       all_day = false
       found = Hash(String, ICalValue).new
@@ -31,15 +37,20 @@ module IcalParser
         if match = line.match(regex)
           name = match["name"].downcase
           name = "classification" if name == "class"
+          name = "attendees" if name == "attendee"
           all_day = true if name == "dtstart" && match["params"]? && match["params"].match(/VALUE=DATE(?:$|[^-])/)
 
           if component_properties.keys.includes? name
             property = component_properties[name]
 
-            if property.quantity == Property::Quantity::One
+            if property.more_than_once == true
+              found[name] = [] of CalAddress if !found[name]?
+              found[name].as Array(CalAddress) << property.parse(match["value"], match["params"]?).as CalAddress
+            elsif property.quantity == Property::Quantity::One
               found[name] = property.parse(match["value"], match["params"]?)
             else
               list = match["value"].split(/(?<!\\),/)
+              #found[name] = [] of String if !found[name]?
               found[name] = list.map { |e| property.parse(e, match["params"]?).as String }
             end
           end
