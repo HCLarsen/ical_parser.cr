@@ -29,8 +29,10 @@ module IcalParser
         "attendees"        => Property.new(CalAddressParser.parser, more_than_once: true),
       }
       all_day = false
-      found = Hash(String, ICalValue).new
+      found = Hash(String, Array(ValueType)).new
       regex = /(?<name>.*?)(?<params>;.*?)?:(?<value>.*)/
+
+      eventc = remove_first_and_last_lines(eventc)
 
       lines = eventc.lines
       lines.each do |line|
@@ -43,15 +45,13 @@ module IcalParser
           if component_properties.keys.includes? name
             property = component_properties[name]
 
-            if property.more_than_once == true
-              found[name] = [] of CalAddress if !found[name]?
-              found[name].as Array(CalAddress) << property.parse(match["value"], match["params"]?).as CalAddress
-            elsif property.quantity == Property::Quantity::One
-              found[name] = property.parse(match["value"], match["params"]?)
+            found[name] = [] of ValueType if !found[name]?
+
+            if property.quantity == Property::Quantity::One
+              found[name] << property.parse(match["value"], match["params"]?)
             else
-              list = match["value"].split(/(?<!\\),/)
-              #found[name] = [] of String if !found[name]?
-              found[name] = list.map { |e| property.parse(e, match["params"]?).as String }
+              values = match["value"].split(/(?<!\\),/)
+              found[name] = found[name] + values.map { |e| property.parse(e, match["params"]?).as String }
             end
           end
         else
@@ -61,20 +61,38 @@ module IcalParser
 
       validate(found, all_day)
 
-      event = Event.new(found)
+      collected = Hash(String, PropertyType).new
+      found.each do |name, value|
+        if name == "categories"
+          collected[name] = value.map { |e| e.as String}
+        elsif name == "attendees"
+          collected[name] = value.map { |e| e.as CalAddress}
+        else
+          collected[name] = value.first
+        end
+      end
+
+      event = Event.new(collected)
       event.all_day = all_day
       return event
     end
 
+    private def remove_first_and_last_lines(string : String)
+      lines = string.lines
+      lines.shift?
+      lines.pop?
+      lines.join("\r\n")
+    end
+
     private def validate(data, all_day : Bool)
       if data["dtstart"]?
-        dtstart = data["dtstart"].as Time
+        dtstart = data["dtstart"].first.as Time
       else
         raise "Invalid Event: DTSTART is REQUIRED"
       end
 
       if data["dtend"]?
-        dtend = data["dtend"].as Time
+        dtend = data["dtend"].first.as Time
         if all_day && dtend != dtend.date
           raise "Invalid Event: DTSTART is DATE but DTEND is DATE-TIME"
         end
@@ -89,7 +107,7 @@ module IcalParser
       end
 
       if data["transp"]?
-        transp = data["transp"].as String
+        transp = data["transp"].first.as String
         if !transp.match(/OPAQUE|TRANSPARENT/)
           raise "Invalid Event: TRANSP must be either OPAQUE or TRANSPARENT"
         end
