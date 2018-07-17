@@ -98,6 +98,8 @@ module IcalParser
     def initialize(@uri : URI)
     end
 
+    def_equals @uri
+
     private def convert_params(hash : Hash(String, String))
       output = {} of String => String
       hash.each do |k, v|

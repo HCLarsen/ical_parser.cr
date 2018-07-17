@@ -16,6 +16,12 @@ class CalAddressTest < Minitest::Test
     assert_equal "jane_doe@example.com", user.uri.opaque
   end
 
+  def test_equality
+    first_user = CalAddress.new(URI.parse("mailto:jdoe@example.com"))
+    second_user = CalAddress.new(URI.parse("mailto:jdoe@example.com"))
+    assert_equal first_user, second_user
+  end
+
   def test_accepts_common_name
     @user.common_name = "John Smith"
     assert_equal "John Smith", @user.common_name
