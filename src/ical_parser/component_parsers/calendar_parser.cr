@@ -40,7 +40,7 @@ module IcalParser
           name = match["name"].downcase
           if calendar_properties.keys.includes? name
             property = calendar_properties[name]
-            found[name] = property.parse(match["value"], match["params"]?)
+            found[name] = property.parse(match["value"], match["params"]?).as String
           end
         end
       end

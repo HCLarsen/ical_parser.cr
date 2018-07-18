@@ -20,16 +20,16 @@ module IcalParser
         "summary"         => Property.new(TextParser.parser),
         "description"     => Property.new(TextParser.parser),
         "classification"  => Property.new(TextParser.parser),
-        "categories"      => Property.new(TextParser.parser, Property::Quantity::List),
+        "categories"      => Property.new(TextParser.parser, single_value: false, only_once: false),
         "transp"          => Property.new(TextParser.parser),
         "status"          => Property.new(TextParser.parser),
         "location"        => Property.new(TextParser.parser),
         "sequence"        => Property.new(IntegerParser.parser),
         "organizer"       => Property.new(CalAddressParser.parser),
-        "attendees"        => Property.new(CalAddressParser.parser, more_than_once: true),
+        "attendees"        => Property.new(CalAddressParser.parser, only_once: false),
       }
       all_day = false
-      found = Hash(String, Array(ValueType)).new
+      found = Hash(String, PropertyType).new
       regex = /(?<name>.*?)(?<params>;.*?)?:(?<value>.*)/
 
       eventc = remove_first_and_last_lines(eventc)
@@ -45,13 +45,20 @@ module IcalParser
           if component_properties.keys.includes? name
             property = component_properties[name]
 
-            found[name] = [] of ValueType if !found[name]?
-
-            if property.quantity == Property::Quantity::One
-              found[name] << property.parse(match["value"], match["params"]?)
+            if property.single_value && property.only_once
+              #puts "Both true"
+              found[name] = property.parse(match["value"], match["params"]?)
+            elsif property.single_value && !property.only_once
+              puts "Single value: #{name}"
+              #found[name] = property.parse(match["value"], match["params"]?)
+            elsif !property.single_value && !property.only_once
+              puts "Both false: #{name}"
+              if found[name]?
+              else
+                found[name] = property.parse(match["value"], match["params"]?)
+              end
             else
-              values = match["value"].split(/(?<!\\),/)
-              found[name] = found[name] + values.map { |e| property.parse(e, match["params"]?).as String }
+              puts "Only Once: #{name}"
             end
           end
         else
@@ -59,20 +66,22 @@ module IcalParser
         end
       end
 
+      puts "Attendees class: #{found["attendees"].class}" if found["attendees"]?
+
       validate(found, all_day)
 
-      collected = Hash(String, PropertyType).new
-      found.each do |name, value|
-        if name == "categories"
-          collected[name] = value.map { |e| e.as String}
-        elsif name == "attendees"
-          collected[name] = value.map { |e| e.as CalAddress}
-        else
-          collected[name] = value.first
-        end
-      end
+#      collected = Hash(String, PropertyType).new
+#      found.each do |name, value|
+#        if name == "categories"
+#          collected[name] = value.as(Array(String).map { |e| e.as String}
+#        elsif name == "attendees"
+#          collected[name] = value.as(Array(CalAddress)).map { |e| e.as CalAddress}
+#        else
+#          collected[name] = value.first
+#        end
+#      end
 
-      event = Event.new(collected)
+      event = Event.new(found)
       event.all_day = all_day
       return event
     end
@@ -86,13 +95,13 @@ module IcalParser
 
     private def validate(data, all_day : Bool)
       if data["dtstart"]?
-        dtstart = data["dtstart"].first.as Time
+        dtstart = data["dtstart"].as Time
       else
         raise "Invalid Event: DTSTART is REQUIRED"
       end
 
       if data["dtend"]?
-        dtend = data["dtend"].first.as Time
+        dtend = data["dtend"].as Time
         if all_day && dtend != dtend.date
           raise "Invalid Event: DTSTART is DATE but DTEND is DATE-TIME"
         end
@@ -107,7 +116,7 @@ module IcalParser
       end
 
       if data["transp"]?
-        transp = data["transp"].first.as String
+        transp = data["transp"].as String
         if !transp.match(/OPAQUE|TRANSPARENT/)
           raise "Invalid Event: TRANSP must be either OPAQUE or TRANSPARENT"
         end

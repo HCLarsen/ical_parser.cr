@@ -1,22 +1,22 @@
 module IcalParser
   class Property(T)
     property parser : ValueParser(T)
-    getter quantity : Quantity
-    getter more_than_once : Bool
+    getter single_value : Bool
+    getter only_once : Bool
 
-    enum Quantity
-      One
-      Two
-      List
+    def initialize(@parser : ValueParser(T), @only_once = true, @single_value = true)
     end
 
-    def initialize(@parser : ValueParser(T), @quantity = Quantity::One, @more_than_once = false)
-    end
-
-    def parse(value : String, params : String?) : T
+    def parse(value : String, params : String?) forall T
       params ||= ""
       params_hash = parse_params(params)
-      parsed = @parser.parse(value, params_hash)
+
+      if @single_value
+        @parser.parse(value, params_hash)
+      else
+        values = value.split(/(?<!\\),/)
+        values.map { |e| @parser.parse(e, params_hash) }
+      end
     end
 
     def parse_params(params : String) : Hash(String, String)

@@ -14,7 +14,6 @@ class PropertyTest < Minitest::Test
     params = ""
     value = "Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta\, Georgia"
     text = property.parse(value, params)
-    assert_equal String, typeof(text)
     assert_equal "Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta, Georgia", text
   end
 
@@ -23,7 +22,15 @@ class PropertyTest < Minitest::Test
     params = ";RSVP=TRUE;ROLE=REQ-PARTICIPANT;CUTYPE=GROUP"
     value = "mailto:employee-A@example.com"
     address = property.parse(value, params)
-    assert_equal "employee-A@example.com", address.uri.opaque
+    assert_equal CalAddress.new(URI.parse("mailto:employee-A@example.com")), address
+    assert_equal CalAddress | Array(CalAddress), typeof(address)
+  end
+
+  def test_single_category_returns_as_array
+    property = Property.new(TextParser.parser, single_value: false, only_once: false)
+    value = "MEETING"
+    list = property.parse(value, "")
+    assert_equal ["MEETING"], list
   end
 
   def test_parses_tz_params
