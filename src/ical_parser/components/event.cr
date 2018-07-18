@@ -47,6 +47,8 @@ module IcalParser
     end
 
     def initialize(properties : Hash(String, PropertyType))
+      verify_vars
+
       @uid = properties["uid"].as String
       @dtstamp = properties["dtstamp"].as Time
       @dtstart = properties["dtstart"].as Time
@@ -84,6 +86,7 @@ module IcalParser
     end
 
     def duration=(duration : Time::Span)
+      puts "Assigning duration"
       if duration > Time::Span.zero
         @dtend = @dtstart + duration
       else
@@ -104,6 +107,14 @@ module IcalParser
         {% if key.id != "duration" %}
           @{{key.id}} = properties[{{key}}].as {{value.id}} if properties[{{key}}]?
         {% end %}
+      {% end %}
+    end
+
+    private macro verify_vars
+      {% for key, value in PROPERTIES %}
+        if properties["{{key.id}}"]? && !properties["{{key.id}}"].is_a? {{ value.id }}
+          raise "Event Error: {{key.id}} is not a valid type"
+        end
       {% end %}
     end
 
