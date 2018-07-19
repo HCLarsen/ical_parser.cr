@@ -42,6 +42,7 @@ class CalendarParserTest < Minitest::Test
     UID:uid3@example.com\r
     ORGANIZER:mailto:jdoe@example.com\r
     ATTENDEE;RSVP=TRUE:mailto:jsmith@example.com\r
+    ATTENDEE;RSVP=TRUE:mailto:janedoe@example.com\r
     DTSTART:19970324T123000Z\r
     DTEND:19970324T210000Z\r
     CATEGORIES:MEETING,PROJECT\r
@@ -55,13 +56,14 @@ class CalendarParserTest < Minitest::Test
     END:VCALENDAR
     HEREDOC
     calendar = @parser.parse(calendar_object)
+    assert_equal 1, calendar.events.size
     event = calendar.events.first
     assert_equal "LDB Lobby", event.location
     assert_equal 0, event.sequence
-    assert_equal CalAddress.new(URI.parse("mailto:jdoe@example.com")).uri, event.organizer.not_nil!.uri
+    assert_equal CalAddress.new(URI.parse("mailto:jdoe@example.com")), event.organizer
 
-    #assert_equal 1, event.attendees.size
-    #attendee = event.attendees.first
-    #assert_equal CalAddress.new(URI.parse("mailto:jsmith@example.com")).uri, attendee.not_nil!.uri
+    assert_equal 2, event.attendees.size
+    assert_equal CalAddress.new(URI.parse("mailto:jsmith@example.com")), event.attendees.first
+    assert_equal CalAddress.new(URI.parse("mailto:janedoe@example.com")), event.attendees.last
   end
 end

@@ -50,7 +50,15 @@ module IcalParser
               found[name] = property.parse(match["value"], match["params"]?)
             elsif property.single_value && !property.only_once
               puts "Single value: #{name}"
-              #found[name] = property.parse(match["value"], match["params"]?)
+              value = property.parse(match["value"], match["params"]?)
+              case value
+              when CalAddress
+                if !found[name]?
+                  found[name] = [value]
+                elsif found[name].is_a? Array(CalAddress)
+                  found[name].as Array(CalAddress) << value
+                end
+              end
             elsif !property.single_value && !property.only_once
               puts "Both false: #{name}"
               if found[name]?
