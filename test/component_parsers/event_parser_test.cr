@@ -83,6 +83,24 @@ class EventParserTest < Minitest::Test
     assert_equal Time.new(2016, 4, 20, 13, 0, 0, location: Time::Location.load("America/New_York")), event.dtend
   end
 
+  def test_parses_multiple_category_lines
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:19970901T130000Z-123403@example.com
+    DTSTAMP:19970901T130000Z
+    DTSTART;VALUE=DATE:19971102
+    SUMMARY:Our Blissful Anniversary
+    TRANSP:TRANSPARENT
+    CLASS:CONFIDENTIAL
+    CATEGORIES:ANNIVERSARY,PERSONAL
+    CATEGORIES:SPECIAL OCCASION
+    RRULE:FREQ=YEARLY
+    END:VEVENT
+    HEREDOC
+    event = @parser.parse(eventc)
+    assert_equal 3, event.categories.size
+  end
+
   def test_raises_for_invalid_line
     eventc = <<-HEREDOC
     BEGIN:VEVENT

@@ -12,7 +12,11 @@ module IcalParser
       params_hash = parse_params(params)
 
       if @single_value
-        @parser.parse(value, params_hash)
+        if @only_once
+          @parser.parse(value, params_hash)
+        else
+          [@parser.parse(value, params_hash)]
+        end
       else
         values = value.split(/(?<!\\),/)
         values.map { |e| @parser.parse(e, params_hash) }

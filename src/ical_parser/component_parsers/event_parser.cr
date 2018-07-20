@@ -44,29 +44,24 @@ module IcalParser
 
           if component_properties.keys.includes? name
             property = component_properties[name]
+            value = property.parse(match["value"], match["params"]?)
 
-            if property.single_value && property.only_once
-              #puts "Both true"
-              found[name] = property.parse(match["value"], match["params"]?)
-            elsif property.single_value && !property.only_once
-              puts "Single value: #{name}"
-              value = property.parse(match["value"], match["params"]?)
-              case value
-              when CalAddress
-                if !found[name]?
-                  found[name] = [value]
-                elsif found[name].is_a? Array(CalAddress)
-                  found[name].as Array(CalAddress) << value
-                end
-              end
-            elsif !property.single_value && !property.only_once
-              puts "Both false: #{name}"
-              if found[name]?
-              else
-                found[name] = property.parse(match["value"], match["params"]?)
-              end
+            unless found[name]?
+              found[name] = value
             else
-              puts "Only Once: #{name}"
+              if property.only_once && property.single_value
+                #puts "Single value"
+              elsif !property.only_once
+                puts "Multiples: #{name}"
+                case value
+                when Array(CalAddress)
+                  found[name] = found[name].as Array(CalAddress) + value
+                when Array(String)
+                  found[name] = found[name].as Array(String) + value
+                end
+              else
+                puts "Single List: #{name}"
+              end
             end
           end
         else
@@ -74,20 +69,7 @@ module IcalParser
         end
       end
 
-      puts "Attendees class: #{found["attendees"].class}" if found["attendees"]?
-
       validate(found, all_day)
-
-#      collected = Hash(String, PropertyType).new
-#      found.each do |name, value|
-#        if name == "categories"
-#          collected[name] = value.as(Array(String).map { |e| e.as String}
-#        elsif name == "attendees"
-#          collected[name] = value.as(Array(CalAddress)).map { |e| e.as CalAddress}
-#        else
-#          collected[name] = value.first
-#        end
-#      end
 
       event = Event.new(found)
       event.all_day = all_day
