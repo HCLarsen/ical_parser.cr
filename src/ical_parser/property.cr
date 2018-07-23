@@ -4,7 +4,7 @@ module IcalParser
     getter single_value : Bool
     getter only_once : Bool
 
-    def initialize(@parser : ValueParser(T), @only_once = true, @single_value = true)
+    def initialize(@parser : ValueParser(T), *, @only_once = true, @single_value = true)
     end
 
     def parse(value : String, params : String?) forall T
