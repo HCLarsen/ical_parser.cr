@@ -18,7 +18,7 @@ module IcalParser
       "sequence"        => Int32?,
       "organizer"       => CalAddress?,
       "attendees"       => Array(CalAddress),
-      "geo"             => NamedTuple(lat: Float64, lon: Float64)?,
+      "geo"             => Hash(String, Float64)?,
     }
 
     @all_day = false

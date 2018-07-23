@@ -67,10 +67,11 @@ class EventTest < Minitest::Test
       "dtstamp" => Time.utc(1997, 9, 1, 13, 0, 0),
       "dtstart" => Time.utc(1997, 9, 3, 16, 30, 0),
       "dtend"   => Time.utc(1997, 9, 3, 19, 0, 0),
-      "geo"     => {lat: 37.386013, lon: -122.082932}
+      "geo"     => {"lat" => 37.386013, "lon" => -122.082932}
     } of String => PropertyType
     event = IcalParser::Event.new(props)
     assert_equal props["geo"], event.geo
+    assert_equal 37.386013, event.geo.not_nil!["lat"]
   end
 
   def test_raises_error_if_hash_contains_invalid_type
