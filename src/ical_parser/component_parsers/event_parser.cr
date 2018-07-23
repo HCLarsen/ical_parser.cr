@@ -26,7 +26,8 @@ module IcalParser
         "location"        => Property.new(TextParser.parser),
         "sequence"        => Property.new(IntegerParser.parser),
         "organizer"       => Property.new(CalAddressParser.parser),
-        "attendees"        => Property.new(CalAddressParser.parser, only_once: false),
+        "attendees"       => Property.new(CalAddressParser.parser, only_once: false),
+        "geo"             => Property.new(FloatParser.parser, parts: ["lat", "lon"]),
       }
       all_day = false
       found = Hash(String, PropertyType).new

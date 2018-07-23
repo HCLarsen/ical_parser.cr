@@ -10,7 +10,10 @@ module IcalParser
     alias ValueType = {{ types.join(" | ").id }}
     {% arrays = types.map{|e| "Array(#{e})".id } %}
     alias ValueArray = {{ arrays.join(" | ").id }}
-    alias PropertyType = ValueType | ValueArray | Hash(String, Float64)
+    {% hashes = types.map{|e| "Hash(String, #{e})".id } %}
+    alias ValueHash = {{ hashes.join(" | ").id }}
+
+    alias PropertyType = ValueType | ValueArray | ValueHash
   end
 
   create_aliases

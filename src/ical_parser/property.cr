@@ -4,7 +4,7 @@ module IcalParser
     getter single_value : Bool
     getter only_once : Bool
 
-    def initialize(@parser : ValueParser(T), *, @only_once = true, @single_value = true)
+    def initialize(@parser : ValueParser(T), *, @parts = ["value"], @only_once = true, @single_value = true)
     end
 
     def parse(value : String, params : String?) forall T
@@ -12,8 +12,12 @@ module IcalParser
       params_hash = parse_params(params)
 
       if @single_value
-        if @only_once
+        if @only_once && @parts.size == 1
           @parser.parse(value, params_hash)
+        elsif @parts.size > 1
+          values = value.split(/(?<!\\);/)
+          parts = values.map { |e| @parser.parse(e, params_hash) }
+          Hash.zip(@parts, parts)
         else
           [@parser.parse(value, params_hash)]
         end

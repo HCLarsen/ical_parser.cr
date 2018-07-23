@@ -8,7 +8,6 @@ class EventParserTest < Minitest::Test
   def initialize(argument)
     super(argument)
     @parser = EventParser.parser
-
   end
 
   def test_returns_parser
@@ -37,6 +36,7 @@ class EventParserTest < Minitest::Test
     CATEGORIES:BUSINESS,HUMAN RESOURCES
     END:VEVENT
     HEREDOC
+
     event = @parser.parse(eventc)
     assert_equal "19970901T130000Z-123401@example.com", event.uid
     assert_equal Time.utc(1997, 9, 1, 13, 0, 0), event.dtstamp
@@ -61,6 +61,7 @@ class EventParserTest < Minitest::Test
     RRULE:FREQ=YEARLY
     END:VEVENT
     HEREDOC
+
     event = @parser.parse(eventc)
     assert_equal Time.new(1997, 11, 2), event.dtstart
     assert event.all_day?
@@ -78,6 +79,7 @@ class EventParserTest < Minitest::Test
     DURATION:PT1H
     END:VEVENT
     HEREDOC
+
     event = @parser.parse(eventc)
     assert_equal Time::Span.new(0, 1, 0, 0), event.duration
     assert_equal Time.new(2016, 4, 20, 13, 0, 0, location: Time::Location.load("America/New_York")), event.dtend
@@ -97,8 +99,26 @@ class EventParserTest < Minitest::Test
     RRULE:FREQ=YEARLY
     END:VEVENT
     HEREDOC
+
     event = @parser.parse(eventc)
     assert_equal 3, event.categories.size
+  end
+
+  def test_parses_geo_property
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:20070423T123432Z-541111@example.com
+    DTSTAMP:20070423T123432Z
+    DTSTART;VALUE=DATE:20070628
+    DTEND;VALUE=DATE:20070709
+    SUMMARY:Festival International de Jazz de Montreal
+    GEO:45.5;-73.567
+    TRANSP:TRANSPARENT
+    END:VEVENT
+    HEREDOC
+
+    event = @parser.parse(eventc)
+    assert_equal 45.5, event.geo.not_nil!["lat"]
   end
 
   def test_raises_for_invalid_line

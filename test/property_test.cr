@@ -23,7 +23,7 @@ class PropertyTest < Minitest::Test
     value = "mailto:employee-A@example.com"
     address = property.parse(value, params)
     assert_equal CalAddress.new(URI.parse("mailto:employee-A@example.com")), address
-    assert_equal CalAddress | Array(CalAddress), typeof(address)
+    assert_equal CalAddress | Array(CalAddress) | Hash(String, CalAddress), typeof(address)
   end
 
   def test_single_category_returns_as_array
@@ -31,6 +31,15 @@ class PropertyTest < Minitest::Test
     value = "MEETING"
     list = property.parse(value, "")
     assert_equal ["MEETING"], list
+  end
+
+  def test_parses_geo
+    NamedTuple(lat: Float64, lon: Float64)
+    property = Property.new(FloatParser.parser, parts: ["lat", "lon"])
+    value = "37.386013;-122.082932"
+    coords = property.parse(value, "")
+    assert_equal coords.as(Hash(String, Float64))["lat"], 37.386013
+    assert_equal coords.as(Hash(String, Float64))["lon"], -122.082932   
   end
 
   def test_parses_tz_params
