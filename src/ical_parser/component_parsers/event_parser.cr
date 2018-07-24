@@ -51,9 +51,7 @@ module IcalParser
               found[name] = value
             else
               if property.only_once && property.single_value
-                #puts "Single value"
               elsif !property.only_once
-                puts "Multiples: #{name}"
                 case value
                 when Array(CalAddress)
                   found[name] = found[name].as Array(CalAddress) + value
@@ -61,7 +59,6 @@ module IcalParser
                   found[name] = found[name].as Array(String) + value
                 end
               else
-                puts "Single List: #{name}"
               end
             end
           end
