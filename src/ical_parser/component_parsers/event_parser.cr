@@ -84,7 +84,7 @@ module IcalParser
         if match = line.match(regex)
           match
         else
-          raise "Invalid Event: No value on line #{line}"
+          raise "Invalid Event: Invalid content line: #{line}"
         end
       end
     end

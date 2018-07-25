@@ -135,7 +135,7 @@ class EventParserTest < Minitest::Test
     error = assert_raises do
       event = @parser.parse(eventc)
     end
-    assert_equal "Invalid Event: No value on line CLASS", error.message
+    assert_equal "Invalid Event: Invalid content line: CLASS", error.message
   end
 
   def test_raises_if_start_missing
