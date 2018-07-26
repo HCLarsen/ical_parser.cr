@@ -54,10 +54,10 @@ module IcalParser
           unless found[name]?
             found[name] = value
           else
-            if property.only_once && property.single_value
-            elsif !property.only_once
-              found[name] = new_array
+            if property.only_once
+              raise "Invalid Event: #{name.upcase} MUST NOT occur more than once"
             else
+              found[name] = new_array
             end
           end
         end

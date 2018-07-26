@@ -138,6 +138,24 @@ class EventParserTest < Minitest::Test
     assert_equal "Invalid Event: Invalid content line: CLASS", error.message
   end
 
+  def test_raises_if_multiple_uids
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:19970901T130000Z-123401@example.com
+    UID:20070423T123432Z-541111@example.com
+    DTSTART:19970903T163000Z
+    DTEND:19970903T190000Z
+    DTSTAMP:19970901T130000Z
+    END:VEVENT
+    HEREDOC
+
+    error = assert_raises do
+      event = @parser.parse(eventc)
+    end
+    assert_equal "Invalid Event: UID MUST NOT occur more than once", error.message
+  end
+
+
   def test_raises_if_start_missing
     eventc = <<-HEREDOC
     BEGIN:VEVENT
