@@ -30,7 +30,12 @@ module IcalParser
     end
 
     def parse(eventc : String)
-      all_day = false
+      property_names = {
+        "class"     => "classification",
+        "attendee"  => "attendees",
+        "comment"   => "comments",
+        "contact"   => "contacts",
+      }
       found = Hash(String, PropertyType).new
 
       lines = content_lines(eventc)
@@ -39,12 +44,8 @@ module IcalParser
 
       matches.each do |match|
         name = match["name"].downcase
-        name = "classification" if name == "class"
-        name = "attendees" if name == "attendee"
-
-        if name == "dtstart" && match["params"]?
-          params = match["params"].lstrip(';').split((";"))
-          all_day = true if params.includes?("VALUE=DATE")
+        if property_names.keys.includes?(name)
+          name = property_names[name]
         end
 
         if COMPONENT_PROPERTIES.keys.includes? name
@@ -63,10 +64,10 @@ module IcalParser
         end
       end
 
-      validate(found, all_day)
+      validate(found)
 
       event = Event.new(found)
-      event.all_day = all_day
+      event.all_day = validated_all_day?(matches)
       return event
     end
 
@@ -89,6 +90,25 @@ module IcalParser
       end
     end
 
+    private def validated_all_day?(matches : Array(Regex::MatchData)) : Bool
+      prop = COMPONENT_PROPERTIES["dtstart"]
+      dtstart = matches.select { |e| e["name"].downcase == "dtstart" }.first
+      dtend = matches.select { |e| e["name"].downcase == "dtend" }.first?
+      duration = matches.select { |e| e["name"].downcase == "duration" }.first?
+      start_params = prop.parse_params(dtstart["params"]? || "")
+      if dtend
+        end_params = prop.parse_params(dtend["params"]? || "")
+        if start_params["VALUE"]? != end_params["VALUE"]?
+          raise "Invalid Event: DTSTART and DTEND must be the same value type"
+        end
+      elsif duration
+        if start_params["VALUE"]? == "DATE" && duration["value"].match(/[smh]/i)
+          raise "Invalid Event: DURATION MUST be day or week duration only"
+        end
+      end
+      start_params["VALUE"]? == "DATE" ? true : false
+    end
+
     private macro new_array
       case value
       {% for type in TYPES %}
@@ -100,7 +120,7 @@ module IcalParser
       end
     end
 
-    private def validate(data, all_day : Bool)
+    private def validate(data)
       if data["dtstart"]?
         dtstart = data["dtstart"].as Time
       else
@@ -109,10 +129,7 @@ module IcalParser
 
       if data["dtend"]?
         dtend = data["dtend"].as Time
-        if all_day && dtend != dtend.date
-          raise "Invalid Event: DTSTART is DATE but DTEND is DATE-TIME"
-        end
-
+        dtstart = data["dtstart"].as Time
         if dtend <= dtstart
           raise "Invalid Event: DTEND MUST BE later than DTSTART"
         end

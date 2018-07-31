@@ -155,7 +155,6 @@ class EventParserTest < Minitest::Test
     assert_equal "Invalid Event: UID MUST NOT occur more than once", error.message
   end
 
-
   def test_raises_if_start_missing
     eventc = <<-HEREDOC
     BEGIN:VEVENT
@@ -187,7 +186,25 @@ class EventParserTest < Minitest::Test
     error = assert_raises do
       event = @parser.parse(eventc)
     end
-    assert_equal "Invalid Event: DTSTART is DATE but DTEND is DATE-TIME", error.message
+    assert_equal "Invalid Event: DTSTART and DTEND must be the same value type", error.message
+  end
+
+  def test_raises_for_all_day_event_with_hour_duration
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:20070423T123432Z-541111@example.com
+    DTSTAMP:20070423T123432Z
+    DTSTART;VALUE=DATE:20070628
+    DURATION:PT1H
+    SUMMARY:Festival International de Jazz de Montreal
+    TRANSP:TRANSPARENT
+    END:VEVENT
+    HEREDOC
+
+    error = assert_raises do
+      event = @parser.parse(eventc)
+    end
+    assert_equal "Invalid Event: DURATION MUST be day or week duration only", error.message
   end
 
   def test_raises_for_earlier_end_than_start_date
