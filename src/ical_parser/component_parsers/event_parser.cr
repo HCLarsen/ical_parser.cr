@@ -121,11 +121,7 @@ module IcalParser
     end
 
     private def validate(data)
-      if data["dtstart"]?
-        dtstart = data["dtstart"].as Time
-      else
-        raise "Invalid Event: DTSTART is REQUIRED"
-      end
+      confirm_mandatory_values_present(data.keys)
 
       if data["dtend"]?
         dtend = data["dtend"].as Time
@@ -145,6 +141,20 @@ module IcalParser
           raise "Invalid Event: TRANSP must be either OPAQUE or TRANSPARENT"
         end
       end
+    end
+
+    private def confirm_mandatory_values_present(found_properties : Array(String))
+      mandatory_properties.each do |prop|
+        if !found_properties.includes? prop
+          raise "Invalid Event: #{prop.upcase} is REQUIRED"
+        end
+      end
+    end
+
+    private def mandatory_properties
+      Event::PROPERTIES.select do |k, v|
+        !v.nilable? && !v.name.starts_with? "Array"
+      end.keys
     end
 
     def dup
