@@ -10,6 +10,7 @@ module IcalParser
   # user.common_name  #=> "The Big Cheese"
   # user.role #=> non-participant
   class CalAddress
+    # Possible values for the [Participation Role](https://tools.ietf.org/html/rfc5545#section-3.2.16) of a calendar user.
     enum Role
       Chair
       ReqParticipant
@@ -30,6 +31,7 @@ module IcalParser
       end
     end
 
+    # Possible calendar user [types](https://tools.ietf.org/html/rfc5545#section-3.2.3)
     enum CUType
       Individual
       Group
@@ -53,6 +55,7 @@ module IcalParser
       end
     end
 
+    # Possible values for [Participation Status](https://tools.ietf.org/html/rfc5545#section-3.2.12) of a calendar user.
     enum PartStat
       NeedsAction
       Accepted
