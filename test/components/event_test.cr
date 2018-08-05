@@ -74,6 +74,19 @@ class EventTest < Minitest::Test
     assert_equal 37.386013, event.geo.not_nil!["lat"]
   end
 
+  def test_recurring_event
+    recur = RecurranceRule.new(RecurranceRule::Freq::Yearly)
+    props = {
+      "uid"     => "canada-day@example.com",
+      "dtstamp" => Time.utc(1867, 3, 29, 13, 0, 0),
+      "dtstart" => Time.utc(1867, 7, 1),
+      "recurrance"   => recur
+    } of String => PropertyType
+    event = IcalParser::Event.new(props)
+    assert event.recurring
+    assert_equal RecurranceRule::Freq::Yearly, event.recurrance.not_nil!.frequency
+  end
+
   def test_raises_error_if_hash_contains_invalid_type
     props = {
       "uid"     => "19970901T130000Z-123401@example.com",

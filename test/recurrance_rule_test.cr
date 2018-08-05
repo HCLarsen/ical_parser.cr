@@ -15,9 +15,9 @@ class RecurranceRuleTest < Minitest::Test
   end
 
   def test_initializes_simple_recurrance_rule
-    recur = RecurranceRule.new(RecurranceRule::Freq::Daily, 10, 2)
+    recur = RecurranceRule.new(RecurranceRule::Freq::Daily, 2, 10)
     assert_equal RecurranceRule::Freq::Daily, recur.frequency
-    assert_equal 10, recur.count
     assert_equal 2, recur.interval
+    assert_equal 10, recur.count
   end
 end

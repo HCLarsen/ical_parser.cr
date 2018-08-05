@@ -19,6 +19,7 @@ module IcalParser
       "organizer"       => CalAddress?,
       "attendees"       => Array(CalAddress),
       "geo"             => Hash(String, Float64)?,
+      "recurrance"      => RecurranceRule?
     }
 
     @all_day = false
@@ -63,6 +64,10 @@ module IcalParser
 
     def opaque?
       @transp == "OPAQUE"
+    end
+
+    def recurring
+      !@recurrance.nil?
     end
 
     def dtstart=(dtstart : Time)
