@@ -4,10 +4,10 @@ module IcalParser
   # This class defines the repetition pattern of an event, to-do, jounral entry or time zone definition.
   #
   # # Specifies a recurrance rule for an event that will repeat every 2 days, up to 10 times.
-  # recur = RecurranceRule.new(RecurranceRule::Freq::Daily, 2, 10)
+  # recur = RecurranceRule.new(RecurranceRule::Freq::Daily, 10, 2)
   # recur.frequency #=> Daily
-  # recur.interval  #=> 2
   # recur.count     #=> 10
+  # recur.interval  #=> 2
   #
   # # Defines an Event that will repeat every year, indefinitely.
   # recur = RecurranceRule.new(RecurranceRule::Freq::Yearly)
@@ -34,8 +34,13 @@ module IcalParser
     property frequency : Freq
     property count : Int32?
     property interval = 1
+    property end_time : Time?
+    property week_start = Time::DayOfWeek::Monday
 
-    def initialize(@frequency : Freq, @interval = 1, @count = nil)
+    def initialize(@frequency : Freq, @count = nil, @interval = 1)
+    end
+
+    def initialize(@frequency : Freq, @end_time : Time, @interval = 1)
     end
   end
 end
