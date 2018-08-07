@@ -62,14 +62,6 @@ module IcalParser
       assign_vars
     end
 
-    def opaque?
-      @transp == "OPAQUE"
-    end
-
-    def recurring
-      !@recurrance.nil?
-    end
-
     def dtstart=(dtstart : Time)
       dtend = @dtend
       if dtend.nil?
@@ -106,6 +98,20 @@ module IcalParser
 
     def all_day=(value : Bool)
       @all_day = value
+    end
+
+    def opaque?
+      @transp == "OPAQUE"
+    end
+
+    def recurring
+      !@recurrance.nil?
+    end
+
+    def occurences
+      if !self.recurring
+        [self]
+      end
     end
 
     private macro assign_vars
