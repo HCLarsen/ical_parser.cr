@@ -109,10 +109,31 @@ module IcalParser
     end
 
     def occurences
-      if !self.recurring
-        [self]
+      recurrance = @recurrance
+      limit = 10
+      array = [self]
+      if !recurrance
+        array
+      elsif count = recurrance.count
+        start = self.dtstart
+        frequency = recurrance.interval.days
+        (count - 1).times do |num|
+          start += frequency
+          array << Event.new(self.uid, self.dtstamp, start)
+        end
+        array
+      else
+        start = self.dtstart
+        frequency = recurrance.interval.years
+        (limit - 1).times do |num|
+          start += frequency
+          array << Event.new(self.uid, self.dtstamp, start)
+        end
+        array
       end
     end
+
+    def_equals @uid, @dtstamp, @dtstart, @dtend, @summary
 
     private macro assign_vars
       {% for key, value in PROPERTIES %}
