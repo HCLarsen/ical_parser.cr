@@ -42,5 +42,26 @@ module IcalParser
 
     def initialize(@frequency : Freq, @end_time : Time, @interval = 1)
     end
+
+    def total_frequency : Time::Span | Time::MonthSpan
+      case @frequency
+      when Freq::Yearly
+        @interval.years
+      when Freq::Monthly
+        @interval.months
+      when Freq::Weekly
+        @interval.weeks
+      when Freq::Daily
+        @interval.days
+      when Freq::Hourly
+        @interval.hours
+      when Freq::Minutely
+        @interval.minutes
+      when Freq::Secondly
+        @interval.seconds
+      else
+        raise "Invalid Frequency value"
+      end
+    end
   end
 end

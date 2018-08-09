@@ -116,7 +116,7 @@ module IcalParser
         array
       elsif count = recurrance.count
         start = self.dtstart
-        frequency = recurrance.interval.days
+        frequency = recurrance.total_frequency#interval.days
         (count - 1).times do |num|
           start += frequency
           array << Event.new(self.uid, self.dtstamp, start)
@@ -124,7 +124,7 @@ module IcalParser
         array
       else
         start = self.dtstart
-        frequency = recurrance.interval.years
+        frequency = recurrance.total_frequency
         (limit - 1).times do |num|
           start += frequency
           array << Event.new(self.uid, self.dtstamp, start)
