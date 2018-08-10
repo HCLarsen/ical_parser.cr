@@ -24,7 +24,7 @@ class RecurranceRuleTest < Minitest::Test
 
   def test_initializes_recurrance_with_until
     xmas_eve = Time.new(1997, 12, 24)
-    recur = RecurranceRule.new(RecurranceRule::Freq::Daily, xmas_eve)
+    recur = RecurranceRule.new(RecurranceRule::Freq::Weekly, xmas_eve)
     assert_equal xmas_eve, recur.end_time
     assert_equal 1, recur.interval
     refute recur.count
