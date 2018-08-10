@@ -109,28 +109,43 @@ module IcalParser
     end
 
     def occurences
-      recurrance = @recurrance
+      recurrance
       limit = 10
       array = [self]
-      if !recurrance
-        array
-      elsif count = recurrance.count
-        start = self.dtstart
-        frequency = recurrance.total_frequency#interval.days
-        (count - 1).times do |num|
-          start += frequency
-          array << Event.new(self.uid, self.dtstamp, start)
-        end
-        array
-      else
-        start = self.dtstart
+
+      if recurrance = @recurrance
         frequency = recurrance.total_frequency
-        (limit - 1).times do |num|
-          start += frequency
-          array << Event.new(self.uid, self.dtstamp, start)
+        start = self.dtstart
+        if count = recurrance.count
+          (count - 1).times do |num|
+            start = later(start, frequency)
+            array << Event.new(self.uid, self.dtstamp, start)
+          end
+        elsif last = recurrance.end_time
+          start = later(start, frequency)
+          while start <= last
+            array << Event.new(self.uid, self.dtstamp, start)
+            start = later(start, frequency)
+          end
+        else
+          (limit - 1).times do |num|
+            start = later(start, frequency)
+            array << Event.new(self.uid, self.dtstamp, start)
+          end
         end
-        array
       end
+
+      array
+    end
+
+    private def later(time : Time, span : (Time::Span | Time::MonthSpan))
+      newtime = time + span
+      if time.zone.dst? && !newtime.zone.dst?
+    	  newtime += Time::Span.new(1, 0, 0)
+    	elsif !time.zone.dst? && newtime.zone.dst?
+    	  newtime -= Time::Span.new(1, 0, 0)
+    	end
+    	newtime
     end
 
     def_equals @uid, @dtstamp, @dtstart, @dtend, @summary

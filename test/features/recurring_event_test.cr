@@ -46,4 +46,17 @@ class RecurringEventTest < Minitest::Test
     last_event = Event.new(props["uid"].as(String), props["dtstamp"].as(Time), Time.utc(1997, 10, 12, 9, 0, 0))
     assert_equal last_event, event.occurences.last
   end
+
+  def test_recurring_event_with_until
+    recur = RecurranceRule.new(RecurranceRule::Freq::Weekly, Time.new(1997, 12, 24))
+    props = {
+      "uid"     => "canada-day@example.com",
+      "dtstamp" => Time.new(1997, 9, 2, 9, 0, 0),
+      "dtstart" => Time.new(1997, 9, 2, 9, 0, 0),
+      "recurrance"   => recur
+    } of String => PropertyType
+    event = IcalParser::Event.new(props)
+    assert_equal 17, event.occurences.size
+    assert_equal Time.new(1997, 12, 23, 9, 0, 0), event.occurences.last.dtstart
+  end
 end
