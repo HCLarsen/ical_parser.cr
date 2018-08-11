@@ -140,12 +140,14 @@ module IcalParser
 
     private def later(time : Time, span : (Time::Span | Time::MonthSpan))
       newtime = time + span
-      if time.zone.dst? && !newtime.zone.dst?
-    	  newtime += Time::Span.new(1, 0, 0)
-    	elsif !time.zone.dst? && newtime.zone.dst?
-    	  newtime -= Time::Span.new(1, 0, 0)
-    	end
-    	newtime
+      if span.is_a?(Time::Span) && span.days != 0
+        if time.zone.dst? && !newtime.zone.dst?
+          newtime += Time::Span.new(1, 0, 0)
+        elsif !time.zone.dst? && newtime.zone.dst?
+          newtime -= Time::Span.new(1, 0, 0)
+        end
+      end
+      newtime
     end
 
     def_equals @uid, @dtstamp, @dtstart, @dtend, @summary
