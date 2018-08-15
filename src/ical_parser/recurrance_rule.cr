@@ -20,7 +20,7 @@ module IcalParser
   # event = IcalParser::Event.new(props)
   # event.recurring             #=> true
   # event.recurrance.frequency  #=> Yearly
-  class RecurranceRule
+  struct RecurranceRule
     enum Freq
       Secondly
       Minutely
