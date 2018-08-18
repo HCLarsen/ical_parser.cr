@@ -36,11 +36,16 @@ module IcalParser
     property interval = 1
     property end_time : Time?
     property week_start = Time::DayOfWeek::Monday
+    property by_day = [] of {Int32, Time::DayOfWeek}
 
     def initialize(@frequency : Freq, @count = nil, @interval = 1)
     end
 
     def initialize(@frequency : Freq, @end_time : Time, @interval = 1)
+    end
+
+    def initialize(@frequency : Freq, @count : Int32, @interval = 1, @by_day = [] of {Int32, Time::DayOfWeek}, week_start : Time::DayOfWeek? = nil)
+      @week_start = week_start if week_start != nil
     end
 
     def total_frequency : Time::Span | Time::MonthSpan
