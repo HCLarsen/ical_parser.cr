@@ -32,7 +32,8 @@ class RecurranceRuleTest < Minitest::Test
 
   def test_initializes_recurrance_with_by_day
     by_day = [{0, Time::DayOfWeek::Tuesday}, {0, Time::DayOfWeek::Thursday}]
-    recur = RecurranceRule.new(RecurranceRule::Freq::Weekly, count: 10, by_day: by_day, week_start: Time::DayOfWeek::Sunday)
+    by_rules = { "by_day" => by_day }
+    recur = RecurranceRule.new(RecurranceRule::Freq::Weekly, count: 10, by_rules: by_rules , week_start: Time::DayOfWeek::Sunday)
     assert_equal by_day, recur.by_day
   end
 end

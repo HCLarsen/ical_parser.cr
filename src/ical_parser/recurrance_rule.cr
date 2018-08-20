@@ -44,7 +44,9 @@ module IcalParser
     def initialize(@frequency : Freq, @end_time : Time, @interval = 1)
     end
 
-    def initialize(@frequency : Freq, @count : Int32, @interval = 1, @by_day = [] of {Int32, Time::DayOfWeek}, week_start : Time::DayOfWeek? = nil)
+    def initialize(@frequency : Freq, @count : Int32, @interval = 1,
+      by_rules = {} of String => Array({Int32, Time::DayOfWeek}), week_start : Time::DayOfWeek? = nil)
+      @by_day = by_rules["by_day"] if by_rules["by_day"]?
       @week_start = week_start if week_start != nil
     end
 
