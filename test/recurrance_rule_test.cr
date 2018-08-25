@@ -42,10 +42,67 @@ class RecurranceRuleTest < Minitest::Test
     assert_equal RecurranceRule::Freq::Weekly, recur.frequency
   end
 
-  def test_initializes_recurrance_with_by_day
+  def test_first_friday_for_ten_months
     by_day = [{1, Time::DayOfWeek::Friday}]
-    by_rules = { "by_day" => by_day }
+    by_rules = { "by_day" => by_day } of String => RecurranceRule::ByRuleType
+    recur = RecurranceRule.new(RecurranceRule::Freq::Monthly, count: 10, by_rules: by_rules)
+    assert_equal by_day, recur.by_day
+  end
+
+  def test_weekly_tuesday_and_thursday
+    by_day = [{0, Time::DayOfWeek::Tuesday}, {0, Time::DayOfWeek::Thursday}]
+    by_rules = { "by_day" => by_day } of String => RecurranceRule::ByRuleType
     recur = RecurranceRule.new(RecurranceRule::Freq::Weekly, count: 10, by_rules: by_rules, week_start: Time::DayOfWeek::Sunday)
     assert_equal by_day, recur.by_day
+    assert_equal Time::DayOfWeek::Sunday, recur.week_start
+  end
+
+  def test_every_day_in_january_for_three_years
+    by_rules = { "by_month" => [1] } of String => RecurranceRule::ByRuleType
+    recur = RecurranceRule.new(RecurranceRule::Freq::Monthly, end_time: Time.new(2000, 1, 31, 14, 0, 0), by_rules: by_rules)
+    assert_equal [1], recur.by_month
+  end
+
+  def test_every_twenty_minutes_in_work_day
+    by_hour = [9,10,11,12,13,14,15,16]
+    by_minute = [0, 20, 40]
+    by_rules = { "by_hour" => by_hour, "by_minute" => by_minute }
+    recur = RecurranceRule.new(RecurranceRule::Freq::Daily, by_rules: by_rules)
+    assert_equal by_hour, recur.by_hour
+    assert_equal by_minute, recur.by_minute
+  end
+
+  def test_monday_of_week_twenty
+    by_week = [20]
+    by_day = [{ 0, Time::DayOfWeek::Monday }]
+    by_rules = { "by_week" => by_week, "by_day" => by_day }
+    recur = RecurranceRule.new(RecurranceRule::Freq::Yearly, by_rules: by_rules)
+    assert_equal by_week, recur.by_week
+    assert_equal by_day, recur.by_day
+  end
+
+  def test_yearday
+    by_year_day = [1, 100, 200]
+    by_rules = { "by_year_day" => by_year_day }
+    recur = RecurranceRule.new(RecurranceRule::Freq::Yearly, interval: 3, by_rules: by_rules)
+    assert_equal 3, recur.interval
+    assert_equal by_year_day, recur.by_year_day
+  end
+
+  def test_monthly_on_second_and_fifteenth
+    by_month_day = [2, 15]
+    by_rules = { "by_month_day" => by_month_day }
+    recur = RecurranceRule.new(RecurranceRule::Freq::Monthly, count: 10, by_rules: by_rules)
+    assert_equal by_month_day, recur.by_month_day
+    assert_equal 10, recur.count
+  end
+
+  def test_second_last_weekday
+    by_day = [{ 0, Time::DayOfWeek::Monday }, { 0, Time::DayOfWeek::Tuesday }, { 0, Time::DayOfWeek::Wednesday }, { 0, Time::DayOfWeek::Thursday }, { 0, Time::DayOfWeek::Friday }]
+    by_set_pos = [-2]
+    by_rules = { "by_day" => by_day, "by_set_pos" => by_set_pos }
+    recur = RecurranceRule.new(RecurranceRule::Freq::Monthly, by_rules: by_rules)
+    assert_equal by_day, recur.by_day
+    assert_equal by_set_pos, recur.by_set_pos
   end
 end

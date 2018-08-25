@@ -31,12 +31,22 @@ module IcalParser
       Yearly
     end
 
+    alias ByRuleType = Array({Int32, Time::DayOfWeek}) | Array(Int32)
+
     property frequency : Freq
     property count : Int32?
-    property interval = 1
     property end_time : Time?
+    property interval = 1
     property week_start = Time::DayOfWeek::Monday
+    property by_month = [] of Int32
+    property by_week = [] of Int32
+    property by_year_day = [] of Int32
+    property by_month_day = [] of Int32
     property by_day = [] of {Int32, Time::DayOfWeek}
+    property by_hour = [] of Int32
+    property by_minute = [] of Int32
+    property by_second = [] of Int32
+    property by_set_pos = [] of Int32
 
     def initialize(@frequency : Freq, @count = nil, @interval = 1)
     end
@@ -44,10 +54,27 @@ module IcalParser
     def initialize(@frequency : Freq, @end_time : Time, @interval = 1)
     end
 
-    def initialize(@frequency : Freq, @count : Int32, @interval = 1,
-      by_rules = {} of String => Array({Int32, Time::DayOfWeek}), week_start : Time::DayOfWeek? = nil)
-      @by_day = by_rules["by_day"] if by_rules["by_day"]?
-      @week_start = week_start if week_start != nil
+    def initialize(@frequency : Freq, @end_time : Time, *, @interval = 1,
+      by_rules = {} of String => ByRuleType, week_start : Time::DayOfWeek? = nil)
+      assign_rules(by_rules)
+      @week_start = week_start if week_start
+    end
+
+    def initialize(@frequency : Freq, *, by_rules : Hash(String, ByRuleType), @count = nil, @interval = 1, week_start : Time::DayOfWeek? = nil)
+      assign_rules(by_rules)
+      @week_start = week_start if week_start
+    end
+
+    def assign_rules(rules : Hash(String, ByRuleType))
+      @by_month = rules["by_month"].as? Array(Int32) if rules["by_month"]?
+      @by_week = rules["by_week"].as? Array(Int32) if rules["by_week"]?
+      @by_year_day = rules["by_year_day"].as? Array(Int32) if rules["by_year_day"]?
+      @by_month_day = rules["by_month_day"].as? Array(Int32) if rules["by_month_day"]?
+      @by_day = rules["by_day"].as? Array({Int32, Time::DayOfWeek}) if rules["by_day"]?
+      @by_hour = rules["by_hour"].as? Array(Int32) if rules["by_hour"]?
+      @by_minute = rules["by_minute"].as? Array(Int32) if rules["by_minute"]?
+      @by_second = rules["by_second"].as? Array(Int32) if rules["by_second"]?
+      @by_set_pos = rules["by_set_pos"].as? Array(Int32) if rules["by_set_pos"]?
     end
 
     def total_frequency : Time::Span | Time::MonthSpan
