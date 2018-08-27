@@ -54,8 +54,7 @@ module IcalParser
     def initialize(@frequency : Freq, @end_time : Time, @interval = 1)
     end
 
-    def initialize(@frequency : Freq, @end_time : Time, *, @interval = 1,
-      by_rules = {} of String => ByRuleType, week_start : Time::DayOfWeek? = nil)
+    def initialize(@frequency : Freq, *, by_rules : Hash(String, ByRuleType), @end_time : Time,  @interval = 1, week_start : Time::DayOfWeek? = nil)
       assign_rules(by_rules)
       @week_start = week_start if week_start
     end
