@@ -10,14 +10,14 @@ class RecurranceRuleTest < Minitest::Test
   end
 
   def test_initializes_ten_daily_occurrences
-    recur = RecurranceRule.new(RecurranceRule::Freq::Daily, 10)
+    recur = RecurranceRule.new(RecurranceRule::Freq::Daily, count: 10)
     assert_equal RecurranceRule::Freq::Daily, recur.frequency
     assert_equal 10, recur.count
   end
 
   def test_initializes_daily_until
     xmas_eve = Time.new(1997, 12, 24)
-    recur = RecurranceRule.new(RecurranceRule::Freq::Weekly, xmas_eve)
+    recur = RecurranceRule.new(RecurranceRule::Freq::Weekly, end_time: xmas_eve)
     assert_equal xmas_eve, recur.end_time
     assert_equal 1, recur.interval
     refute recur.count
@@ -104,5 +104,21 @@ class RecurranceRuleTest < Minitest::Test
     recur = RecurranceRule.new(RecurranceRule::Freq::Monthly, by_rules: by_rules)
     assert_equal by_day, recur.by_day
     assert_equal by_set_pos, recur.by_set_pos
+  end
+
+  def test_raises_assigning_count_to_rule_with_until
+    recur = RecurranceRule.new(RecurranceRule::Freq::Daily, count: 10)
+    error = assert_raises do
+      recur.end_time = Time.new(1997, 12, 24)
+    end
+    assert_equal "Invalid Assignment: Recurrance Rule cannot have both a count and an end time", error.message
+  end
+
+  def test_raises_assigning_until_to_rule_with_count
+    recur = RecurranceRule.new(RecurranceRule::Freq::Weekly, end_time: Time.new(1997, 12, 24))
+    error = assert_raises do
+      recur.count = 10
+    end
+    assert_equal "Invalid Assignment: Recurrance Rule cannot have both a count and an end time", error.message
   end
 end

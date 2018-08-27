@@ -34,8 +34,8 @@ module IcalParser
     alias ByRuleType = Array({Int32, Time::DayOfWeek}) | Array(Int32)
 
     property frequency : Freq
-    property count : Int32?
-    property end_time : Time?
+    getter count : Int32?
+    getter end_time : Time?
     property interval = 1
     property week_start = Time::DayOfWeek::Monday
     property by_month = [] of Int32
@@ -74,6 +74,22 @@ module IcalParser
       @by_minute = rules["by_minute"].as? Array(Int32) if rules["by_minute"]?
       @by_second = rules["by_second"].as? Array(Int32) if rules["by_second"]?
       @by_set_pos = rules["by_set_pos"].as? Array(Int32) if rules["by_set_pos"]?
+    end
+
+    def count=(count : Int32)
+      unless @end_time
+        @count = count
+      else
+        raise "Invalid Assignment: Recurrance Rule cannot have both a count and an end time"
+      end
+    end
+
+    def end_time=(end_time : Time)
+      unless @count
+        @end_time = end_time
+      else
+        raise "Invalid Assignment: Recurrance Rule cannot have both a count and an end time"
+      end
     end
 
     def total_frequency : Time::Span | Time::MonthSpan
