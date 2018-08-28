@@ -29,6 +29,27 @@ module IcalParser
       Weekly
       Monthly
       Yearly
+
+      def self.from_string(string : String)
+        case string
+        when "secondly"
+          Secondly
+        when "minutely"
+          Minutely
+        when "hourly"
+          Hourly
+        when "daily"
+          Daily
+        when "weekly"
+          Weekly
+        when "monthly"
+          Monthly
+        when "yearly"
+          Yearly
+        else
+          raise "Invalid Recurrance Rule FREQ value"
+        end
+      end
     end
 
     alias ByRuleType = Array({Int32, Time::DayOfWeek}) | Array(Int32)
