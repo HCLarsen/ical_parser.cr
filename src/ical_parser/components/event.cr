@@ -19,7 +19,7 @@ module IcalParser
       "organizer"       => CalAddress?,
       "attendees"       => Array(CalAddress),
       "geo"             => Hash(String, Float64)?,
-      "recurrance"      => RecurranceRule?
+      "recurrence"      => RecurrenceRule?
     }
 
     @all_day = false
@@ -105,23 +105,23 @@ module IcalParser
     end
 
     def recurring
-      !@recurrance.nil?
+      !@recurrence.nil?
     end
 
     def occurences
-      recurrance
+      recurrence
       limit = 10
       array = [self]
 
-      if recurrance = @recurrance
-        frequency = recurrance.total_frequency
+      if recurrence = @recurrence
+        frequency = recurrence.total_frequency
         start = self.dtstart
-        if count = recurrance.count
+        if count = recurrence.count
           (count - 1).times do |num|
             start = later(start, frequency)
             array << Event.new(self.uid, self.dtstamp, start)
           end
-        elsif last = recurrance.end_time
+        elsif last = recurrence.end_time
           start = later(start, frequency)
           while start <= last
             array << Event.new(self.uid, self.dtstamp, start)

@@ -18,28 +18,28 @@ class RecurringEventTest < Minitest::Test
   end
 
   def test_recurring_event
-    recur = RecurranceRule.new(RecurranceRule::Freq::Yearly)
+    recur = RecurrenceRule.new(RecurrenceRule::Freq::Yearly)
     props = {
       "uid"     => "canada-day@example.com",
       "dtstamp" => Time.utc(1867, 3, 29, 13, 0, 0),
       "dtstart" => Time.utc(1867, 7, 1),
-      "recurrance"   => recur
+      "recurrence"   => recur
     } of String => PropertyType
     event = IcalParser::Event.new(props)
     assert event.recurring
-    assert_equal RecurranceRule::Freq::Yearly, event.recurrance.not_nil!.frequency
+    assert_equal RecurrenceRule::Freq::Yearly, event.recurrence.not_nil!.frequency
     assert_equal event, event.occurences.first
     third_event = Event.new(props["uid"].as(String), props["dtstamp"].as(Time), Time.utc(1870, 7, 1))
     assert_equal third_event, event.occurences[3]
   end
 
   def test_recurring_event_with_count
-    recur = RecurranceRule.new(RecurranceRule::Freq::Daily, 5, 10)
+    recur = RecurrenceRule.new(RecurrenceRule::Freq::Daily, 5, 10)
     props = {
       "uid"     => "canada-day@example.com",
       "dtstamp" => Time.utc(1997, 9, 2, 9, 0, 0),
       "dtstart" => Time.utc(1997, 9, 2, 9, 0, 0),
-      "recurrance"   => recur
+      "recurrence"   => recur
     } of String => PropertyType
     event = IcalParser::Event.new(props)
     assert_equal 5, event.occurences.size
@@ -48,12 +48,12 @@ class RecurringEventTest < Minitest::Test
   end
 
   def test_recurring_event_with_until
-    recur = RecurranceRule.new(RecurranceRule::Freq::Weekly, Time.new(1997, 12, 24))
+    recur = RecurrenceRule.new(RecurrenceRule::Freq::Weekly, Time.new(1997, 12, 24))
     props = {
       "uid"     => "canada-day@example.com",
       "dtstamp" => Time.new(1997, 9, 2, 9, 0, 0),
       "dtstart" => Time.new(1997, 9, 2, 9, 0, 0),
-      "recurrance"   => recur
+      "recurrence"   => recur
     } of String => PropertyType
     event = IcalParser::Event.new(props)
     assert_equal 17, event.occurences.size

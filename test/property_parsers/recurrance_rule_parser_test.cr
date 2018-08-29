@@ -2,19 +2,19 @@ require "minitest/autorun"
 
 require "/../src/iCal"
 
-class RecurranceRuleParserTest < Minitest::Test
+class RecurrenceRuleParserTest < Minitest::Test
   include IcalParser
 
   def initialize(arg)
     super(arg)
-    @parser = RecurranceRuleParser.parser
+    @parser = RecurrenceRuleParser.parser
   end
 
   def test_daily_with_count
     string = "FREQ=DAILY;COUNT=10"
     recur = @parser.parse(string)
     assert_equal 10, recur.count
-    assert_equal RecurranceRule::Freq::Daily, recur.frequency
+    assert_equal RecurrenceRule::Freq::Daily, recur.frequency
     assert_equal 1, recur.interval
   end
 
@@ -28,7 +28,7 @@ class RecurranceRuleParserTest < Minitest::Test
   def test_daily_with_interval
     string = "FREQ=DAILY;INTERVAL=2"
     recur = @parser.parse(string)
-    assert_equal RecurranceRule::Freq::Daily, recur.frequency
+    assert_equal RecurrenceRule::Freq::Daily, recur.frequency
     assert_equal 2, recur.interval
   end
 end
