@@ -39,4 +39,13 @@ class RecurrenceRuleParserTest < Minitest::Test
     assert_equal [1], recur.by_month
     assert_equal sundays, recur.by_day.not_nil!.first
   end
+
+  def test_by_positive_and_negative_days
+    string = "FREQ=MONTHLY;INTERVAL=2;COUNT=10;BYDAY=1SU,-1SU"
+    first_sunday = {1, Time::DayOfWeek::Sunday}
+    last_sunday = {-1, Time::DayOfWeek::Sunday}
+    recur = @parser.parse(string)
+    assert_equal first_sunday, recur.by_day.not_nil!.first
+    assert_equal last_sunday, recur.by_day.not_nil!.last
+  end
 end

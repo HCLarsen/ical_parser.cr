@@ -28,8 +28,13 @@ module IcalParser
       rules = {} of String => RecurrenceRule::ByRuleType
       rules["by_month"] = hash["bymonth"].split(',').map(&.to_i) if hash["bymonth"]?
       if hash["byday"]?
-        days = hash["byday"].split(',').map { |day| day_to_day_of_week(day)}
-        rules["by_day"] = days.map { |day| {0, day} }
+        byday_regex = /(?<num>-?[1-9]?)(?<day>[A-Z]{2})/
+        days = hash["byday"].split(',')
+        matches = days.map { |day| day.match(byday_regex) }
+        rules["by_day"] = matches.compact.map do |match|
+          num = match["num"].empty? ? 0 : match["num"].to_i
+          {num, day_to_day_of_week(match["day"])}
+        end
       end
 
       if hash["until"]?
@@ -38,7 +43,7 @@ module IcalParser
         RecurrenceRule.new(frequency, end_time: end_time, by_rules: rules, interval: interval)
       elsif hash["count"]?
         count = hash["count"].to_i
-        RecurrenceRule.new(frequency, count: count, interval: interval)
+        RecurrenceRule.new(frequency, count: count, by_rules: rules, interval: interval)
       else
         RecurrenceRule.new(frequency, interval: interval)
       end
@@ -61,7 +66,7 @@ module IcalParser
       when "SU"
         Time::DayOfWeek::Sunday
       else
-        raise "Invalid Day of Week value"
+        raise "Invalid Day of Week value: #{day}"
       end
     end
   end
