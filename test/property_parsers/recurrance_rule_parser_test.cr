@@ -45,7 +45,41 @@ class RecurrenceRuleParserTest < Minitest::Test
     first_sunday = {1, Time::DayOfWeek::Sunday}
     last_sunday = {-1, Time::DayOfWeek::Sunday}
     recur = @parser.parse(string)
-    assert_equal first_sunday, recur.by_day.not_nil!.first
-    assert_equal last_sunday, recur.by_day.not_nil!.last
+    assert_equal [first_sunday, last_sunday], recur.by_day
+  end
+
+  def test_multiple_by_xxx_rules
+    string = "FREQ=YEARLY;INTERVAL=2;BYMONTH=1;BYDAY=SU;BYHOUR=8,9;BYMINUTE=30"
+    recur = @parser.parse(string)
+    assert_equal RecurrenceRule::Freq::Yearly, recur.frequency
+    assert_equal 2, recur.interval
+    assert_equal [1], recur.by_month
+    assert_equal [{0, Time::DayOfWeek::Sunday}], recur.by_day
+    assert_equal [8, 9], recur.by_hour
+    assert_equal [30], recur.by_minute
+  end
+
+  def test_yearly_by_weekno
+    string = "FREQ=YEARLY;BYWEEKNO=20;BYDAY=MO"
+    recur = @parser.parse(string)
+    assert_equal [20], recur.by_week
+  end
+
+  def test_by_month_day
+    string = "FREQ=MONTHLY;BYMONTHDAY=-3"
+    recur = @parser.parse(string)
+    assert_equal [-3], recur.by_month_day
+  end
+
+  def test_by_year_day
+    string = "FREQ=YEARLY;INTERVAL=3;COUNT=10;BYYEARDAY=1,100,200"
+    recur = @parser.parse(string)
+    assert_equal [1, 100, 200], recur.by_year_day
+  end
+
+  def test_set_pos
+    string = "FREQ=MONTHLY;BYDAY=MO,TU,WE,TH,FR;BYSETPOS=-2"
+    recur = @parser.parse(string)
+    assert_equal [-2], recur.by_set_pos
   end
 end

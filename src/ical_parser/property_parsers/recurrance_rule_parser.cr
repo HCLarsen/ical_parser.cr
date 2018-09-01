@@ -26,7 +26,16 @@ module IcalParser
       interval = hash["interval"]? ? hash["interval"].to_i : 1
 
       rules = {} of String => RecurrenceRule::ByRuleType
+
       rules["by_month"] = hash["bymonth"].split(',').map(&.to_i) if hash["bymonth"]?
+      rules["by_week"] = hash["byweekno"].split(',').map(&.to_i) if hash["byweekno"]?
+      rules["by_month_day"] = hash["bymonthday"].split(',').map(&.to_i) if hash["bymonthday"]?
+      rules["by_year_day"] = hash["byyearday"].split(',').map(&.to_i) if hash["byyearday"]?
+      rules["by_hour"] = hash["byhour"].split(',').map(&.to_i) if hash["byhour"]?
+      rules["by_minute"] = hash["byminute"].split(',').map(&.to_i) if hash["byminute"]?
+      rules["by_second"] = hash["bysecond"].split(',').map(&.to_i) if hash["bysecond"]?
+      rules["by_set_pos"] = hash["bysetpos"].split(',').map(&.to_i) if hash["bysetpos"]?
+
       if hash["byday"]?
         byday_regex = /(?<num>-?[1-9]?)(?<day>[A-Z]{2})/
         days = hash["byday"].split(',')
@@ -45,7 +54,7 @@ module IcalParser
         count = hash["count"].to_i
         RecurrenceRule.new(frequency, count: count, by_rules: rules, interval: interval)
       else
-        RecurrenceRule.new(frequency, interval: interval)
+        RecurrenceRule.new(frequency, by_rules: rules, interval: interval)
       end
     end
 
