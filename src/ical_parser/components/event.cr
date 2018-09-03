@@ -108,36 +108,6 @@ module IcalParser
       !@recurrence.nil?
     end
 
-    def occurences
-      recurrence
-      limit = 10
-      array = [self]
-
-      if recurrence = @recurrence
-        frequency = recurrence.total_frequency
-        start = self.dtstart
-        if count = recurrence.count
-          (count - 1).times do |num|
-            start = later(start, frequency)
-            array << Event.new(self.uid, self.dtstamp, start)
-          end
-        elsif last = recurrence.end_time
-          start = later(start, frequency)
-          while start <= last
-            array << Event.new(self.uid, self.dtstamp, start)
-            start = later(start, frequency)
-          end
-        else
-          (limit - 1).times do |num|
-            start = later(start, frequency)
-            array << Event.new(self.uid, self.dtstamp, start)
-          end
-        end
-      end
-
-      array
-    end
-
     private def later(time : Time, span : (Time::Span | Time::MonthSpan))
       newtime = time + span
       if span.is_a?(Time::Span) && span.days != 0
