@@ -5,7 +5,7 @@ require "./ical_parser/property_parsers/*"
 
 # TODO: Write documentation for `IcalParser`
 module IcalParser
-  TYPES = [Bool, CalAddress, Float64, Int32, PeriodOfTime, String, Time, Time::Span, URI]
+  TYPES = [Bool, CalAddress, Float64, Int32, PeriodOfTime, RecurrenceRule, String, Time, Time::Span, URI]
 
   {% begin %}
     alias ValueType = {{ TYPES.join(" | ").id }}

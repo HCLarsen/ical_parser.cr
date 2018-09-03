@@ -19,6 +19,7 @@ module IcalParser
       "organizer"       => CalAddress?,
       "attendees"       => Array(CalAddress),
       "geo"             => Hash(String, Float64)?,
+      "recurrence"      => RecurrenceRule?
     }
 
     @all_day = false
@@ -61,10 +62,6 @@ module IcalParser
       assign_vars
     end
 
-    def opaque?
-      @transp == "OPAQUE"
-    end
-
     def dtstart=(dtstart : Time)
       dtend = @dtend
       if dtend.nil?
@@ -102,6 +99,58 @@ module IcalParser
     def all_day=(value : Bool)
       @all_day = value
     end
+
+    def opaque?
+      @transp == "OPAQUE"
+    end
+
+    def recurring
+      !@recurrence.nil?
+    end
+
+    def occurences
+      recurrence
+      limit = 10
+      array = [self]
+
+      if recurrence = @recurrence
+        frequency = recurrence.total_frequency
+        start = self.dtstart
+        if count = recurrence.count
+          (count - 1).times do |num|
+            start = later(start, frequency)
+            array << Event.new(self.uid, self.dtstamp, start)
+          end
+        elsif last = recurrence.end_time
+          start = later(start, frequency)
+          while start <= last
+            array << Event.new(self.uid, self.dtstamp, start)
+            start = later(start, frequency)
+          end
+        else
+          (limit - 1).times do |num|
+            start = later(start, frequency)
+            array << Event.new(self.uid, self.dtstamp, start)
+          end
+        end
+      end
+
+      array
+    end
+
+    private def later(time : Time, span : (Time::Span | Time::MonthSpan))
+      newtime = time + span
+      if span.is_a?(Time::Span) && span.days != 0
+        if time.zone.dst? && !newtime.zone.dst?
+          newtime += Time::Span.new(1, 0, 0)
+        elsif !time.zone.dst? && newtime.zone.dst?
+          newtime -= Time::Span.new(1, 0, 0)
+        end
+      end
+      newtime
+    end
+
+    def_equals @uid, @dtstamp, @dtstart, @dtend, @summary
 
     private macro assign_vars
       {% for key, value in PROPERTIES %}
