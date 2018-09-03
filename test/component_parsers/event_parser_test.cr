@@ -102,6 +102,7 @@ class EventParserTest < Minitest::Test
 
     event = @parser.parse(eventc)
     assert_equal 3, event.categories.size
+    assert_equal RecurrenceRule::Freq::Yearly, event.recurrence.not_nil!.frequency
   end
 
   def test_parses_geo_property

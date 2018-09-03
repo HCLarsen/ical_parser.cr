@@ -17,6 +17,7 @@ module IcalParser
       "organizer"       => Property.new(CalAddressParser.parser),
       "attendees"       => Property.new(CalAddressParser.parser, only_once: false),
       "geo"             => Property.new(FloatParser.parser, parts: ["lat", "lon"]),
+      "recurrence"      => Property.new(RecurrenceRuleParser.parser),
     }
 
     private def initialize; end
@@ -35,6 +36,7 @@ module IcalParser
         "attendee"  => "attendees",
         "comment"   => "comments",
         "contact"   => "contacts",
+        "rrule"     => "recurrence"
       }
       found = Hash(String, PropertyType).new
 
