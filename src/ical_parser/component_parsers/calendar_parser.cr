@@ -18,7 +18,7 @@ module IcalParser
         "method"    => Property.new(TextParser.parser),
       }
 
-      line_regex = /(?<name>.*?)(?<params>;.*?)?:(?<value>.*)/
+      line_regex = /(?<name>.*?)(?<params>;[a-zA-Z\-]*=(?:".*"|[^:\n]*))*:(?<value>.*)/
       component_regex = /^BEGIN:(?<type>.*?)$.*?^END:.*?$/m
 
       found = {} of String => String

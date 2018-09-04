@@ -81,10 +81,10 @@ module IcalParser
     end
 
     private def lines_matches(lines : Array(String))
-      regex = /(?<name>.*?)(?<params>;.*?)?:(?<value>.*)/
+      line_regex = /(?<name>.*?)(?<params>;[a-zA-Z\-]*=(?:".*"|[^:\n]*))*:(?<value>.*)/
 
       lines.map do |line|
-        if match = line.match(regex)
+        if match = line.match(line_regex)
           match
         else
           raise "Invalid Event: Invalid content line: #{line}"
