@@ -1,5 +1,9 @@
 module IcalParser
   class EventParser
+    NV_PAIR_REGEX = /;[a-zA-Z\-]*=(?:".*"|[^:;\n]*)/
+    PARAMS_REGEX = /#{NV_PAIR_REGEX}+/
+    LINES_REGEX = /(?<name>.*?)(?<params>;[a-zA-Z\-]*=(?:".*"|[^:;\n]*)+)?:(?<value>.*)/
+
     COMPONENT_PROPERTIES = {
       "uid"             => Property.new(TextParser.parser),
       "dtstamp"         => Property.new(DateTimeParser.parser),
@@ -81,10 +85,8 @@ module IcalParser
     end
 
     private def lines_matches(lines : Array(String))
-      line_regex = /(?<name>.*?)(?<params>;[a-zA-Z\-]*=(?:".*"|[^:\n]*))*:(?<value>.*)/
-
       lines.map do |line|
-        if match = line.match(line_regex)
+        if match = line.match(LINES_REGEX)
           match
         else
           raise "Invalid Event: Invalid content line: #{line}"
