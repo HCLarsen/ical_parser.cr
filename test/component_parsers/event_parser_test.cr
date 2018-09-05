@@ -97,12 +97,14 @@ class EventParserTest < Minitest::Test
     CLASS:CONFIDENTIAL
     CATEGORIES:ANNIVERSARY,PERSONAL
     CATEGORIES:SPECIAL OCCASION
+    REQUEST-STATUS:4.1;Event conflict.  Date-time is busy.
     RRULE:FREQ=YEARLY
     END:VEVENT
     HEREDOC
 
     event = @parser.parse(eventc)
     assert_equal 3, event.categories.size
+    assert_equal ["4.1;Event conflict.  Date-time is busy."], event.request_status
   end
 
   def test_parses_geo_property

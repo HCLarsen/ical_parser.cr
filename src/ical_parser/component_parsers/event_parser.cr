@@ -12,9 +12,15 @@ module IcalParser
       "description"     => Property.new(TextParser.parser),
       "classification"  => Property.new(TextParser.parser),
       "categories"      => Property.new(TextParser.parser, single_value: false, only_once: false),
+      "resources"       => Property.new(TextParser.parser, single_value: false, only_once: false),
+      "contacts"        => Property.new(TextParser.parser, single_value: false, only_once: false),
+      "related_to"      => Property.new(TextParser.parser, single_value: false, only_once: false),
+      "request_status"  => Property.new(TextParser.parser, only_once: false),
       "transp"          => Property.new(TextParser.parser),
       "status"          => Property.new(TextParser.parser),
+      "comments"        => Property.new(TextParser.parser),
       "location"        => Property.new(TextParser.parser),
+      "priority"        => Property.new(IntegerParser.parser),
       "sequence"        => Property.new(IntegerParser.parser),
       "organizer"       => Property.new(CalAddressParser.parser),
       "attendees"       => Property.new(CalAddressParser.parser, only_once: false),
@@ -34,11 +40,13 @@ module IcalParser
 
     def parse(eventc : String)
       property_names = {
-        "class"     => "classification",
-        "attendee"  => "attendees",
-        "comment"   => "comments",
-        "contact"   => "contacts",
-        "rrule"     => "recurrence"
+        "class"           => "classification",
+        "attendee"        => "attendees",
+        "comment"         => "comments",
+        "contact"         => "contacts",
+        "rrule"           => "recurrence",
+        "related-to"      => "related_to",
+        "request-status"  => "request_status",
       }
       found = Hash(String, PropertyType).new
 

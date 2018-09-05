@@ -11,10 +11,16 @@ module IcalParser
       "summary"         => String?,
       "classification"  => String?,
       "categories"      => Array(String),
+      "resources"       => Array(String),
+      "contacts"        => Array(String),
+      "related_to"      => Array(String),
+      "request_status"  => Array(String),
       "transp"          => String?,
       "description"     => String?,
       "status"          => String?,
+      "comments"        => String?,
       "location"        => String?,
+      "priority"        => Int32?,
       "sequence"        => Int32?,
       "organizer"       => CalAddress?,
       "attendees"       => Array(CalAddress),
@@ -33,6 +39,10 @@ module IcalParser
     {% debug %}
 
     @categories = [] of String
+    @resources = [] of String
+    @contacts = [] of String
+    @related_to = [] of String
+    @request_status = [] of String
     @attendees = [] of CalAddress
     @transp = "OPAQUE"
 
@@ -133,6 +143,8 @@ module IcalParser
     private macro verify_vars
       {% for key, value in PROPERTIES %}
         if properties["{{key.id}}"]? && !properties["{{key.id}}"].is_a? {{ value.id }}
+          puts properties["{{key.id}}"]
+          puts properties["{{key.id}}"].class
           raise "Event Error: {{key.id}} is not a valid type"
         end
       {% end %}
