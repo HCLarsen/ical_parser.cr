@@ -1,7 +1,5 @@
 module IcalParser
   class EventParser
-    NV_PAIR_REGEX = /;[a-zA-Z\-]*=(?:".*"|[^:;\n]*)/
-    PARAMS_REGEX = /#{NV_PAIR_REGEX}+/
     LINES_REGEX = /(?<name>.*?)(?<params>;[a-zA-Z\-]*=(?:".*"|[^:;\n]*)+)?:(?<value>.*)/
 
     COMPONENT_PROPERTIES = {
