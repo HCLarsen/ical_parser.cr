@@ -132,14 +132,6 @@ module IcalParser
 
     def_equals @uid, @dtstamp, @dtstart, @dtend, @summary
 
-    private macro assign_vars
-      {% for key, value in PROPERTIES %}
-        {% if key.id != "duration" %}
-          @{{key.id}} = properties[{{key}}].as {{value.id}} if properties[{{key}}]?
-        {% end %}
-      {% end %}
-    end
-
     private macro verify_vars
       {% for key, value in PROPERTIES %}
         if properties["{{key.id}}"]? && !properties["{{key.id}}"].is_a? {{ value.id }}
@@ -147,6 +139,14 @@ module IcalParser
           puts properties["{{key.id}}"].class
           raise "Event Error: {{key.id}} is not a valid type"
         end
+      {% end %}
+    end
+
+    private macro assign_vars
+      {% for key, value in PROPERTIES %}
+        {% if key.id != "duration" %}
+          @{{key.id}} = properties[{{key}}].as {{value.id}} if properties[{{key}}]?
+        {% end %}
       {% end %}
     end
 
