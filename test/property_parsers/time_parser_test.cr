@@ -23,7 +23,7 @@ class TimeParserTest < Minitest::Test
     assert_equal Time.utc(1, 1, 1, 7, 0, 0), time
   end
 
-  def test_parses_time_zone_time
+  def test_parses_est_time_zone_time
     string = "083000"
     params = {"TZID" => "America/New_York"}
     time = @parser.parse(string, params)

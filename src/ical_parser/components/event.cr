@@ -94,7 +94,6 @@ module IcalParser
     end
 
     def duration=(duration : Time::Span)
-      puts "Assigning duration"
       if duration > Time::Span.zero
         @dtend = @dtstart + duration
       else
@@ -135,8 +134,6 @@ module IcalParser
     private macro verify_vars
       {% for key, value in PROPERTIES %}
         if properties["{{key.id}}"]? && !properties["{{key.id}}"].is_a? {{ value.id }}
-          puts properties["{{key.id}}"]
-          puts properties["{{key.id}}"].class
           raise "Event Error: {{key.id}} is not a valid type"
         end
       {% end %}
