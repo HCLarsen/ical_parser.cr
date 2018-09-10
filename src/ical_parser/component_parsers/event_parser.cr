@@ -5,6 +5,8 @@ module IcalParser
     COMPONENT_PROPERTIES = {
       "uid"             => Property.new(TextParser.parser),
       "dtstamp"         => Property.new(DateTimeParser.parser),
+      "created"         => Property.new(DateTimeParser.parser),
+      "last_mod"        => Property.new(DateTimeParser.parser),
       "dtstart"         => Property.new(DateTimeParser.parser),
       "dtend"           => Property.new(DateTimeParser.parser),
       "duration"        => Property.new(DurationParser.parser),
@@ -26,6 +28,8 @@ module IcalParser
       "attendees"       => Property.new(CalAddressParser.parser, only_once: false),
       "geo"             => Property.new(FloatParser.parser, parts: ["lat", "lon"]),
       "recurrence"      => Property.new(RecurrenceRuleParser.parser),
+      "exdate"          => Property.new(DateTimeParser.parser, single_value: false, only_once: false),
+      "url"             => Property.new(URIParser.parser),
     }
 
     private def initialize; end
@@ -40,6 +44,7 @@ module IcalParser
 
     def parse(eventc : String)
       property_names = {
+        "last-modified"   => "last_mod",
         "class"           => "classification",
         "attendee"        => "attendees",
         "comment"         => "comments",

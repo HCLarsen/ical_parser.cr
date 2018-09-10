@@ -5,6 +5,8 @@ module IcalParser
     PROPERTIES = {
       "uid"             => String,
       "dtstamp"         => Time,
+      "created"         => Time?,
+      "last_mod"        => Time?,
       "dtstart"         => Time,
       "dtend"           => Time?,
       "duration"        => Time::Span?,
@@ -25,7 +27,9 @@ module IcalParser
       "organizer"       => CalAddress?,
       "attendees"       => Array(CalAddress),
       "geo"             => Hash(String, Float64)?,
-      "recurrence"      => RecurrenceRule?
+      "recurrence"      => RecurrenceRule?,
+      "exdate"          => Array(Time),
+      "url"             => URI?
     }
 
     @all_day = false
@@ -44,6 +48,8 @@ module IcalParser
     @related_to = [] of String
     @request_status = [] of String
     @attendees = [] of CalAddress
+    @exdate = [] of Time
+    @rdate = [] of Time
     @transp = "OPAQUE"
 
     def initialize(@uid : String, @dtstamp : Time, @dtstart : Time)

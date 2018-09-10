@@ -124,6 +124,21 @@ class EventParserTest < Minitest::Test
     assert_equal 45.5, event.geo.not_nil!["lat"]
   end
 
+  def test_recurring_event_with_ex_date
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:20070423T123432Z-541111@example.com
+    DTSTAMP:19970829T180000
+    DTSTART;TZID=America/New_York:19970902T090000
+    EXDATE;TZID=America/New_York:19970902T090000
+    RRULE:FREQ=MONTHLY;BYDAY=FR;BYMONTHDAY=13
+    END:VEVENT
+    HEREDOC
+
+    event = @parser.parse(eventc)
+    assert_equal [Time.new(1997, 9, 2, 9, 0, 0, location: Time::Location.load("America/New_York"))], event.exdate
+  end
+
   def test_raises_for_invalid_line
     eventc = <<-HEREDOC
     BEGIN:VEVENT
