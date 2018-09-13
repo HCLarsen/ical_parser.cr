@@ -11,20 +11,7 @@ module IcalParser
       params ||= ""
       params_hash = parse_params(params)
 
-      if @single_value
-        if @only_once && @parts.size == 1
-          @parser.parse(value, params_hash)
-        elsif @parts.size > 1
-          values = value.split(/(?<!\\);/)
-          parts = values.map { |e| @parser.parse(e, params_hash) }
-          Hash.zip(@parts, parts)
-        else
-          [@parser.parse(value, params_hash)]
-        end
-      else
-        values = value.split(/(?<!\\),/)
-        values.map { |e| @parser.parse(e, params_hash) }
-      end
+      parse_value(value, params_hash)
     end
 
     def parse_params(params : String) : Hash(String, String)
@@ -41,6 +28,23 @@ module IcalParser
       end
       array = array.transpose
       Hash.zip(array.first, array.last)
+    end
+
+    def parse_value(value : String, params : Hash(String, String)) forall T
+      if @single_value
+        if @only_once && @parts.size == 1
+          @parser.parse(value, params)
+        elsif @parts.size > 1
+          values = value.split(/(?<!\\);/)
+          parts = values.map { |e| @parser.parse(e, params) }
+          Hash.zip(@parts, parts)
+        else
+          [@parser.parse(value, params)]
+        end
+      else
+        values = value.split(/(?<!\\),/)
+        values.map { |e| @parser.parse(e, params) }
+      end
     end
   end
 end
