@@ -16,4 +16,21 @@ module IcalParser
 
     alias PropertyType = ValueType | ValueArray | ValueHash
   {% end %}
+
+  PARSERS = {
+    "BINARY"      => TextParser.parser,  # To be replaced with BinaryParser once written.
+    "BOOLEAN"     => BooleanParser.parser,
+    "CAL-ADDRESS" => CalAddressParser.parser,
+    "DATE"        => DateParser.parser,
+    "DATE-TIME"   => DateTimeParser.parser,
+    "DURATION"    => DurationParser.parser,
+    "FLOAT"       => FloatParser.parser,
+    "INTEGER"     => IntegerParser.parser,
+    "PERIOD"      => PeriodOfTimeParser.parser,
+    "RECUR"       => RecurrenceRuleParser.parser,
+    "TEXT"        => TextParser.parser,
+    "TIME"        => TimeParser.parser,
+    "URI"         =>  URIParser.parser,
+    "UTC-OFFSET"  => TextParser.parser,  # To be replaced with UTCOffsetParser once written.
+  }
 end
