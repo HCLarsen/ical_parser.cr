@@ -49,7 +49,7 @@ module IcalParser
     @request_status = [] of String
     @attendees = [] of CalAddress
     @exdate = [] of Time
-    @rdate = [] of Time
+    @rdate = [] of Time | PeriodOfTime
     @transp = "OPAQUE"
 
     def initialize(@uid : String, @dtstamp : Time, @dtstart : Time)
