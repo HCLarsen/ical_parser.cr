@@ -14,6 +14,8 @@ module IcalParser
     {% hashes = TYPES.map{|e| "Hash(String, #{e})".id } %}
     alias ValueHash = {{ hashes.join(" | ").id }}
 
+    alias ParserType = {{ TYPES.map{|e| "Proc(String, Hash(String, String), #{e})".id}.join(" | ").id }}
+
     alias PropertyType = ValueType | ValueArray | ValueHash
   {% end %}
 
