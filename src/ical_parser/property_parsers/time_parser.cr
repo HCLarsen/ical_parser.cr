@@ -20,12 +20,12 @@ module IcalParser
   # impossible to determine the offset of a time zone without knowing the date.
   # Time zone information is instead parsed and set by the Date-Time parser.
   class TimeParser < ValueParser(Time)
-    TIME     = Time::Format.new("%H%M%S")
-    UTC_TIME = Time::Format.new("%H%M%SZ")
-
-    DT_FLOATING_REGEX = /^\d{6}$/
-    DT_UTC_REGEX      = /^\d{6}Z$/
-
+    # TIME     = Time::Format.new("%H%M%S")
+    # UTC_TIME = Time::Format.new("%H%M%SZ")
+    #
+    # DT_FLOATING_REGEX = /^\d{6}$/
+    # DT_UTC_REGEX      = /^\d{6}Z$/
+    #
     # Parses the Time value and returns it as a Crystal Time object.
     #
     # ```
@@ -44,6 +44,21 @@ module IcalParser
       else
         raise "Invalid Time format"
       end
+    end
+  end
+
+  @@time_parser = Proc(String, Hash(String, String), Time).new do |value, params|
+    if DT_FLOATING_REGEX.match(value)
+      if tz = params["TZID"]?
+        location = Time::Location.load(tz)
+      else
+        location = Time::Location.local
+      end
+      Time.parse(value, TIME.pattern, location)
+    elsif DT_UTC_REGEX.match(value)
+      Time.parse(value, UTC_TIME.pattern, Time::Location::UTC)
+    else
+      raise "Invalid Time format"
     end
   end
 end

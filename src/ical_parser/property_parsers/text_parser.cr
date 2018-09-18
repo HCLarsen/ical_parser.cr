@@ -25,4 +25,8 @@ module IcalParser
       string.gsub(/(\,|\;|\\[^n])/) { |match| "\\" + match }
     end
   end
+
+  @@text_parser = Proc(String, Hash(String, String), String).new do |value, params|
+    value.gsub(/\\(?![nN\\])/) { |match| "" }
+  end
 end

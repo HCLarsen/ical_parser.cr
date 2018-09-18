@@ -4,4 +4,8 @@ module IcalParser
       string.to_f
     end
   end
+
+  @@float_parser = Proc(String, Hash(String, String), Float64).new do |value, params|
+    value.to_f
+  end
 end

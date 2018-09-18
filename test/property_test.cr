@@ -10,9 +10,7 @@ class PropertyTest < Minitest::Test
   end
 
   def test_property_parses_value
-    text_parser = TextParser.parser
-    parser = ->text_parser.parse(String, Hash(String, String))
-    property = Property(String).new(parser)
+    property = Property(String).new(@@text_parser)
     params = ""
     value = "Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta\, Georgia"
     text = property.parse(value, params)
@@ -23,9 +21,7 @@ class PropertyTest < Minitest::Test
   end
 
   def test_property_parses_value_with_params
-    address_parser = CalAddressParser.parser
-    parser = ->address_parser.parse(String, Hash(String, String))
-    property = Property(CalAddress).new(parser)
+    property = Property(CalAddress).new(@@caladdress_parser)
     params = ";RSVP=TRUE;ROLE=REQ-PARTICIPANT;CUTYPE=GROUP"
     value = "mailto:employee-A@example.com"
     address = property.parse(value, params)
@@ -34,9 +30,7 @@ class PropertyTest < Minitest::Test
   end
 
   def test_single_category_returns_as_array
-    text_parser = TextParser.parser
-    parser = ->text_parser.parse(String, Hash(String, String))
-    property = Property(String).new(parser, single_value: false, only_once: false)
+    property = Property(String).new(@@text_parser, single_value: false, only_once: false)
     value = "MEETING"
     list = property.parse(value, "")
     assert_equal ["MEETING"], list
@@ -44,9 +38,7 @@ class PropertyTest < Minitest::Test
 
   def test_parses_geo
     NamedTuple(lat: Float64, lon: Float64)
-    float_parser = FloatParser.parser
-    parser = ->float_parser.parse(String, Hash(String, String))
-    property = Property(Float64).new(parser, parts: ["lat", "lon"])
+    property = Property(Float64).new(@@float_parser, parts: ["lat", "lon"])
     value = "37.386013;-122.082932"
     coords = property.parse(value, "")
     assert_equal coords.as(Hash(String, Float64))["lat"], 37.386013
@@ -54,29 +46,21 @@ class PropertyTest < Minitest::Test
   end
 
   def test_parses_tz_params
-    text_parser = TextParser.parser
-    parser = ->text_parser.parse(String, Hash(String, String))
-    property = Property(String).new(parser)
-
+    property = Property(String).new(@@text_parser)
     params = ";TZID=America/New_York"
     hash = {"TZID" => "America/New_York"}
     assert_equal hash, property.parse_params(params)
   end
 
   def test_parses_multiple_params
-    text_parser = TextParser.parser
-    parser = ->text_parser.parse(String, Hash(String, String))
-    property = Property(String).new(parser)
-
+    property = Property(String).new(@@text_parser)
     params = ";ROLE=REQ-PARTICIPANT;PARTSTAT=TENTATIVE;CN=Henry Cabot"
     hash = {"ROLE" => "REQ-PARTICIPANT", "PARTSTAT" => "TENTATIVE", "CN" => "Henry Cabot"}
     assert_equal hash, property.parse_params(params)
   end
 
   def test_property_parses_params_with_array_value
-    address_parser = CalAddressParser.parser
-    parser = ->address_parser.parse(String, Hash(String, String))
-    property = Property(CalAddress).new(parser)
+    property = Property(CalAddress).new(@@caladdress_parser)
     params = %(;DELEGATED-TO="mailto:jdoe@example.com","mailto:jqpublic@example.com")
     parsed_params = property.parse_params(params)
     assert_equal %("mailto:jdoe@example.com","mailto:jqpublic@example.com"), parsed_params["DELEGATED-TO"]

@@ -19,4 +19,23 @@ module IcalParser
       end
     end
   end
+
+  @@period_parser = Proc(String, Hash(String, String), PeriodOfTime).new do |value, params|
+    parts = value.split("/")
+    if parts.size == 2
+      if parts[1].match(DT_UTC_REGEX) || parts[1].match(DT_FLOATING_REGEX)
+        start_time = DateTimeParser.parser.parse(parts[0])
+        end_time = DateTimeParser.parser.parse(parts[1])
+        PeriodOfTime.new(start_time, end_time)
+      elsif parts[1].match(DAYS_REGEX) || parts[1].match(WEEKS_REGEX)
+        start_time = DateTimeParser.parser.parse(parts[0])
+        duration = DurationParser.parser.parse(parts[1])
+        PeriodOfTime.new(start_time, duration)
+      else
+        raise "Invalid Period of Time format"
+      end
+    else
+      raise "Invalid Period of Time format"
+    end
+  end
 end
