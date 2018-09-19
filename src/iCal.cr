@@ -20,19 +20,19 @@ module IcalParser
   {% end %}
 
   PARSERS = {
-    "BINARY"      => TextParser.parser,  # To be replaced with BinaryParser once written.
-    "BOOLEAN"     => BooleanParser.parser,
-    "CAL-ADDRESS" => CalAddressParser.parser,
-    "DATE"        => DateParser.parser,
-    "DATE-TIME"   => DateTimeParser.parser,
-    "DURATION"    => DurationParser.parser,
-    "FLOAT"       => FloatParser.parser,
-    "INTEGER"     => IntegerParser.parser,
-    "PERIOD"      => PeriodOfTimeParser.parser,
-    "RECUR"       => RecurrenceRuleParser.parser,
-    "TEXT"        => TextParser.parser,
-    "TIME"        => TimeParser.parser,
-    "URI"         =>  URIParser.parser,
-    "UTC-OFFSET"  => TextParser.parser,  # To be replaced with UTCOffsetParser once written.
+    "BINARY"      => @@text_parser,  # To be replaced with BinaryParser once written.
+    "BOOLEAN"     => @@boolean_parser,
+    "CAL-ADDRESS" => @@caladdress_parser,
+    "DATE"        => @@date_parser,
+    "DATE-TIME"   => @@date_time_parser,
+    "DURATION"    => @@duration_parser,
+    "FLOAT"       => @@float_parser,
+    "INTEGER"     => @@integer_parser,
+    "PERIOD"      => @@period_parser,
+    "RECUR"       => @@recurrence_parser,
+    "TEXT"        => @@text_parser,
+    "TIME"        => @@time_parser,
+    "URI"         => @@uri_parser,
+    "UTC-OFFSET"  => @@text_parser,  # To be replaced with UTCOffsetParser once written.
   }
 end
