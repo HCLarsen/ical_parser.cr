@@ -7,8 +7,11 @@ module IcalParser
   TIME     = Time::Format.new("%H%M%S")
   UTC_TIME = Time::Format.new("%H%M%SZ")
 
-  DATE_REGEX        = /^;VALUE=DATE:\d{8}/
+  DATE_REGEX = /^\d{8}$/
+  # DATE_REGEX        = /^;VALUE=DATE:\d{8}/
   DT_FLOATING_REGEX = /^\d{8}T\d{6}(?!Z)/
   DT_UTC_REGEX      = /^\d{8}T\d{6}Z/
   DT_TZ_REGEX       = /(?<=\w:)\d{8}T\d{6}/
+  TIME_FLOATING_REGEX = /^\d{6}$/
+  TIME_UTC_REGEX = /^\d{6}Z$/
 end

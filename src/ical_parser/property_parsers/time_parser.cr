@@ -32,14 +32,14 @@ module IcalParser
     # TimeParser.parser.parse("230000") # => 0001-01-01 23:00:00
     # ```
     def parse(string : String, params = {} of String => String) : T
-      if DT_FLOATING_REGEX.match(string)
+      if TIME_FLOATING_REGEX.match(string)
         if tz = params["TZID"]?
           location = Time::Location.load(tz)
         else
           location = Time::Location.local
         end
         Time.parse(string, TIME.pattern, location)
-      elsif DT_UTC_REGEX.match(string)
+      elsif TIME_UTC_REGEX.match(string)
         Time.parse(string, UTC_TIME.pattern, Time::Location::UTC)
       else
         raise "Invalid Time format"
@@ -48,14 +48,14 @@ module IcalParser
   end
 
   @@time_parser = Proc(String, Hash(String, String), Time).new do |value, params|
-    if DT_FLOATING_REGEX.match(value)
+    if TIME_FLOATING_REGEX.match(value)
       if tz = params["TZID"]?
         location = Time::Location.load(tz)
       else
         location = Time::Location.local
       end
       Time.parse(value, TIME.pattern, location)
-    elsif DT_UTC_REGEX.match(value)
+    elsif TIME_UTC_REGEX.match(value)
       Time.parse(value, UTC_TIME.pattern, Time::Location::UTC)
     else
       raise "Invalid Time format"
