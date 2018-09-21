@@ -1,15 +1,12 @@
 require "./value_parser"
 
 module IcalParser
-  DAYS_REGEX  = /^(?<polarity>[+-])?P((?<days>\d+)D)?(T((?<hours>\d+)H)?((?<minutes>\d+)M)?((?<seconds>\d+)S)?)?$/
-  WEEKS_REGEX = /^(?<polarity>[+-])?P(?<weeks>\d+)W$/
   class DurationParser < ValueParser(Time::Span)
-
     def parse(string : String, params = {} of String => String) : T
-      if match = string.match(DAYS_REGEX)
+      if match = string.match(DUR_DATE_REGEX)
         captures = get_captures(match)
         duration = Time::Span.new(captures["days"], captures["hours"], captures["minutes"], captures["seconds"])
-      elsif match = string.match(WEEKS_REGEX)
+      elsif match = string.match(DUR_WEEKS_REGEX)
         days = match["weeks"].to_i * 7
         duration = Time::Span.new(days, 0, 0, 0)
       else
@@ -32,10 +29,10 @@ module IcalParser
   end
 
   @@duration_parser = Proc(String, Hash(String, String), Time::Span).new do |value, params|
-    if match = value.match(DAYS_REGEX)
+    if match = value.match(DUR_DATE_REGEX)
       captures = get_captures(match)
       duration = Time::Span.new(captures["days"], captures["hours"], captures["minutes"], captures["seconds"])
-    elsif match = value.match(WEEKS_REGEX)
+    elsif match = value.match(DUR_WEEKS_REGEX)
       days = match["weeks"].to_i * 7
       duration = Time::Span.new(days, 0, 0, 0)
     else
