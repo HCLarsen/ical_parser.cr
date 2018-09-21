@@ -29,4 +29,8 @@ module IcalParser
   @@text_parser = Proc(String, Hash(String, String), String).new do |value, params|
     value.gsub(/\\(?![nN\\])/) { |match| "" }
   end
+
+  @@text_generator = Proc(String, String).new do |value|
+    value.gsub(/(\,|\;|\\[^n])/) { |match| "\\" + match }
+  end
 end
