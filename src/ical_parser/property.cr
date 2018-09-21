@@ -1,12 +1,11 @@
 module IcalParser
   class Property(T)
     @parser : ParserType
-    @alt_parsers = [] of ParserType
+    @alt_values : Array(String)
     getter single_value : Bool
     getter only_once : Bool
 
-    # def initialize(@parser : ValueParser(T), *, @parts = ["value"], @only_once = true, @single_value = true)
-    def initialize(@parser : ParserType, *, @parts = ["value"], @only_once = true, @single_value = true)
+    def initialize(@parser : ParserType, *, @alt_values = [] of String, @parts = ["value"], @only_once = true, @single_value = true)
     end
 
     def parse(value : String, params : String?) forall T
@@ -33,20 +32,28 @@ module IcalParser
     end
 
     def parse_value(value : String, params : Hash(String, String)) : T | Array(T) | Hash(String, T)
-       parser = @parser.as Proc(String, Hash(String, String), T)
+      if value_type = params["VALUE"]?
+        if @alt_values.includes?(value_type)
+          parser = PARSERS[value_type]
+        else
+          raise "Invalid value type for this property"
+        end
+      else
+        parser = @parser
+      end
       if @single_value
         if @only_once && @parts.size == 1
-          @parser.call(value, params).as T
+          parser.call(value, params).as T
         elsif @parts.size > 1
           values = value.split(/(?<!\\);/)
-          parts = values.map { |e| @parser.call(e, params).as T }
+          parts = values.map { |e| parser.call(e, params).as T }
           Hash.zip(@parts, parts)
         else
-          [@parser.call(value, params).as T].as Array(T)
+          [parser.call(value, params).as T].as Array(T)
         end
       else
         values = value.split(/(?<!\\),/)
-        values.map { |e| @parser.call(e, params).as T }. as Array(T)
+        values.map { |e| parser.call(e, params).as T }. as Array(T)
       end
     end
   end

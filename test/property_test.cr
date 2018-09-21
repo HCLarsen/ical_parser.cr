@@ -11,9 +11,8 @@ class PropertyTest < Minitest::Test
 
   def test_property_parses_value
     prop = Property(String).new(@@text_parser)
-    params = ""
     value = "Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta\, Georgia"
-    text = prop.parse(value, params)
+    text = prop.parse(value, "")
     assert_equal "Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta, Georgia", text
 
     found = Hash(String, PropertyType).new
@@ -64,5 +63,25 @@ class PropertyTest < Minitest::Test
     params = %(;DELEGATED-TO="mailto:jdoe@example.com","mailto:jqpublic@example.com")
     parsed_params = prop.parse_params(params)
     assert_equal %("mailto:jdoe@example.com","mailto:jqpublic@example.com"), parsed_params["DELEGATED-TO"]
+  end
+
+  def test_multiple_return_types
+    prop = Property(Time | PeriodOfTime).new(@@date_time_parser, alt_values: ["DATE", "PERIOD"], single_value: false, only_once: false)
+    dt_value = "19970714T083000"
+    date_time = prop.parse(dt_value, ";TZID=America/New_York")
+    assert_equal [Time.new(1997, 7, 14, 8, 30, 0, location: Time::Location.load("America/New_York"))], date_time
+
+    date_value = "19970101,19970120,19970217,19970421,19970526,19970704,19970901,19971014,19971128,19971129,19971225"
+    dates = prop.parse(date_value, "VALUE=DATE")
+    assert_equal Time.new(1997, 1, 1), dates.as(Array(PeriodOfTime | Time)).first
+  end
+
+  def test_raise_for_invalid_value_type
+    prop = Property(Time | PeriodOfTime).new(@@date_time_parser, alt_values: ["DATE", "PERIOD"], single_value: false, only_once: false)
+    date_value = "19970101,19970120,19970217,19970421,19970526,19970704,19970901,19971014,19971128,19971129,19971225"
+    error = assert_raises do
+      dates = prop.parse(date_value, "VALUE=TEXT")
+    end
+    assert_equal "Invalid value type for this property", error.message
   end
 end
