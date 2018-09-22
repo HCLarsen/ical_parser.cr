@@ -12,10 +12,10 @@ module IcalParser
 
     def parse(calendar_object : String)
       calendar_properties = {
-        "prodid"    => Property.new(TextParser.parser),
-        "version"   => Property.new(TextParser.parser),
-        "calscale"  => Property.new(TextParser.parser),
-        "method"    => Property.new(TextParser.parser),
+        "prodid"    => Property(String).new(PARSERS["TEXT"]),
+        "version"   => Property(String).new(PARSERS["TEXT"]),
+        "calscale"  => Property(String).new(PARSERS["TEXT"]),
+        "method"    => Property(String).new(PARSERS["TEXT"]),
       }
 
       line_regex = /(?<name>.*?)(?<params>;[a-zA-Z\-]*=(?:".*"|[^:\n]*))*:(?<value>.*)/
