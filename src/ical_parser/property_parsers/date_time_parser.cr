@@ -24,9 +24,9 @@ module IcalParser
       raise "Invalid Date-Time format"
     end
     raise "Invalid Date-Time format" if date_string.empty? || time_string.empty?
-    time = TimeParser.parser.parse(time_string, params)
+    time = @@time_parser.call(time_string, params)
     params["TZID"] ||= time.location.to_s
-    date = DateParser.parser.parse(date_string, params)
+    date = @@date_parser.call(date_string, params)
     date + time.time_of_day
   end
 end

@@ -114,7 +114,9 @@ module IcalParser
 
     if hash["until"]?
       until_string = hash["until"].upcase
-      end_time = DateTimeParser.parser.parse(until_string)
+      params = Hash(String, String).new
+
+      end_time = @@date_time_parser.call(until_string, params)
       RecurrenceRule.new(frequency, end_time: end_time, by_rules: rules, interval: interval)
     elsif hash["count"]?
       count = hash["count"].to_i
