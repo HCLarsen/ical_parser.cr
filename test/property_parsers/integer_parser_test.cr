@@ -5,23 +5,28 @@ require "/../src/iCal"
 class IntegerParserTest < Minitest::Test
   include IcalParser
 
+  @parser : Proc(String, Hash(String, String), Int32)
+
   def initialize(arg)
     super(arg)
-    @parser = IntegerParser.parser
+    @parser = @@integer_parser
+    @params = Hash(String, String).new
   end
 
   def test_parses_small_integer
-    assert_equal 5, @parser.parse("5")
+    string = "5"
+    assert_equal 5, @parser.call(string, @params)
   end
 
   def test_parses_large_negative_integer
-    assert_equal -1234567890, @parser.parse("-1234567890")
+    string = "-1234567890"
+    assert_equal -1234567890, @parser.call(string, @params)
   end
 
   def test_raises_for_invalid_float
     string = "SOMETHING ELSE"
     error = assert_raises do
-      @parser.parse(string)
+      @parser.call(string, @params)
     end
     assert_equal "Invalid Int32: SOMETHING ELSE", error.message
   end

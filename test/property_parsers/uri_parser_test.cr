@@ -5,9 +5,12 @@ require "/../src/iCal"
 class URIParserTest < Minitest::Test
   include IcalParser
 
+  @parser : Proc(String, Hash(String, String), URI)
+
   def initialize(arg)
     super(arg)
-    @parser = URIParser.parser
+    @parser = @@uri_parser
+    @params = Hash(String, String).new
   end
 
   def test_parses_url_uris
@@ -26,7 +29,7 @@ class URIParserTest < Minitest::Test
       {"scheme" => "telnet", "host" => "192.0.2.16", "hier-part" => "192.0.2.16:80/"},
     ]
     examples.each_with_index do |example, i|
-      uri = @parser.parse(example)
+      uri = @parser.call(example, @params)
       assert_equal parsed_examples[i]["scheme"], uri.scheme
       assert_equal parsed_examples[i]["host"], uri.host
     end
@@ -34,7 +37,7 @@ class URIParserTest < Minitest::Test
 
   def test_parses_mailto_uri
     example = "mailto:John.Doe@example.com"
-    uri = @parser.parse(example)
+    uri = @parser.call(example, @params)
     assert_equal "mailto", uri.scheme
     assert_equal "John.Doe@example.com", uri.opaque
   end
