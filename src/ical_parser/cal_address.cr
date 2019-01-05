@@ -1,4 +1,5 @@
-# IANA, non-standard, language, calendar user type, group or list membership, participation role, participation status, RSVP expectation, delegatee, delegator, sent by, common name, or directory entry
+require "json"
+require "./uri"
 
 module IcalParser
   # Representation of the [Cal-Address](https://tools.ietf.org/html/rfc5545#section-3.3.3) value type
@@ -79,19 +80,46 @@ module IcalParser
       end
     end
 
-    property uri : URI
+    module RoleConverter
+      def self.from_json(value : JSON::PullParser) : Role
+        Role.from_string(value.read_string)
+      end
+    end
 
-    property cutype = CUType::Individual
-    property role = Role::ReqParticipant
-    property part_stat = PartStat::NeedsAction
-    property rsvp = false
-    property sent_by : CalAddress?
-    property member = [] of CalAddress
-    property delegated_to = [] of CalAddress
-    property delegated_from = [] of CalAddress
-    property language : String?
-    property common_name : String?
-    property dir : URI?
+    module CUTypeConverter
+      def self.from_json(value : JSON::PullParser) : CUType
+        CUType.from_string(value.read_string)
+      end
+    end
+
+    module PartStatConverter
+      def self.from_json(value : JSON::PullParser) : PartStat
+        PartStat.from_string(value.read_string)
+      end
+    end
+
+    JSON.mapping(
+      uri: { type: URI, converter: URIConverter },
+      cutype: { type: CUType, converter: CUTypeConverter, default: CUType::Individual },
+      role: { type: Role, converter: RoleConverter, default: Role::ReqParticipant },
+      part_stat: { type: PartStat, key: "partstat", converter: PartStatConverter, default: PartStat::NeedsAction },
+      delegated_from: { type: Array(CalAddress), key: "delegated-from", default: [] of CalAddress },
+      delegated_to: { type: Array(CalAddress), key: "delegated-to", default: [] of CalAddress },
+      member: { type: Array(CalAddress), default: [] of CalAddress },
+      sent_by: { type: CalAddress?, key: "sent-by" },
+      rsvp: { type: Bool, default: false },
+      common_name: { type: String?, key: "cn" },
+      dir: { type: URI?, converter: URIConverter }
+    )
+
+
+    @member = [] of CalAddress
+    @cutype = CUType::Individual
+    @role = Role::ReqParticipant
+    @part_stat = PartStat::NeedsAction
+    @delegated_from = [] of CalAddress
+    @delegated_to = [] of CalAddress
+    @rsvp = false
 
     # Creates a new CalAddress object with the specified URI.
     #

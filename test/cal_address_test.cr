@@ -84,4 +84,45 @@ class CalAddressTest < Minitest::Test
   def test_partstat_defaults_to_needs_action
     assert_equal CalAddress::PartStat::NeedsAction, @user.part_stat
   end
+
+  def test_parse_from_json
+    user = CalAddress.from_json(%({ "uri" : "mailto:jsmith@example.com" }))
+    assert_equal @user, user
+  end
+
+  def test_parse_json_with_member
+    user = CalAddress.from_json(%({ "uri" : "mailto:janedoe@example.com", "member" : [ { "uri" : "mailto:projectA@example.com" }, { "uri" : "mailto:projectB@example.com" } ] }))
+    assert_equal URI.parse("mailto:projectA@example.com"), user.member.first.uri
+  end
+
+  def test_parses_json_with_sent_by
+    user = CalAddress.from_json(%({ "uri" : "mailto:jsmith@example.com", "sent-by" : { "uri" : "mailto:jan_doe@example.com" }, "cn" : "John Smith" }))
+    assert_equal URI.parse("mailto:jan_doe@example.com"), user.sent_by.not_nil!.uri
+    assert_equal "John Smith", user.common_name
+  end
+
+  def test_parses_json_with_cutype
+    user = CalAddress.from_json(%({ "uri" : "mailto:employee-A@example.com", "cutype" : "GROUP", "rsvp" : true }))
+    assert user.rsvp
+    assert_equal CalAddress::CUType::Group, user.cutype
+  end
+
+  def test_parses_json_with_delegated_from
+    user = CalAddress.from_json(%({ "uri" : "mailto:jdoe@example.com", "delegated-from" : [ { "uri" : "mailto:jsmith@example.com" } ] }))
+    assert_equal URI.parse("mailto:jsmith@example.com"), user.delegated_from.first.uri
+  end
+
+  def test_parses_json_with_dir
+    user = CalAddress.from_json(%({ "uri" : "mailto:jimdo@example.com", "dir" : "ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20Dolittle)" }))
+    assert_equal URI.parse("ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20Dolittle)"), user.dir
+  end
+
+  def test_parses_complex_json
+    user = CalAddress.from_json(%({ "uri" : "mailto:iamboss@example.com", "role" : "NON-PARTICIPANT", "partstat" : "DELEGATED", "delegated-to" : [ { "uri" : "mailto:hcabot@example.com" } ], "cn" : "The Big Cheese" }))
+    assert_equal URI.parse("mailto:iamboss@example.com"), user.uri
+    assert_equal CalAddress::Role::NonParticipant, user.role
+    assert_equal CalAddress::PartStat::Delegated, user.part_stat
+    assert_equal URI.parse("mailto:hcabot@example.com"), user.delegated_to.first.uri
+    assert_equal "The Big Cheese", user.common_name
+  end
 end
