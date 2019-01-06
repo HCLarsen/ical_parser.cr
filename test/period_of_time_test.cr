@@ -83,4 +83,12 @@ class PeriodOfTimeTest < Minitest::Test
     end
     assert_equal "Invalid duration: must be positive", error.message
   end
+
+  def test_parses_and_outputs_json
+    json = %({"start":852159600,"end":852206400})
+    period = PeriodOfTime.from_json(json)
+    assert_equal Time.new(1997, 1, 1, 18, 0, 0), period.start_time
+    assert_equal Time.new(1997, 1, 2, 7, 0, 0), period.end_time
+    assert_equal json, period.to_json
+  end
 end
