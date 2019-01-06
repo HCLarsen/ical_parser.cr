@@ -125,4 +125,8 @@ class CalAddressTest < Minitest::Test
     assert_equal URI.parse("mailto:hcabot@example.com"), user.delegated_to.first.uri
     assert_equal "The Big Cheese", user.common_name
   end
+
+  def test_outputs_to_json
+    assert_equal %({"uri":"mailto:jsmith@example.com","cutype":"Individual","role":"ReqParticipant","partstat":"NeedsAction","delegated-from":[],"delegated-to":[],"member":[],"rsvp":false}), @user.to_json
+  end
 end

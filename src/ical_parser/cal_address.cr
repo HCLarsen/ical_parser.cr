@@ -84,17 +84,29 @@ module IcalParser
       def self.from_json(value : JSON::PullParser) : Role
         Role.from_string(value.read_string)
       end
+
+      def self.to_json(value : Role, json : JSON::Builder)
+        value.to_s.to_json(json)
+      end
     end
 
     module CUTypeConverter
       def self.from_json(value : JSON::PullParser) : CUType
         CUType.from_string(value.read_string)
       end
+
+      def self.to_json(value : CUType, json : JSON::Builder)
+        value.to_s.to_json(json)
+      end
     end
 
     module PartStatConverter
       def self.from_json(value : JSON::PullParser) : PartStat
         PartStat.from_string(value.read_string)
+      end
+
+      def self.to_json(value : PartStat, json : JSON::Builder)
+        value.to_s.to_json(json)
       end
     end
 
@@ -112,7 +124,6 @@ module IcalParser
       dir: { type: URI?, converter: URIConverter }
     )
 
-
     @member = [] of CalAddress
     @cutype = CUType::Individual
     @role = Role::ReqParticipant
@@ -128,6 +139,10 @@ module IcalParser
     # user.uri.opaque  #=> "jsmith@example.com"
     def initialize(@uri : URI)
     end
+
+#    def to_json
+#      @uri.to_s.to_json
+#    end
 
     def_equals @uri
 
