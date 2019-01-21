@@ -140,10 +140,6 @@ module IcalParser
     def initialize(@uri : URI)
     end
 
-#    def to_json
-#      @uri.to_s.to_json
-#    end
-
     def_equals @uri
 
     private def convert_params(hash : Hash(String, String))
