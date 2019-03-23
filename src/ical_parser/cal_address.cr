@@ -1,5 +1,6 @@
 require "json"
 require "./uri"
+require "./cal_enums"
 
 module IcalParser
   # Representation of the [Cal-Address](https://tools.ietf.org/html/rfc5545#section-3.3.3) value type
@@ -11,83 +12,6 @@ module IcalParser
   # user.common_name  #=> "The Big Cheese"
   # user.role #=> non-participant
   class CalAddress
-    # Possible values for the [Participation Role](https://tools.ietf.org/html/rfc5545#section-3.2.16) of a calendar user.
-    enum Role
-      Chair
-      ReqParticipant
-      OptParticipant
-      NonParticipant
-
-      def self.parse(string : String) : self?
-        {% begin %}
-          case string.gsub('-', '_').camelcase.downcase
-          {% for member in @type.constants %}
-            when {{member.stringify.camelcase.downcase}}
-              {{@type}}::{{member}}
-          {% end %}
-          else
-            ReqParticipant
-          end
-        {% end %}
-      end
-
-      def to_json(json : JSON::Builder)
-        self.to_s.underscore.gsub('_', '-').upcase.to_json(json)
-      end
-    end
-
-    # Possible calendar user [types](https://tools.ietf.org/html/rfc5545#section-3.2.3)
-    enum CUType
-      Individual
-      Group
-      Resource
-      Room
-      Unknown
-
-      def self.parse(string : String) : self?
-        {% begin %}
-          case string.gsub('-', '_').camelcase.downcase
-          {% for member in @type.constants %}
-            when {{member.stringify.camelcase.downcase}}
-              {{@type}}::{{member}}
-          {% end %}
-          else
-            Individual
-          end
-        {% end %}
-      end
-
-      def to_json(json : JSON::Builder)
-        self.to_s.underscore.gsub('_', '-').upcase.to_json(json)
-      end
-    end
-
-    # Possible values for [Participation Status](https://tools.ietf.org/html/rfc5545#section-3.2.12) of a calendar user.
-    enum PartStat
-      NeedsAction
-      Accepted
-      Declined
-      Tentative
-      Delegated
-
-      def self.parse(string : String) : self?
-        {% begin %}
-          case string.gsub('-', '_').camelcase.downcase
-          {% for member in @type.constants %}
-            when {{member.stringify.camelcase.downcase}}
-              {{@type}}::{{member}}
-          {% end %}
-          else
-            NeedsAction
-          end
-        {% end %}
-      end
-
-      def to_json(json : JSON::Builder)
-        self.to_s.underscore.gsub('_', '-').upcase.to_json(json)
-      end
-    end
-
     JSON.mapping(
       uri: { type: URI, converter: URIConverter },
       cutype: { type: CUType?, getter: false },
