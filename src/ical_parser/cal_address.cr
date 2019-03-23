@@ -18,17 +18,21 @@ module IcalParser
       OptParticipant
       NonParticipant
 
-      def self.from_string(string : String)
-        case string
-        when "CHAIR"
-          Chair
-        when "OPT-PARTICIPANT"
-          OptParticipant
-        when "NON-PARTICIPANT"
-          NonParticipant
-        else
-          ReqParticipant
-        end
+      def self.parse(string : String) : self?
+        {% begin %}
+          case string.gsub('-', '_').camelcase.downcase
+          {% for member in @type.constants %}
+            when {{member.stringify.camelcase.downcase}}
+              {{@type}}::{{member}}
+          {% end %}
+          else
+            ReqParticipant
+          end
+        {% end %}
+      end
+
+      def to_json(json : JSON::Builder)
+        self.to_s.underscore.gsub('_', '-').upcase.to_json(json)
       end
     end
 
@@ -40,19 +44,21 @@ module IcalParser
       Room
       Unknown
 
-      def self.from_string(string : String)
-        case string
-        when "GROUP"
-          Group
-        when "RESOURCE"
-          Resource
-        when "ROOM"
-          Room
-        when "UNKNOWN"
-          Unknown
-        else
-          Individual
-        end
+      def self.parse(string : String) : self?
+        {% begin %}
+          case string.gsub('-', '_').camelcase.downcase
+          {% for member in @type.constants %}
+            when {{member.stringify.camelcase.downcase}}
+              {{@type}}::{{member}}
+          {% end %}
+          else
+            Individual
+          end
+        {% end %}
+      end
+
+      def to_json(json : JSON::Builder)
+        self.to_s.underscore.gsub('_', '-').upcase.to_json(json)
       end
     end
 
@@ -64,73 +70,41 @@ module IcalParser
       Tentative
       Delegated
 
-      def self.from_string(string : String)
-        case string
-        when "ACCEPTED"
-          Accepted
-        when "DECLINED"
-          Declined
-        when "TENTATIVE"
-          Tentative
-        when "DELEGATED"
-          Delegated
-        else
-          NeedsAction
-        end
-      end
-    end
-
-    module RoleConverter
-      def self.from_json(value : JSON::PullParser) : Role
-        Role.from_string(value.read_string)
+      def self.parse(string : String) : self?
+        {% begin %}
+          case string.gsub('-', '_').camelcase.downcase
+          {% for member in @type.constants %}
+            when {{member.stringify.camelcase.downcase}}
+              {{@type}}::{{member}}
+          {% end %}
+          else
+            NeedsAction
+          end
+        {% end %}
       end
 
-      def self.to_json(value : Role, json : JSON::Builder)
-        value.to_s.to_json(json)
-      end
-    end
-
-    module CUTypeConverter
-      def self.from_json(value : JSON::PullParser) : CUType
-        CUType.from_string(value.read_string)
-      end
-
-      def self.to_json(value : CUType, json : JSON::Builder)
-        value.to_s.to_json(json)
-      end
-    end
-
-    module PartStatConverter
-      def self.from_json(value : JSON::PullParser) : PartStat
-        PartStat.from_string(value.read_string)
-      end
-
-      def self.to_json(value : PartStat, json : JSON::Builder)
-        value.to_s.to_json(json)
+      def to_json(json : JSON::Builder)
+        self.to_s.underscore.gsub('_', '-').upcase.to_json(json)
       end
     end
 
     JSON.mapping(
       uri: { type: URI, converter: URIConverter },
-      cutype: { type: CUType, converter: CUTypeConverter, default: CUType::Individual },
-      role: { type: Role, converter: RoleConverter, default: Role::ReqParticipant },
-      part_stat: { type: PartStat, key: "partstat", converter: PartStatConverter, default: PartStat::NeedsAction },
-      delegated_from: { type: Array(CalAddress), key: "delegated-from", default: [] of CalAddress },
-      delegated_to: { type: Array(CalAddress), key: "delegated-to", default: [] of CalAddress },
-      member: { type: Array(CalAddress), default: [] of CalAddress },
+      cutype: { type: CUType?, getter: false },
+      role: { type: Role?, getter: false },
+      part_stat: { type: PartStat?, getter: false, key: "partstat" },
+      member: { type: Array(CalAddress)?, getter: false },
+      delegated_from: { type: Array(CalAddress)?, key: "delegated-from", getter: false },
+      delegated_to: { type: Array(CalAddress)?, key: "delegated-to", getter: false },
       sent_by: { type: CalAddress?, key: "sent-by" },
-      rsvp: { type: Bool, default: false },
+      rsvp: { type: Bool? },
       common_name: { type: String?, key: "cn" },
       dir: { type: URI?, converter: URIConverter }
     )
 
-    @member = [] of CalAddress
-    @cutype = CUType::Individual
-    @role = Role::ReqParticipant
-    @part_stat = PartStat::NeedsAction
-    @delegated_from = [] of CalAddress
-    @delegated_to = [] of CalAddress
-    @rsvp = false
+    getter(member) { [] of CalAddress }
+    getter(delegated_from) { [] of CalAddress }
+    getter(delegated_to) { [] of CalAddress }
 
     # Creates a new CalAddress object with the specified URI.
     #
@@ -142,17 +116,20 @@ module IcalParser
 
     def_equals @uri
 
-    private def convert_params(hash : Hash(String, String))
-      output = {} of String => String
-      hash.each do |k, v|
-        output[convert_string(k)] = v.downcase
-      end
-      output
+    def cutype
+      @cutype || CUType::Individual
     end
 
-    private def convert_string(string : String)
-      string = string.downcase
-      string.gsub("-", "_")
+    def role
+      @role || Role::ReqParticipant
+    end
+
+    def part_stat
+      @part_stat || PartStat::NeedsAction
+    end
+
+    def rsvp
+      @rsvp || false
     end
   end
 end

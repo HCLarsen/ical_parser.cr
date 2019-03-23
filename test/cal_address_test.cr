@@ -86,47 +86,57 @@ class CalAddressTest < Minitest::Test
   end
 
   def test_parse_from_json
-    user = CalAddress.from_json(%({"uri":"mailto:jsmith@example.com"}))
+    json = %({"uri":"mailto:jsmith@example.com"})
+    user = CalAddress.from_json(json)
     assert_equal @user, user
+    assert_equal json, user.to_json
   end
 
   def test_parse_json_with_member
-    user = CalAddress.from_json(%({"uri":"mailto:janedoe@example.com","member":[{"uri":"mailto:projectA@example.com"},{"uri":"mailto:projectB@example.com"}]}))
+    json = %({"uri":"mailto:janedoe@example.com","member":[{"uri":"mailto:projectA@example.com"},{"uri":"mailto:projectB@example.com"}]})
+    user = CalAddress.from_json(json)
     assert_equal URI.parse("mailto:projectA@example.com"), user.member.first.uri
+    assert_equal json, user.to_json
   end
 
   def test_parses_json_with_sent_by
-    user = CalAddress.from_json(%({"uri":"mailto:jsmith@example.com","sent-by":{"uri":"mailto:jan_doe@example.com" },"cn":"John Smith"}))
+    json = %({"uri":"mailto:jsmith@example.com","sent-by":{"uri":"mailto:jan_doe@example.com"},"cn":"John Smith"})
+    user = CalAddress.from_json(json)
     assert_equal URI.parse("mailto:jan_doe@example.com"), user.sent_by.not_nil!.uri
     assert_equal "John Smith", user.common_name
+    assert_equal json, user.to_json
   end
 
   def test_parses_json_with_cutype
-    user = CalAddress.from_json(%({"uri":"mailto:employee-A@example.com","cutype":"GROUP","rsvp":true}))
+    json = %({"uri":"mailto:employee-A@example.com","cutype":"GROUP","rsvp":true})
+    user = CalAddress.from_json(json)
     assert user.rsvp
     assert_equal CalAddress::CUType::Group, user.cutype
+    assert_equal json, user.to_json
   end
 
   def test_parses_json_with_delegated_from
-    user = CalAddress.from_json(%({"uri":"mailto:jdoe@example.com","delegated-from":[{"uri":"mailto:jsmith@example.com"}]}))
+    json = %({"uri":"mailto:jdoe@example.com","delegated-from":[{"uri":"mailto:jsmith@example.com"}]})
+    user = CalAddress.from_json(json)
     assert_equal URI.parse("mailto:jsmith@example.com"), user.delegated_from.first.uri
+    assert_equal json, user.to_json
   end
 
   def test_parses_json_with_dir
-    user = CalAddress.from_json(%({"uri":"mailto:jimdo@example.com","dir":"ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20Dolittle)"}))
+    json = %({"uri":"mailto:jimdo@example.com","dir":"ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20Dolittle)"})
+    user = CalAddress.from_json(json)
     assert_equal URI.parse("ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20Dolittle)"), user.dir
+    assert_equal json, user.to_json
   end
 
   def test_parses_complex_json
-    user = CalAddress.from_json(%({"uri":"mailto:iamboss@example.com","role":"NON-PARTICIPANT","partstat":"DELEGATED","delegated-to":[{"uri":"mailto:hcabot@example.com"}],"cn":"The Big Cheese"}))
+    json = %({"uri":"mailto:iamboss@example.com","role":"NON-PARTICIPANT","partstat":"DELEGATED","delegated-to":[{"uri":"mailto:hcabot@example.com"}],"cn":"The Big Cheese"})
+    user = CalAddress.from_json(json)
     assert_equal URI.parse("mailto:iamboss@example.com"), user.uri
     assert_equal CalAddress::Role::NonParticipant, user.role
     assert_equal CalAddress::PartStat::Delegated, user.part_stat
     assert_equal URI.parse("mailto:hcabot@example.com"), user.delegated_to.first.uri
     assert_equal "The Big Cheese", user.common_name
-  end
-
-  def test_outputs_to_json
-    assert_equal %({"uri":"mailto:jsmith@example.com","cutype":"Individual","role":"ReqParticipant","partstat":"NeedsAction","delegated-from":[],"delegated-to":[],"member":[],"rsvp":false}), @user.to_json
+    assert_equal json, user.to_json
   end
 end

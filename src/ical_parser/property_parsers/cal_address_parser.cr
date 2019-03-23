@@ -40,15 +40,15 @@ module IcalParser
     end
 
     if string = params["ROLE"]?
-      address.role = CalAddress::Role.from_string(string)
+      address.role = CalAddress::Role.parse(string)
     end
 
     if string = params["PARTSTAT"]?
-      address.part_stat = CalAddress::PartStat.from_string(string)
+      address.part_stat = CalAddress::PartStat.parse(string)
     end
 
     if string = params["CUTYPE"]?
-      address.cutype = CalAddress::CUType.from_string(string)
+      address.cutype = CalAddress::CUType.parse(string)
     end
 
     address
