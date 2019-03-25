@@ -1,12 +1,9 @@
 module IcalParser
   struct PeriodOfTime
     JSON.mapping(
-      start_time: { type: Time, key: "start", converter: Time::EpochConverter },
-      end_time: { type: Time, key: "end", converter: Time::EpochConverter }
+      start_time: { type: Time, key: "start", setter: false, converter: Time::EpochConverter },
+      end_time: { type: Time, setter: false, key: "end", converter: Time::EpochConverter }
     )
-
-    property start_time : Time
-    getter end_time : Time
 
     def initialize(@start_time : Time, @end_time : Time)
       raise "Invalid PeriodOfTime: end_time must be later than start time" if @end_time <= @start_time
