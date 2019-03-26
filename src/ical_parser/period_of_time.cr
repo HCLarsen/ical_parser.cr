@@ -1,7 +1,7 @@
 module IcalParser
   struct PeriodOfTime
     JSON.mapping(
-      start_time: { type: Time, key: "start", setter: false, converter: Time::EpochConverter },
+      start_time: { type: Time, setter: false, key: "start", converter: Time::EpochConverter },
       end_time: { type: Time, setter: false, key: "end", converter: Time::EpochConverter }
     )
 
