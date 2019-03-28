@@ -179,11 +179,18 @@ class RecurrenceRuleTest < Minitest::Test
   end
 
   def test_parses_week_start
-    # FREQ=WEEKLY;INTERVAL=2;WKST=SU
     json = %({"freq":"WEEKLY","interval":2,"wkst":"SU"})
     recur = RecurrenceRule.from_json(json)
     assert_equal RecurrenceRule::Freq::Weekly, recur.frequency
     assert_equal 2, recur.interval
     assert_equal Time::DayOfWeek::Sunday, recur.week_start
+  end
+
+  def test_parses_by_day_with_num
+    json = %({"freq":"MONTHLY","count":10,"byday":["1FR"]})
+    recur = RecurrenceRule.from_json(json)
+    assert_equal RecurrenceRule::Freq::Monthly, recur.frequency
+    assert_equal 10, recur.count
+    assert_equal [{1, Time::DayOfWeek::Friday}], recur.by_day
   end
 end
