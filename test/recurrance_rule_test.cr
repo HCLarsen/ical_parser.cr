@@ -121,4 +121,69 @@ class RecurrenceRuleTest < Minitest::Test
     end
     assert_equal "Invalid Assignment: Recurrence Rule cannot have both a count and an end time", error.message
   end
+
+  def test_parses_daily_until
+    json = %({"freq":"DAILY","until":882921600})
+    recur = RecurrenceRule.from_json(json)
+    assert_equal RecurrenceRule::Freq::Daily, recur.frequency
+    assert_equal Time.utc(1997, 12, 24), recur.end_time
+    refute recur.count
+    assert_equal json, recur.to_json
+  end
+
+  def test_parses_monday_of_week_twenty
+    json = %({"freq":"YEARLY","byweekno":[20],"byday":["MO"]})
+    recur = RecurrenceRule.from_json(json)
+    assert_equal RecurrenceRule::Freq::Yearly, recur.frequency
+    assert_equal [20], recur.by_week
+    assert_equal [{ 0, Time::DayOfWeek::Monday }], recur.by_day
+    assert_equal json, recur.to_json
+  end
+
+  def test_parses_complicated_rrule
+    json = %({"freq":"YEARLY","interval":2,"bymonth":[1],"byday":["SU"],"byhour":[8,9],"byminute":[30]})
+    recur = RecurrenceRule.from_json(json)
+    assert_equal RecurrenceRule::Freq::Yearly, recur.frequency
+    assert_equal 2, recur.interval
+    assert_equal [1], recur.by_month
+    assert_equal [{ 0, Time::DayOfWeek::Sunday}], recur.by_day
+    assert_equal [8,9], recur.by_hour
+    assert_equal [30], recur.by_minute
+    assert_equal json, recur.to_json
+  end
+
+  def test_parses_yearday
+    json = %({"freq":"YEARLY","count":10,"interval":3,"byyearday":[1,100,200]})
+    recur = RecurrenceRule.from_json(json)
+    assert_equal RecurrenceRule::Freq::Yearly, recur.frequency
+    assert_equal 3, recur.interval
+    assert_equal 10, recur.count
+    assert_equal [1, 100, 200], recur.by_year_day
+    assert_equal json, recur.to_json
+  end
+
+  def test_parses_monthday
+    json = %({"freq":"MONTHLY","bymonthday":[-3]})
+    recur = RecurrenceRule.from_json(json)
+    assert_equal RecurrenceRule::Freq::Monthly, recur.frequency
+    assert_equal [-3], recur.by_month_day
+    assert_equal json, recur.to_json
+  end
+
+  def test_parses_by_set_pos
+    json = %({"freq":"MONTHLY","byday":["MO","TU","WE","TH","FR"],"bysetpos":[-2]})
+    recur = RecurrenceRule.from_json(json)
+    assert_equal RecurrenceRule::Freq::Monthly, recur.frequency
+    assert_equal [{0, Time::DayOfWeek::Monday}, {0, Time::DayOfWeek::Tuesday}, {0, Time::DayOfWeek::Wednesday}, {0, Time::DayOfWeek::Thursday}, {0, Time::DayOfWeek::Friday}], recur.by_day
+    assert_equal [-2], recur.by_set_pos
+  end
+
+  def test_parses_week_start
+    # FREQ=WEEKLY;INTERVAL=2;WKST=SU
+    json = %({"freq":"WEEKLY","interval":2,"wkst":"SU"})
+    recur = RecurrenceRule.from_json(json)
+    assert_equal RecurrenceRule::Freq::Weekly, recur.frequency
+    assert_equal 2, recur.interval
+    assert_equal Time::DayOfWeek::Sunday, recur.week_start
+  end
 end

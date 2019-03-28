@@ -21,6 +21,40 @@ module IcalParser
   # event.recurring             #=> true
   # event.recurrence.frequency  #=> Yearly
   struct RecurrenceRule
+    module ByDayConverter
+      def self.from_json(value : JSON::PullParser) : Array({Int32, Time::DayOfWeek})
+        byday_regex = /(?<num>-?[1-9]?)(?<day>[A-Z]{2})/
+        output = [] of {Int32, Time::DayOfWeek}
+        value.read_array do
+          day = value.read_string
+          if match = day.match(byday_regex)
+            num = match["num"].empty? ? 0 : match["num"].to_i
+            output << {num, RecurrenceRule.weekday_to_day_of_week(match["day"])}
+          else
+            raise "Invalid BYDAY rule format"
+          end
+        end
+        output
+      end
+
+      def self.to_json(value : Array({Int32, Time::DayOfWeek}), json : JSON::Builder)
+        value.map do |day|
+          output = day[0] > 0 ? day[0].to_s : ""
+          output + day[1].to_s[0..1].upcase
+        end.to_json(json)
+      end
+    end
+
+    module DayOfWeekConverter
+      def self.from_json(value : JSON::PullParser) : Time::DayOfWeek
+        RecurrenceRule.weekday_to_day_of_week(value.read_string)
+      end
+
+      def self.to_json(value : Time::DayOfWeek, json : JSON::Builder)
+        value.to_s[0..1].upcase.to_json(json)
+      end
+    end
+
     enum Freq
       Secondly
       Minutely
@@ -52,22 +86,47 @@ module IcalParser
       end
     end
 
+    protected def self.weekday_to_day_of_week(day : String) : Time::DayOfWeek
+      case day
+      when "MO"
+        Time::DayOfWeek::Monday
+      when "TU"
+        Time::DayOfWeek::Tuesday
+      when "WE"
+        Time::DayOfWeek::Wednesday
+      when "TH"
+        Time::DayOfWeek::Thursday
+      when "FR"
+        Time::DayOfWeek::Friday
+      when "SA"
+        Time::DayOfWeek::Saturday
+      when "SU"
+        Time::DayOfWeek::Sunday
+      else
+        raise "Invalid Day of Week value: #{day}"
+      end
+    end
+
     alias ByRuleType = Array({Int32, Time::DayOfWeek}) | Array(Int32)
 
-    property frequency : Freq
-    getter count : Int32?
-    getter end_time : Time?
-    property interval = 1
+    JSON.mapping(
+      frequency: {type: Freq, key: "freq"},
+      count: {type: Int32?},
+      interval: {type: Int32?},
+      end_time: {type: Time?, key: "until", converter: Time::EpochConverter},
+      by_week: {type: Array(Int32)?, key: "byweekno"},
+      by_month: {type: Array(Int32)?, key: "bymonth"},
+      by_day: {type: Array({Int32, Time::DayOfWeek})?, key: "byday", converter: ByDayConverter},
+      by_hour: {type: Array(Int32)?, key: "byhour"},
+      by_minute: {type: Array(Int32)?, key: "byminute"},
+      by_year_day: {type: Array(Int32)?, key: "byyearday"},
+      by_month_day: {type: Array(Int32)?, key: "bymonthday"},
+      by_set_pos: {type: Array(Int32)?, key: "bysetpos"},
+      week_start: {type: Time::DayOfWeek?, key: "wkst", converter: DayOfWeekConverter}
+    )
+
     property week_start = Time::DayOfWeek::Monday
-    property by_month = [] of Int32
-    property by_week = [] of Int32
-    property by_year_day = [] of Int32
-    property by_month_day = [] of Int32
-    property by_day = [] of {Int32, Time::DayOfWeek}
-    property by_hour = [] of Int32
-    property by_minute = [] of Int32
     property by_second = [] of Int32
-    property by_set_pos = [] of Int32
 
     def initialize(@frequency : Freq, @count = nil, @interval = 1)
     end
