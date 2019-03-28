@@ -1,6 +1,3 @@
-require "json"
-require "./uri"
-
 module IcalParser
   # Representation of the [Cal-Address](https://tools.ietf.org/html/rfc5545#section-3.3.3) value type
   #
@@ -12,7 +9,7 @@ module IcalParser
   # user.role #=> non-participant
   class CalAddress
     JSON.mapping(
-      uri: { type: URI, converter: URIConverter },
+      uri: { type: URI, converter: URI::URIConverter },
       cutype: { type: CUType?, getter: false },
       role: { type: Role?, getter: false },
       part_stat: { type: PartStat?, getter: false, key: "partstat" },
@@ -22,7 +19,7 @@ module IcalParser
       sent_by: { type: CalAddress?, key: "sent-by" },
       rsvp: { type: Bool? },
       common_name: { type: String?, key: "cn" },
-      dir: { type: URI?, converter: URIConverter }
+      dir: { type: URI?, converter: URI::URIConverter }
     )
 
     getter(member) { [] of CalAddress }
