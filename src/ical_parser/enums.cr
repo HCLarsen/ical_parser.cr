@@ -57,4 +57,37 @@ module IcalParser
       end
     end
   end
+
+  struct RecurrenceRule
+    enum Freq
+      Secondly
+      Minutely
+      Hourly
+      Daily
+      Weekly
+      Monthly
+      Yearly
+
+      def self.from_string(string : String)
+        case string
+        when "secondly"
+          Secondly
+        when "minutely"
+          Minutely
+        when "hourly"
+          Hourly
+        when "daily"
+          Daily
+        when "weekly"
+          Weekly
+        when "monthly"
+          Monthly
+        when "yearly"
+          Yearly
+        else
+          raise "Invalid Recurrence Rule FREQ value"
+        end
+      end
+    end
+  end
 end

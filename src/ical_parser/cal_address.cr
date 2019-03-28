@@ -1,6 +1,5 @@
 require "json"
 require "./uri"
-require "./cal_enums"
 
 module IcalParser
   # Representation of the [Cal-Address](https://tools.ietf.org/html/rfc5545#section-3.3.3) value type
