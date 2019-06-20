@@ -5,6 +5,7 @@ require "/../src/iCal"
 class EventTest < Minitest::Test
   include IcalParser
 
+  # Test constructors
   def test_initializes_event_without_end_time
     uid = "19970901T130000Z-123403@example.com"
     dtstamp = Time.utc(1997, 9, 1, 13, 0, 0)
@@ -131,5 +132,21 @@ class EventTest < Minitest::Test
       event.dtend = Time.utc(1997, 9, 3, 16, 0, 0)
     end
     assert_equal "Invalid Event: End time cannot precede start time", error.message
+  end
+
+  #Test #from_json
+  def test_parses_simple_event_from_json
+    json = %({"uid":"19970901T130000Z-123401@example.com","dtstamp":873118800,"dtstart":873304200,"dtend":873313200,"summary":"Annual Employee Review","class":"PRIVATE","categories":["BUSINESS","HUMAN RESOURCES"]})
+    event = Event.from_json(json)
+    assert_equal "19970901T130000Z-123401@example.com", event.uid
+    assert_equal Time.utc(1997, 9, 1, 13, 0, 0), event.dtstamp
+    assert_equal Time.utc(1997, 9, 3, 16, 30, 0), event.dtstart
+    assert_equal Time.utc(1997, 9, 3, 19, 0, 0), event.dtend
+    assert_equal "Annual Employee Review", event.summary
+    assert_equal "PRIVATE", event.classification
+    assert_equal ["BUSINESS", "HUMAN RESOURCES"], event.categories
+    assert event.opaque?
+
+    assert_equal json, event.to_json
   end
 end

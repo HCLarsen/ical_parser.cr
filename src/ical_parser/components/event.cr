@@ -32,6 +32,16 @@ module IcalParser
       "url"             => URI?
     }
 
+    JSON.mapping(
+      uid: {type: String},
+      dtstamp: {type: Time, converter: Time::EpochConverter},
+      dtstart: {type: Time, converter: Time::EpochConverter},
+      dtend: {type: Time?, converter: Time::EpochConverter},
+      summary: {type: String?},
+      classification: {type: String?, key: "class"},
+      categories: {type: Array(String)},
+    )
+
     @all_day = false
     {% for key, value in PROPERTIES %}
       {% if key.id == "uid" %}
