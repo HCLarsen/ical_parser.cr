@@ -13,7 +13,7 @@ class CalAddressTest < Minitest::Test
   def test_initializes_cal_address
     uri = URI.parse("mailto:jane_doe@example.com")
     user = CalAddress.new(uri)
-    assert_equal "jane_doe@example.com", user.uri.opaque
+    assert_equal "jane_doe@example.com", user.uri.path
   end
 
   def test_equality
@@ -30,14 +30,14 @@ class CalAddressTest < Minitest::Test
   def test_accepts_member_cal_address
     member = CalAddress.new(URI.parse("mailto:ietf-calsch@example.org"))
     @user.member << member
-    assert_equal "ietf-calsch@example.org", @user.member.first.uri.opaque
+    assert_equal "ietf-calsch@example.org", @user.member.first.uri.path
     assert_equal Array(CalAddress), @user.member.class
   end
 
   def test_accepts_sent_by_cal_address
     sent_by = CalAddress.new(URI.parse("mailto:sray@example.com"))
     @user.sent_by = sent_by
-    assert_equal "sray@example.com", @user.sent_by.not_nil!.uri.opaque
+    assert_equal "sray@example.com", @user.sent_by.not_nil!.uri.path
     assert_equal CalAddress, @user.sent_by.class
   end
 
@@ -45,14 +45,14 @@ class CalAddressTest < Minitest::Test
     user = CalAddress.new(URI.parse("mailto:jdoe@example.com"))
     del_from = [CalAddress.new(URI.parse("mailto:jsmith@example.com"))]
     user.delegated_from = del_from
-    assert_equal "jsmith@example.com", user.delegated_from.first.not_nil!.uri.opaque
+    assert_equal "jsmith@example.com", user.delegated_from.first.not_nil!.uri.path
     assert_equal Array(CalAddress), user.delegated_from.class
   end
 
   def test_accepts_delegated_from_cal_address
     del_to = [CalAddress.new(URI.parse("mailto:jdoe@example.com")), CalAddress.new(URI.parse("mailto:jqpublic@example.com"))]
     @user.delegated_to = del_to
-    assert_equal "jdoe@example.com", @user.delegated_to.first.not_nil!.uri.opaque
+    assert_equal "jdoe@example.com", @user.delegated_to.first.not_nil!.uri.path
     assert_equal Array(CalAddress), @user.delegated_to.class
   end
 

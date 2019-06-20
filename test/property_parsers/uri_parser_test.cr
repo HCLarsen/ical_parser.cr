@@ -39,6 +39,6 @@ class URIParserTest < Minitest::Test
     example = "mailto:John.Doe@example.com"
     uri = @parser.call(example, @params)
     assert_equal "mailto", uri.scheme
-    assert_equal "John.Doe@example.com", uri.opaque
+    assert_equal "John.Doe@example.com", uri.path
   end
 end

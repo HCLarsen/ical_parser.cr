@@ -4,7 +4,7 @@ module IcalParser
   # uri = URI.parse("mailto:iamboss@example.com")
   # params = { "ROLE" => "NON-PARTICIPANT", "PARTSTAT" => "DELEGATED", "CN" => "The Big Cheese" }
   # user = CalAddress.new(uri, params)
-  # user.uri.opaque #=> iamboss@example.com
+  # user.uri.path #=> iamboss@example.com
   # user.common_name  #=> "The Big Cheese"
   # user.role #=> non-participant
   class CalAddress
@@ -30,7 +30,7 @@ module IcalParser
     #
     # uri = URI.parse("mailto:jsmith@example.com")
     # user = CalAddress.new(uri)
-    # user.uri.opaque  #=> "jsmith@example.com"
+    # user.uri.path  #=> "jsmith@example.com"
     def initialize(@uri : URI)
     end
 

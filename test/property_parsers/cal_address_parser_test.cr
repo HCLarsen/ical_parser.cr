@@ -45,7 +45,7 @@ class CalAddressParserTest < Minitest::Test
     params = {"SENT-BY" => "mailto:sray@example.com"}
     string = "mailto:jsmith@example.com"
     address = @parser.call(string, params)
-    assert_equal "sray@example.com", address.sent_by.not_nil!.uri.opaque
+    assert_equal "sray@example.com", address.sent_by.not_nil!.uri.path
   end
 
   def test_parses_members
@@ -53,7 +53,7 @@ class CalAddressParserTest < Minitest::Test
     params = {"MEMBER" => %("mailto:projectA@example.com","mailto:projectB@example.com")}
     address = @parser.call(string, params)
     assert_equal 2, address.member.size
-    assert_equal "projectA@example.com", address.member.first.uri.opaque
+    assert_equal "projectA@example.com", address.member.first.uri.path
   end
 
   def test_parses_delegated_from
@@ -61,7 +61,7 @@ class CalAddressParserTest < Minitest::Test
     params = {"DELEGATED-FROM" => %("mailto:immud@example.com")}
     address = @parser.call(string, params)
     assert_equal 1, address.delegated_from.size
-    assert_equal "immud@example.com", address.delegated_from.first.uri.opaque
+    assert_equal "immud@example.com", address.delegated_from.first.uri.path
   end
 
   def test_parses_multiple_delegated_to
@@ -69,19 +69,19 @@ class CalAddressParserTest < Minitest::Test
     string = "jsmith@example.com"
     address = @parser.call(string, params)
     assert_equal 2, address.delegated_to.size
-    assert_equal "jdoe@example.com", address.delegated_to.first.uri.opaque
+    assert_equal "jdoe@example.com", address.delegated_to.first.uri.path
   end
 
   def test_parses_complicated_cal_address
     params = {"ROLE" => "NON-PARTICIPANT", "PARTSTAT" => "DELEGATED", "DELEGATED-TO" => "mailto:hcabot@example.com", "CN" => "The Big Cheese"}
     string = "mailto:iamboss@example.com"
     address = @parser.call(string, params)
-    assert_equal "iamboss@example.com", address.uri.opaque
+    assert_equal "iamboss@example.com", address.uri.path
     assert_equal "The Big Cheese", address.common_name
 
     delegated = CalAddress.new(URI.parse("mailto:hcabot@example.com"))
     assert_equal 1, address.delegated_to.size
-    assert_equal delegated.uri.opaque, address.delegated_to.first.uri.opaque
+    assert_equal delegated.uri.path, address.delegated_to.first.uri.path
 
     assert_equal CalAddress::Role::NonParticipant, address.role
     assert_equal CalAddress::PartStat::Delegated, address.part_stat
