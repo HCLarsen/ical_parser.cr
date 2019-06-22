@@ -1,18 +1,8 @@
 module IcalParser
-  # Parser for the Recurrence Rule property
+  # The recurrence_parser function parses the RFC5545 [Recurrence Rule](https://tools.ietf.org/html/rfc5545#section-3.3.10) value type and returns a JSON object.
   #
-  # This class parses the Recurrence Rule property and produces an instance of
-  # the RecurrenceRule class to be stored in an Event, Journal, To-Do, or
-  # Time Zone definition object.
-  #
-  # ### Parsing
-  #
-  # parser = RecurrenceRule.parser
-  # recur = parser.parse("FREQ=WEEKLY;UNTIL=19971007T000000Z;WKST=SU;BYDAY=TU,TH")
-  # recur.frequency   #=> Weekly
-  # recur.end_time    #=> 1997-10-07 00:00:00.0 UTC
-  # recur.week_start  #=> Time::DayOfWeek::Sunday
-  # recur.by_day      #=> [Time::DayOfWeek::Tuesday, Time::DayOfWeek::Thursday]
+  # recur = @@recurrence_parser.call("FREQ=WEEKLY;UNTIL=19971007T000000Z;WKST=SU;BYDAY=TU,TH")
+  # recur #=> {"freq":"weekly","until":"","wkst":"SU","by_day":["tu","th"]}
   @@recurrence_parser = Proc(String, Hash(String, String), RecurrenceRule).new do |value, params|
     hash = {} of String => String
     pairs = value.split(';')
