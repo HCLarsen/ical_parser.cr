@@ -43,6 +43,8 @@ module IcalParser
     end
 
     def parse(eventc : String)
+      lines = content_lines(eventc)
+      matches = lines_matches(lines)
       found = parse_to_json(eventc)
 
       validate(found)
