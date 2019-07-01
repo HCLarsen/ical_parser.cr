@@ -281,4 +281,28 @@ class EventParserTest < Minitest::Test
     end
     assert_equal "Invalid Event: TRANSP must be either OPAQUE or TRANSPARENT", error.message
   end
+
+  def test_parses_to_json
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:19970901T130000Z-123401@example.com
+    DTSTAMP:19970901T130000Z
+    DTSTART:19970903T163000Z
+    DTEND:19970903T190000Z
+    SUMMARY:Annual Employee Review
+    CLASS:PRIVATE
+    CATEGORIES:BUSINESS,HUMAN RESOURCES
+    END:VEVENT
+    HEREDOC
+
+    event = @parser.parse_to_json(eventc)
+
+    assert_equal "19970901T130000Z-123401@example.com", event["uid"]
+    assert_equal Time.utc(1997, 9, 1, 13, 0, 0), event["dtstamp"]
+    assert_equal Time.utc(1997, 9, 3, 16, 30, 0), event["dtstart"]
+    assert_equal Time.utc(1997, 9, 3, 19, 0, 0), event["dtend"]
+    assert_equal "Annual Employee Review", event["summary"]
+    assert_equal "PRIVATE", event["classification"]
+    assert_equal ["BUSINESS", "HUMAN RESOURCES"], event["categories"]
+  end
 end

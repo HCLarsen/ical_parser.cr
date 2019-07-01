@@ -43,6 +43,16 @@ module IcalParser
     end
 
     def parse(eventc : String)
+      found = parse_to_json(eventc)
+
+      validate(found)
+
+      event = Event.new(found)
+      event.all_day = validated_all_day?(matches)
+      return event
+    end
+
+    def parse_to_json(eventc : String)
       property_names = {
         "last-modified"   => "last_mod",
         "class"           => "classification",
@@ -81,11 +91,7 @@ module IcalParser
         end
       end
 
-      validate(found)
-
-      event = Event.new(found)
-      event.all_day = validated_all_day?(matches)
-      return event
+      found
     end
 
     private def content_lines(component : String)
