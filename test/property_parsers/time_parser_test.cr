@@ -1,11 +1,12 @@
 require "minitest/autorun"
 
-require "/../src/iCal"
+require "/../src/ical_parser/property_parsers/time_parser"
+require "/../src/ical_parser/common"
 
 class TimeParserTest < Minitest::Test
   include IcalParser
 
-  @parser : Proc(String, Hash(String, String), Time)
+  @parser : Proc(String, Hash(String, String), String)
 
   def initialize(arg)
     super(arg)
@@ -16,22 +17,19 @@ class TimeParserTest < Minitest::Test
   def test_parses_time
     string = "230000"
     time = @parser.call(string, @params)
-    assert_equal Time.new(1, 1, 1, 23, 0, 0, nanosecond: 0, location: Time::Location.local), time
-    assert_equal Time::Location.local, time.location
+    assert_equal string, time
   end
 
   def test_parses_utc_time
     string = "070000Z"
     time = @parser.call(string, @params)
-    assert_equal Time.utc(1, 1, 1, 7, 0, 0), time
+    assert_equal string, time
   end
 
   def test_parses_est_time_zone_time
     string = "083000"
-    @params = {"TZID" => "America/New_York"}
     time = @parser.call(string, @params)
-    assert_equal Time.utc(1, 1, 1, 13, 30, 0), time
-    assert_equal Time::Location.load("America/New_York"), time.location
+    assert_equal string, time
   end
 
   def test_raises_invalid_time_format
