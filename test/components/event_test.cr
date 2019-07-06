@@ -37,57 +37,7 @@ class EventTest < Minitest::Test
     assert_equal dtend, event.dtend
   end
 
-  def test_initializes_event_from_hash
-    props = {
-      "uid"     => "19970901T130000Z-123401@example.com",
-      "dtstamp" => Time.utc(1997, 9, 1, 13, 0, 0),
-      "dtstart" => Time.utc(1997, 9, 3, 16, 30, 0),
-      "dtend"   => Time.utc(1997, 9, 3, 19, 0, 0),
-    } of String => PropertyType
-    event = IcalParser::Event.new(props)
-    assert_equal props["uid"], event.uid
-    assert_equal props["dtstart"], event.dtstart
-    assert_equal props["dtend"], event.dtend
-  end
-
-  def test_initializes_event_from_hash_with_duration
-    props = {
-      "uid"     => "19970901T130000Z-123401@example.com",
-      "dtstamp" => Time.utc(1997, 9, 1, 13, 0, 0),
-      "dtstart" => Time.utc(1997, 9, 3, 16, 30, 0),
-      "duration" => Time::Span.new(1,0,0)
-    } of String => PropertyType
-    event = IcalParser::Event.new(props)
-    assert_equal props["dtstart"], event.dtstart
-    assert_equal props["dtstart"].as(Time) + props["duration"].as(Time::Span), event.dtend
-  end
-
-  def test_hash_initialized_with_geo
-    props = {
-      "uid"     => "19970901T130000Z-123401@example.com",
-      "dtstamp" => Time.utc(1997, 9, 1, 13, 0, 0),
-      "dtstart" => Time.utc(1997, 9, 3, 16, 30, 0),
-      "dtend"   => Time.utc(1997, 9, 3, 19, 0, 0),
-      "geo"     => {"lat" => 37.386013, "lon" => -122.082932}
-    } of String => PropertyType
-    event = IcalParser::Event.new(props)
-    assert_equal props["geo"], event.geo
-    assert_equal 37.386013, event.geo.not_nil!["lat"]
-  end
-
-  def test_raises_error_if_hash_contains_invalid_type
-    props = {
-      "uid"     => "19970901T130000Z-123401@example.com",
-      "dtstamp" => Time.utc(1997, 9, 1, 13, 0, 0),
-      "dtstart" => Time.utc(1997, 9, 3, 16, 30, 0),
-      "dtend"   => "End Time"
-    } of String => PropertyType
-    error = assert_raises do
-      event = IcalParser::Event.new(props)
-    end
-    assert_equal "Event Error: dtend is not a valid type", error.message
-  end
-
+  # Test error raising
   def test_raises_error_if_end_time_earlier_than_start_time
     uid = "19970901T130000Z-123401@example.com"
     dtstamp = Time.utc(1997, 9, 1, 13, 0, 0)
@@ -134,6 +84,54 @@ class EventTest < Minitest::Test
     assert_equal "Invalid Event: End time cannot precede start time", error.message
   end
 
+
+  # # Test initializing from hash
+  # def test_initializes_event_from_hash
+  #   props = {
+  #     "uid"     => "19970901T130000Z-123401@example.com",
+  #     "dtstamp" => "19970901T130000Z",
+  #     "dtstart" => "19970903T163000Z",
+  #     "dtend"   => "19970903T190000Z",
+  #   } of String => PropertyType
+  #   event = IcalParser::Event.new(props)
+  #   assert_equal props["uid"], event.uid
+  #   assert_equal props["dtstart"], event.dtstart
+  #   assert_equal props["dtend"], event.dtend
+  # end
+  #
+  # def test_initializes_event_from_hash_with_duration
+  #   props = {
+  #     "uid"     => "19970901T130000Z-123401@example.com",
+  #     "dtstamp" => "19970901T130000Z",
+  #     "dtstart" => "19970903T163000Z",
+  #     "duration" => "PT1H"
+  #   } of String => PropertyType
+  #   event = IcalParser::Event.new(props)
+  #   assert_equal props["dtstart"], event.dtstart
+  #   assert_equal props["dtstart"].as(Time) + props["duration"].as(Time::Span), event.dtend
+  # end
+  #
+  # def test_hash_initialized_with_geo
+  #   props = {
+  #     "uid"     => "19970901T130000Z-123401@example.com",
+  #     "dtstamp" => "19970901T130000Z",
+  #     "dtstart" => "19970903T163000Z",
+  #     "dtend"   => "19970903T190000Z",
+  #     "geo"     => {"lat" => JSON::Any.new(37.386013), "lon" => JSON::Any.new(-122.082932)}
+  #   } of String => PropertyType
+  #   event = IcalParser::Event.new(props)
+  #   assert_equal props["geo"], event.geo
+  #   assert_equal 37.386013, event.geo.not_nil!["lat"]
+  # end
+  #
+  # def test_raises_error_if_hash_contains_invalid_type
+  #   json = %({"uid":"19970901T130000Z-123401@example.com","dtstamp":"19970901T130000Z","dtstart":"19970903T163000Z","dtend":"End Time"})
+  #   error = assert_raises do
+  #     event = Event.from_json(json)
+  #   end
+  #   assert_equal "Event Error: dtend is not a valid type", error.message
+  # end
+  
   #Test #from_json
   def test_parses_simple_event_from_json
     json = %({"uid":"19970901T130000Z-123401@example.com","dtstamp":873118800,"dtstart":873304200,"dtend":873313200,"summary":"Annual Employee Review","class":"PRIVATE","categories":["BUSINESS","HUMAN RESOURCES"]})
