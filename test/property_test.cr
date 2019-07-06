@@ -14,18 +14,14 @@ class PropertyTest < Minitest::Test
     value = "Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta\, Georgia"
     text = prop.parse(value, "")
     assert_equal "Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta, Georgia", text
-
-    found = Hash(String, PropertyType).new
-    found["description"] = text
   end
 
   def test_property_parses_value_with_params
-    prop = Property(CalAddress).new(@@caladdress_parser)
+    prop = Property(String).new(@@caladdress_parser)
     params = ";RSVP=TRUE;ROLE=REQ-PARTICIPANT;CUTYPE=GROUP"
     value = "mailto:employee-A@example.com"
     address = prop.parse(value, params)
-    assert_equal CalAddress.new(URI.parse("mailto:employee-A@example.com")), address
-    assert_equal CalAddress | Array(CalAddress) | Hash(String, CalAddress), typeof(address)
+    assert_equal value, address
   end
 
   def test_single_category_returns_as_array
@@ -66,18 +62,18 @@ class PropertyTest < Minitest::Test
   end
 
   def test_multiple_return_types
-    prop = Property(Time | PeriodOfTime).new(@@date_time_parser, alt_values: ["DATE", "PERIOD"], single_value: false, only_once: false)
+    prop = Property(String).new(@@date_time_parser, alt_values: ["DATE", "PERIOD"], single_value: false, only_once: false)
     dt_value = "19970714T083000"
     date_time = prop.parse(dt_value, ";TZID=America/New_York")
-    assert_equal [Time.new(1997, 7, 14, 8, 30, 0, location: Time::Location.load("America/New_York"))], date_time
+    assert_equal ["19970714T083000"], date_time
 
     date_value = "19970101,19970120,19970217,19970421,19970526,19970704,19970901,19971014,19971128,19971129,19971225"
     dates = prop.parse(date_value, "VALUE=DATE")
-    assert_equal Time.new(1997, 1, 1), dates.as(Array(PeriodOfTime | Time)).first
+    assert_equal "19970101", dates.as(Array(String)).first
   end
 
   def test_raise_for_invalid_value_type
-    prop = Property(Time | PeriodOfTime).new(@@date_time_parser, alt_values: ["DATE", "PERIOD"], single_value: false, only_once: false)
+    prop = Property(String).new(@@date_time_parser, alt_values: ["DATE", "PERIOD"], single_value: false, only_once: false)
     date_value = "19970101,19970120,19970217,19970421,19970526,19970704,19970901,19971014,19971128,19971129,19971225"
     error = assert_raises do
       dates = prop.parse(date_value, "VALUE=TEXT")
