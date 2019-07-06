@@ -7,35 +7,34 @@ require "/../src/ical_parser/common"
 class DurationParserTest < Minitest::Test
   include IcalParser
 
-  @parser : Proc(String, Hash(String, String), String)
+  @parser : Proc(String, String)
 
   def initialize(arg)
     super(arg)
     @parser = @@duration_parser
-    @params = Hash(String, String).new
   end
 
   def test_parses_simple_duration
     string = "PT1H"
-    duration = @parser.call(string, @params)
+    duration = @parser.call(string)
     assert_equal string, duration
   end
 
   def test_parses_duration_with_multiple_elements
     string = "P15DT5H0M20S"
-    duration = @parser.call(string, @params)
+    duration = @parser.call(string)
     assert_equal string, duration
   end
 
   def test_parses_weeklong_duration
     string = "P7W"
-    duration = @parser.call(string, @params)
+    duration = @parser.call(string)
     assert_equal string, duration
   end
 
   def test_parses_negative_duration
     string = "-PT15M"
-    duration = @parser.call(string, @params)
+    duration = @parser.call(string)
     assert_equal string, duration
   end
 
@@ -43,7 +42,7 @@ class DurationParserTest < Minitest::Test
     durations = ["P15D5H0M20S", "P1H", "15D", "P1Y", "P1M", "P1WT1H"]
     durations.each do |duration|
       error = assert_raises do
-        @parser.call(duration, @params)
+        @parser.call(duration)
       end
       assert_equal "Invalid Duration format", error.message
     end

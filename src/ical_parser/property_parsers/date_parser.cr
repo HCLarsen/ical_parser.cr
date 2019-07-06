@@ -1,7 +1,7 @@
 require "./value_parser"
 
 module IcalParser
-  @@date_parser = Proc(String, Hash(String, String), String).new do |value, params|
+  @@date_parser = Proc(String, String).new do |value|
     if DATE_REGEX.match(value)
       # if tz = params["TZID"]?
       #   location = Time::Location.load(tz)

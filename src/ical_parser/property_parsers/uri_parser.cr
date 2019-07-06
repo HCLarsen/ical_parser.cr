@@ -3,7 +3,7 @@ require "uri"
 require "./value_parser"
 
 module IcalParser
-  @@uri_parser = Proc(String, Hash(String, String), String).new do |value, params|
+  @@uri_parser = Proc(String, String).new do |value|
     value
   end
 end

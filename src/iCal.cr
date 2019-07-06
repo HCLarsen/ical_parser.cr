@@ -9,7 +9,7 @@ module IcalParser
   TYPES = [Bool, Float64, Int32, String]
 
   {% begin %}
-    alias ParserType = {{ TYPES.map{|e| "Proc(String, Hash(String, String), #{e})".id}.join(" | ").id }}
+    alias ParserType = {{ TYPES.map{|e| "Proc(String, #{e})".id}.join(" | ").id }}
   {% end %}
 
   alias PropertyType = JSON::Any::Type

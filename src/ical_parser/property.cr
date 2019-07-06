@@ -38,7 +38,7 @@ module IcalParser
     end
 
     def parse_value(value : String, params : Hash(String, JSON::Any)) : JSON::Any
-      new_params = Hash(String, String).new
+      # new_params = Hash(String, String).new
 
       if value_type = params["VALUE"]?
         if @alt_values.includes?(value_type)
@@ -51,11 +51,11 @@ module IcalParser
       end
       if @single_value
         if @only_once && @parts.size == 1
-          parsed = parser.call(value, new_params).as T
+          parsed = parser.call(value).as T
           JSON::Any.new(parsed)
         elsif @parts.size > 1
           values = value.split(/(?<!\\);/)
-          parts = values.map { |e| JSON::Any.new(parser.call(e, new_params).as T) }
+          parts = values.map { |e| JSON::Any.new(parser.call(e).as T) }
           JSON::Any.new(Hash.zip(@parts, parts))
         else
           # [parser.call(value, new_params).as T].as Array(T)
@@ -63,7 +63,7 @@ module IcalParser
         end
       else
         values = value.split(/(?<!\\),/)
-        values = values.map { |e| JSON::Any.new(parser.call(e, new_params).as T) }
+        values = values.map { |e| JSON::Any.new(parser.call(e).as T) }
         JSON::Any.new(values)
       end
     end

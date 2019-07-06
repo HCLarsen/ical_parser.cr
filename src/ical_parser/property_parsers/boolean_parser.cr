@@ -1,7 +1,7 @@
 require "./value_parser"
 
 module IcalParser
-  @@boolean_parser = Proc(String, Hash(String, String), Bool).new do |value, params|
+  @@boolean_parser = Proc(String, Bool).new do |value|
     if value == "TRUE"
       true
     elsif value == "FALSE"

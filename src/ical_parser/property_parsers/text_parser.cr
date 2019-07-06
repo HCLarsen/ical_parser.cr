@@ -2,7 +2,7 @@ require "./value_parser"
 
 module IcalParser
   # Parses a TEXT property into a String object, removing escape characters.
-  @@text_parser = Proc(String, Hash(String, String), String).new do |value, params|
+  @@text_parser = Proc(String, String).new do |value|
     value.gsub(/\\(?![nN\\])/) { |match| "" }
   end
 

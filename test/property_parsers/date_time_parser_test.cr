@@ -7,37 +7,35 @@ require "/../src/ical_parser/common"
 class DateTimeParserTest < Minitest::Test
   include IcalParser
 
-  @parser : Proc(String, Hash(String, String), String)
+  @parser : Proc(String, String)
 
   def initialize(arg)
     super(arg)
     @parser = @@date_time_parser
-    @params = Hash(String, String).new
   end
 
   def test_parses_floating_date_time
     string = "19980118T230000"
-    dateTime = @parser.call(string, @params)
+    dateTime = @parser.call(string)
     assert_equal string, dateTime
   end
 
   def test_parses_utc_date_time
     string = "19980119T070000Z"
-    dateTime = @parser.call(string, @params)
+    dateTime = @parser.call(string)
     assert_equal string, dateTime
   end
 
   def test_parses_date_time_with_time_zone
     string = "19970714T133000"
-    params = {"TZID" => "America/New_York"}
-    dateTime = @parser.call(string, params)
+    dateTime = @parser.call(string)
     assert_equal string, dateTime
   end
 
   def test_raises_for_invalid_time_format
     string = "19980119T230000-0800"
     error = assert_raises do
-      @parser.call(string, @params)
+      @parser.call(string)
     end
     assert_equal "Invalid Date-Time format", error.message
   end
@@ -45,7 +43,7 @@ class DateTimeParserTest < Minitest::Test
   def test_raises_for_invalid_date_time_format
     string = "19980119230000"
     error = assert_raises do
-      @parser.call(string, @params)
+      @parser.call(string)
     end
     assert_equal "Invalid Date-Time format", error.message
   end
@@ -53,7 +51,7 @@ class DateTimeParserTest < Minitest::Test
   def test_raises_for_date_time_without_time
     string = "19980118T"
     error = assert_raises do
-      @parser.call(string, @params)
+      @parser.call(string)
     end
     assert_equal "Invalid Date-Time format", error.message
   end

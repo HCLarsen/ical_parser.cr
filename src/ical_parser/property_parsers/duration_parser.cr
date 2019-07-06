@@ -1,5 +1,5 @@
 module IcalParser
-  @@duration_parser = Proc(String, Hash(String, String), String).new do |value, params|
+  @@duration_parser = Proc(String, String).new do |value|
     if value.match(DUR_DATE_REGEX) || value.match(DUR_WEEKS_REGEX)
       value
     else

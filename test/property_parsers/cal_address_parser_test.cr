@@ -8,7 +8,7 @@ require "/../src/ical_parser/enums"
 class CalAddressParserTest < Minitest::Test
   include IcalParser
 
-  @parser : Proc(String, Hash(String, String), String)
+  @parser : Proc(String, String)
 
   def initialize(arg)
     super(arg)
@@ -17,8 +17,7 @@ class CalAddressParserTest < Minitest::Test
 
   def test_parses_simple_address
     string = "mailto:jsmith@example.com"
-    params = Hash(String, String).new
-    address = @parser.call(string, params)
+    address = @parser.call(string)
     assert_equal string, address
   end
 end

@@ -4,7 +4,7 @@ module IcalParser
   #
   # recur = @@recurrence_parser.call("FREQ=WEEKLY;UNTIL=19971007T000000Z;WKST=SU;BYDAY=TU,TH")
   # recur #=> {"freq":"weekly","until":"","wkst":"SU","by_day":["tu","th"]}
-  @@recurrence_parser = Proc(String, Hash(String, String), Hash(String, RecurrenceRuleType)).new do |value, params|
+  @@recurrence_parser = Proc(String, Hash(String, RecurrenceRuleType)).new do |value|
 
     hash = {} of String => RecurrenceRuleType
     pairs = value.split(';')
