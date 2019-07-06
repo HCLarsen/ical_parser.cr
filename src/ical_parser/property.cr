@@ -8,30 +8,38 @@ module IcalParser
     def initialize(@parser : ParserType, *, @alt_values = [] of String, @parts = ["value"], @only_once = true, @single_value = true)
     end
 
-    def parse(value : String, params : String?) forall T
+    def parse(value : String, params : String?) : Hash(String, JSON::Any)
+      output = Hash(String, JSON::Any).new
+
       params ||= ""
       params_hash = parse_params(params)
 
-      parse_value(value, params_hash)
+      output["params"] = JSON::Any.new(params_hash)
+      output["value"] = parse_value(value, params_hash)
+      output
     end
 
-    def parse_params(params : String) : Hash(String, String)
-      return Hash(String, String).new if params.empty?
+    def parse_params(params : String) : Hash(String, JSON::Any)
+      output = Hash(String, JSON::Any).new
+      return output if params.empty?
 
       params = params.lstrip(';')
+
       array = params.split(";").map do |item|
         pair = item.split("=")
         if pair.size == 2
-          pair
+          output[pair.first] = JSON::Any.new(pair.last)
         else
           raise "Invaild parameters format"
         end
       end
-      array = array.transpose
-      Hash.zip(array.first, array.last)
+
+      output
     end
 
-    def parse_value(value : String, params : Hash(String, String)) : T | Array(T) | Hash(String, T)
+    def parse_value(value : String, params : Hash(String, JSON::Any)) : JSON::Any
+      new_params = Hash(String, String).new
+
       if value_type = params["VALUE"]?
         if @alt_values.includes?(value_type)
           parser = PARSERS[value_type]
@@ -43,17 +51,20 @@ module IcalParser
       end
       if @single_value
         if @only_once && @parts.size == 1
-          parser.call(value, params).as T
+          parsed = parser.call(value, new_params).as T
+          JSON::Any.new(parsed)
         elsif @parts.size > 1
           values = value.split(/(?<!\\);/)
-          parts = values.map { |e| parser.call(e, params).as T }
-          Hash.zip(@parts, parts)
+          parts = values.map { |e| JSON::Any.new(parser.call(e, new_params).as T) }
+          JSON::Any.new(Hash.zip(@parts, parts))
         else
-          [parser.call(value, params).as T].as Array(T)
+          # [parser.call(value, new_params).as T].as Array(T)
+          raise "Error"
         end
       else
         values = value.split(/(?<!\\),/)
-        values.map { |e| parser.call(e, params).as T }. as Array(T)
+        values = values.map { |e| JSON::Any.new(parser.call(e, new_params).as T) }
+        JSON::Any.new(values)
       end
     end
   end
