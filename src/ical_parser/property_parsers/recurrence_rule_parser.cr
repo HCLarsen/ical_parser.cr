@@ -4,19 +4,20 @@ module IcalParser
   #
   # recur = @@recurrence_parser.call("FREQ=WEEKLY;UNTIL=19971007T000000Z;WKST=SU;BYDAY=TU,TH")
   # recur #=> {"freq":"weekly","until":"","wkst":"SU","by_day":["tu","th"]}
-  @@recurrence_parser = Proc(String, Hash(String, RecurrenceRuleType)).new do |value|
+  # @@recurrence_parser = Proc(String, Hash(String, RecurrenceRuleType)).new do |value|
+  @@recurrence_parser = Proc(String, String).new do |value|
 
-    hash = {} of String => RecurrenceRuleType
+    hash = {} of String => JSON::Any::Type
     pairs = value.split(';')
     pairs.each do  |pair|
       name, value = pair.split('=')
       name = name.downcase
       if name == "byday"
-        hash[name] = value.split(',')
+        hash[name] = value.split(',').map { |e| JSON::Any.new(e) }
       elsif name.starts_with?("by")
-        hash[name] = value.split(',').map(&.to_i)
+        hash[name] = value.split(',').map { |e| JSON::Any.new(e.to_i64) }
       elsif name == "interval" || name == "count"
-        hash[name] = value.to_i
+        hash[name] = value.to_i64
       elsif name == "freq"
         hash[name] = value.downcase
       else
@@ -24,7 +25,7 @@ module IcalParser
       end
     end
 
-    hash
+    hash.to_json
 
     # frequency = RecurrenceRule::Freq.from_string(hash["freq"].downcase)
     # interval = hash["interval"]? ? hash["interval"].to_i : 1
