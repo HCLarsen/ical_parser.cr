@@ -2,12 +2,11 @@ require "minitest/autorun"
 
 require "/../src/ical_parser/property_parsers/period_of_time_parser"
 require "/../src/ical_parser/common"
-# require "/../src/iCal"
 
 class PeriodOfTimeTest < Minitest::Test
   include IcalParser
 
-  @parser : Proc(String, Hash(String, String))
+  @parser : Proc(String, String)
 
   def initialize(arg)
     super(arg)
@@ -17,15 +16,15 @@ class PeriodOfTimeTest < Minitest::Test
   def test_parses_start_end_format
     string = "19970101T180000Z/19970102T070000Z"
     period = @parser.call(string)
-    hash = {"start" => "19970101T180000Z", "finish" => "19970102T070000Z"}
-    assert_equal hash, period
+    json = %({"start":"19970101T180000Z","finish":"19970102T070000Z"})
+    assert_equal json, period
   end
 
   def test_parses_start_duration_format
     string = "19970101T180000Z/PT5H30M"
     period = @parser.call(string)
-    hash = {"start" => "19970101T180000Z", "duration" => "PT5H30M"}
-    assert_equal hash, period
+    json = %({"start":"19970101T180000Z","duration":"PT5H30M"})
+    assert_equal json, period
   end
 
   def test_raises_invalid_format
