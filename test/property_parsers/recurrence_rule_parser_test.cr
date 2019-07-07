@@ -5,7 +5,6 @@ require "/../src/iCal"
 class RecurrenceRuleParserTest < Minitest::Test
   include IcalParser
 
-  # @parser : Proc(String, Hash(String, RecurrenceRuleType))
   @parser : Proc(String, String)
 
   def initialize(arg)
