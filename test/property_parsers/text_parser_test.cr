@@ -1,6 +1,7 @@
 require "minitest/autorun"
 
-require "/../src/iCal"
+require "/../src/ical_parser/property_parsers/text_parser"
+require "/../src/ical_parser/common"
 
 class TextParserTest < Minitest::Test
   include IcalParser
@@ -16,15 +17,17 @@ class TextParserTest < Minitest::Test
   end
 
   def test_parses_text
-    escaped = "I need to escape \\, \\; \\\\ but not \\n newline characters"
-    text = "I need to escape , ; \\ but not \\n newline characters"
-    assert_equal text, @parser.call(escaped, @params)
+    string = "I need to escape \\, \\; \\\\ but not \\n newline characters"
+    expected = "I need to escape , ; \\\\ but not \\\\n newline characters"
+    result = @parser.call(string, @params)
+    assert_equal %("#{expected}"), result
   end
 
   def test_parses_other_text
-    escaped = "Networld+Interop Conference and Exhibit\\nAtlanta World Congress Center\\nAtlanta\\, Georgia"
-    text = "Networld+Interop Conference and Exhibit\\nAtlanta World Congress Center\\nAtlanta, Georgia"
-    assert_equal text, @parser.call(escaped, @params)
+    string = "Networld+Interop Conference and Exhibit\\nAtlanta World Congress Center\\nAtlanta\\, Georgia"
+    expected = "Networld+Interop Conference and Exhibit\\\\nAtlanta World Congress Center\\\\nAtlanta, Georgia"
+    result = @parser.call(string, @params)
+    assert_equal %("#{expected}"), result
   end
 
   def test_generates_text

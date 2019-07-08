@@ -1,11 +1,12 @@
 require "minitest/autorun"
 
-require "/../src/iCal"
+require "/../src/ical_parser/property_parsers/integer_parser"
+require "/../src/ical_parser/common"
 
 class IntegerParserTest < Minitest::Test
   include IcalParser
 
-  @parser : Proc(String, Hash(String, String), Int32)
+  @parser : Proc(String, Hash(String, String), String)
 
   def initialize(arg)
     super(arg)
@@ -15,12 +16,12 @@ class IntegerParserTest < Minitest::Test
 
   def test_parses_small_integer
     string = "5"
-    assert_equal 5, @parser.call(string, @params)
+    assert_equal string, @parser.call(string, @params)
   end
 
   def test_parses_large_negative_integer
     string = "-1234567890"
-    assert_equal -1234567890, @parser.call(string, @params)
+    assert_equal string, @parser.call(string, @params)
   end
 
   def test_raises_for_invalid_float

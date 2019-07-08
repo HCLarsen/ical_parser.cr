@@ -5,7 +5,7 @@ require "/../src/iCal"
 class BooleanParserTest < Minitest::Test
   include IcalParser
 
-  @parser : Proc(String, Hash(String, String), Bool)
+  @parser : Proc(String, Hash(String, String), String)
 
   def initialize(arg)
     super(arg)
@@ -15,12 +15,12 @@ class BooleanParserTest < Minitest::Test
 
   def test_returns_true_for_true_value
     string = "TRUE"
-    assert @parser.call(string, @params)
+    assert_equal "true", @parser.call(string, @params)
   end
 
   def test_returns_false_for_false_value
     string = "FALSE"
-    refute @parser.call(string, @params)
+    assert_equal "false", @parser.call(string, @params)
   end
 
   def test_raises_for_invalid_value

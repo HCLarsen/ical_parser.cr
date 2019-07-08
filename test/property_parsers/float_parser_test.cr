@@ -1,11 +1,12 @@
 require "minitest/autorun"
 
-require "/../src/iCal"
+require "/../src/ical_parser/property_parsers/float_parser"
+require "/../src/ical_parser/common"
 
 class FloatParserTest < Minitest::Test
   include IcalParser
 
-  @parser : Proc(String, Hash(String, String), Float64)
+  @parser : Proc(String, Hash(String, String), String)
 
   def initialize(arg)
     super(arg)
@@ -14,21 +15,18 @@ class FloatParserTest < Minitest::Test
   end
 
   def test_parses_large_float
-    string = "1000000.0000001"
-    float = 1000000.0000001
-    assert_equal float, @parser.call(string, @params)
+    float = "1000000.0000001"
+    assert_equal float, @parser.call(float, @params)
   end
 
   def test_parses_small_float
-    string = "1.333"
-    float = 1.333
-    assert_equal float, @parser.call(string, @params)
+    float = "1.333"
+    assert_equal float, @parser.call(float, @params)
   end
 
   def test_parses_negative_pi
-    string = "-3.14"
-    float = -3.14
-    assert_equal float, @parser.call(string, @params)
+    float = "-3.14"
+    assert_equal float, @parser.call(float, @params)
   end
 
   def test_raises_for_invalid_float

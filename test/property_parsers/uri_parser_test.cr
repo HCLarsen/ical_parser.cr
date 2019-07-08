@@ -1,11 +1,13 @@
 require "minitest/autorun"
 
-require "/../src/iCal"
+require "/../src/ical_parser/property_parsers/uri_parser"
+require "/../src/ical_parser/common"
+
 
 class URIParserTest < Minitest::Test
   include IcalParser
 
-  @parser : Proc(String, Hash(String, String), URI)
+  @parser : Proc(String, Hash(String, String), String)
 
   def initialize(arg)
     super(arg)
@@ -14,31 +16,14 @@ class URIParserTest < Minitest::Test
   end
 
   def test_parses_url_uris
-    examples = [
-      "http://example.com/pub/calendars/jsmith/mytime.ics",
-      "ftp://ftp.is.co.za/rfc/rfc1808.txt",
-      "http://www.ietf.org/rfc/rfc2396.txt",
-      "ldap://[2001:db8::7]/c=GB?objectClass?one",
-      "telnet://192.0.2.16:80/",
-    ]
-    parsed_examples = [
-      {"scheme" => "http", "host" => "example.com", "hier-part" => "example.com/pub/calendars/jsmith/mytime.ics"},
-      {"scheme" => "ftp", "host" => "ftp.is.co.za", "hier-part" => "ftp.is.co.za/rfc/rfc1808.txt"},
-      {"scheme" => "http", "host" => "www.ietf.org", "hier-part" => "www.ietf.org/rfc/rfc2396.txt"},
-      {"scheme" => "ldap", "host" => "[2001:db8::7]", "hier-part" => "[2001:db8::7]/c=GB?objectClass?one"},
-      {"scheme" => "telnet", "host" => "192.0.2.16", "hier-part" => "192.0.2.16:80/"},
-    ]
-    examples.each_with_index do |example, i|
-      uri = @parser.call(example, @params)
-      assert_equal parsed_examples[i]["scheme"], uri.scheme
-      assert_equal parsed_examples[i]["host"], uri.host
-    end
+    example = "http://example.com/pub/calendars/jsmith/mytime.ics"
+    uri = @parser.call(example, @params)
+    assert_equal %("#{example}"), uri
   end
 
   def test_parses_mailto_uri
     example = "mailto:John.Doe@example.com"
     uri = @parser.call(example, @params)
-    assert_equal "mailto", uri.scheme
-    assert_equal "John.Doe@example.com", uri.path
+    assert_equal %("#{example}"), uri
   end
 end

@@ -1,11 +1,11 @@
 require "./value_parser"
 
 module IcalParser
-  @@boolean_parser = Proc(String, Hash(String, String), Bool).new do |value, params|
+  @@boolean_parser = Proc(String, Hash(String, String), String).new do |value, params|
     if value == "TRUE"
-      true
+      true.to_json
     elsif value == "FALSE"
-      false
+      false.to_json
     else
       raise "Invalid Boolean value"
     end

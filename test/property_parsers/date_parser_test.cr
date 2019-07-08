@@ -1,11 +1,12 @@
 require "minitest/autorun"
 
-require "/../src/iCal"
+require "/../src/ical_parser/property_parsers/date_parser"
+require "/../src/ical_parser/common"
 
 class DateParserTest < Minitest::Test
   include IcalParser
 
-  @parser : Proc(String, Hash(String, String), Time)
+  @parser : Proc(String, Hash(String, String), String)
 
   def initialize(arg)
     super(arg)
@@ -16,8 +17,7 @@ class DateParserTest < Minitest::Test
   def test_parses_date
     string = "19970714"
     date = @parser.call(string, @params)
-    assert_equal Time.new(1997, 7, 14), date
-    assert_equal Time::Location.local, date.location
+    assert_equal %("1997-07-14"), date
   end
 
   def test_raises_for_invalid_date_format
