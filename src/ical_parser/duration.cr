@@ -1,3 +1,5 @@
+require "json"
+
 module IcalParser
   class Duration
     JSON.mapping(
@@ -17,7 +19,7 @@ module IcalParser
     def initialize(@weeks : Int32)
     end
 
-    def initialize(@days : Int32, @hours : Int32, @minutes : Int32, @seconds : Int32)
+    def initialize(*, @days : Int32?, @hours : Int32?, @minutes : Int32?, @seconds : Int32?)
     end
 
     def initialize(pull : JSON::PullParser)

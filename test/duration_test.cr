@@ -1,6 +1,6 @@
 require "minitest/autorun"
 
-require "/../src/iCal"
+require "/../src/ical_parser/duration"
 
 class DurationTest < Minitest::Test
   include IcalParser
@@ -11,7 +11,7 @@ class DurationTest < Minitest::Test
   end
 
   def test_initializes_standard_form
-    duration = Duration.new(15, 5, 0, 20)
+    duration = Duration.new(days: 15, hours: 5, minutes: 0, seconds: 20)
     assert_equal 15, duration.days
     assert_equal 5, duration.hours
     assert_equal 0, duration.minutes
