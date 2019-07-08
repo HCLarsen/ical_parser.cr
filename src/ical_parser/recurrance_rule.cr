@@ -1,3 +1,5 @@
+require "json"
+
 module IcalParser
   # Representation of the Recurrence Rule.
   #
