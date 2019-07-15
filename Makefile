@@ -2,7 +2,7 @@
 
 CRYSTAL = crystal
 
-test: test1 test2 test3
+test: test1 test2 test3 test4 test5
 
 test1:
 	$(CRYSTAL) run test/*_test.cr -- --parallel 4
