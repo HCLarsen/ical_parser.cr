@@ -74,20 +74,6 @@ module IcalParser
       @dtend = @dtstart + duration
     end
 
-    def initialize(properties : Hash(String, PropertyType))
-      verify_vars
-
-      @uid = properties["uid"].as String
-      @dtstamp = properties["dtstamp"].as Time
-      @dtstart = properties["dtstart"].as Time
-
-      if duration = properties["duration"]?
-        @dtend = @dtstart + duration.as Time::Span
-      end
-
-      assign_vars
-    end
-
     def dtstart=(dtstart : Time)
       dtend = @dtend
       if dtend.nil?
