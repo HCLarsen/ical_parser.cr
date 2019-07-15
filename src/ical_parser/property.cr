@@ -46,14 +46,18 @@ module IcalParser
           parser.call(value, params).as T
         elsif @parts.size > 1
           values = value.split(/(?<!\\);/)
-          parts = values.map { |e| parser.call(e, params).as T }
-          Hash.zip(@parts, parts)
+          parts = @parts.map_with_index do |e, i|
+            parsed = parser.call(values[i], params)
+            %("#{e}":#{parsed})
+          end
+          %({#{parts.join(",")}})
         else
           [parser.call(value, params).as T].as Array(T)
         end
       else
         values = value.split(/(?<!\\),/)
-        values.map { |e| parser.call(e, params).as T }. as Array(T)
+        values.map! { |e| parser.call(e, params) }
+        %([#{values.join(",")}])
       end
     end
   end
