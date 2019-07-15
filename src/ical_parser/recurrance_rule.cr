@@ -10,18 +10,6 @@ module IcalParser
   # recur.frequency #=> Daily
   # recur.count     #=> 10
   # recur.interval  #=> 2
-  #
-  # # Defines an Event that will repeat every year, indefinitely.
-  # recur = RecurrenceRule.new(RecurrenceRule::Freq::Yearly)
-  # props = {
-  #   "uid"         => "canada-day@example.com",
-  #   "dtstamp"     => Time.utc(1867, 3, 29, 13, 0, 0),
-  #   "dtstart"     => Time.utc(1867, 7, 1),
-  #   "recurrence"  => recur
-  # } of String => PropertyType
-  # event = IcalParser::Event.new(props)
-  # event.recurring             #=> true
-  # event.recurrence.frequency  #=> Yearly
   struct RecurrenceRule
     alias ByRuleType = Array({Int32, Time::DayOfWeek}) | Array(Int32)
 
