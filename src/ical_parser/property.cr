@@ -1,5 +1,5 @@
 module IcalParser
-  class Property(T)
+  class Property
     @parser : ParserType
     @alt_values : Array(String)
     getter single_value : Bool
@@ -8,7 +8,7 @@ module IcalParser
     def initialize(@parser : ParserType, *, @alt_values = [] of String, @parts = ["value"], @only_once = true, @single_value = true)
     end
 
-    def parse(value : String, params : String?) forall T
+    def parse(value : String, params : String?) : String
       params ||= ""
       params_hash = parse_params(params)
 
@@ -31,7 +31,7 @@ module IcalParser
       Hash.zip(array.first, array.last)
     end
 
-    def parse_value(value : String, params : Hash(String, String)) : T | Array(T) | Hash(String, T)
+    def parse_value(value : String, params : Hash(String, String)) : String
       if value_type = params["VALUE"]?
         if @alt_values.includes?(value_type)
           parser = PARSERS[value_type]
@@ -43,7 +43,7 @@ module IcalParser
       end
       if @single_value
         if @only_once && @parts.size == 1
-          parser.call(value, params).as T
+          parser.call(value, params)
         elsif @parts.size > 1
           values = value.split(/(?<!\\);/)
           parts = @parts.map_with_index do |e, i|
@@ -52,7 +52,7 @@ module IcalParser
           end
           %({#{parts.join(",")}})
         else
-          [parser.call(value, params).as T].as Array(T)
+          %(#([parser.call(value, params)]))
         end
       else
         values = value.split(/(?<!\\),/)
