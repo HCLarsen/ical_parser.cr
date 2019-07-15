@@ -1,11 +1,13 @@
 require "minitest/autorun"
 
-require "/../src/iCal"
+require "/../src/ical_parser/property_parsers/cal_address_parser"
+require "/../src/ical_parser/common"
+require "/../src/ical_parser/enums"
 
 class CalAddressParserTest < Minitest::Test
   include IcalParser
 
-  @parser : Proc(String, Hash(String, String), CalAddress)
+  @parser : Proc(String, Hash(String, String), String)
 
   def initialize(arg)
     super(arg)
@@ -15,75 +17,69 @@ class CalAddressParserTest < Minitest::Test
   def test_parses_simple_address
     string = "mailto:jsmith@example.com"
     params = Hash(String, String).new
-    uri = URI.parse(string)
     address = @parser.call(string, params)
-    assert_equal uri, address.uri
+    assert_equal %({"uri":"mailto:jsmith@example.com"}), address
   end
 
   def test_parses_rsvp
     string = "mailto:jsmith@example.com"
     params = {"RSVP" => "TRUE"}
     address = @parser.call(string, params)
-    assert address.rsvp
+    assert_equal %({"uri":"mailto:jsmith@example.com","rsvp":true}), address
   end
 
   def test_parses_cutype
     string = "mailto:ietf-calsch@example.org"
     params = {"CUTYPE" => "GROUP"}
     address = @parser.call(string, params)
-    assert_equal CalAddress::CUType::Group, address.cutype
+    expected = %({"uri":"mailto:ietf-calsch@example.org","cutype":"GROUP"})
+    assert_equal expected, address
   end
 
   def test_parses_dir
     string = "mailto:jimdo@example.com"
     params = {"DIR" => %("ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20Dolittle)")}
     address = @parser.call(string, params)
-    assert_equal "example.com", address.dir.not_nil!.host
+    expected = %({"uri":"mailto:jimdo@example.com","dir":"ldap://example.com:6666/o=ABC%20Industries,c=US???(cn=Jim%20Dolittle)"})
+    assert_equal expected, address
   end
 
   def test_parses_sent_by
     params = {"SENT-BY" => "mailto:sray@example.com"}
     string = "mailto:jsmith@example.com"
     address = @parser.call(string, params)
-    assert_equal "sray@example.com", address.sent_by.not_nil!.uri.path
+    expected = %({"uri":"mailto:jsmith@example.com","sent-by":{"uri":"mailto:sray@example.com"}})
+    assert_equal expected, address
   end
 
   def test_parses_members
     string = "mailto:jsmith@example.com"
     params = {"MEMBER" => %("mailto:projectA@example.com","mailto:projectB@example.com")}
     address = @parser.call(string, params)
-    assert_equal 2, address.member.size
-    assert_equal "projectA@example.com", address.member.first.uri.path
+    expected = %({"uri":"mailto:jsmith@example.com","member":[{"uri":"mailto:projectA@example.com"},{"uri":"mailto:projectB@example.com"}]})
+    assert_equal expected, address
   end
 
   def test_parses_delegated_from
     string = "mailto:ildoit@example.com"
     params = {"DELEGATED-FROM" => %("mailto:immud@example.com")}
     address = @parser.call(string, params)
-    assert_equal 1, address.delegated_from.size
-    assert_equal "immud@example.com", address.delegated_from.first.uri.path
+    expected = %({"uri":"mailto:ildoit@example.com","delegated-from":[{"uri":"mailto:immud@example.com"}]})
+    assert_equal expected, address
   end
 
   def test_parses_multiple_delegated_to
     params = {"DELEGATED-TO" => %("mailto:jdoe@example.com","mailto:jqpublic@example.com")}
     string = "jsmith@example.com"
     address = @parser.call(string, params)
-    assert_equal 2, address.delegated_to.size
-    assert_equal "jdoe@example.com", address.delegated_to.first.uri.path
+    expected = %({"uri":"jsmith@example.com","delegated-to":[{"uri":"mailto:jdoe@example.com"},"uri":"mailto:jqpublic@example.com"]})
   end
 
   def test_parses_complicated_cal_address
     params = {"ROLE" => "NON-PARTICIPANT", "PARTSTAT" => "DELEGATED", "DELEGATED-TO" => "mailto:hcabot@example.com", "CN" => "The Big Cheese"}
     string = "mailto:iamboss@example.com"
     address = @parser.call(string, params)
-    assert_equal "iamboss@example.com", address.uri.path
-    assert_equal "The Big Cheese", address.common_name
-
-    delegated = CalAddress.new(URI.parse("mailto:hcabot@example.com"))
-    assert_equal 1, address.delegated_to.size
-    assert_equal delegated.uri.path, address.delegated_to.first.uri.path
-
-    assert_equal CalAddress::Role::NonParticipant, address.role
-    assert_equal CalAddress::PartStat::Delegated, address.part_stat
+    expected = %({"uri":"mailto:iamboss@example.com","role":"NON-PARTICIPANT","partstat":"DELEGATED","delegated-to":[{"uri":"mailto:hcabot@example.com"}],"cn":"The Big Cheese"})
+    assert_equal expected, address
   end
 end
