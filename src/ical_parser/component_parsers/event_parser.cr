@@ -42,19 +42,17 @@ module IcalParser
       end
     end
 
-    def parse(eventc : String)
+    def parse(eventc : String) : Event
       lines = content_lines(eventc)
       matches = lines_matches(lines)
       found = parse_to_json(eventc)
 
-      validate(found)
-
-      event = Event.new(found)
-      event.all_day = validated_all_day?(matches)
+      event = Event.from_json(found)
+      # event.all_day = validated_all_day?(matches)
       return event
     end
 
-    def parse_to_json(eventc : String)
+    def parse_to_json(eventc : String) : String
       property_names = {
         "last-modified"   => "last_mod",
         "class"           => "classification",
@@ -65,7 +63,8 @@ module IcalParser
         "related-to"      => "related_to",
         "request-status"  => "request_status",
       }
-      found = Hash(String, PropertyType).new
+      found = Hash(String, String).new
+      props = Array(String).new
 
       lines = content_lines(eventc)
 
@@ -80,6 +79,7 @@ module IcalParser
         if COMPONENT_PROPERTIES.keys.includes? name
           property = COMPONENT_PROPERTIES[name]
           value = property.parse(match["value"], match["params"]?)
+          props << %("#{name}":#{value})
 
           unless found[name]?
             found[name] = value
@@ -93,7 +93,11 @@ module IcalParser
         end
       end
 
-      found
+      # validate(found)
+
+      found.to_json
+
+      %({#{props.join(",")}})
     end
 
     private def content_lines(component : String)
