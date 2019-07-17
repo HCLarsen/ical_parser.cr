@@ -139,7 +139,7 @@ class EventParserTest < Minitest::Test
   #   assert_equal [Time.new(1997, 9, 2, 9, 0, 0, location: Time::Location.load("America/New_York"))], event.exdate
   # end
   #
-  # Error checking
+  # #Error checking
   # def test_raises_for_invalid_line
   #   eventc = <<-HEREDOC
   #   BEGIN:VEVENT
@@ -323,21 +323,78 @@ class EventParserTest < Minitest::Test
     assert_equal expected, result
   end
 
-  # def test_parses_with_duration_to_json
-  #   eventc = <<-HEREDOC
-  #   BEGIN:VEVENT
-  #   SUMMARY:Lunchtime meeting
-  #   DTSTAMP:20160418T135200
-  #   UID:ff808181-1fd7389e-011f-d7389ef9-00000003
-  #   DTSTART;TZID=America/New_York:20160420T120000
-  #   DURATION:PT1H
-  #   END:VEVENT
-  #   HEREDOC
-  #
-  #   event = @parser.parse_to_json(eventc)
-  #
-  #   assert_equal expected, result
-  #   assert_equal Time::Span.new(0, 1, 0, 0), event.duration
-  #   assert_equal Time.new(2016, 4, 20, 13, 0, 0, location: Time::Location.load("America/New_York")), event.dtend
-  # end
+  def test_parses_with_duration_to_json
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    SUMMARY:Lunchtime meeting
+    DTSTAMP:20160418T135200Z
+    UID:ff808181-1fd7389e-011f-d7389ef9-00000003
+    DTSTART;TZID=America/New_York:20160420T120000
+    DURATION:PT1H
+    END:VEVENT
+    HEREDOC
+
+    result = @parser.parse_to_json(eventc)
+    expected = %({"summary":"Lunchtime meeting","dtstamp":"2016-04-18T13:52:00Z","uid":"ff808181-1fd7389e-011f-d7389ef9-00000003","dtstart":"2016-04-20T12:00:00-05:00","duration":{"hours":1}})
+
+    assert_equal expected, result
+  end
+
+  def test_parses_multiple_category_lines_to_json
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:19970901T130000Z-123403@example.com
+    DTSTAMP:19970901T130000Z
+    DTSTART;VALUE=DATE:19971102
+    SUMMARY:Our Blissful Anniversary
+    TRANSP:TRANSPARENT
+    CLASS:CONFIDENTIAL
+    CATEGORIES:ANNIVERSARY,PERSONAL
+    CATEGORIES:SPECIAL OCCASION
+    REQUEST-STATUS:4.1;Event conflict.  Date-time is busy.
+    RRULE:FREQ=YEARLY
+    END:VEVENT
+    HEREDOC
+
+    result = @parser.parse_to_json(eventc)
+    expected = %({"uid":"19970901T130000Z-123403@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-11-02","summary":"Our Blissful Anniversary","transp":"TRANSPARENT","classification":"CONFIDENTIAL","categories":["ANNIVERSARY","PERSONAL","SPECIAL OCCASION"],"request-status":["4.1;Event conflict.  Date-time is busy."],"recurrence":{"freq":"yearly"}})
+
+    assert_equal expected, result
+  end
+
+  def test_parses_geo_property_to_json
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:20070423T123432Z-541111@example.com
+    DTSTAMP:20070423T123432Z
+    DTSTART;VALUE=DATE:20070628
+    DTEND;VALUE=DATE:20070709
+    SUMMARY:Festival International de Jazz de Montreal
+    GEO:45.5;-73.567
+    TRANSP:TRANSPARENT
+    END:VEVENT
+    HEREDOC
+
+    result = @parser.parse_to_json(eventc)
+    expected = %({"uid":"20070423T123432Z-541111@example.com","dtstamp":"2007-04-23T12:34:32Z","dtstart":"2007-06-28","dtend":"2007-07-09","summary":"Festival International de Jazz de Montreal","geo":{"lat":45.5,"lon":-73.567},"transp":"TRANSPARENT"})
+
+    assert_equal expected, result
+  end
+
+  def test_recurring_event_with_ex_date
+    eventc = <<-HEREDOC
+    BEGIN:VEVENT
+    UID:20070423T123432Z-541111@example.com
+    DTSTAMP:19970829T180000Z
+    DTSTART;TZID=America/New_York:19970902T090000
+    EXDATE;TZID=America/New_York:19970902T090000
+    RRULE:FREQ=MONTHLY;BYDAY=FR;BYMONTHDAY=13
+    END:VEVENT
+    HEREDOC
+
+    result = @parser.parse_to_json(eventc)
+    expected = %({"uid":"20070423T123432Z-541111@example.com","dtstamp":"1997-08-29T18:00:00Z","dtstart":"1997-09-02T09:00:00-05:00","exdate":["1997-09-02T09:00:00-05:00"],"recurrence":{"freq":"monthly","byday":["FR"],"bymonthday":[13]}})
+
+    assert_equal expected, result
+  end
 end

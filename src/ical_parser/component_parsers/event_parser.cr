@@ -6,7 +6,7 @@ module IcalParser
       "uid"             => Property.new(PARSERS["TEXT"]),
       "dtstamp"         => Property.new(PARSERS["DATE-TIME"]),
       "created"         => Property.new(PARSERS["DATE-TIME"]),
-      "last_mod"        => Property.new(PARSERS["DATE-TIME"]),
+      "last-mod"        => Property.new(PARSERS["DATE-TIME"]),
       "dtstart"         => Property.new(PARSERS["DATE-TIME"], alt_values: ["DATE"]),
       "dtend"           => Property.new(PARSERS["DATE-TIME"], alt_values: ["DATE"]),
       "duration"        => Property.new(PARSERS["DURATION"]),
@@ -17,7 +17,7 @@ module IcalParser
       "resources"       => Property.new(PARSERS["TEXT"], single_value: false, only_once: false),
       "contacts"        => Property.new(PARSERS["TEXT"], single_value: false, only_once: false),
       "related_to"      => Property.new(PARSERS["TEXT"], single_value: false, only_once: false),
-      "request_status"  => Property.new(PARSERS["TEXT"], only_once: false),
+      "request-status"  => Property.new(PARSERS["TEXT"], only_once: false),
       "transp"          => Property.new(PARSERS["TEXT"]),
       "status"          => Property.new(PARSERS["TEXT"]),
       "comments"        => Property.new(PARSERS["TEXT"]),
@@ -54,17 +54,14 @@ module IcalParser
 
     def parse_to_json(eventc : String) : String
       property_names = {
-        "last-modified"   => "last_mod",
+        "last-modified"   => "last-mod",
         "class"           => "classification",
         "attendee"        => "attendees",
         "comment"         => "comments",
         "contact"         => "contacts",
         "rrule"           => "recurrence",
-        "related-to"      => "related_to",
-        "request-status"  => "request_status",
       }
       found = Hash(String, String).new
-      props = Array(String).new
 
       lines = content_lines(eventc)
 
@@ -79,7 +76,6 @@ module IcalParser
         if COMPONENT_PROPERTIES.keys.includes? name
           property = COMPONENT_PROPERTIES[name]
           value = property.parse(match["value"], match["params"]?)
-          props << %("#{name}":#{value})
 
           unless found[name]?
             found[name] = value
@@ -87,15 +83,17 @@ module IcalParser
             if property.only_once
               raise "Invalid Event: #{name.upcase} MUST NOT occur more than once"
             else
-              found[name] = new_array
+              value = value.strip("[]")
+              found[name] = found[name].insert(-2, ",#{value}")
             end
           end
         end
       end
 
-      # validate(found)
-
-      found.to_json
+      props = Array(String).new
+      found.map do |k, v|
+        props << %("#{k}":#{v})
+      end
 
       %({#{props.join(",")}})
     end
@@ -134,17 +132,6 @@ module IcalParser
         end
       end
       start_params["VALUE"]? == "DATE" ? true : false
-    end
-
-    private macro new_array
-      case value
-      {% for type in TYPES %}
-      when Array({{type.id}})
-        found[name].as Array({{type.id}}) + value
-      {% end %}
-      else
-        raise "Invalid property type"
-      end
     end
 
     private def validate(data)
