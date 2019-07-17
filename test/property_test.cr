@@ -62,6 +62,14 @@ class PropertyTest < Minitest::Test
     assert_equal %("mailto:jdoe@example.com","mailto:jqpublic@example.com"), parsed_params["DELEGATED-TO"]
   end
 
+  def test_parses_request_status
+    prop = Property.new(@@text_parser, only_once: false)
+    value = "4.1;Event conflict.  Date-time is busy."
+    result = prop.parse(value, "")
+    expected = %(["4.1;Event conflict.  Date-time is busy."])
+    assert_equal expected, result
+  end
+
   def test_parse_alternate_type
     prop = Property.new(@@date_time_parser, alt_values: ["DATE", "PERIOD"], single_value: false, only_once: false)
     date_value = "19970101,19970120,19970217,19970421,19970526,19970704,19970901,19971014,19971128,19971129,19971225"

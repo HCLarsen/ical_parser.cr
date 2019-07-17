@@ -41,6 +41,7 @@ module IcalParser
       else
         parser = @parser
       end
+
       if @single_value
         if @only_once && @parts.size == 1
           parser.call(value, params)
@@ -52,7 +53,7 @@ module IcalParser
           end
           %({#{parts.join(",")}})
         else
-          %(#([parser.call(value, params)]))
+          %([#{parser.call(value, params)}])
         end
       else
         values = value.split(/(?<!\\),/)
