@@ -34,11 +34,11 @@ module IcalParser
 
     JSON.mapping(
       uid: {type: String},
-      dtstamp: {type: Time, converter: Time::EpochConverter},
-      dtstart: {type: Time, converter: Time::EpochConverter},
-      dtend: {type: Time?, converter: Time::EpochConverter},
+      dtstamp: {type: Time, converter: Time::ISO8601Converter},
+      dtstart: {type: Time, converter: Time::ISO8601Converter},
+      dtend: {type: Time?, converter: Time::ISO8601Converter},
       summary: {type: String?},
-      classification: {type: String?, key: "class"},
+      classification: {type: String?},
       categories: {type: Array(String)},
     )
 

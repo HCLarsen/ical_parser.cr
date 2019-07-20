@@ -1,3 +1,15 @@
+struct Time
+  module ISO8601Converter
+    def self.from_json(value : JSON::PullParser) : Time
+      Time::Format::ISO_8601_DATE_TIME.parse(value.read_string)
+    end
+
+    def self.to_json(value : Time, json : JSON::Builder)
+      Time::Format::ISO_8601_DATE_TIME.format(value).to_json(json)
+    end
+  end
+end
+
 class URI
   module URIConverter
     def self.from_json(value : JSON::PullParser) : URI
@@ -45,7 +57,7 @@ module IcalParser
         value.to_s[0..1].upcase.to_json(json)
       end
     end
-    
+
     protected def self.weekday_to_day_of_week(day : String) : Time::DayOfWeek
       case day
       when "MO"
