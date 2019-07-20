@@ -37,22 +37,19 @@ module IcalParser
       dtstamp: {type: Time, converter: Time::ISO8601Converter},
       dtstart: {type: Time, converter: Time::ISO8601Converter},
       dtend: {type: Time?, converter: Time::ISO8601Converter},
+      duration: {type: Duration?},
       summary: {type: String?},
       classification: {type: String?},
-      categories: {type: Array(String)},
+      categories: {type: Array(String)?},
+      transp: {type: String?},
+      request_status: {type: Array(String)?, key: "request-status"},
+      geo: {type: Hash(String, Float64)?},
+      recurrence: {type: RecurrenceRule?},
+      all_day: {type: Bool?, key: "all-day"}
     )
 
-    @all_day = false
-    {% for key, value in PROPERTIES %}
-      {% if key.id == "uid" %}
-        getter {{key.id}} : {{value.id}}
-      {% elsif key.id != "duration" %}
-        property {{key.id}} : {{value.id}}
-      {% end %}
-    {% end %}
-    {% debug %}
+    # @all_day = false
 
-    @categories = [] of String
     @resources = [] of String
     @contacts = [] of String
     @related_to = [] of String
@@ -60,7 +57,6 @@ module IcalParser
     @attendees = [] of CalAddress
     @exdate = [] of Time
     @rdate = [] of Time | PeriodOfTime
-    @transp = "OPAQUE"
 
     def initialize(@uid : String, @dtstamp : Time, @dtstart : Time)
     end
@@ -87,22 +83,22 @@ module IcalParser
       check_end_greater_than_start(@dtstart, dtend)
     end
 
-    def duration : Time::Span
-      if dtend = @dtend
-        dtend - @dtstart
-      else
-        Time::Span.zero
-      end
-    end
-
-    def duration=(duration : Time::Span)
-      if duration > Time::Span.zero
-        @dtend = @dtstart + duration
-      else
-        raise "Error: Duration value must be greater than zero"
-      end
-    end
-
+    # def duration : Time::Span
+    #   if dtend = @dtend
+    #     dtend - @dtstart
+    #   else
+    #     Time::Span.zero
+    #   end
+    # end
+    #
+    # def duration=(duration : Time::Span)
+    #   if duration > Time::Span.zero
+    #     @dtend = @dtstart + duration
+    #   else
+    #     raise "Error: Duration value must be greater than zero"
+    #   end
+    # end
+    #
     def all_day?
       @all_day
     end
@@ -111,8 +107,16 @@ module IcalParser
       @all_day = value
     end
 
+    def categories
+      @categories || [] of String
+    end
+
+    def transp
+      @transp || "OPAQUE"
+    end
+
     def opaque?
-      @transp == "OPAQUE"
+      @transp != "TRANSPARENT"
     end
 
     def recurring
@@ -133,28 +137,20 @@ module IcalParser
 
     def_equals @uid, @dtstamp, @dtstart, @dtend, @summary
 
-    private macro verify_vars
-      {% for key, value in PROPERTIES %}
-        if properties["{{key.id}}"]? && !properties["{{key.id}}"].is_a? {{ value.id }}
-          raise "Event Error: {{key.id}} is not a valid type"
-        end
-      {% end %}
-    end
-
-    private macro assign_vars
-      {% for key, value in PROPERTIES %}
-        {% if key.id != "duration" %}
-          @{{key.id}} = properties[{{key}}].as {{value.id}} if properties[{{key}}]?
-        {% end %}
-      {% end %}
-    end
-
     private def check_end_greater_than_start(dtstart : Time, dtend : Time)
       if dtend > dtstart
         @dtstart = dtstart
         @dtend = dtend
       else
         raise "Invalid Event: End time cannot precede start time"
+      end
+    end
+
+    def initialize(pull : JSON::PullParser)
+      previous_def
+      duration = @duration
+      unless duration.nil?
+        @dtend = @dtstart.shift(days: duration.days, hours: duration.hours, minutes: duration.minutes, seconds: duration.seconds)
       end
     end
   end

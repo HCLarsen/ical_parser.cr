@@ -48,7 +48,6 @@ module IcalParser
       found = parse_to_json(eventc)
 
       event = Event.from_json(found)
-      # event.all_day = validated_all_day?(matches)
       return event
     end
 
@@ -93,6 +92,10 @@ module IcalParser
       props = Array(String).new
       found.map do |k, v|
         props << %("#{k}":#{v})
+      end
+
+      if found["dtstart"].match(/^"\d{4}-\d{2}-\d{2}"$/)
+        props << %("all-day":true)
       end
 
       %({#{props.join(",")}})
