@@ -1,7 +1,18 @@
 struct Time
   module ISO8601Converter
+    ISO8601_UTC_DT_REGEX = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z/
+    ISO8601_TZ_DT_REGEX = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}-\d{2}:\d{2}/
+    TZ_REGEX = /\w+\/\w+$/
+
     def self.from_json(value : JSON::PullParser) : Time
-      Time::Format::ISO_8601_DATE_TIME.parse(value.read_string)
+      string = value.read_string
+      if string.match(ISO8601_UTC_DT_REGEX)
+        Time::Format::ISO_8601_DATE_TIME.parse(string)
+      elsif string.match(ISO8601_TZ_DT_REGEX)
+        Time.parse_local(string, "%FT%T%:z")
+      else
+        Time::Format::ISO_8601_DATE.parse(string)
+      end
     end
 
     def self.to_json(value : Time, json : JSON::Builder)
