@@ -13,6 +13,7 @@ class EventTest < Minitest::Test
     event = IcalParser::Event.new(uid, dtstamp, dtstart)
     assert_equal uid, event.uid
     assert_equal dtstamp, event.dtstamp
+    refute event.all_day?
   end
 
   def test_initializes_event_with_end_time
