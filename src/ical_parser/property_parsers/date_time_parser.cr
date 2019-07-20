@@ -4,14 +4,23 @@ require "./time_parser"
 
 module IcalParser
   @@date_time_parser = Proc(String, Hash(String, String), String).new do |value, params|
-    begin
-      date_string, time_string = value.split('T')
-    rescue
+    if DT_FLOATING_REGEX.match(value)
+      pattern = DATE.pattern + "T" + TIME.pattern
+      if tz = params["TZID"]?
+        location = Time::Location.load(tz)
+        output = "%FT%T%:z"
+      else
+        location = Time::Location.local
+        output = "%FT%T"
+      end
+    elsif DT_UTC_REGEX.match(value)
+      location = Time::Location::UTC
+      pattern = DATE.pattern + "T" + UTC_TIME.pattern
+      output = "%FT%TZ"
+    else
       raise "Invalid Date-Time format"
     end
-    raise "Invalid Date-Time format" if date_string.empty? || time_string.empty?
-    time = @@time_parser.call(time_string, params)
-    date = @@date_parser.call(date_string, params)
-    (date.strip('"') + "T" + time.strip('"')).to_json
+
+    date_time = Time.parse(value, pattern, location).to_s(output).to_json
   end
 end

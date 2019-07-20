@@ -30,7 +30,7 @@ class DateTimeParserTest < Minitest::Test
     string = "19970714T133000"
     params = {"TZID" => "America/New_York"}
     dateTime = @parser.call(string, params)
-    assert_equal %("1997-07-14T13:30:00-05:00"), dateTime
+    assert_equal %("1997-07-14T13:30:00-04:00"), dateTime
   end
 
   def test_raises_for_invalid_time_format
@@ -38,7 +38,7 @@ class DateTimeParserTest < Minitest::Test
     error = assert_raises do
       @parser.call(string, @params)
     end
-    assert_equal "Invalid Time format", error.message
+    assert_equal "Invalid Date-Time format", error.message
   end
 
   def test_raises_for_invalid_date_time_format

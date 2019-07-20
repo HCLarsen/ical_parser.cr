@@ -81,7 +81,7 @@ class PropertyTest < Minitest::Test
     prop = Property.new(@@date_time_parser, alt_values: ["DATE", "PERIOD"], single_value: false, only_once: false)
     dt_value = "19970714T083000"
     date_time = prop.parse(dt_value, ";TZID=America/New_York")
-    expected = %(["1997-07-14T08:30:00-05:00"])
+    expected = %(["1997-07-14T08:30:00-04:00"])
     assert_equal expected, date_time
   end
 
