@@ -28,5 +28,7 @@ module IcalParser
         raise "Error: Week durations cannot be combined with other duration units"
       end
     end
+
+    def_equals @weeks, @days, @hours, @minutes, @seconds
   end
 end
