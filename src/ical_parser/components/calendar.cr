@@ -1,3 +1,6 @@
+require "./event"
+require "./../property_parsers/*"
+
 module IcalParser
   class Calendar
     PROPERTIES = {
@@ -7,6 +10,14 @@ module IcalParser
       "calscale"  => String
     }
 
+    JSON.mapping(
+      prodid: {type: String},
+      version: {type: String},
+      method: {type: String?},
+      calscale: {type: String?},
+      events: {type: Array(Event)}
+    )
+
     property prodid : String
     property version = "2.0"
     property method : String?
@@ -14,12 +25,6 @@ module IcalParser
     property events = [] of Event
 
     def initialize(@prodid : String, @events = [] of Event)
-    end
-
-    private macro assign_vars
-      {% for key, value in PROPERTIES %}
-        @{{key.id}} = properties[{{key}}].as {{value.id}} if properties[{{key}}]?
-      {% end %}
     end
   end
 end
