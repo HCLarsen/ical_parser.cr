@@ -75,7 +75,7 @@ class EventParserTest < Minitest::Test
     eventc = <<-HEREDOC
     BEGIN:VEVENT
     SUMMARY:Lunchtime meeting
-    DTSTAMP:20160418T135200
+    DTSTAMP:20160418T135200Z
     UID:ff808181-1fd7389e-011f-d7389ef9-00000003
     DTSTART;TZID=America/New_York:20160420T120000
     DURATION:PT1H
