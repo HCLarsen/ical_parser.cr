@@ -2,61 +2,36 @@ require "./../property_parsers/*"
 
 module IcalParser
   class Event
-    PROPERTIES = {
-      "uid"             => String,
-      "dtstamp"         => Time,
-      "created"         => Time?,
-      "last_mod"        => Time?,
-      "dtstart"         => Time,
-      "dtend"           => Time?,
-      "duration"        => Time::Span?,
-      "summary"         => String?,
-      "classification"  => String?,
-      "categories"      => Array(String),
-      "resources"       => Array(String),
-      "contacts"        => Array(String),
-      "related_to"      => Array(String),
-      "request_status"  => Array(String),
-      "transp"          => String?,
-      "description"     => String?,
-      "status"          => String?,
-      "comments"        => String?,
-      "location"        => String?,
-      "priority"        => Int32?,
-      "sequence"        => Int32?,
-      "organizer"       => CalAddress?,
-      "attendees"       => Array(CalAddress),
-      "geo"             => Hash(String, Float64)?,
-      "recurrence"      => RecurrenceRule?,
-      "exdate"          => Array(Time),
-      "url"             => URI?
-    }
-
     JSON.mapping(
       uid: {type: String},
       dtstamp: {type: Time, converter: Time::ISO8601Converter},
+      created: {type: Time?},
+      last_mod: {type: Time?, key: "last-mod"},
       dtstart: {type: Time, converter: Time::ISO8601Converter},
       dtend: {type: Time?, converter: Time::ISO8601Converter},
       duration: {type: Duration?},
       summary: {type: String?},
       classification: {type: String?},
       categories: {type: Array(String)?},
-      transp: {type: String?},
+      resources: {type: Array(String)?},
+      contacts: {type: Array(String)?},
+      related_to: {type: Array(String)?, key: "related-to"},
       request_status: {type: Array(String)?, key: "request-status"},
+      transp: {type: String?},
+      description: {type: String?},
+      status: {type: String?},
+      comments: {type: String?},
+      location: {type: String?},
+      priority: {type: Int32?},
+      sequence: {type: Int32?},
+      organizer: {type: CalAddress?},
+      attendees: {type: Array(CalAddress)?},
       geo: {type: Hash(String, Float64)?},
       recurrence: {type: RecurrenceRule?},
+      exdate: {type: Array(Time)?, converter: JSON::ArrayConverter(Time::ISO8601Converter)},
+      url: {type: URI?, converter: URI::URIConverter},
       all_day: {type: Bool?, key: "all-day"}
     )
-
-    # @all_day = false
-
-    @resources = [] of String
-    @contacts = [] of String
-    @related_to = [] of String
-    @request_status = [] of String
-    @attendees = [] of CalAddress
-    @exdate = [] of Time
-    @rdate = [] of Time | PeriodOfTime
 
     def initialize(@uid : String, @dtstamp : Time, @dtstart : Time)
     end
@@ -110,6 +85,35 @@ module IcalParser
     def categories
       @categories || [] of String
     end
+
+    def attendees
+      @attendees || [] of CalAddress
+    end
+
+    def contacts
+      @contacts || [] of String
+    end
+
+    def resources
+      @resources || [] of String
+    end
+
+    def related_to
+      @related_to || [] of String
+    end
+
+    def request_status
+      @request_status || [] of String
+    end
+
+    def exdate
+      @exdate || [] of Time
+    end
+
+    def rdate
+      @rdate || [] of Time | PeriodOfTime
+    end
+
 
     def transp
       @transp || "OPAQUE"

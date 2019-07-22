@@ -1,3 +1,21 @@
+module JSON::ArrayConverter(Converter)
+  def self.from_json(pull : JSON::PullParser)
+    ary = Array(typeof(Converter.from_json(pull))).new
+    pull.read_array do
+      ary << Converter.from_json(pull)
+    end
+    ary
+  end
+
+  def self.to_json(values : Array, builder : JSON::Builder)
+    builder.array do
+      values.each do |value|
+        Converter.to_json(value, builder)
+      end
+    end
+  end
+end
+
 struct Time
   module ISO8601Converter
     ISO8601_UTC_DT_REGEX = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z/
