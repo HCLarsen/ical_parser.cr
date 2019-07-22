@@ -43,12 +43,8 @@ module IcalParser
     end
 
     def parse(eventc : String) : Event
-      lines = content_lines(eventc)
-      matches = lines_matches(lines)
       found = parse_to_json(eventc)
-
-      event = Event.from_json(found)
-      return event
+      Event.from_json(found)
     end
 
     def parse_to_json(eventc : String) : String
