@@ -112,4 +112,26 @@ class CalendarParserTest < Minitest::Test
     assert_equal Time.utc(1998, 3, 9, 13, 0, 0), event.created
     assert_equal Time.utc(1998, 3, 9, 15, 5, 0), event.last_mod
   end
+
+  #JSON tests
+  def test_parses_simple_calendar_to_json
+    calendar_object = <<-HEREDOC
+    BEGIN:VCALENDAR\r
+    VERSION:2.0\r
+    PRODID:-//hacksw/handcal//NONSGML v1.0//EN\r
+    BEGIN:VEVENT\r
+    UID:19970610T172345Z-AF23B2@example.com\r
+    DTSTAMP:19970610T172345Z\r
+    DTSTART:19970714T170000Z\r
+    DTEND:19970715T040000Z\r
+    SUMMARY:Bastille Day Party\r
+    END:VEVENT\r
+    END:VCALENDAR
+    HEREDOC
+
+    expected = %({"version":"2.0","prodid":"-//hacksw/handcal//NONSGML v1.0//EN","events":[{"uid":"19970610T172345Z-AF23B2@example.com","dtstamp":"1997-06-10T17:23:45Z","dtstart":"1997-07-14T17:00:00Z","dtend":"1997-07-15T04:00:00Z","summary":"Bastille Day Party"}]})
+
+    calendar = @parser.parse_to_json(calendar_object)
+    assert_equal expected, calendar
+  end
 end
