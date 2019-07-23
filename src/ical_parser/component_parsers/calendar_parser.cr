@@ -25,10 +25,21 @@ module IcalParser
       Calendar.from_json(found)
     end
 
-    def parse_to_json(calendar_object : String)
+    def parse_to_json(calendar_object : String) : String
+      calendar_object = calendar_object.lchop("BEGIN:VCALENDAR\r\n").rchop("END:VCALENDAR")
+      calendar_object = unfold(calendar_object)
+
+      props = parse_properties(calendar_object)
+      events = parse_components(calendar_object)
+
+      props.concat(events)
+
+      %({#{props.join(",")}})
+    end
+
+    private def parse_properties(calendar_object : String) : Array(String)
       found = Hash(String, String).new
 
-      calendar_object = unfold(calendar_object)
       lines = content_lines(calendar_object)
       matches = lines_matches(lines)
 
@@ -52,40 +63,42 @@ module IcalParser
         end
       end
 
-      props = Array(String).new
       found.map do |k, v|
-        props << %("#{k}":#{v})
+        %("#{k}":#{v})
       end
+    end
+
+    private def parse_components(calendar_object) : Array(String)
+      found = Hash(String, Array(String)).new
 
       events = [] of String
-      components = lines.join("\n").scan(COMPONENT_REGEX)
+      components = calendar_object.scan(COMPONENT_REGEX)
       components.each do |component|
         if component["type"].strip == "VEVENT"
-          events << EventParser.parser.parse_to_json(component[0])
+          if found["events"]?
+            found["events"] << EventParser.parser.parse_to_json(component[0])
+          else
+            found["events"] = [EventParser.parser.parse_to_json(component[0])]
+          end
         end
       end
 
-      props << %("events":[#{events.join(",")}])
-
-      %({#{props.join(",")}})
-    end
-
-    private def parse_components(args_name)
+      found.map do |k, v|
+        %("#{k}":[#{v.join(",")}])
+      end
     end
 
     private def content_lines(component : String)
       lines = component.lines
-      lines.shift?
-      lines.pop?
       lines
     end
 
     private def lines_matches(lines : Array(String))
-      lines.map do |line|
+      lines.map_with_index do |line, index|
         if match = line.match(LINES_REGEX)
           match
         else
-          raise "Invalid Event: Invalid content line: #{line}"
+          raise "Invalid Event: Invalid content line ##{index}: #{line}"
         end
       end
     end
