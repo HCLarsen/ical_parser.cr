@@ -88,9 +88,9 @@ event["NON-SMOKING"]  #=> True
 
 ### Values
 
-Where possible, property values are returned as the corresponding Crystal core data type. TEXT values are returned as Strings, Date, Time and Date-Times are returned as Time, Duration is returned as Time::Span, and so forth.
+Where possible, property values are returned as the corresponding Crystal core data type. TEXT values are returned as Strings; Date, Time and Date-Times are returned as Time, Integer is returned as Int32, and so forth.
 
-For values that don't have a corresponding Crystal core class, those types are provided by this module. These include CalAddress, PeriodOfTime and Recur.
+For values that don't have a corresponding Crystal core class, those types are provided by this module. These include CalAddress, PeriodOfTime, Duration and Recur.
 
 ## Contributing
 
