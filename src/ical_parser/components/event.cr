@@ -5,8 +5,8 @@ module IcalParser
     JSON.mapping(
       uid: {type: String},
       dtstamp: {type: Time, converter: Time::ISO8601Converter},
-      created: {type: Time?},
-      last_mod: {type: Time?, key: "last-mod"},
+      created: {type: Time?, converter: Time::ISO8601Converter},
+      last_mod: {type: Time?, key: "last-mod", converter: Time::ISO8601Converter},
       dtstart: {type: Time, converter: Time::ISO8601Converter},
       dtend: {type: Time?, converter: Time::ISO8601Converter},
       duration: {type: Duration?},
