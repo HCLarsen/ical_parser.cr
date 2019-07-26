@@ -5,9 +5,10 @@ require "/../src/iCal"
 
 class ICSStreamTest < Minitest::Test
   include IcalParser
+  TEST_FILE_FOLDER = File.join(File.dirname(File.dirname(__FILE__)), "files")
 
   def test_parses_local_file
-    filename = File.join(File.dirname(__FILE__), "files", "FIFA_World_Cup_2018.ics")
+    filename = File.join(TEST_FILE_FOLDER, "FIFA_World_Cup_2018.ics")
     calendar = ICSStream.read(filename)
     assert_equal Calendar, calendar.class
     assert_equal "-//Calendar Labs//Calendar 1.0//EN", calendar.prodid
@@ -23,7 +24,7 @@ class ICSStreamTest < Minitest::Test
   end
 
   def test_parses_local_file_as_array
-    filename = File.join(File.dirname(__FILE__), "files", "multical.ics")
+    filename = File.join(TEST_FILE_FOLDER, "multical.ics")
     calendars = ICSStream.read_calendars(filename)
     assert_equal Array(Calendar), calendars.class
     assert_equal 2, calendars.size
