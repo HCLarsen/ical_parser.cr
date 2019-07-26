@@ -11,11 +11,18 @@ class DurationTest < Minitest::Test
   end
 
   def test_initializes_standard_form
-    duration = Duration.new(days: 15, hours: 5, minutes: 0, seconds: 20)
+    duration = Duration.new(days: 15, hours: 5, seconds: 20)
     assert_equal 15, duration.days
     assert_equal 5, duration.hours
     assert_equal 0, duration.minutes
     assert_equal 20, duration.seconds
+  end
+
+  def test_calculates_duration_between_dates
+    date1 = Time.new(2019, 7, 25, 10, 8, 0)
+    date2 = Time.new(2019, 7, 25, 11, 0, 0)
+    expected = Duration.new(minutes: 52)
+    assert_equal expected, Duration.between(date1, date2)
   end
 
   def test_parses_json_weeks
@@ -32,6 +39,7 @@ class DurationTest < Minitest::Test
     assert_equal 5, duration.hours
     assert_equal 0, duration.minutes
     assert_equal 20, duration.seconds
+    assert_equal json, duration.to_json
   end
 
   def test_raises_for_json_with_weeks_and_days
