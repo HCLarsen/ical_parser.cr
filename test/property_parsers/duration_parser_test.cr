@@ -21,7 +21,7 @@ class DurationParserTest < Minitest::Test
 
   def test_parses_duration_with_multiple_elements
     string = "P15DT5H0M20S"
-    assert_equal %({"days":15,"hours":5,"minutes":0,"seconds":20}), @parser.call(string, @params)
+    assert_equal %({"days":15,"hours":5,"seconds":20}), @parser.call(string, @params)
   end
 
   def test_parses_weeklong_duration
