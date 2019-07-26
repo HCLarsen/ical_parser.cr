@@ -58,22 +58,22 @@ module IcalParser
       check_end_greater_than_start(@dtstart, dtend)
     end
 
-    # def duration : Time::Span
-    #   if dtend = @dtend
-    #     dtend - @dtstart
-    #   else
-    #     Time::Span.zero
-    #   end
-    # end
-    #
-    # def duration=(duration : Time::Span)
-    #   if duration > Time::Span.zero
-    #     @dtend = @dtstart + duration
-    #   else
-    #     raise "Error: Duration value must be greater than zero"
-    #   end
-    # end
-    #
+    def duration : Duration
+      if dtend = @dtend
+        Duration.between(@dtstart, dtend)
+      else
+        Duration.new
+      end
+    end
+
+    def duration=(duration : Duration)
+      if duration >= Duration.new
+        @duration = duration
+      else
+        raise "Error: Duration value must be greater than zero"
+      end
+    end
+
     def all_day?
       @all_day
     end

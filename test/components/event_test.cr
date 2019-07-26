@@ -13,6 +13,7 @@ class EventTest < Minitest::Test
     event = IcalParser::Event.new(uid, dtstamp, dtstart)
     assert_equal uid, event.uid
     assert_equal dtstamp, event.dtstamp
+    assert_equal Duration.new, event.duration
     refute event.all_day?
   end
 
@@ -25,6 +26,7 @@ class EventTest < Minitest::Test
     assert_equal uid, event.uid
     assert_equal dtstart, event.dtstart
     assert_equal dtend, event.dtend
+    assert_equal Duration.new(hours: 2, minutes: 30), event.duration
   end
 
   def test_initializes_event_with_duration
