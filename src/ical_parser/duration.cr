@@ -3,11 +3,11 @@ require "json"
 module IcalParser
   class Duration
     JSON.mapping(
-      weeks: { type: Int32?, getter: false, default: nil },
-      days: { type: Int32?, getter: false, default: nil },
-      hours: { type: Int32?, getter: false, default: nil },
-      minutes: { type: Int32?, getter: false, default: nil },
-      seconds: { type: Int32?, getter: false, default: nil },
+      weeks: {type: Int32?, getter: false, default: nil},
+      days: {type: Int32?, getter: false, default: nil},
+      hours: {type: Int32?, getter: false, default: nil},
+      minutes: {type: Int32?, getter: false, default: nil},
+      seconds: {type: Int32?, getter: false, default: nil},
     )
 
     def initialize(@weeks : Int32)
