@@ -1,5 +1,3 @@
-require "./value_parser"
-
 module IcalParser
   @@boolean_parser = Proc(String, Hash(String, String), String).new do |value, params|
     if value == "TRUE"

@@ -1,5 +1,4 @@
 require "json"
-require "./value_parser"
 
 module IcalParser
   @@date_parser = Proc(String, Hash(String, String), String).new do |value, params|

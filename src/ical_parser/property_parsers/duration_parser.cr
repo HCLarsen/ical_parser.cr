@@ -1,5 +1,3 @@
-require "./value_parser"
-
 require "./../duration"
 
 module IcalParser

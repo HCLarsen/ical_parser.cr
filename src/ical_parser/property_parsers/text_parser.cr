@@ -1,5 +1,4 @@
 require "json"
-require "./value_parser"
 
 module IcalParser
   # Parses a TEXT property into a String object, removing escape characters.
