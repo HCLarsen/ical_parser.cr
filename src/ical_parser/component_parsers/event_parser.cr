@@ -1,6 +1,8 @@
 module IcalParser
   class EventParser
+    DELIMITER = "VEVENT"
     LINES_REGEX = /(?<name>.*?)(?<params>;[a-zA-Z\-]*=(?:".*"|[^:;\n]*)+)?:(?<value>.*)/
+    COMPONENT_REGEX = /^BEGIN:(?<type>.*?)$.*?^END:.*?$/m
 
     COMPONENT_PROPERTIES = {
       "uid"             => Property.new(PARSERS["TEXT"]),
@@ -42,12 +44,19 @@ module IcalParser
       end
     end
 
-    def parse(eventc : String) : Event
-      found = parse_to_json(eventc)
+    def parse(component : String) : Event
+      found = parse_to_json(component)
       Event.from_json(found)
     end
 
-    def parse_to_json(eventc : String) : String
+    def parse_to_json(component : String) : String
+      component = remove_delimiters(component)
+      props = parse_properties(component)
+
+      %({#{props.join(",")}})
+    end
+
+    private def parse_properties(component : String) : Array(String)
       property_names = {
         "last-modified"   => "last-mod",
         "class"           => "classification",
@@ -58,13 +67,12 @@ module IcalParser
       }
       found = Hash(String, String).new
 
-      lines = content_lines(eventc)
-
+      lines = content_lines(component)
       matches = lines_matches(lines)
 
       matches.each do |match|
         name = match["name"].downcase
-        if property_names.keys.includes?(name)
+        if property_names[name]?
           name = property_names[name]
         end
 
@@ -85,31 +93,30 @@ module IcalParser
         end
       end
 
-      props = Array(String).new
+      if found["dtstart"]? && found["dtstart"].match(/^"\d{4}-\d{2}-\d{2}"$/)
+        found["all-day"] = "true"
+      end
+
       found.map do |k, v|
-        props << %("#{k}":#{v})
+        %("#{k}":#{v})
       end
-
-      if found["dtstart"].match(/^"\d{4}-\d{2}-\d{2}"$/)
-        props << %("all-day":true)
-      end
-
-      %({#{props.join(",")}})
     end
 
-    private def content_lines(component : String)
+    private def remove_delimiters(component : String) : String
+      component.lchop("BEGIN:#{DELIMITER}\r\n").rchop("END:#{DELIMITER}")
+    end
+
+    private def content_lines(component : String) : Array(String)
       lines = component.lines
-      lines.shift?
-      lines.pop?
       lines
     end
 
-    private def lines_matches(lines : Array(String))
-      lines.map do |line|
+    private def lines_matches(lines : Array(String)) : Array(Regex::MatchData)
+      lines.map_with_index do |line, index|
         if match = line.match(LINES_REGEX)
           match
         else
-          raise "Invalid Event: Invalid content line: #{line}"
+          raise "Invalid Event: Invalid content line ##{index}: #{line}"
         end
       end
     end
