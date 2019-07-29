@@ -103,13 +103,6 @@ module IcalParser
       end
     end
 
-    private def remove_first_and_last_lines(string : String)
-      lines = string.lines
-      lines.shift?
-      lines.pop?
-      lines.join("\r\n")
-    end
-
     private def unfold(string : String)
       string.gsub("\r\n ", "")
     end
