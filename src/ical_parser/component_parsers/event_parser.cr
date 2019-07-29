@@ -114,62 +114,6 @@ module IcalParser
       end
     end
 
-    private def validated_all_day?(matches : Array(Regex::MatchData)) : Bool
-      prop = COMPONENT_PROPERTIES["dtstart"]
-      dtstart = matches.select { |e| e["name"].downcase == "dtstart" }.first
-      dtend = matches.select { |e| e["name"].downcase == "dtend" }.first?
-      duration = matches.select { |e| e["name"].downcase == "duration" }.first?
-      start_params = prop.parse_params(dtstart["params"]? || "")
-      if dtend
-        end_params = prop.parse_params(dtend["params"]? || "")
-        if start_params["VALUE"]? != end_params["VALUE"]?
-          raise "Invalid Event: DTSTART and DTEND must be the same value type"
-        end
-      elsif duration
-        if start_params["VALUE"]? == "DATE" && duration["value"].match(/[smh]/i)
-          raise "Invalid Event: DURATION MUST be day or week duration only"
-        end
-      end
-      start_params["VALUE"]? == "DATE" ? true : false
-    end
-
-    private def validate(data)
-      confirm_mandatory_values_present(data.keys)
-
-      if data["dtend"]?
-        dtend = data["dtend"].as Time
-        dtstart = data["dtstart"].as Time
-        if dtend <= dtstart
-          raise "Invalid Event: DTEND MUST BE later than DTSTART"
-        end
-
-        if data["duration"]?
-          raise "Invalid Event: DTEND and DURATION MUST NOT appear in the same event"
-        end
-      end
-
-      if data["transp"]?
-        transp = data["transp"].as String
-        if !transp.match(/OPAQUE|TRANSPARENT/)
-          raise "Invalid Event: TRANSP must be either OPAQUE or TRANSPARENT"
-        end
-      end
-    end
-
-    private def confirm_mandatory_values_present(found_properties : Array(String))
-      mandatory_properties.each do |prop|
-        if !found_properties.includes? prop
-          raise "Invalid Event: #{prop.upcase} is REQUIRED"
-        end
-      end
-    end
-
-    private def mandatory_properties
-      Event::PROPERTIES.select do |k, v|
-        !v.nilable? && !v.name.starts_with? "Array"
-      end.keys
-    end
-
     def dup
       raise Exception.new("Can't duplicate instance of singleton #{self.class}")
     end
