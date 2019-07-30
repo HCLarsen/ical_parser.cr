@@ -30,7 +30,8 @@ module IcalParser
       "attendees"       => Property.new(PARSERS["CAL-ADDRESS"], only_once: false),
       "geo"             => Property.new(PARSERS["FLOAT"], parts: ["lat", "lon"]),
       "recurrence"      => Property.new(PARSERS["RECUR"]),
-      "exdate"          => Property.new(PARSERS["DATE-TIME"], single_value: false, only_once: false),
+      "exdate"          => Property.new(PARSERS["DATE-TIME"], alt_values: ["DATE"], single_value: false, only_once: false),
+      "rdate"           => Property.new(PARSERS["DATE-TIME"], alt_values: ["DATE", "PERIOD"], single_value: false, only_once: false),
       "url"             => Property.new(PARSERS["URI"]),
     }
 
