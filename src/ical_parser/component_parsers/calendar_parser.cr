@@ -11,6 +11,10 @@ module IcalParser
       "method"    => Property.new(PARSERS["TEXT"]),
     }
 
+    COMPONENTS = {
+      "VEVENT"    => {parser: EventParser, key: "events"},
+    }
+
     private def initialize; end
 
     def self.parser : CalendarParser
@@ -31,9 +35,9 @@ module IcalParser
       component = unfold(component)
 
       props = parse_properties(component)
-      events = parse_components(component)
+      components = parse_components(component)
 
-      props.concat(events)
+      props.concat(components)
 
       %({#{props.join(",")}})
     end
@@ -83,11 +87,14 @@ module IcalParser
       events = [] of String
       components = component.scan(COMPONENT_REGEX)
       components.each do |component|
-        if component["type"].strip == "VEVENT"
-          if found["events"]?
-            found["events"] << EventParser.parser.parse_to_json(component[0])
+        name = component["type"].strip
+        if COMPONENTS.keys.includes? name
+          key = COMPONENTS[name]["key"]
+          parser = COMPONENTS[name]["parser"].parser
+          if found[key]?
+            found[key] << parser.parse_to_json(component[0])
           else
-            found["events"] = [EventParser.parser.parse_to_json(component[0])]
+            found[key] = [parser.parse_to_json(component[0])]
           end
         end
       end
