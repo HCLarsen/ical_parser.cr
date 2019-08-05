@@ -1,3 +1,4 @@
+require "./object"
 require "json"
 require "uri"
 require "./converters"
@@ -40,20 +41,9 @@ module IcalParser
 
     def_equals @uri
 
-    def cutype
-      @cutype || CUType::Individual
-    end
-
-    def role
-      @role || Role::ReqParticipant
-    end
-
-    def part_stat
-      @part_stat || PartStat::NeedsAction
-    end
-
-    def rsvp
-      @rsvp || false
-    end
+    getter cutype, type: CUType, value: CUType::Individual
+    getter role, type: Role, value: Role::ReqParticipant
+    getter part_stat, type: PartStat, value: PartStat::NeedsAction
+    getter rsvp, type: Bool, value: false
   end
 end
