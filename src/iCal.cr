@@ -7,8 +7,6 @@ require "./ical_parser/stream_parser/*"
 
 # TODO: Write documentation for `IcalParser`
 module IcalParser
-  TYPES = [Bool, Float64, Int32, String, Time]
-
   alias ParserType = Proc(String, Hash(String, String), String)
 
   PARSERS = {
