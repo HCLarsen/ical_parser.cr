@@ -2,7 +2,7 @@ module IcalParser
   class CalendarParser
     DELIMITER = "VCALENDAR"
     LINES_REGEX = /(?<name>.*?)(?<params>;[a-zA-Z\-]*=(?:".*"|[^:;\n]*)+)?:(?<value>.*)/
-    COMPONENT_REGEX = /^BEGIN:(?<type>.*?)$.*?^END:.*?$/m
+    COMPONENT_REGEX = /^BEGIN:(?<type>.*?)$.*?^END:\k<type>$/m
 
     COMPONENT_PROPERTIES = {
       "prodid"    => Property.new(PARSERS["TEXT"]),
@@ -109,6 +109,7 @@ module IcalParser
     end
 
     private def content_lines(component : String) : Array(String)
+      component = component.gsub(/#{COMPONENT_REGEX}\n/, nil)
       lines = component.lines
       lines
     end

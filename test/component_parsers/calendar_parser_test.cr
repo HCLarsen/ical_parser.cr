@@ -71,40 +71,40 @@ class CalendarParserTest < Minitest::Test
 
   def test_parses_event_with_time_zone
     calendar_object = <<-HEREDOC
-    BEGIN:VCALENDAR
-    PRODID:-//RDU Software//NONSGML HandCal//EN
-    VERSION:2.0
-    BEGIN:VTIMEZONE
-    TZID:America/New_York
-    BEGIN:STANDARD
-    DTSTART:19981025T020000
-    TZOFFSETFROM:-0400
-    TZOFFSETTO:-0500
-    TZNAME:EST
-    END:STANDARD
-    BEGIN:DAYLIGHT
-    DTSTART:19990404T020000
-    TZOFFSETFROM:-0500
-    TZOFFSETTO:-0400
-    TZNAME:EDT
-    END:DAYLIGHT
-    END:VTIMEZONE
-    BEGIN:VEVENT
-    DTSTAMP:19980309T231000Z
-    UID:guid-1.example.com
-    ORGANIZER:mailto:mrbig@example.com
+    BEGIN:VCALENDAR\r
+    PRODID:-//RDU Software//NONSGML HandCal//EN\r
+    VERSION:2.0\r
+    BEGIN:VTIMEZONE\r
+    TZID:America/New_York\r
+    BEGIN:STANDARD\r
+    DTSTART:19981025T020000\r
+    TZOFFSETFROM:-0400\r
+    TZOFFSETTO:-0500\r
+    TZNAME:EST\r
+    END:STANDARD\r
+    BEGIN:DAYLIGHT\r
+    DTSTART:19990404T020000\r
+    TZOFFSETFROM:-0500\r
+    TZOFFSETTO:-0400\r
+    TZNAME:EDT\r
+    END:DAYLIGHT\r
+    END:VTIMEZONE\r
+    BEGIN:VEVENT\r
+    DTSTAMP:19980309T231000Z\r
+    UID:guid-1.example.com\r
+    ORGANIZER:mailto:mrbig@example.com\r
     ATTENDEE;RSVP=TRUE;ROLE=REQ-PARTICIPANT;CUTYPE=GROUP:
-     mailto:employee-A@example.com
-    DESCRIPTION:Project XYZ Review Meeting
-    CATEGORIES:MEETING
-    CLASS:PUBLIC
-    CREATED:19980309T130000Z
-    LAST-MODIFIED:19980309T150500Z
-    SUMMARY:XYZ Project Review
-    DTSTART;TZID=America/New_York:19980312T083000
-    DTEND;TZID=America/New_York:19980312T093000
-    LOCATION:1CP Conference Room 4350
-    END:VEVENT
+     mailto:employee-A@example.com\r
+    DESCRIPTION:Project XYZ Review Meeting\r
+    CATEGORIES:MEETING\r
+    CLASS:PUBLIC\r
+    CREATED:19980309T130000Z\r
+    LAST-MODIFIED:19980309T150500Z\r
+    SUMMARY:XYZ Project Review\r
+    DTSTART;TZID=America/New_York:19980312T083000\r
+    DTEND;TZID=America/New_York:19980312T093000\r
+    LOCATION:1CP Conference Room 4350\r
+    END:VEVENT\r
     END:VCALENDAR
     HEREDOC
     calendar = @parser.parse(calendar_object)
