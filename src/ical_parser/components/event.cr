@@ -12,12 +12,12 @@ module IcalParser
       duration: {type: Duration?},
       summary: {type: String?},
       classification: {type: String?},
-      categories: {type: Array(String)?},
-      resources: {type: Array(String)?},
-      contacts: {type: Array(String)?},
-      related_to: {type: Array(String)?, key: "related-to"},
-      request_status: {type: Array(String)?, key: "request-status"},
-      transp: {type: String?},
+      categories: {type: Array(String)?, getter: false},
+      resources: {type: Array(String)?, getter: false},
+      contacts: {type: Array(String)?, getter: false},
+      related_to: {type: Array(String)?, key: "related-to", getter: false},
+      request_status: {type: Array(String)?, key: "request-status", getter: false},
+      transp: {type: String?, getter: false},
       description: {type: String?},
       status: {type: String?},
       comments: {type: String?},
@@ -25,13 +25,22 @@ module IcalParser
       priority: {type: Int32?},
       sequence: {type: Int32?},
       organizer: {type: CalAddress?},
-      attendees: {type: Array(CalAddress)?},
+      attendees: {type: Array(CalAddress)?, getter: false},
       geo: {type: Hash(String, Float64)?},
       recurrence: {type: RecurrenceRule?},
-      exdate: {type: Array(Time)?, converter: JSON::ArrayConverter(Time::ISO8601Converter)},
+      exdate: {type: Array(Time)?, getter: false, converter: JSON::ArrayConverter(Time::ISO8601Converter)},
       url: {type: URI?, converter: URI::URIConverter},
-      all_day: {type: Bool?, key: "all-day"}
+      all_day: {type: Bool?, key: "all-day", getter: false}
     )
+
+    getter? all_day
+    getter attendees, type: Array(CalAddress), value: [] of CalAddress
+    getter categories, contacts, resources, related_to, request_status, type: Array(String), value: [] of String
+    getter exdate, type: Array(Time), value: [] of Time
+    getter rdate, type: Array(Time | PeriodOfTime), value: [] of Time | PeriodOfTime
+    getter transp, type: String, value: "OPAQUE"
+
+    def_equals @uid, @dtstamp, @dtstart, @dtend, @summary
 
     def initialize(@uid : String, @dtstamp : Time, @dtstart : Time)
     end
@@ -74,51 +83,6 @@ module IcalParser
       end
     end
 
-    def all_day?
-      @all_day
-    end
-
-    def all_day=(value : Bool)
-      @all_day = value
-    end
-
-    def categories
-      @categories || [] of String
-    end
-
-    def attendees
-      @attendees || [] of CalAddress
-    end
-
-    def contacts
-      @contacts || [] of String
-    end
-
-    def resources
-      @resources || [] of String
-    end
-
-    def related_to
-      @related_to || [] of String
-    end
-
-    def request_status
-      @request_status || [] of String
-    end
-
-    def exdate
-      @exdate || [] of Time
-    end
-
-    def rdate
-      @rdate || [] of Time | PeriodOfTime
-    end
-
-
-    def transp
-      @transp || "OPAQUE"
-    end
-
     def opaque?
       @transp != "TRANSPARENT"
     end
@@ -138,8 +102,6 @@ module IcalParser
       end
       newtime
     end
-
-    def_equals @uid, @dtstamp, @dtstart, @dtend, @summary
 
     private def check_end_greater_than_start(dtstart : Time, dtend : Time)
       if dtend > dtstart
