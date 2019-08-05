@@ -4,7 +4,7 @@ class Object
       @{{name.id}} : {{type.id}}?
 
       def {{name.id}}
-        @{{name.id}} || {{value.id}}
+        @{{name.id}} || {{value}}
       end
     {% end %}
   end

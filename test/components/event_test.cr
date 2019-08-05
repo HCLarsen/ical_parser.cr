@@ -14,6 +14,8 @@ class EventTest < Minitest::Test
     assert_equal uid, event.uid
     assert_equal dtstamp, event.dtstamp
     assert_equal Duration.new, event.duration
+    assert_equal "OPAQUE", event.transp
+    assert_equal "PUBLIC", event.classification
     refute event.all_day?
   end
 

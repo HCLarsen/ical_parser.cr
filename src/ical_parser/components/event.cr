@@ -39,6 +39,7 @@ module IcalParser
     getter exdate, type: Array(Time), value: [] of Time
     getter rdate, type: Array(Time | PeriodOfTime), value: [] of Time | PeriodOfTime
     getter transp, type: String, value: "OPAQUE"
+    getter classification, type: String, value: "PUBLIC"
 
     def_equals @uid, @dtstamp, @dtstart, @dtend, @summary
 
