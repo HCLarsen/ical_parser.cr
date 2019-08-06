@@ -32,21 +32,15 @@ module IcalParser
     end
 
     def parse_value(value : String, params : Hash(String, String)) : String
-      if value_type = params["VALUE"]?
-        if @alt_values.includes?(value_type)
-          parser = PARSERS[value_type]
-        else
-          raise "Invalid value type for this property"
-        end
-      else
-        parser = PARSERS[@type]
-      end
+      semicolon_separator = /(?<!\\);/
+      comma_separator = /(?<!\\),/
+      parser = get_parser(params["VALUE"]?)
 
       if @single_value
         if @only_once && @parts.size == 1
           parser.call(value, params)
         elsif @parts.size > 1
-          values = value.split(/(?<!\\);/)
+          values = value.split(semicolon_separator)
           parts = @parts.map_with_index do |e, i|
             parsed = parser.call(values[i], params)
             %("#{e}":#{parsed})
@@ -56,9 +50,21 @@ module IcalParser
           %([#{parser.call(value, params)}])
         end
       else
-        values = value.split(/(?<!\\),/)
+        values = value.split(comma_separator)
         values.map! { |e| parser.call(e, params) }
         %([#{values.join(",")}])
+      end
+    end
+
+    def get_parser(value_type : String?)
+      if value_type
+        if @alt_values.includes?(value_type)
+          PARSERS[value_type]
+        else
+          raise "Invalid value type for this property"
+        end
+      else
+        PARSERS[@type]
       end
     end
   end
