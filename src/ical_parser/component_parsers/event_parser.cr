@@ -4,36 +4,9 @@ module IcalParser
     LINES_REGEX = /(?<name>.*?)(?<params>;[a-zA-Z\-]*=(?:".*"|[^:;\n]*)+)?:(?<value>.*)/
     COMPONENT_REGEX = /^BEGIN:(?<type>.*?)$.*?^END:.*?$/m
 
-    COMPONENT_PROPERTIES = {
-      "uid"             => Property.new("TEXT"),
-      "dtstamp"         => Property.new("DATE-TIME"),
-      "created"         => Property.new("DATE-TIME"),
-      "last-mod"        => Property.new("DATE-TIME"),
-      "dtstart"         => Property.new("DATE-TIME", alt_values: ["DATE"]),
-      "dtend"           => Property.new("DATE-TIME", alt_values: ["DATE"]),
-      "duration"        => Property.new("DURATION"),
-      "summary"         => Property.new("TEXT"),
-      "description"     => Property.new("TEXT"),
-      "classification"  => Property.new("TEXT"),
-      "categories"      => Property.new("TEXT", single_value: false, only_once: false),
-      "resources"       => Property.new("TEXT", single_value: false, only_once: false),
-      "contacts"        => Property.new("TEXT", single_value: false, only_once: false),
-      "related_to"      => Property.new("TEXT", single_value: false, only_once: false),
-      "request-status"  => Property.new("TEXT", only_once: false),
-      "transp"          => Property.new("TEXT"),
-      "status"          => Property.new("TEXT"),
-      "comments"        => Property.new("TEXT"),
-      "location"        => Property.new("TEXT"),
-      "priority"        => Property.new("INTEGER"),
-      "sequence"        => Property.new("INTEGER"),
-      "organizer"       => Property.new("CAL-ADDRESS"),
-      "attendees"       => Property.new("CAL-ADDRESS", only_once: false),
-      "geo"             => Property.new("FLOAT", parts: ["lat", "lon"]),
-      "recurrence"      => Property.new("RECUR"),
-      "exdate"          => Property.new("DATE-TIME", alt_values: ["DATE"], single_value: false, only_once: false),
-      "rdate"           => Property.new("DATE-TIME", alt_values: ["DATE", "PERIOD"], single_value: false, only_once: false),
-      "url"             => Property.new("URI"),
-    }
+    PROPERTY_KEYS = ["uid", "dtstamp", "created", "last-mod", "dtstart", "dtend", "duration", "summary", "description", "classification", "categories", "resources", "contacts", "related_to", "request-status", "transp", "status", "comments", "location", "priority", "sequence", "organizer", "attendees", "geo", "recurrence", "exdate", "rdate", "url"]
+
+    PROPERTIES = COMPONENT_PROPERTIES.select(PROPERTY_KEYS)
 
     private def initialize; end
 
@@ -77,8 +50,8 @@ module IcalParser
           name = property_names[name]
         end
 
-        if COMPONENT_PROPERTIES.keys.includes? name
-          property = COMPONENT_PROPERTIES[name]
+        if PROPERTIES.keys.includes? name
+          property = PROPERTIES[name]
           value = property.parse(match["value"], match["params"]?)
 
           unless found[name]?

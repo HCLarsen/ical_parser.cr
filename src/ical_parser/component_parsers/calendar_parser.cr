@@ -4,7 +4,7 @@ module IcalParser
     LINES_REGEX = /(?<name>.*?)(?<params>;[a-zA-Z\-]*=(?:".*"|[^:;\n]*)+)?:(?<value>.*)/
     COMPONENT_REGEX = /^BEGIN:(?<type>.*?)$.*?^END:\k<type>$/m
 
-    COMPONENT_PROPERTIES = {
+    PROPERTIES = {
       "prodid"    => Property.new("TEXT"),
       "version"   => Property.new("TEXT"),
       "calscale"  => Property.new("TEXT"),
@@ -55,8 +55,8 @@ module IcalParser
           name = property_names[name]
         end
 
-        if COMPONENT_PROPERTIES.keys.includes? name
-          property = COMPONENT_PROPERTIES[name]
+        if PROPERTIES.keys.includes? name
+          property = PROPERTIES[name]
           value = property.parse(match["value"], match["params"]?)
 
           unless found[name]?
