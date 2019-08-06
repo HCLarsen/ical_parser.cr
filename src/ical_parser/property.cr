@@ -1,11 +1,11 @@
 module IcalParser
   class Property
-    @parser : ParserType
+    @type : String
     @alt_values : Array(String)
     getter single_value : Bool
     getter only_once : Bool
 
-    def initialize(@parser : ParserType, *, @alt_values = [] of String, @parts = ["value"], @only_once = true, @single_value = true)
+    def initialize(@type : String, *, @alt_values = [] of String, @parts = ["value"], @only_once = true, @single_value = true)
     end
 
     def parse(value : String, params : String?) : String
@@ -39,7 +39,7 @@ module IcalParser
           raise "Invalid value type for this property"
         end
       else
-        parser = @parser
+        parser = PARSERS[@type]
       end
 
       if @single_value
