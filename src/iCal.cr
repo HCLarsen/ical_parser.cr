@@ -27,7 +27,7 @@ module IcalParser
   }
 
   COMPONENT_PROPERTIES = {
-    uid: {types: String, required: true},
+    uid: {types: ["TEXT"], required: true},
     dtstamp: {types: ["DATE-TIME"], required: true},
     created: {types: ["DATE-TIME"]},
     last_mod: {types: ["DATE-TIME"], key: "last-mod"},
