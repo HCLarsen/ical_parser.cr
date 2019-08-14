@@ -5,10 +5,10 @@ module IcalParser
     COMPONENT_REGEX = /^BEGIN:(?<type>.*?)$.*?^END:\k<type>$/m
 
     PROPERTIES = {
-      "prodid"    => Property.new("TEXT"),
-      "version"   => Property.new("TEXT"),
-      "calscale"  => Property.new("TEXT"),
-      "method"    => Property.new("TEXT"),
+      "prodid"    => Property.new(["TEXT"]),
+      "version"   => Property.new(["TEXT"]),
+      "calscale"  => Property.new(["TEXT"]),
+      "method"    => Property.new(["TEXT"]),
     }
 
     COMPONENTS = {
