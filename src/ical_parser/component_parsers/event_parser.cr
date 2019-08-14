@@ -6,7 +6,7 @@ module IcalParser
 
     PROPERTY_KEYS = ["uid", "dtstamp", "created", "last-mod", "dtstart", "dtend", "duration", "summary", "description", "classification", "categories", "resources", "contacts", "related_to", "request-status", "transp", "status", "comments", "location", "priority", "sequence", "organizer", "attendees", "geo", "recurrence", "exdate", "rdate", "url"]
 
-    PROPERTIES = COMPONENT_PROPERTIES.select(PROPERTY_KEYS)
+    PROPERTIES = Event::PROPERTIES
 
     private def initialize; end
 
