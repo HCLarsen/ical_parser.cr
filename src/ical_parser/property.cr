@@ -1,11 +1,13 @@
 module IcalParser
   class Property
-    @type : String
-    @alt_values : Array(String)
+    @types : Array(String)
     getter single_value : Bool
     getter only_once : Bool
 
-    def initialize(@type : String, *, @alt_values = [] of String, @parts = ["value"], @only_once = true, @single_value = true)
+    def initialize(@types, *, @parts = ["value"], @only_once = true, @single_value = true)
+      if @types.size < 1
+        raise "Property Error: Property must have at least ONE value type"
+      end
     end
 
     def parse(value : String, params : String?) : String
@@ -58,13 +60,13 @@ module IcalParser
 
     def get_parser(value_type : String?)
       if value_type
-        if @alt_values.includes?(value_type)
+        if @types.includes?(value_type)
           PARSERS[value_type]
         else
           raise "Invalid value type for this property"
         end
       else
-        PARSERS[@type]
+        PARSERS[@types[0]]
       end
     end
   end
