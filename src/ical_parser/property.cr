@@ -1,6 +1,7 @@
 module IcalParser
   class Property
     @types : Array(String)
+    @parser : ParserType
     getter single_value : Bool
     getter only_once : Bool
 
@@ -8,6 +9,7 @@ module IcalParser
       if @types.size < 1
         raise "Property Error: Property must have at least ONE value type"
       end
+      @parser = PARSERS[@types[0]]
     end
 
     def parse(value : String, params : String?) : String
@@ -33,40 +35,54 @@ module IcalParser
       Hash.zip(array.first, array.last)
     end
 
-    def parse_value(value : String, params : Hash(String, String)) : String
-      semicolon_separator = /(?<!\\);/
-      comma_separator = /(?<!\\),/
-      parser = get_parser(params["VALUE"]?)
+    private def parse_value(value : String, params : Hash(String, String)) : String
+      set_parser(params["VALUE"]?)
 
       if @single_value
         if @only_once && @parts.size == 1
-          parser.call(value, params)
+          parse_single_value(value, params)
         elsif @parts.size > 1
-          values = value.split(semicolon_separator)
-          parts = @parts.map_with_index do |e, i|
-            parsed = parser.call(values[i], params)
-            %("#{e}":#{parsed})
-          end
-          %({#{parts.join(",")}})
+          parse_multi_part(value, params)
         else
-          %([#{parser.call(value, params)}])
+          %([#{parse_single_value(value, params)}])
         end
       else
-        values = value.split(comma_separator)
-        values.map! { |e| parser.call(e, params) }
-        %([#{values.join(",")}])
+        parse_list(value, params)
       end
     end
 
-    def get_parser(value_type : String?)
+    private def parse_multi_part(list : String, params : Hash(String, String)) : String
+      semicolon_separator = /(?<!\\);/
+
+      values = list.split(semicolon_separator)
+      parts = @parts.map_with_index do |e, i|
+        parsed = parse_single_value(values[i], params)
+        %("#{e}":#{parsed})
+      end
+      %({#{parts.join(",")}})
+    end
+
+    private def parse_list(list : String, params : Hash(String, String)) : String
+      comma_separator = /(?<!\\),/
+
+      values = list.split(comma_separator)
+      values.map! { |e| parse_single_value(e, params) }
+      %([#{values.join(",")}])
+    end
+
+    private def parse_single_value(value : String, params : Hash(String, String)) : String
+      @parser.call(value, params)
+    end
+
+    private def set_parser(value_type : String?)
       if value_type
         if @types.includes?(value_type)
-          PARSERS[value_type]
+          @parser = PARSERS[value_type]
         else
           raise "Invalid value type for this property"
         end
       else
-        PARSERS[@types[0]]
+        @parser = PARSERS[@types[0]]
       end
     end
   end
