@@ -68,7 +68,7 @@ class EventParserTest < Minitest::Test
     assert event.all_day?
     assert_equal "TRANSPARENT", event.transp
     refute event.opaque?
-    assert_equal RecurrenceRule::Freq::Yearly, event.recurrence.not_nil!.frequency
+    assert_equal RecurrenceRule::Freq::Yearly, event.rrule.not_nil!.frequency
   end
 
   def test_parses_with_duration
@@ -299,7 +299,7 @@ class EventParserTest < Minitest::Test
     HEREDOC
 
     result = @parser.parse_to_json(eventc)
-    expected = %({"uid":"19970901T130000Z-123401@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-09-03T16:30:00Z","dtend":"1997-09-03T19:00:00Z","summary":"Annual Employee Review","classification":"PRIVATE","categories":["BUSINESS","HUMAN RESOURCES"]})
+    expected = %({"uid":"19970901T130000Z-123401@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-09-03T16:30:00Z","dtend":"1997-09-03T19:00:00Z","summary":"Annual Employee Review","class":"PRIVATE","categories":["BUSINESS","HUMAN RESOURCES"]})
 
     assert_equal expected, result
   end
@@ -319,7 +319,7 @@ class EventParserTest < Minitest::Test
     HEREDOC
 
     result = @parser.parse_to_json(eventc)
-    expected = %({"uid":"19970901T130000Z-123403@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-11-02","summary":"Our Blissful Anniversary","transp":"TRANSPARENT","classification":"CONFIDENTIAL","categories":["ANNIVERSARY","PERSONAL","SPECIAL OCCASION"],"recurrence":{"freq":"yearly"},"all-day":true})
+    expected = %({"uid":"19970901T130000Z-123403@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-11-02","summary":"Our Blissful Anniversary","transp":"TRANSPARENT","class":"CONFIDENTIAL","categories":["ANNIVERSARY","PERSONAL","SPECIAL OCCASION"],"rrule":{"freq":"yearly"},"all-day":true})
 
     assert_equal expected, result
   end
@@ -358,7 +358,7 @@ class EventParserTest < Minitest::Test
     HEREDOC
 
     result = @parser.parse_to_json(eventc)
-    expected = %({"uid":"19970901T130000Z-123403@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-11-02","summary":"Our Blissful Anniversary","transp":"TRANSPARENT","classification":"CONFIDENTIAL","categories":["ANNIVERSARY","PERSONAL","SPECIAL OCCASION"],"request-status":["4.1;Event conflict.  Date-time is busy."],"recurrence":{"freq":"yearly"},"all-day":true})
+    expected = %({"uid":"19970901T130000Z-123403@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-11-02","summary":"Our Blissful Anniversary","transp":"TRANSPARENT","class":"CONFIDENTIAL","categories":["ANNIVERSARY","PERSONAL","SPECIAL OCCASION"],"request-status":["4.1;Event conflict.  Date-time is busy."],"rrule":{"freq":"yearly"},"all-day":true})
 
     assert_equal expected, result
   end
@@ -394,7 +394,7 @@ class EventParserTest < Minitest::Test
     HEREDOC
 
     result = @parser.parse_to_json(eventc)
-    expected = %({"uid":"20070423T123432Z-541111@example.com","dtstamp":"1997-08-29T18:00:00Z","dtstart":"1997-09-02T09:00:00-04:00","exdate":["1997-09-02T09:00:00-04:00"],"recurrence":{"freq":"monthly","byday":["FR"],"bymonthday":[13]}})
+    expected = %({"uid":"20070423T123432Z-541111@example.com","dtstamp":"1997-08-29T18:00:00Z","dtstart":"1997-09-02T09:00:00-04:00","exdate":["1997-09-02T09:00:00-04:00"],"rrule":{"freq":"monthly","byday":["FR"],"bymonthday":[13]}})
 
     assert_equal expected, result
   end

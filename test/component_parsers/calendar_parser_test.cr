@@ -110,7 +110,7 @@ class CalendarParserTest < Minitest::Test
     calendar = @parser.parse(calendar_object)
     event = calendar.events.first
     assert_equal Time.utc(1998, 3, 9, 13, 0, 0), event.created
-    assert_equal Time.utc(1998, 3, 9, 15, 5, 0), event.last_mod
+    assert_equal Time.utc(1998, 3, 9, 15, 5, 0), event.last_modified
   end
 
   #JSON tests

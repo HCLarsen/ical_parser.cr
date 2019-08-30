@@ -32,12 +32,9 @@ module IcalParser
 
     private def parse_properties(component : String) : Array(String)
       property_names = {
-        "last-modified"   => "last-mod",
-        "class"           => "classification",
         "attendee"        => "attendees",
         "comment"         => "comments",
         "contact"         => "contacts",
-        "rrule"           => "recurrence",
       }
       found = Hash(String, String).new
 
