@@ -37,6 +37,10 @@ module IcalParser
   }
 
   COMPONENT_PROPERTIES = {
+    prodid: {types: ["TEXT"]},
+    version: {types: ["TEXT"]},
+    method: {types: ["TEXT"]},
+    calscale: {types: ["TEXT"]},
     uid: {types: ["TEXT"], required: true},
     dtstamp: {types: ["DATE-TIME"], required: true},
     created: {types: ["DATE-TIME"]},
@@ -51,7 +55,7 @@ module IcalParser
     contact: {types: ["CAL-ADDRESS"]},
     related_to: {types: ["TEXT"], key: "related-to", getter: false},
     request_status: {types: ["TEXT"], key: "request-status", getter: false},
-    transparency: {types: ["TEXT"], default: "opaque"},
+    transp: {types: ["TEXT"], default: "opaque"},
     description: {types: ["TEXT"]},
     status: {types: ["TEXT"]},
     comment: {types: ["TEXT"]},

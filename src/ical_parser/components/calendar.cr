@@ -1,13 +1,15 @@
-require "./event"
 require "./../property_parsers/*"
+require "./../property"
+require "./../enums"
+require "./*"
 
 module IcalParser
   class Calendar
     PROPERTIES = {
-      "prodid"    => String,
-      "version"   => String,
-      "method"    => String,
-      "calscale"  => String
+      "prodid"    => Property.new("prodid"),
+      "version"   => Property.new("version"),
+      "calscale"  => Property.new("calscale"),
+      "method"    => Property.new("method"),
     }
 
     JSON.mapping(

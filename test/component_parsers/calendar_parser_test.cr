@@ -1,6 +1,6 @@
 require "minitest/autorun"
 
-require "/../src/iCal"
+require "/../src/ical_parser/component_parsers/calendar_parser"
 
 class CalendarParserTest < Minitest::Test
   include IcalParser

@@ -1,15 +1,12 @@
+require "./../components/calendar"
+
 module IcalParser
   class CalendarParser
     DELIMITER = "VCALENDAR"
     LINES_REGEX = /(?<name>.*?)(?<params>;[a-zA-Z\-]*=(?:".*"|[^:;\n]*)+)?:(?<value>.*)/
     COMPONENT_REGEX = /^BEGIN:(?<type>.*?)$.*?^END:\k<type>$/m
 
-    PROPERTIES = {
-      "prodid"    => Property.new(["TEXT"]),
-      "version"   => Property.new(["TEXT"]),
-      "calscale"  => Property.new(["TEXT"]),
-      "method"    => Property.new(["TEXT"]),
-    }
+    PROPERTIES = Calendar::PROPERTIES
 
     COMPONENTS = {
       "VEVENT"    => {parser: EventParser, key: "events"},
@@ -49,6 +46,7 @@ module IcalParser
       lines = content_lines(component)
       matches = lines_matches(lines)
 
+      # puts "Working"
       matches.each do |match|
         name = match["name"].downcase
         if property_names[name]?
@@ -71,11 +69,13 @@ module IcalParser
           end
         end
       end
+      # puts "Working"
 
       if found["dtstart"]? && found["dtstart"].match(/^"\d{4}-\d{2}-\d{2}"$/)
         found["all-day"] = "true"
       end
 
+      # puts "Working"
       found.map do |k, v|
         %("#{k}":#{v})
       end

@@ -1,3 +1,5 @@
+require "./../components/event"
+
 module IcalParser
   class EventParser
     DELIMITER = "VEVENT"
