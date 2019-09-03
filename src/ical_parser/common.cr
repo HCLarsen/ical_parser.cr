@@ -48,7 +48,7 @@ module IcalParser
     class: {types: ["TEXT"], default: "public"},
     categories: {types: ["TEXT"], list: true},
     resources: {types: ["TEXT"], list: true},
-    contact: {types: ["TEXT"]},
+    contact: {types: ["CAL-ADDRESS"]},
     related_to: {types: ["TEXT"], key: "related-to", getter: false},
     request_status: {types: ["TEXT"], key: "request-status", getter: false},
     transparency: {types: ["TEXT"], default: "opaque"},

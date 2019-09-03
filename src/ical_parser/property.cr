@@ -1,21 +1,25 @@
+require "./common"
+
 module IcalParser
   class Property
+    getter name : String
     @types : Array(String)
     @parser : ParserType
     getter single_value : Bool
     getter only_once : Bool
 
-    def initialize(@types, *, @parts = ["value"], @only_once = true, @single_value = true)
+    def initialize(@name, *, @parts = ["value"], @only_once = true, @single_value = true)
+      component_property = COMPONENT_PROPERTIES[@name]
+      @types = component_property[:types]
+      @parser = PARSERS[@types[0]]
       if @types.size < 1
         raise "Property Error: Property must have at least ONE value type"
       end
-      @parser = PARSERS[@types[0]]
     end
 
     def parse(value : String, params : String?) : String
       params ||= ""
       params_hash = parse_params(params)
-
       parse_value(value, params_hash)
     end
 
@@ -81,8 +85,6 @@ module IcalParser
         else
           raise "Invalid value type for this property"
         end
-      else
-        @parser = PARSERS[@types[0]]
       end
     end
   end
