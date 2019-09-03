@@ -14,12 +14,6 @@ class PropertyTest < Minitest::Test
     assert_equal "contact", contact_prop.name
   end
 
-  # def test_returns_key_and_var_name
-  #   contact_prop = Property.new(["TEXT"], name: "contacts", single_value: false, only_once: false)
-  #   assert_equal "contacts", contact_prop.key
-  #   assert_equal "contacts", contact_prop.var_name
-  # end
-  #
   def test_property_parses_value
     prop = Property.new(name: "description")
     value = "Networld+Interop Conference and Exhibit\nAtlanta World Congress Center\nAtlanta\, Georgia"
