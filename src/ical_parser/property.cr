@@ -15,6 +15,9 @@ module IcalParser
       if @types.size < 1
         raise "Property Error: Property must have at least ONE value type"
       end
+      if @name == "dtstart"
+        puts "Is this the error?"
+      end
     end
 
     def parse(value : String, params : String?) : String
@@ -85,7 +88,9 @@ module IcalParser
         else
           raise "Invalid value type for this property"
         end
-      end
+      else
+       @parser = PARSERS[@types[0]]
+     end
     end
   end
 end
