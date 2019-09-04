@@ -22,7 +22,7 @@ module IcalParser
       "request-status"  => Property.new("request_status", only_once: false),
       "transp"          => Property.new("transp"),
       "status"          => Property.new("status"),
-      "comment"         => Property.new("comment", key: "comments"),
+      "comment"         => Property.new("comment", key: "comments", only_once: false),
       "location"        => Property.new("location"),
       "priority"        => Property.new("priority"),
       "sequence"        => Property.new("sequence"),
