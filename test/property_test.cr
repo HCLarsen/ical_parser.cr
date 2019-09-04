@@ -9,9 +9,15 @@ class PropertyTest < Minitest::Test
     super(argument)
   end
 
-  def test_initializes_data_from_component_property
-    contact_prop = Property.new(name: "contact", single_value: false, only_once: false)
+  def test_initializes
+    contact_prop = Property.new(name: "contact", key: "contacts", single_value: false, only_once: false)
     assert_equal "contact", contact_prop.name
+    assert_equal "contacts", contact_prop.key
+  end
+
+  def test_returns_default_key
+    prop = Property.new(name: "description")
+    assert_equal "description", prop.key
   end
 
   def test_property_parses_value

@@ -90,7 +90,7 @@ class EventTest < Minitest::Test
 
   #Test #from_json
   def test_parses_simple_event_from_json
-    json = %({"uid":"19970901T130000Z-123401@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-09-03T16:30:00Z","dtend":"1997-09-03T19:00:00Z","summary":"Annual Employee Review","class":"PRIVATE","categories":["BUSINESS","HUMAN RESOURCES"]})
+    json = %({"uid":"19970901T130000Z-123401@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-09-03T16:30:00Z","dtend":"1997-09-03T19:00:00Z","summary":"Annual Employee Review","classification":"PRIVATE","categories":["BUSINESS","HUMAN RESOURCES"]})
     event = Event.from_json(json)
     assert_equal "19970901T130000Z-123401@example.com", event.uid
     assert_equal Time.utc(1997, 9, 1, 13, 0, 0), event.dtstamp

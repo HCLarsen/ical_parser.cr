@@ -5,19 +5,21 @@ module IcalParser
     getter name : String
     @types : Array(String)
     @parser : ParserType
+    @key : String?
     getter single_value : Bool
     getter only_once : Bool
 
-    def initialize(@name, *, @parts = ["value"], @only_once = true, @single_value = true)
+    def initialize(@name, *, @parts = ["value"], @key = nil, @only_once = true, @single_value = true)
       component_property = COMPONENT_PROPERTIES[@name]
       @types = component_property[:types]
       @parser = PARSERS[@types[0]]
       if @types.size < 1
         raise "Property Error: Property must have at least ONE value type"
       end
-      if @name == "dtstart"
-        puts "Is this the error?"
-      end
+    end
+
+    def key : String
+      @key || @name
     end
 
     def parse(value : String, params : String?) : String

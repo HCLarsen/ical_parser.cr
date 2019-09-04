@@ -299,7 +299,7 @@ class EventParserTest < Minitest::Test
     HEREDOC
 
     result = @parser.parse_to_json(eventc)
-    expected = %({"uid":"19970901T130000Z-123401@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-09-03T16:30:00Z","dtend":"1997-09-03T19:00:00Z","summary":"Annual Employee Review","class":"PRIVATE","categories":["BUSINESS","HUMAN RESOURCES"]})
+    expected = %({"uid":"19970901T130000Z-123401@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-09-03T16:30:00Z","dtend":"1997-09-03T19:00:00Z","summary":"Annual Employee Review","classification":"PRIVATE","categories":["BUSINESS","HUMAN RESOURCES"]})
 
     assert_equal expected, result
   end
@@ -319,7 +319,7 @@ class EventParserTest < Minitest::Test
     HEREDOC
 
     result = @parser.parse_to_json(eventc)
-    expected = %({"uid":"19970901T130000Z-123403@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-11-02","summary":"Our Blissful Anniversary","transp":"TRANSPARENT","class":"CONFIDENTIAL","categories":["ANNIVERSARY","PERSONAL","SPECIAL OCCASION"],"rrule":{"freq":"yearly"},"all-day":true})
+    expected = %({"uid":"19970901T130000Z-123403@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-11-02","summary":"Our Blissful Anniversary","transp":"TRANSPARENT","classification":"CONFIDENTIAL","categories":["ANNIVERSARY","PERSONAL","SPECIAL OCCASION"],"rrule":{"freq":"yearly"},"all-day":true})
 
     assert_equal expected, result
   end
@@ -358,7 +358,7 @@ class EventParserTest < Minitest::Test
     HEREDOC
 
     result = @parser.parse_to_json(eventc)
-    expected = %({"uid":"19970901T130000Z-123403@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-11-02","summary":"Our Blissful Anniversary","transp":"TRANSPARENT","class":"CONFIDENTIAL","categories":["ANNIVERSARY","PERSONAL","SPECIAL OCCASION"],"request-status":["4.1;Event conflict.  Date-time is busy."],"rrule":{"freq":"yearly"},"all-day":true})
+    expected = %({"uid":"19970901T130000Z-123403@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-11-02","summary":"Our Blissful Anniversary","transp":"TRANSPARENT","classification":"CONFIDENTIAL","categories":["ANNIVERSARY","PERSONAL","SPECIAL OCCASION"],"request_status":["4.1;Event conflict.  Date-time is busy."],"rrule":{"freq":"yearly"},"all-day":true})
 
     assert_equal expected, result
   end

@@ -33,11 +33,6 @@ module IcalParser
     end
 
     private def parse_properties(component : String) : Array(String)
-      property_names = {
-        "attendee"        => "attendees",
-        "comment"         => "comments",
-        "contact"         => "contacts",
-      }
       found = Hash(String, String).new
 
       lines = content_lines(component)
@@ -45,22 +40,20 @@ module IcalParser
 
       matches.each do |match|
         name = match["name"].downcase
-        if property_names[name]?
-          name = property_names[name]
-        end
 
         if PROPERTIES.keys.includes? name
           property = PROPERTIES[name]
+          key = property.key
           value = property.parse(match["value"], match["params"]?)
 
-          unless found[name]?
-            found[name] = value
+          unless found[key]?
+            found[key] = value
           else
             if property.only_once
               raise "Invalid Event: #{name.upcase} MUST NOT occur more than once"
             else
               value = value.strip("[]")
-              found[name] = found[name].insert(-2, ",#{value}")
+              found[key] = found[key].insert(-2, ",#{value}")
             end
           end
         end
