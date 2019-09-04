@@ -10,14 +10,20 @@ class PropertyTest < Minitest::Test
   end
 
   def test_initializes
-    contact_prop = Property.new(name: "contact", key: "contacts", single_value: false, only_once: false)
+    contact_prop = Property.new(name: "contact", key: "contacts", only_once: false)
     assert_equal "contact", contact_prop.name
     assert_equal "contacts", contact_prop.key
+    refute contact_prop.list
   end
 
   def test_returns_default_key
     prop = Property.new(name: "description")
     assert_equal "description", prop.key
+  end
+
+  def test_derives_list_from_component_property
+    category_prop = Property.new("categories", single_value: false, only_once: false)
+    assert category_prop.list
   end
 
   def test_property_parses_value

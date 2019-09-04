@@ -6,6 +6,7 @@ module IcalParser
     @types : Array(String)
     @parser : ParserType
     @key : String?
+    getter list : Bool
     getter single_value : Bool
     getter only_once : Bool
 
@@ -13,6 +14,7 @@ module IcalParser
       component_property = COMPONENT_PROPERTIES[@name]
       @types = component_property[:types]
       @parser = PARSERS[@types[0]]
+      @list = component_property[:list]? || false
       if @types.size < 1
         raise "Property Error: Property must have at least ONE value type"
       end
