@@ -7,10 +7,9 @@ module IcalParser
     @parser : ParserType
     @key : String?
     getter list : Bool
-    getter single_value : Bool
     getter only_once : Bool
 
-    def initialize(@name, *, @parts = ["value"], @key = nil, @only_once = true, @single_value = true)
+    def initialize(@name, *, @parts = ["value"], @key = nil, @only_once = true)
       component_property = COMPONENT_PROPERTIES[@name]
       @types = component_property[:types]
       @parser = PARSERS[@types[0]]
@@ -49,7 +48,7 @@ module IcalParser
     private def parse_value(value : String, params : Hash(String, String)) : String
       set_parser(params["VALUE"]?)
 
-      if @single_value
+      if !@list
         if @only_once && @parts.size == 1
           parse_single_value(value, params)
         elsif @parts.size > 1
