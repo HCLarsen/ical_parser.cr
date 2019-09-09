@@ -6,9 +6,7 @@ module IcalParser
     LINES_REGEX = /(?<name>.*?)(?<params>;[a-zA-Z\-]*=(?:".*"|[^:;\n]*)+)?:(?<value>.*)/
     COMPONENT_REGEX = /^BEGIN:(?<type>.*?)$.*?^END:.*?$/m
 
-    PROPERTY_KEYS = ["uid", "dtstamp", "created", "last-mod", "dtstart", "dtend", "duration", "summary", "description", "classification", "categories", "resources", "contacts", "related_to", "request-status", "transp", "status", "comments", "location", "priority", "sequence", "organizer", "attendees", "geo", "recurrence", "exdate", "rdate", "url"]
-
-    PROPERTIES = Event::PROPERTIES
+    PROPERTY_KEYS = Event::PROPERTIES.keys
 
     private def initialize; end
 
@@ -41,8 +39,9 @@ module IcalParser
       matches.each do |match|
         name = match["name"].downcase
 
-        if PROPERTIES.keys.includes? name
-          property = PROPERTIES[name]
+        if PROPERTY_KEYS.includes? name
+          property = Property.new(Event::PROPERTIES[name])
+
           key = property.key
           value = property.parse(match["value"], match["params"]?)
 

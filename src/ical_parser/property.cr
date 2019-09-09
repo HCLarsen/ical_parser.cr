@@ -7,15 +7,29 @@ module IcalParser
     @parser : ParserType
     @key : String?
     getter list : Bool
-    getter only_once : Bool
+    getter only_once = true
 
-    def initialize(@name, *, @parts = ["value"], @key = nil, @only_once = true)
-      component_property = COMPONENT_PROPERTIES[@name]
-      @types = component_property[:types]
-      @parser = PARSERS[@types[0]]
-      @list = component_property[:list]? || false
-      if @types.size < 1
-        raise "Property Error: Property must have at least ONE value type"
+    def initialize(prop : NamedTuple)
+      if prop[:name]?
+        @name = prop[:name]? || ""
+        component_property = COMPONENT_PROPERTIES[@name]
+
+        @types = component_property[:types]
+        if @types.size < 1
+          raise "Property Error: Property must have at least ONE value type"
+        end
+
+        @parser = PARSERS[@types[0]]
+        @list = component_property[:list]? || false
+
+        @parts = prop[:parts]? || ["value"]
+        @key = prop[:key]?
+
+        if !prop[:only_once]? && prop.has_key? :only_once
+          @only_once = false
+        end
+      else
+        raise "Property Error: Property must have a name"
       end
     end
 

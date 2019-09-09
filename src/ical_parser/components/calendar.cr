@@ -6,10 +6,10 @@ require "./*"
 module IcalParser
   class Calendar
     PROPERTIES = {
-      "prodid"    => Property.new("prodid"),
-      "version"   => Property.new("version"),
-      "calscale"  => Property.new("calscale"),
-      "method"    => Property.new("method"),
+      "prodid"    => Property.new({ name: "prodid"}),
+      "version"   => Property.new({ name: "version"}),
+      "calscale"  => Property.new({ name: "calscale"}),
+      "method"    => Property.new({ name: "method"}),
     }
 
     JSON.mapping(
