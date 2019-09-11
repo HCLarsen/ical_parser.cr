@@ -36,7 +36,7 @@ class PropertyTest < Minitest::Test
   end
 
   def test_property_parses_value_with_params
-    prop = Property.new({ name: "contact" })
+    prop = Property.new({ name: "organizer" })
     params = ";RSVP=TRUE;ROLE=REQ-PARTICIPANT;CUTYPE=GROUP"
     value = "mailto:employee-A@example.com"
     result = prop.parse(value, params)
