@@ -12,6 +12,7 @@ module IcalParser
     def initialize(prop : NamedTuple)
       if prop[:name]?
         @name = prop[:name]? || ""
+
         component_property = COMPONENT_PROPERTIES[@name]
 
         @types = component_property[:types]
@@ -22,7 +23,7 @@ module IcalParser
         @parser = PARSERS[@types[0]]
         @list = component_property[:list]? || false
 
-        @parts = prop[:parts]? || ["value"]
+        @parts = component_property[:parts]? || ["value"]
         @key = prop[:key]?
 
         if !prop[:only_once]? && prop.has_key? :only_once
