@@ -3,13 +3,49 @@ require "./../property"
 require "./../enums"
 
 module IcalParser
+  CLASSES = {
+    "BOOLEAN"     => Bool,
+    "CAL-ADDRESS" => CalAddress,
+    "DATE"        => Time,
+    "DATE-TIME"   => Time,
+    "DURATION"    => Duration,
+    "FLOAT"       => Float64,
+    "INTEGER"     => Int32,
+    "PERIOD"      => PeriodOfTime,
+    "RECUR"       => RecurrenceRule,
+    "TEXT"        => String,
+    "TIME"        => Time,
+    "URI"         => URI,
+  }
+
   class Event
+    macro mapping
+      JSON.mapping(
+        {% for key, value in PROPERTIES %}
+          {% _property = COMPONENT_PROPERTIES[value[:name]] %}
+          {% _class = CLASSES[_property[:types][0]] %}
+          {% value[:type] = _class %}
+          {% value[:key] = value[:key] || value[:name] %}
+          {% value[:nilable] = !value[:required] %}
+          {% value[:converter] = _property[:converter] %}
+          {% if value[:only_once] == false || _property[:list] == true %}
+            {{value[:key].id}}: { type: Array({{_class.id}}){{ (value[:required] ? "" : "?").id }}, converter: {{value[:converter]}} },
+          {% elsif _property[:parts] %}
+            {{value[:key].id}}: { type: Hash(String, {{_class.id}}){{ (value[:required] ? "" : "?").id }} , converter: {{value[:converter]}} },
+          {% else %}
+            {{value[:key].id}}: {{value.id}},
+          {% end %}
+        {% end %}
+        all_day: {type: Bool?, key: "all-day", getter: false}
+      )
+    end
+
     PROPERTIES = {
-      "uid"             => { name: "uid" },
-      "dtstamp"         => { name: "dtstamp" },
+      "uid"             => { name: "uid", required: true },
+      "dtstamp"         => { name: "dtstamp", required: true },
       "created"         => { name: "created" },
       "last-modified"   => { name: "last_modified" },
-      "dtstart"         => { name: "dtstart" },
+      "dtstart"         => { name: "dtstart", required: true },
       "dtend"           => { name: "dtend" },
       "duration"        => { name: "duration" },
       "summary"         => { name: "summary" },
@@ -28,43 +64,13 @@ module IcalParser
       "sequence"        => { name: "sequence" },
       "organizer"       => { name: "organizer" },
       "attendee"        => { name: "attendee", key: "attendees", only_once: false },
-      "geo"             => { name: "geo", parts: ["lat", "lon"] },
+      "geo"             => { name: "geo" },
       "rrule"           => { name: "rrule" },
       "exdate"          => { name: "exdate", only_once: false },
-      "rdate"           => { name: "rdate", only_once: false },
       "url"             => { name: "url" },
     }
 
-    JSON.mapping(
-      uid: {type: String},
-      dtstamp: {type: Time, converter: Time::ISO8601Converter},
-      created: {type: Time?, converter: Time::ISO8601Converter},
-      last_modified: {type: Time?, converter: Time::ISO8601Converter},
-      dtstart: {type: Time, converter: Time::ISO8601Converter},
-      dtend: {type: Time?, converter: Time::ISO8601Converter},
-      duration: {type: Duration?},
-      summary: {type: String?},
-      classification: {type: String?},
-      categories: {type: Array(String)?, getter: false},
-      resources: {type: Array(String)?, getter: false},
-      contacts: {type: Array(String)?, getter: false},
-      related_to: {type: Array(String)?, getter: false},
-      request_status: {type: Array(String)?, getter: false},
-      transp: {type: String?, getter: false},
-      description: {type: String?},
-      status: {type: String?},
-      comments: {type: String?},
-      location: {type: String?},
-      priority: {type: Int32?},
-      sequence: {type: Int32?},
-      organizer: {type: CalAddress?},
-      attendees: {type: Array(CalAddress)?, getter: false},
-      geo: {type: Hash(String, Float64)?},
-      rrule: {type: RecurrenceRule?},
-      exdate: {type: Array(Time)?, getter: false, converter: JSON::ArrayConverter(Time::ISO8601Converter)},
-      url: {type: URI?, converter: URI::URIConverter},
-      all_day: {type: Bool?, key: "all-day", getter: false}
-    )
+    mapping
 
     getter? all_day
     getter attendees, type: Array(CalAddress), value: [] of CalAddress
