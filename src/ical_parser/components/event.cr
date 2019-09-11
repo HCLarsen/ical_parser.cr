@@ -3,21 +3,6 @@ require "./../property"
 require "./../enums"
 
 module IcalParser
-  CLASSES = {
-    "BOOLEAN"     => Bool,
-    "CAL-ADDRESS" => CalAddress,
-    "DATE"        => Time,
-    "DATE-TIME"   => Time,
-    "DURATION"    => Duration,
-    "FLOAT"       => Float64,
-    "INTEGER"     => Int32,
-    "PERIOD"      => PeriodOfTime,
-    "RECUR"       => RecurrenceRule,
-    "TEXT"        => String,
-    "TIME"        => Time,
-    "URI"         => URI,
-  }
-
   class Event
     macro mapping
       JSON.mapping(

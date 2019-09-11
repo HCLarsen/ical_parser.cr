@@ -19,6 +19,21 @@ module IcalParser
 
   alias ParserType = Proc(String, Hash(String, String), String)
 
+  CLASSES = {
+    "BOOLEAN"     => Bool,
+    "CAL-ADDRESS" => CalAddress,
+    "DATE"        => Time,
+    "DATE-TIME"   => Time,
+    "DURATION"    => Duration,
+    "FLOAT"       => Float64,
+    "INTEGER"     => Int32,
+    "PERIOD"      => PeriodOfTime,
+    "RECUR"       => RecurrenceRule,
+    "TEXT"        => String,
+    "TIME"        => Time,
+    "URI"         => URI,
+  }
+
   PARSERS = {
     "BINARY"      => @@text_parser,  # To be replaced with BinaryParser once written.
     "BOOLEAN"     => @@boolean_parser,
