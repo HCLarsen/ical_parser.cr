@@ -7,10 +7,9 @@ module IcalParser
     COMPONENT_REGEX = /^BEGIN:(?<type>.*?)$.*?^END:\k<type>$/m
 
     PROPERTIES = Calendar::PROPERTIES
+    PROPERTY_KEYS = Calendar::PROPERTIES.keys
 
-    COMPONENTS = {
-      "VEVENT"    => {parser: EventParser, key: "events"},
-    }
+    COMPONENTS = Calendar::COMPONENTS
 
     private def initialize; end
 
@@ -40,42 +39,37 @@ module IcalParser
     end
 
     private def parse_properties(component : String) : Array(String)
-      property_names = {} of String => String
       found = Hash(String, String).new
 
       lines = content_lines(component)
       matches = lines_matches(lines)
 
-      # puts "Working"
       matches.each do |match|
         name = match["name"].downcase
-        if property_names[name]?
-          name = property_names[name]
-        end
 
-        if PROPERTIES.keys.includes? name
-          property = PROPERTIES[name]
+        if PROPERTY_KEYS.includes? name
+          property = Property.new(Calendar::PROPERTIES[name])
+
+          key = property.key
           value = property.parse(match["value"], match["params"]?)
 
-          unless found[name]?
-            found[name] = value
+          unless found[key]?
+            found[key] = value
           else
             if property.only_once
               raise "Invalid Event: #{name.upcase} MUST NOT occur more than once"
             else
               value = value.strip("[]")
-              found[name] = found[name].insert(-2, ",#{value}")
+              found[key] = found[key].insert(-2, ",#{value}")
             end
           end
         end
       end
-      # puts "Working"
 
       if found["dtstart"]? && found["dtstart"].match(/^"\d{4}-\d{2}-\d{2}"$/)
         found["all-day"] = "true"
       end
 
-      # puts "Working"
       found.map do |k, v|
         %("#{k}":#{v})
       end
