@@ -1,5 +1,5 @@
 require "./../property_parsers/*"
-require "./../property"
+require "./../common"
 require "./../enums"
 
 module IcalParser

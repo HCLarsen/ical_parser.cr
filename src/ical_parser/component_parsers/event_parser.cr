@@ -1,4 +1,5 @@
 require "./../components/event"
+require "./../property"
 
 module IcalParser
   class EventParser

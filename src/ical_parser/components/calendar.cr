@@ -1,5 +1,4 @@
 require "./../property_parsers/*"
-require "./../property"
 require "./../enums"
 require "./*"
 

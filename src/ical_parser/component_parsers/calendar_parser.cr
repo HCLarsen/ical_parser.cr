@@ -1,4 +1,5 @@
 require "./../components/calendar"
+require "./../property"
 
 module IcalParser
   class CalendarParser
