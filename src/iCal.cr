@@ -1,4 +1,3 @@
-require "json"
 require "./ical_parser/*"
 require "./ical_parser/components/*"
 require "./ical_parser/component_parsers/*"

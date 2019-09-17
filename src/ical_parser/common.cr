@@ -1,3 +1,5 @@
+require "./property_parsers/*"
+
 module IcalParser
   FLOATING_DATE_TIME = Time::Format.new("%Y%m%dT%H%M%S")
   UTC_DATE_TIME      = Time::Format.new("%Y%m%dT%H%M%SZ")
@@ -84,6 +86,6 @@ module IcalParser
     exdate: {types: ["DATE-TIME", "DATE"], list: true, converter: JSON::ArrayConverter(Time::ISO8601Converter)},
     rdate: {types: ["DATE-TIME", "DATE", "PERIOD"], list: true, converter: JSON::ArrayConverter(Time::ISO8601Converter)},
     url: {types: ["URI"], converter: URI::URIConverter},
-    all_day: {types: ["BOOLEAN"], key: "all-day"}
+    all_day: {types: ["BOOLEAN"]}
   }
 end
