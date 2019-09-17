@@ -1,6 +1,4 @@
-require "./../property_parsers/*"
-require "./../common"
-require "./../enums"
+require "./component"
 
 module IcalParser
   class Event < Component
@@ -32,6 +30,7 @@ module IcalParser
       "rrule"           => { name: "rrule" },
       "exdate"          => { name: "exdate", only_once: false },
       "url"             => { name: "url" },
+      "all_day"         => { name: "all_day", getter: false }
     }
 
     mapping

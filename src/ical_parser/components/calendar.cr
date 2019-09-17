@@ -1,9 +1,8 @@
-require "./../property_parsers/*"
 require "./../enums"
 require "./*"
 
 module IcalParser
-  class Calendar
+  class Calendar < Component
     PROPERTIES = {
       "prodid"    => { name: "prodid", required: true },
       "version"   => { name: "version", required: true },
@@ -12,16 +11,10 @@ module IcalParser
     }
 
     COMPONENTS = {
-      "VEVENT"    => {parser: EventParser, key: "events"},
+      "VEVENT"    => {parser: EventParser, class: Event, key: "events"},
     }
 
-    JSON.mapping(
-      prodid: {type: String},
-      version: {type: String},
-      method: {type: String?},
-      calscale: {type: String?},
-      events: {type: Array(Event)?}
-    )
+    mapping
 
     @version = "2.0"
     getter events, type: Array(Event), value: [] of Event
