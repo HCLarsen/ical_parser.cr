@@ -319,7 +319,7 @@ class EventParserTest < Minitest::Test
     HEREDOC
 
     result = @parser.parse_to_json(eventc)
-    expected = %({"uid":"19970901T130000Z-123403@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-11-02","summary":"Our Blissful Anniversary","transp":"TRANSPARENT","classification":"CONFIDENTIAL","categories":["ANNIVERSARY","PERSONAL","SPECIAL OCCASION"],"rrule":{"freq":"yearly"},"all-day":true})
+    expected = %({"uid":"19970901T130000Z-123403@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-11-02","summary":"Our Blissful Anniversary","transp":"TRANSPARENT","classification":"CONFIDENTIAL","categories":["ANNIVERSARY","PERSONAL","SPECIAL OCCASION"],"rrule":{"freq":"yearly"},"all_day":true})
 
     assert_equal expected, result
   end
@@ -358,7 +358,7 @@ class EventParserTest < Minitest::Test
     HEREDOC
 
     result = @parser.parse_to_json(eventc)
-    expected = %({"uid":"19970901T130000Z-123403@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-11-02","summary":"Our Blissful Anniversary","transp":"TRANSPARENT","classification":"CONFIDENTIAL","categories":["ANNIVERSARY","PERSONAL","SPECIAL OCCASION"],"request_status":["4.1;Event conflict.  Date-time is busy."],"rrule":{"freq":"yearly"},"all-day":true})
+    expected = %({"uid":"19970901T130000Z-123403@example.com","dtstamp":"1997-09-01T13:00:00Z","dtstart":"1997-11-02","summary":"Our Blissful Anniversary","transp":"TRANSPARENT","classification":"CONFIDENTIAL","categories":["ANNIVERSARY","PERSONAL","SPECIAL OCCASION"],"request_status":["4.1;Event conflict.  Date-time is busy."],"rrule":{"freq":"yearly"},"all_day":true})
 
     assert_equal expected, result
   end
@@ -377,7 +377,7 @@ class EventParserTest < Minitest::Test
     HEREDOC
 
     result = @parser.parse_to_json(eventc)
-    expected = %({"uid":"20070423T123432Z-541111@example.com","dtstamp":"2007-04-23T12:34:32Z","dtstart":"2007-06-28","dtend":"2007-07-09","summary":"Festival International de Jazz de Montreal","geo":{"lat":45.5,"lon":-73.567},"transp":"TRANSPARENT","all-day":true})
+    expected = %({"uid":"20070423T123432Z-541111@example.com","dtstamp":"2007-04-23T12:34:32Z","dtstart":"2007-06-28","dtend":"2007-07-09","summary":"Festival International de Jazz de Montreal","geo":{"lat":45.5,"lon":-73.567},"transp":"TRANSPARENT","all_day":true})
 
     assert_equal expected, result
   end
