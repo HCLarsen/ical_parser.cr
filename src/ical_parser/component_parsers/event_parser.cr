@@ -1,4 +1,5 @@
 require "./../components/event"
+require "./../property_parsers/*"
 require "./../property"
 
 module IcalParser
@@ -21,6 +22,7 @@ module IcalParser
 
     def parse(component : String) : Event
       found = parse_to_json(component)
+
       Event.from_json(found)
     end
 
@@ -60,7 +62,7 @@ module IcalParser
       end
 
       if found["dtstart"]? && found["dtstart"].match(/^"\d{4}-\d{2}-\d{2}"$/)
-        found["all-day"] = "true"
+        found["all_day"] = "true"
       end
 
       found.map do |k, v|
